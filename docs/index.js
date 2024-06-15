@@ -32,5 +32,5 @@ submit.addEventListener("click", () => {
         grade = "D";
     }
 
-    rankleStat.textContent = "YOUR RANKLE: " + grade + " FROM " + average;
+    rankleStat.textContent = "YOUR RANKLE: " + grade;
 })
