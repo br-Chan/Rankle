@@ -18,13 +18,13 @@
         <h2>Wordle</h2>
         <label for="wordlestat">Enter guesses made:</label>
         <select name="wordlestat" id="wordlestat">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="X">X</option>
+            <option value=6>1</option> <!-- S -->
+            <option value=5>2</option> <!-- S/A -->
+            <option value=4>3</option> <!-- A -->
+            <option value=3>4</option> <!-- B -->
+            <option value=2>5</option> <!-- C -->
+            <option value=1>6</option> <!-- D -->
+            <option value=0>X</option> <!-- F -->
         </select>
     </div>
 
@@ -32,20 +32,21 @@
         <h2>Connections</h2>
         <label for="connectionsstat">Enter guesses left:</label>
         <select name="connectionsstat" id="connectionsstat">
-            <option value="4">4</option>
-            <option value="3">3</option>
-            <option value="2">2</option>
-            <option value="1">1</option>
-            <option value="X">X</option>
+            <option value=4>4</option> <!-- A -->
+            <option value=3>3</option> <!-- B -->
+            <option value=2>2</option> <!-- C -->
+            <option value=1>1</option> <!-- D -->
+            <option value=0>X</option> <!-- F -->
         </select>
     </div>
 
     <div>
         <hr>
         <br>
-        <button class="submit">Get your Rankle Stat!</button>
+        <button class="submit">Get your Rankle!</button>
     </div>
 
+    <p class="ranklestat"></p>
 
 
     <script src="index.js"></script>
