@@ -36,7 +36,7 @@ submitButton.addEventListener("click", () => {
     rankleStat.textContent = "TODAY'S RANKLE: " + grade;
 })
 
-copyButton.addEventListener("click", async (rankleStat) => {
+copyButton.addEventListener("click", async () => {
     try {
         await navigator.clipboard.writeText(rankleStat.textContent);
         console.log('Content copied to clipboard');
