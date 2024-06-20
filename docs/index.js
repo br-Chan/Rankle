@@ -1,7 +1,8 @@
 const wordleStat = document.getElementById('wordlestat');
 const connectionsStat = document.getElementById('connectionsstat');
-const submit = document.querySelector('.submit');
+const submitButton = document.querySelector('.submit');
 const rankleStat = document.querySelector('.ranklestat');
+const copyButton = document.querySelector('.copyrankle');
 
 function processStat(selectElement) {
     const stat = selectElement.value;
@@ -10,7 +11,7 @@ function processStat(selectElement) {
     return mark;
 }
 
-submit.addEventListener("click", () => {
+submitButton.addEventListener("click", () => {
     const wordleMark = processStat(wordleStat);
     const connectionsMark = processStat(connectionsStat);
     const average = (wordleMark + connectionsMark) / 2;
@@ -32,5 +33,14 @@ submit.addEventListener("click", () => {
         grade = "D";
     }
 
-    rankleStat.textContent = "YOUR RANKLE: " + grade;
+    rankleStat.textContent = "TODAY'S RANKLE: " + grade;
+})
+
+copyButton.addEventListener("click", async (rankleStat) => {
+    try {
+        await navigator.clipboard.writeText(rankleStat.textContent);
+        console.log('Content copied to clipboard');
+      } catch (err) {
+        console.error('Failed to copy: ', err);
+      }
 })
