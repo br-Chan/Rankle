@@ -1,3 +1,5 @@
+import { statModule } from "./statModule";
+
 const wordleStat = document.getElementById('wordlestat');
 const connectionsStat = document.getElementById('connectionsstat');
 const submitButton = document.querySelector('.submit');
