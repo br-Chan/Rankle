@@ -1,25 +1,23 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import rankleLogo from './assets/rankleLogo.svg'
 import './App.css'
 
 function StatModule({ gameName }) {
   const buttons = [];
   for (let index = 0; index < 3; index++) {
     buttons.push(
-      <button key={index} value={ index + 1 } onSquareClick={() => handleClick(index)}>
+      <button key={index} value={index + 1} onSquareClick={() => handleClick(index)}>
         {index + 1}
       </button>
     );
   }
 
-
   return (
-    <>
+    <div className="statModule">
       <h2>{gameName}</h2>
       <label for="wordlestat">Enter guesses made: </label>
       {buttons}
-    </>
+    </div>
   );
 }
 
@@ -30,10 +28,7 @@ function App() {
     <>
       <div>
         <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
+          <img src={rankleLogo} className="logo" alt="Vite logo" />
         </a>
       </div>
       <h1>RANKLE</h1>

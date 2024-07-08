@@ -33,7 +33,11 @@ body {
 
 h1 {
   font-size: 3.2em;
+  color: gold;
   line-height: 1.1;
+
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
 }
 
 button {
