@@ -6,6 +6,7 @@
 }
 
 .statModule {
+  padding: 1.5em;
   border: 3px solid;
   border-radius: 16px;
   border-color: gold;
@@ -41,9 +42,9 @@
   }
 } */
 
-.card {
+/* .card {
   padding: 2em;
-}
+} */
 
 .tip {
   color: #888;

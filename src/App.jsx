@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import rankleLogo from './assets/rankleLogo.svg'
+import rankleLogo from '/rankleLogo.svg'
 import './App.css'
 
-function StatModule({ gameName }) {
+function StatModule({ gameName,  }) {
   const buttons = [];
-  for (let index = 0; index < 3; index++) {
+  for (let index = 0; index < 6; index++) {
     buttons.push(
       <button key={index} value={index + 1} onSquareClick={() => handleClick(index)}>
         {index + 1}
@@ -28,7 +28,7 @@ function App() {
     <>
       <div>
         <a href="https://vitejs.dev" target="_blank">
-          <img src={rankleLogo} className="logo" alt="Vite logo" />
+          <img src={rankleLogo} className="logo" alt="Rankle logo" />
         </a>
       </div>
       <h1>RANKLE</h1>
@@ -43,7 +43,9 @@ function App() {
       <div>
         <StatModule gameName="Wordle" />
         <StatModule gameName="Connections" />
-        <StatModule gameName="Symble" /></div>
+        <StatModule gameName="Symble" />
+        <StatModule gameName="Spotle" />
+      </div>
       <p className="tip">
         Click on the Rankle logo to generate your Rank
       </p>
