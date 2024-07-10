@@ -5,11 +5,28 @@
   text-align: center;
 }
 
+.statModuleContainer {
+  display: flex;
+  flex-direction: row;
+}
+
 .statModule {
+  flex-basis: 25%;
   padding: 1.5em;
   border: 3px solid;
   border-radius: 16px;
   border-color: gold;
+  background-color: rgb(255, 244, 184);
+}
+
+.statModuleButtonContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.statModuleButton {
+  flex-basis: 20%;
 }
 
 .logo {
