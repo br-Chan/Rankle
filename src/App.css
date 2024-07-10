@@ -7,11 +7,14 @@
 
 .statModuleContainer {
   display: flex;
-  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
 }
 
 .statModule {
-  flex-basis: 25%;
+  flex-basis: 20%;
+
   padding: 1.5em;
   border: 3px solid;
   border-radius: 16px;
@@ -23,10 +26,23 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  gap: 5px;
 }
 
 .statModuleButton {
   flex-basis: 20%;
+
+  /* same background colour as the Connections buttons */
+  background-color: #efefe6;
+}
+
+/* .statModuleButton:hover {
+  background-color: grey;
+} */
+
+button:focus,
+button:focus-visible {
+  background-color: gold;
 }
 
 .logo {

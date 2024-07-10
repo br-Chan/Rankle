@@ -4,8 +4,12 @@ import './App.css'
 
 function StatModule({ gameName, numOfButtons }) {
   const buttons = [];
-  let buttonText = "";
 
+  function handleClick(index) {
+    
+  }
+
+  let buttonText = "";
   for (let index = 0; index < numOfButtons; index++) {
     if (index + 1 < 10) {
       buttonText = "0" + (index + 1);
@@ -52,12 +56,10 @@ function App() {
       </div> */}
       <div className="statModuleContainer">
         <StatModule gameName="Wordle" numOfButtons="6" />
-        <br />
         <StatModule gameName="Connections" numOfButtons="4" />
-        <br />
         <StatModule gameName="Symble" numOfButtons="8" />
-        <br />
         <StatModule gameName="Spotle" numOfButtons="10" />
+        <StatModule gameName="Dordle" numOfButtons="7" />
       </div>
       <p className="tip">
         Click on the Rankle logo to generate your Rank
