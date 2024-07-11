@@ -15,7 +15,7 @@ export function StatModule({ gameName, numOfButtons, themeColor }) {
         }
 
         buttons.push(
-            <button className="statModuleButton" key={index} value={index} onSquareClick={() => handleClick(index)}>
+            <button className="statModuleButton" key={index} value={index} onClick={() => handleClick(index)}>
                 {buttonText}
             </button>
         );
@@ -27,15 +27,18 @@ export function StatModule({ gameName, numOfButtons, themeColor }) {
         </button>
     )
 
+    let translucentColor = "";
+    translucentColor = themeColor + "25";
+
     const statModuleStyle = {
         borderColor: themeColor,
-        backgroundColor: themeColor,
+        backgroundColor: translucentColor,
     }
 
     return (
         <div className="statModule" style={statModuleStyle}>
             <h2>{gameName}</h2>
-            <label for="wordlestat">Select guesses made<br /></label>
+            <label>Select guesses made<br /></label>
             <div className="statModuleButtonContainer">
                 {buttons}
             </div>

@@ -8,10 +8,10 @@ function App() {
 
   const statModules = [
     <StatModule gameName="Wordle" numOfButtons="6" themeColor="#67a561" />,
-    <StatModule gameName="Connections" numOfButtons="4" />,
-    <StatModule gameName="Symble" numOfButtons="8" />,
-    <StatModule gameName="Spotle" numOfButtons="10" />,
-    <StatModule gameName="Dordle" numOfButtons="7" />,
+    <StatModule gameName="Connections" numOfButtons="4" themeColor="#bc70c4" />,
+    <StatModule gameName="Symble" numOfButtons="8" themeColor="#f11415" />,
+    <StatModule gameName="Spotle" numOfButtons="10" themeColor="#8370de" />,
+    <StatModule gameName="Dordle" numOfButtons="7" themeColor="#fccc04" />,
     <StatModule gameName="Dordle" numOfButtons="15" />,
     <StatModule gameName="Dordle" numOfButtons="6" />,
     <StatModule gameName="Dordle" numOfButtons="5" />,
