@@ -6,6 +6,19 @@ import { StatModule } from './StatModule'
 function App() {
   const [count, setCount] = useState(0);
 
+  const statModules = [
+    <StatModule gameName="Wordle" numOfButtons="6" />,
+    <StatModule gameName="Connections" numOfButtons="4" />,
+    <StatModule gameName="Symble" numOfButtons="8" />,
+    <StatModule gameName="Spotle" numOfButtons="10" />,
+    <StatModule gameName="Dordle" numOfButtons="7" />,
+    <StatModule gameName="Dordle" numOfButtons="15" />,
+    <StatModule gameName="Dordle" numOfButtons="6" />,
+    <StatModule gameName="Dordle" numOfButtons="5" />,
+    <StatModule gameName="Dordle" numOfButtons="4" />,
+    <StatModule gameName="Dordle" numOfButtons="3" />
+  ];
+
   return (
     <>
       {/* <div>
@@ -25,16 +38,7 @@ function App() {
         </p>
       </div> */}
       <div className="statModuleContainer">
-        <StatModule gameName="Wordle" numOfButtons="6" />
-        <StatModule gameName="Connections" numOfButtons="4" />
-        <StatModule gameName="Symble" numOfButtons="8" />
-        <StatModule gameName="Spotle" numOfButtons="10" />
-        <StatModule gameName="Dordle" numOfButtons="7" />
-        <StatModule gameName="Dordle" numOfButtons="15" />
-        <StatModule gameName="Dordle" numOfButtons="6" />
-        <StatModule gameName="Dordle" numOfButtons="5" />
-        <StatModule gameName="Dordle" numOfButtons="4" />
-        <StatModule gameName="Dordle" numOfButtons="3" />
+        {statModules}
       </div>
       <p className="tip">
         Click on the Rankle logo to generate your Rank
