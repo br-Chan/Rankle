@@ -19,7 +19,7 @@
   border: 3px solid;
   border-radius: 16px;
   border-color: gold;
-  background-color: rgb(255, 244, 184);
+  background-color: rgb(255 215 0 / 25%);
 }
 
 .statModuleButtonContainer {
@@ -30,7 +30,7 @@
 }
 
 .statModuleButton {
-  flex-basis: 20%;
+  flex-basis: 25%;
 
   /* same background colour as the Connections buttons */
   background-color: #efefe6;

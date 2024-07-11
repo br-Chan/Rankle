@@ -7,7 +7,7 @@ function App() {
   const [count, setCount] = useState(0);
 
   const statModules = [
-    <StatModule gameName="Wordle" numOfButtons="6" />,
+    <StatModule gameName="Wordle" numOfButtons="6" themeColor="#67a561" />,
     <StatModule gameName="Connections" numOfButtons="4" />,
     <StatModule gameName="Symble" numOfButtons="8" />,
     <StatModule gameName="Spotle" numOfButtons="10" />,
