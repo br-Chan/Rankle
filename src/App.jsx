@@ -6,23 +6,29 @@ function StatModule({ gameName, numOfButtons }) {
   const buttons = [];
 
   function handleClick(index) {
-    
+
   }
 
   let buttonText = "";
-  for (let index = 0; index < numOfButtons; index++) {
-    if (index + 1 < 10) {
-      buttonText = "0" + (index + 1);
+  for (let index = numOfButtons; index > 0; index--) {
+    if (index < 10) {
+      buttonText = "0" + (index);
     } else {
-      buttonText = index + 1;
+      buttonText = index;
     }
 
     buttons.push(
-      <button className="statModuleButton" key={index} value={index + 1} onSquareClick={() => handleClick(index)}>
+      <button className="statModuleButton" key={index} value={index} onSquareClick={() => handleClick(index)}>
         {buttonText}
       </button>
     );
   }
+
+  buttons.push(
+    <button className="statModuleButton" key="X" value="X" onSquareClick={() => handleClick("X")}>
+      X
+    </button>
+  )
 
   return (
     <div className="statModule">
