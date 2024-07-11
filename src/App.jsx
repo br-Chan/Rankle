@@ -46,12 +46,14 @@ function App() {
 
   return (
     <>
-      <div>
+      {/* <div>
         <a href="https://vitejs.dev" target="_blank">
           <img src={rankleLogo} className="logo" alt="Rankle logo" />
         </a>
-      </div>
+      </div> */}
+
       <h1>RANKLE</h1>
+      
       {/* <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
@@ -66,6 +68,11 @@ function App() {
         <StatModule gameName="Symble" numOfButtons="8" />
         <StatModule gameName="Spotle" numOfButtons="10" />
         <StatModule gameName="Dordle" numOfButtons="7" />
+        <StatModule gameName="Dordle" numOfButtons="15" />
+        <StatModule gameName="Dordle" numOfButtons="6" />
+        <StatModule gameName="Dordle" numOfButtons="5" />
+        <StatModule gameName="Dordle" numOfButtons="4" />
+        <StatModule gameName="Dordle" numOfButtons="3" />
       </div>
       <p className="tip">
         Click on the Rankle logo to generate your Rank
