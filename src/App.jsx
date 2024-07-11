@@ -1,45 +1,7 @@
 import { useState } from 'react'
 import rankleLogo from '/rankleLogo.svg'
 import './App.css'
-
-function StatModule({ gameName, numOfButtons }) {
-  const buttons = [];
-
-  function handleClick(index) {
-
-  }
-
-  let buttonText = "";
-  for (let index = numOfButtons; index > 0; index--) {
-    if (index < 10) {
-      buttonText = "0" + (index);
-    } else {
-      buttonText = index;
-    }
-
-    buttons.push(
-      <button className="statModuleButton" key={index} value={index} onSquareClick={() => handleClick(index)}>
-        {buttonText}
-      </button>
-    );
-  }
-
-  buttons.push(
-    <button className="statModuleButton" key="X" value="X" onSquareClick={() => handleClick("X")}>
-      X
-    </button>
-  )
-
-  return (
-    <div className="statModule">
-      <h2>{gameName}</h2>
-      <label for="wordlestat">Select guesses made<br /></label>
-      <div className="statModuleButtonContainer">
-        {buttons}
-      </div>
-    </div>
-  );
-}
+import { StatModule } from './StatModule'
 
 function App() {
   const [count, setCount] = useState(0);
@@ -53,7 +15,7 @@ function App() {
       </div> */}
 
       <h1>RANKLE</h1>
-      
+
       {/* <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
