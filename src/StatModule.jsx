@@ -22,7 +22,7 @@ export function StatModule({ gameName, numOfButtons, themeColor }) {
     }
 
     buttons.push(
-        <button className="statModuleButton" key="X" value="X" onSquareClick={() => handleClick("X")}>
+        <button className="statModuleButton" key="X" value="X" onClick={() => handleClick("X")}>
             X
         </button>
     )
