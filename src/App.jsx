@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import rankleLogo from '/rankleLogo.svg'
 import './App.css'
 import { StatModule } from './StatModule'
@@ -7,16 +6,16 @@ import { ButtonModule } from './ButtonModule'
 function App() {
 
   const statModules = [
-    <StatModule gameName="Wordle" numOfButtons="6" themeColor="#67a561" />,
-    <StatModule gameName="Connections" numOfButtons="4" themeColor="#bc70c4" />,
-    <StatModule gameName="Symble" numOfButtons="8" themeColor="#f11415" />,
-    <StatModule gameName="Spotle" numOfButtons="10" themeColor="#8370de" />,
-    <StatModule gameName="Dordle" numOfButtons="7" themeColor="#fccc04" />,
-    <StatModule gameName="Dordle" numOfButtons="15" themeColor="#f31064" />,
-    <StatModule gameName="Dordle" numOfButtons="6" themeColor="#46013f"/>,
-    <StatModule gameName="Bandle" numOfButtons="6" themeColor="#f9deb2"/>,
-    <StatModule gameName="Dordle" numOfButtons="4" />,
-    <StatModule gameName="Dordle" numOfButtons="3" />
+    <StatModule gameName="Wordle" themeColor="#67a561" />,
+    <StatModule gameName="Connections" themeColor="#bc70c4" />,
+    <StatModule gameName="Symble" themeColor="#f11415" />,
+    <StatModule gameName="Spotle" themeColor="#8370de" />,
+    <StatModule gameName="Dordle" themeColor="#fccc04" />,
+    <StatModule gameName="Dordle" themeColor="#f31064" />,
+    <StatModule gameName="Dordle" themeColor="#46013f" />,
+    <StatModule gameName="Bandle" themeColor="#f9deb2" />,
+    <StatModule gameName="Dordle" />,
+    <StatModule gameName="Dordle" />
   ];
 
   return (

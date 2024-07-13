@@ -1,41 +1,21 @@
+import { useState } from "react";
+
 import { ButtonModule } from "./ButtonModule";
 
-export function StatModule({ gameName, numOfButtons, themeColor }) {
+export function StatModule({ gameName, themeColor }) {
 
-    const buttons = [];
+    // Array to contain all input modules in the stat module for this game.
     const inputModules = [
         <ButtonModule queryText="Query text" numOfButtons={6} descending={true} />,
         <ButtonModule queryText="Select guesses made" numOfButtons="5" />
     ];
 
-    function handleClick(index) {
+    const [_inputModules, setInputModules] = useState(null);
 
-    }
+    // Set the translucent colour for the background.
+    let translucentColor = themeColor + "25";
 
-    let buttonText = "";
-    for (let index = numOfButtons; index > 0; index--) {
-        if (index < 10) {
-            buttonText = "0" + (index);
-        } else {
-            buttonText = index;
-        }
-
-        buttons.push(
-            <button className="statModuleButton" key={index} value={index} onClick={() => handleClick(index)}>
-                {buttonText}
-            </button>
-        );
-    }
-
-    buttons.push(
-        <button className="statModuleButton" key="X" value="X" onClick={() => handleClick("X")}>
-            X
-        </button>
-    )
-
-    let translucentColor = "";
-    translucentColor = themeColor + "25";
-
+    // Set the styles for the border and background colours.
     const statModuleStyle = {
         borderColor: themeColor,
         backgroundColor: translucentColor,

@@ -23,6 +23,7 @@ export function ButtonModule({ queryText, numOfButtons, descending }) {
         );
     }
 
+    // Create an "X" button to be selected if the player failed at this game.
     buttons.push(
         <button className="statModuleButton" key="X" value="X" onClick={() => handleClick("X")}>
             X
