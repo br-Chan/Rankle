@@ -39,7 +39,7 @@ function App() {
       </div> */}
       <div className="statModuleContainer">
         {statModules}
-      </div>/
+      </div>
       <p className="tip">
         Click on the Rankle logo to generate your Rank
       </p>

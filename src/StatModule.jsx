@@ -3,6 +3,10 @@ import { ButtonModule } from "./ButtonModule";
 export function StatModule({ gameName, numOfButtons, themeColor }) {
 
     const buttons = [];
+    const inputModules = [
+        <ButtonModule queryText="Query text" numOfButtons={6} descending={true} />,
+        <ButtonModule queryText="Select guesses made" numOfButtons="5" />
+    ];
 
     function handleClick(index) {
 
@@ -40,12 +44,7 @@ export function StatModule({ gameName, numOfButtons, themeColor }) {
     return (
         <div className="statModule" style={statModuleStyle}>
             <h2>{gameName}</h2>
-            <label>Select guesses made<br /></label>
-            <div className="statModuleButtonContainer">
-                {buttons}
-            </div>
-            <br />
-            <ButtonModule queryText="text" numOfButtons="5" />
+            {inputModules}
         </div>
     );
 }

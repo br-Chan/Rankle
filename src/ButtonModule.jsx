@@ -1,16 +1,19 @@
-export function ButtonModule({ queryText, numOfButtons }) {
+export function ButtonModule({ queryText, numOfButtons, descending }) {
     const buttons = [];
 
     function handleClick(index) {
 
     }
 
+    // Clear the button text string.
     let buttonText = "";
-    for (let index = numOfButtons; index > 0; index--) {
-        if (index < 10) {
-            buttonText = "0" + (index);
+
+    // Create each button with ascending or descending numbers.
+    for (let index = 0; index < numOfButtons; ++index) {
+        if (descending === true) {
+            buttonText = numOfButtons - index;
         } else {
-            buttonText = index;
+            buttonText = index + 1;
         }
 
         buttons.push(
