@@ -3,10 +3,14 @@ import './App.css'
 import { StatModule } from './StatModule'
 import { ButtonModule } from './ButtonModule'
 
+function createWordleStatModule() {
+  return <StatModule gameName="Wordle" themeColor="#67a561" />
+}
+
 function App() {
 
   const statModules = [
-    <StatModule gameName="Wordle" themeColor="#67a561" />,
+    createWordleStatModule(),
     <StatModule gameName="Connections" themeColor="#bc70c4" />,
     <StatModule gameName="Symble" themeColor="#f11415" />,
     <StatModule gameName="Spotle" themeColor="#8370de" />,
@@ -17,6 +21,8 @@ function App() {
     <StatModule gameName="Dordle" />,
     <StatModule gameName="Dordle" />
   ];
+
+  // statModules[0].addInputModule("Hello", "5", "false");
 
   return (
     <>
