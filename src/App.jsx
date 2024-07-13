@@ -2,9 +2,9 @@ import { useState } from 'react'
 import rankleLogo from '/rankleLogo.svg'
 import './App.css'
 import { StatModule } from './StatModule'
+import { ButtonModule } from './ButtonModule'
 
 function App() {
-  const [count, setCount] = useState(0);
 
   const statModules = [
     <StatModule gameName="Wordle" numOfButtons="6" themeColor="#67a561" />,
@@ -12,9 +12,9 @@ function App() {
     <StatModule gameName="Symble" numOfButtons="8" themeColor="#f11415" />,
     <StatModule gameName="Spotle" numOfButtons="10" themeColor="#8370de" />,
     <StatModule gameName="Dordle" numOfButtons="7" themeColor="#fccc04" />,
-    <StatModule gameName="Dordle" numOfButtons="15" />,
-    <StatModule gameName="Dordle" numOfButtons="6" />,
-    <StatModule gameName="Dordle" numOfButtons="5" />,
+    <StatModule gameName="Dordle" numOfButtons="15" themeColor="#f31064" />,
+    <StatModule gameName="Dordle" numOfButtons="6" themeColor="#46013f"/>,
+    <StatModule gameName="Bandle" numOfButtons="6" themeColor="#f9deb2"/>,
     <StatModule gameName="Dordle" numOfButtons="4" />,
     <StatModule gameName="Dordle" numOfButtons="3" />
   ];
@@ -39,7 +39,7 @@ function App() {
       </div> */}
       <div className="statModuleContainer">
         {statModules}
-      </div>
+      </div>/
       <p className="tip">
         Click on the Rankle logo to generate your Rank
       </p>

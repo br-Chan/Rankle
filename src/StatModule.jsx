@@ -1,3 +1,5 @@
+import { ButtonModule } from "./ButtonModule";
+
 export function StatModule({ gameName, numOfButtons, themeColor }) {
 
     const buttons = [];
@@ -42,6 +44,8 @@ export function StatModule({ gameName, numOfButtons, themeColor }) {
             <div className="statModuleButtonContainer">
                 {buttons}
             </div>
+            <br />
+            <ButtonModule queryText="text" numOfButtons="5" />
         </div>
     );
 }
