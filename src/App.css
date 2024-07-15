@@ -32,6 +32,9 @@
 .statModuleButton {
   flex-basis: 25%;
 
+  width: 5em;
+  height: 2.4em;
+
   /* same background colour as the Connections buttons */
   /* background-color: #efefe6; */
 }

@@ -1,4 +1,4 @@
-import rankleLogo from '/rankleLogo.svg'
+import { useState } from 'react';
 import './App.css'
 import { StatModule } from './StatModule'
 import { ButtonModule } from './ButtonModule'
@@ -16,6 +16,7 @@ function addButtonModule(index, queryText, numOfButtons, descending) {
 
 function App() {
   const inputModulesArray = [];
+  const [rank, setRank] = useState("R");
 
   function createWordleStatModule(themeColor) {
     inputModulesArray[0] = [
@@ -53,7 +54,6 @@ function App() {
     return <StatModule gameName="Spotle" inputModules={inputModulesArray[4]} themeColor={themeColor} />
   }
 
-
   const statModules = [
     createWordleStatModule("#67a561"),
     createConnectionsStatModule("#bc70c4"),
@@ -62,6 +62,10 @@ function App() {
     createSpotleStatModule("#8370de"),
     // <StatModule gameName="Dordle"  themeColor="#fccc04" />,
   ];
+
+  function handleRankClick() {
+    setRank("S");
+  }
 
   return (
     <>
@@ -73,20 +77,14 @@ function App() {
 
       <h1>RANKLE</h1>
 
-      {/* <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div> */}
+      <button onClick={handleRankClick}>
+        Click to regenerate Rank: {rank}
+      </button>
+
       <div className="statModuleContainer">
+
         {statModules}
       </div>
-      <p className="tip">
-        Click on the Rankle logo to generate your Rank
-      </p>
     </>
   )
 }
