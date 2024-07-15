@@ -33,7 +33,11 @@
   flex-basis: 25%;
 
   /* same background colour as the Connections buttons */
-  background-color: #efefe6;
+  /* background-color: #efefe6; */
+}
+
+.statModuleButtonClicked {
+  background-color: green;
 }
 
 /* .statModuleButton:hover {
@@ -42,7 +46,7 @@
 
 button:focus,
 button:focus-visible {
-  background-color: gold;
+  /* background-color: gold; */
 }
 
 .logo {
