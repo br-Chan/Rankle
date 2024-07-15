@@ -14,27 +14,53 @@ function addButtonModule(index, queryText, numOfButtons, descending) {
   );
 }
 
-function createWordleStatModule() {
-  return <StatModule gameName="Wordle" themeColor="#67a561" />
-}
-
 function App() {
-  const inputModules = [
-    <ButtonModule queryText="Query text" numOfButtons={6} descending={true} />,
-    <ButtonModule queryText="Select guesses made" numOfButtons="5" />
-  ];
+  const inputModulesArray = [];
+
+  function createWordleStatModule() {
+    inputModulesArray[0] = [
+      <ButtonModule queryText="Guesses made:" numOfButtons={6} />,
+    ];
+    return <StatModule gameName="Wordle" inputModules={inputModulesArray[0]} themeColor="#67a561" />
+  }
+
+  function createConnectionsStatModule() {
+    inputModulesArray[1] = [
+      <ButtonModule queryText="Mistakes remaining:" numOfButtons={4} descending={true} />,
+      <ButtonModule queryText="Connections found:" numOfButtons={4} />,
+    ];
+    return <StatModule gameName="Connections" inputModules={inputModulesArray[1]} themeColor="#bc70c4" />
+  }
+
+  function createSymbleStatModule() {
+    inputModulesArray[2] = [
+      <ButtonModule queryText="Guesses made:" numOfButtons={8} />,
+    ];
+    return <StatModule gameName="Symble" inputModules={inputModulesArray[2]} themeColor="#f11415" />
+  }
+
+  function createStrandsStatModule() {
+    inputModulesArray[3] = [
+      <ButtonModule queryText="Hints used:" numOfButtons={7} />,
+    ];
+    return <StatModule gameName="Strands" inputModules={inputModulesArray[3]} themeColor="#a5beba" />
+  }
+
+  function createSpotleStatModule() {
+    inputModulesArray[4] = [
+      <ButtonModule queryText="Guesses made:" numOfButtons={10} />,
+    ];
+    return <StatModule gameName="Spotle" inputModules={inputModulesArray[4]} themeColor="#8370de" />
+  }
+
 
   const statModules = [
     createWordleStatModule(),
-    <StatModule gameName="Connections" themeColor="#bc70c4" />,
-    <StatModule gameName="Symble" inputModules={inputModules} themeColor="#f11415" />,
-    <StatModule gameName="Spotle" inputModules={inputModules} themeColor="#8370de" />,
-    <StatModule gameName="Dordle" inputModules={inputModules} themeColor="#fccc04" />,
-    <StatModule gameName="Dordle" inputModules={inputModules} themeColor="#f31064" />,
-    <StatModule gameName="Dordle" inputModules={inputModules} themeColor="#46013f" />,
-    <StatModule gameName="Bandle" inputModules={inputModules} themeColor="#f9deb2" />,
-    <StatModule gameName="Dordle" inputModules={inputModules} />,
-    <StatModule gameName="Dordle" inputModules={inputModules} />
+    createConnectionsStatModule(),
+    createSymbleStatModule(),
+    createStrandsStatModule(),
+    createSpotleStatModule(),
+    // <StatModule gameName="Dordle"  themeColor="#fccc04" />,
   ];
 
   // statModules[0].addInputModule("Hello", "5", "false");
