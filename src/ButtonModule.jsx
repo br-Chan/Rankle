@@ -1,4 +1,7 @@
-export function ButtonModule({ queryText, numOfButtons, descending }) {
+import { useState } from "react";
+
+export const ButtonModule = ({ queryText, numOfButtons, descending, themeColor }) => {
+    const [selectedButtonIndex, setSelectedButtonIndex] = useState(null);
     const buttons = [];
 
     // Clear the button text string.
@@ -15,10 +18,19 @@ export function ButtonModule({ queryText, numOfButtons, descending }) {
         }
 
         buttons.push(
-            <button className="statModuleButton" key={index} onClick={() => handleClick(index)}>
+            <button
+                className="statModuleButton"
+                key={index}
+                style={{ backgroundColor: selectedButtonIndex === index ? themeColor : "white" }}
+                onClick={() => handleClick(index)}
+            >
                 {buttonText}
             </button>
         );
+    }
+
+    function handleClick(index) {
+        setSelectedButtonIndex(index);
     }
 
     return (

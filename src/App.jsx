@@ -17,53 +17,51 @@ function addButtonModule(index, queryText, numOfButtons, descending) {
 function App() {
   const inputModulesArray = [];
 
-  function createWordleStatModule() {
+  function createWordleStatModule(themeColor) {
     inputModulesArray[0] = [
-      <ButtonModule queryText="Guesses made:" numOfButtons={6} />,
+      <ButtonModule queryText="Guesses made:" numOfButtons={6} themeColor={themeColor} />,
     ];
-    return <StatModule gameName="Wordle" inputModules={inputModulesArray[0]} themeColor="#67a561" />
+    return <StatModule gameName="Wordle" inputModules={inputModulesArray[0]} themeColor={themeColor} />
   }
 
-  function createConnectionsStatModule() {
+  function createConnectionsStatModule(themeColor) {
     inputModulesArray[1] = [
-      <ButtonModule queryText="Mistakes remaining:" numOfButtons={4} descending={true} />,
-      <ButtonModule queryText="Connections found:" numOfButtons={4} />,
+      <ButtonModule queryText="Mistakes remaining:" numOfButtons={4} descending={true} themeColor={themeColor} />,
+      <ButtonModule queryText="Connections found:" numOfButtons={4} themeColor={themeColor} />,
     ];
-    return <StatModule gameName="Connections" inputModules={inputModulesArray[1]} themeColor="#bc70c4" />
+    return <StatModule gameName="Connections" inputModules={inputModulesArray[1]} themeColor={themeColor} />
   }
 
-  function createSymbleStatModule() {
+  function createSymbleStatModule(themeColor) {
     inputModulesArray[2] = [
-      <ButtonModule queryText="Guesses made:" numOfButtons={8} />,
+      <ButtonModule queryText="Guesses made:" numOfButtons={8} themeColor={themeColor} />,
     ];
-    return <StatModule gameName="Symble" inputModules={inputModulesArray[2]} themeColor="#f11415" />
+    return <StatModule gameName="Symble" inputModules={inputModulesArray[2]} themeColor={themeColor} />
   }
 
-  function createStrandsStatModule() {
+  function createStrandsStatModule(themeColor) {
     inputModulesArray[3] = [
-      <ButtonModule queryText="Hints used:" numOfButtons={7} />,
+      <ButtonModule queryText="Hints used:" numOfButtons={7} themeColor={themeColor} />,
     ];
-    return <StatModule gameName="Strands" inputModules={inputModulesArray[3]} themeColor="#a5beba" />
+    return <StatModule gameName="Strands" inputModules={inputModulesArray[3]} themeColor={themeColor} />
   }
 
-  function createSpotleStatModule() {
+  function createSpotleStatModule(themeColor) {
     inputModulesArray[4] = [
-      <ButtonModule queryText="Guesses made:" numOfButtons={10} />,
+      <ButtonModule queryText="Guesses made:" numOfButtons={10} themeColor={themeColor} />,
     ];
-    return <StatModule gameName="Spotle" inputModules={inputModulesArray[4]} themeColor="#8370de" />
+    return <StatModule gameName="Spotle" inputModules={inputModulesArray[4]} themeColor={themeColor} />
   }
 
 
   const statModules = [
-    createWordleStatModule(),
-    createConnectionsStatModule(),
-    createSymbleStatModule(),
-    createStrandsStatModule(),
-    createSpotleStatModule(),
+    createWordleStatModule("#67a561"),
+    createConnectionsStatModule("#bc70c4"),
+    createSymbleStatModule("#f11415"),
+    createStrandsStatModule("#a5beba"),
+    createSpotleStatModule("#8370de"),
     // <StatModule gameName="Dordle"  themeColor="#fccc04" />,
   ];
-
-  // statModules[0].addInputModule("Hello", "5", "false");
 
   return (
     <>
