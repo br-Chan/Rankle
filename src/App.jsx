@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './App.css'
 import { StatModule } from './StatModule'
 import { ButtonModule } from './ButtonModule'
+import { InputModule } from './InputModule';
 
 function addButtonModule(index, queryText, numOfButtons, descending) {
   // have an array of arrays of input modules (or a map?). Each array of input modules is then
@@ -18,9 +19,20 @@ function App() {
   const inputModulesArray = [];
   const [rank, setRank] = useState("R");
 
+  const handleInputClick = (value) => {
+    console.log(value);
+  }
+
   function createWordleStatModule(themeColor) {
     inputModulesArray[0] = [
       <ButtonModule queryText="Guesses made:" numOfButtons={6} themeColor={themeColor} />,
+      <InputModule
+        queryText="I am input module"
+        buttonLabels={["1", "2"]}
+        buttonValues={[6, 5]}
+        onInputClick={handleInputClick}
+        themeColor={themeColor}
+      />,
     ];
     return <StatModule gameName="Wordle" inputModules={inputModulesArray[0]} themeColor={themeColor} />
   }
@@ -64,7 +76,7 @@ function App() {
   ];
 
   function handleRankClick() {
-    setRank("S");
+    setRank("[Coming soon]");
   }
 
   return (
@@ -77,7 +89,7 @@ function App() {
 
       <h1>RANKLE</h1>
 
-      <button onClick={handleRankClick}>
+      <button style={{ marginBottom: '10px' }} onClick={handleRankClick}>
         Click to regenerate Rank: {rank}
       </button>
 
