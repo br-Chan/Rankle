@@ -38,8 +38,24 @@ function App() {
     const avg = sum / scores.length;
     console.log("Average: " + avg);
 
+    let rank = "R";
+    if (avg >= 91) rank = "S";
+    else if (avg >= 84) rank = "A+";
+    else if (avg >= 77) rank = "A";
+    else if (avg >= 70) rank = "A-";
+    else if (avg >= 63) rank = "B+";
+    else if (avg >= 56) rank = "B";
+    else if (avg >= 49) rank = "B-";
+    else if (avg >= 42) rank = "C+";
+    else if (avg >= 35) rank = "C";
+    else if (avg >= 28) rank = "C-";
+    else if (avg >= 21) rank = "D+";
+    else if (avg >= 14) rank = "D";
+    else if (avg >= 7) rank = "D-";
+    else if (avg >= 0) rank = "F";
+
     // Update the rank.
-    setRank("(" + avg + ")");
+    setRank(rank + " (" + avg + ")");
   }
 
   function createWordleStatModule(themeColor) {
