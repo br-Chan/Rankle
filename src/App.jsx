@@ -17,20 +17,19 @@ function addButtonModule(index, queryText, numOfButtons, descending) {
 
 function App() {
   const inputModulesArray = [];
+  const scores = [];
   const [rank, setRank] = useState("R");
 
-  const handleInputClick = (value) => {
-    console.log(value);
+  const handleInputClick = (valueIndex, value) => {
+    console.log(valueIndex + ": " + value);
   }
 
   function createWordleStatModule(themeColor) {
+    const index = 0;
     inputModulesArray[0] = [
-      <ButtonModule
-        queryText="Guesses made:"
-        numOfButtons={6}
-        themeColor={themeColor}
-      />,
       <InputModule
+        key={index}
+        valueIndex={index}
         queryText="Guesses made:"
         buttonLabels={[1, 2, 3, 4, 5, 6, "X"]}
         buttonValues={[6, 5, 4, 3, 2, 1, 0]} // change these values
@@ -42,20 +41,14 @@ function App() {
   }
 
   function createConnectionsStatModule(themeColor) {
+    const index = 1;
     inputModulesArray[1] = [
-      <ButtonModule queryText="Connections found:" numOfButtons={4} themeColor={themeColor} />,
-      <ButtonModule queryText="Mistakes remaining:" numOfButtons={4} descending={true} themeColor={themeColor} />,
       <InputModule
-        queryText="Connections found:"
-        buttonLabels={[0, 1, 2, 3, 4]}
-        buttonValues={[0, 1, 2, 3, 3]} // change these values
-        onInputClick={handleInputClick}
-        themeColor={themeColor}
-      />,
-      <InputModule
-        queryText="Mistakes remaining:"
-        buttonLabels={[4, 3, 2, 1, "X"]}
-        buttonValues={[6, 5, 4, 3, 2]} // change these values
+        key={index}
+        valueIndex={index}
+        queryText="Groups made / Mistakes remaining"
+        buttonLabels={["4/4", "4/3", "4/2", "4/1", "2/X", "1/X", "0/X"]}
+        buttonValues={[85, 80, 70, 60, 30, 15, 5]}
         onInputClick={handleInputClick}
         themeColor={themeColor}
       />,
@@ -64,9 +57,11 @@ function App() {
   }
 
   function createSymbleStatModule(themeColor) {
+    const index = 2;
     inputModulesArray[2] = [
-      <ButtonModule queryText="Guesses made:" numOfButtons={8} themeColor={themeColor} />,
       <InputModule
+        key={index}
+        valueIndex={index}
         queryText="Guesses made:"
         buttonLabels={[1, 2, 3, 4, 5, 6, 7, 8, "X"]}
         buttonValues={[8, 7, 6, 5, 4, 3, 2, 1, 0]} // change these values
@@ -78,9 +73,11 @@ function App() {
   }
 
   function createStrandsStatModule(themeColor) {
+    const index = 3;
     inputModulesArray[3] = [
-      <ButtonModule queryText="Hints used:" numOfButtons={7} themeColor={themeColor} />,
       <InputModule
+        key={index}
+        valueIndex={index}
         queryText="Hints used:"
         buttonLabels={[0, 1, 2, 3, 4, 5, 6, 7]}
         buttonValues={[7, 6, 5, 4, 3, 2, 1, 0]} // change these values
@@ -92,9 +89,11 @@ function App() {
   }
 
   function createSpotleStatModule(themeColor) {
+    const index = 4;
     inputModulesArray[4] = [
-      <ButtonModule queryText="Guesses made:" numOfButtons={10} themeColor={themeColor} />,
       <InputModule
+        key={index}
+        valueIndex={index}
         queryText="Guesses made:"
         buttonLabels={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "X"]}
         buttonValues={[10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]} // change these values
