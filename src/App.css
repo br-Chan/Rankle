@@ -34,22 +34,10 @@
 
   width: 5em;
   height: 2.4em;
-
-  /* same background colour as the Connections buttons */
-  /* background-color: #efefe6; */
 }
 
 .statModuleButtonClicked {
   background-color: green;
-}
-
-/* .statModuleButton:hover {
-  background-color: grey;
-} */
-
-button:focus,
-button:focus-visible {
-  /* background-color: gold; */
 }
 
 .logo {
@@ -63,28 +51,6 @@ button:focus-visible {
 .logo:hover {
   filter: drop-shadow(0 0 2em gold);
 }
-/* .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-} */
-
-/* @keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-} */
-
-/* .card {
-  padding: 2em;
-} */
 
 .tip {
   color: #888;

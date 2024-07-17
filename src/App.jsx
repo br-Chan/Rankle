@@ -25,11 +25,15 @@ function App() {
 
   function createWordleStatModule(themeColor) {
     inputModulesArray[0] = [
-      <ButtonModule queryText="Guesses made:" numOfButtons={6} themeColor={themeColor} />,
+      <ButtonModule
+        queryText="Guesses made:"
+        numOfButtons={6}
+        themeColor={themeColor}
+      />,
       <InputModule
-        queryText="I am input module"
-        buttonLabels={["1", "2"]}
-        buttonValues={[6, 5]}
+        queryText="Guesses made:"
+        buttonLabels={[1, 2, 3, 4, 5, 6, "X"]}
+        buttonValues={[6, 5, 4, 3, 2, 1, 0]} // change these values
         onInputClick={handleInputClick}
         themeColor={themeColor}
       />,
@@ -39,8 +43,22 @@ function App() {
 
   function createConnectionsStatModule(themeColor) {
     inputModulesArray[1] = [
-      <ButtonModule queryText="Mistakes remaining:" numOfButtons={4} descending={true} themeColor={themeColor} />,
       <ButtonModule queryText="Connections found:" numOfButtons={4} themeColor={themeColor} />,
+      <ButtonModule queryText="Mistakes remaining:" numOfButtons={4} descending={true} themeColor={themeColor} />,
+      <InputModule
+        queryText="Connections found:"
+        buttonLabels={[0, 1, 2, 3, 4]}
+        buttonValues={[0, 1, 2, 3, 3]} // change these values
+        onInputClick={handleInputClick}
+        themeColor={themeColor}
+      />,
+      <InputModule
+        queryText="Mistakes remaining:"
+        buttonLabels={[4, 3, 2, 1, "X"]}
+        buttonValues={[6, 5, 4, 3, 2]} // change these values
+        onInputClick={handleInputClick}
+        themeColor={themeColor}
+      />,
     ];
     return <StatModule gameName="Connections" inputModules={inputModulesArray[1]} themeColor={themeColor} />
   }
@@ -48,6 +66,13 @@ function App() {
   function createSymbleStatModule(themeColor) {
     inputModulesArray[2] = [
       <ButtonModule queryText="Guesses made:" numOfButtons={8} themeColor={themeColor} />,
+      <InputModule
+        queryText="Guesses made:"
+        buttonLabels={[1, 2, 3, 4, 5, 6, 7, 8, "X"]}
+        buttonValues={[8, 7, 6, 5, 4, 3, 2, 1, 0]} // change these values
+        onInputClick={handleInputClick}
+        themeColor={themeColor}
+      />,
     ];
     return <StatModule gameName="Symble" inputModules={inputModulesArray[2]} themeColor={themeColor} />
   }
@@ -55,6 +80,13 @@ function App() {
   function createStrandsStatModule(themeColor) {
     inputModulesArray[3] = [
       <ButtonModule queryText="Hints used:" numOfButtons={7} themeColor={themeColor} />,
+      <InputModule
+        queryText="Hints used:"
+        buttonLabels={[0, 1, 2, 3, 4, 5, 6, 7]}
+        buttonValues={[7, 6, 5, 4, 3, 2, 1, 0]} // change these values
+        onInputClick={handleInputClick}
+        themeColor={themeColor}
+      />,
     ];
     return <StatModule gameName="Strands" inputModules={inputModulesArray[3]} themeColor={themeColor} />
   }
@@ -62,6 +94,13 @@ function App() {
   function createSpotleStatModule(themeColor) {
     inputModulesArray[4] = [
       <ButtonModule queryText="Guesses made:" numOfButtons={10} themeColor={themeColor} />,
+      <InputModule
+        queryText="Guesses made:"
+        buttonLabels={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "X"]}
+        buttonValues={[10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]} // change these values
+        onInputClick={handleInputClick}
+        themeColor={themeColor}
+      />,
     ];
     return <StatModule gameName="Spotle" inputModules={inputModulesArray[4]} themeColor={themeColor} />
   }
