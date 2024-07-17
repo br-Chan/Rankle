@@ -17,11 +17,29 @@ function addButtonModule(index, queryText, numOfButtons, descending) {
 
 function App() {
   const inputModulesArray = [];
-  const scores = [];
+  const [scores] = useState(Array(5).fill(0));
   const [rank, setRank] = useState("R");
 
   const handleInputClick = (valueIndex, value) => {
     console.log(valueIndex + ": " + value);
+    scores[valueIndex] = value;
+  }
+
+  function handleRankClick() {
+    // Calculate the sum of score values.
+    let sum = 0;
+    scores.forEach((element) => {
+      sum += element;
+      console.log(element + " +");
+    });
+    console.log("= " + sum);
+
+    // Calculate the average score value.
+    const avg = sum / scores.length;
+    console.log("Average: " + avg);
+
+    // Update the rank.
+    setRank("(" + avg + ")");
   }
 
   function createWordleStatModule(themeColor) {
@@ -32,7 +50,7 @@ function App() {
         valueIndex={index}
         queryText="Guesses made:"
         buttonLabels={[1, 2, 3, 4, 5, 6, "X"]}
-        buttonValues={[6, 5, 4, 3, 2, 1, 0]} // change these values
+        buttonValues={[100, 90, 80, 60, 40, 20, 0]} // change these values
         onInputClick={handleInputClick}
         themeColor={themeColor}
       />,
@@ -46,8 +64,8 @@ function App() {
       <InputModule
         key={index}
         valueIndex={index}
-        queryText="Groups made / Mistakes remaining"
-        buttonLabels={["4/4", "4/3", "4/2", "4/1", "2/X", "1/X", "0/X"]}
+        queryText="Groups made | Mistakes remaining"
+        buttonLabels={["4|4", "4|3", "4|2", "4|1", "2|X", "1|X", "0|X"]}
         buttonValues={[85, 80, 70, 60, 30, 15, 5]}
         onInputClick={handleInputClick}
         themeColor={themeColor}
@@ -64,7 +82,7 @@ function App() {
         valueIndex={index}
         queryText="Guesses made:"
         buttonLabels={[1, 2, 3, 4, 5, 6, 7, 8, "X"]}
-        buttonValues={[8, 7, 6, 5, 4, 3, 2, 1, 0]} // change these values
+        buttonValues={[100, 95, 90, 80, 70, 60, 40, 30, 5]} // change these values
         onInputClick={handleInputClick}
         themeColor={themeColor}
       />,
@@ -80,7 +98,7 @@ function App() {
         valueIndex={index}
         queryText="Hints used:"
         buttonLabels={[0, 1, 2, 3, 4, 5, 6, 7]}
-        buttonValues={[7, 6, 5, 4, 3, 2, 1, 0]} // change these values
+        buttonValues={[80, 75, 70, 60, 40, 30, 20, 5]} // change these values
         onInputClick={handleInputClick}
         themeColor={themeColor}
       />,
@@ -96,7 +114,7 @@ function App() {
         valueIndex={index}
         queryText="Guesses made:"
         buttonLabels={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "X"]}
-        buttonValues={[10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0]} // change these values
+        buttonValues={[100, 95, 90, 80, 75, 65, 55, 45, 30, 10, 0]} // change these values
         onInputClick={handleInputClick}
         themeColor={themeColor}
       />,
@@ -112,10 +130,6 @@ function App() {
     createSpotleStatModule("#8370de"),
     // <StatModule gameName="Dordle"  themeColor="#fccc04" />,
   ];
-
-  function handleRankClick() {
-    setRank("[Coming soon]");
-  }
 
   return (
     <>
