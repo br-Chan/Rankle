@@ -17,8 +17,8 @@ function addButtonModule(index, queryText, numOfButtons, descending) {
 
 function App() {
   const inputModulesArray = [];
-  const [enabledScores] = useState(Array(5).fill(true));
-  const [scores] = useState(Array(5).fill(0));
+  const [enabledScores] = useState(Array(5).fill(true)); // true if score is enabled, false otherwise.
+  const [scores] = useState(Array(5).fill(0)); // value of each score.
   // TODO: use length of scores to set unique keys to the input modules
   const [rank, setRank] = useState("R");
 
@@ -32,17 +32,25 @@ function App() {
     scores[valueIndex] = value;
   }
 
-  function handleRankClick() {
-    // Calculate the sum of score values.
+  const handleRankClick = () => {
+    let numberOfEnabledScores = 0; // to divide the sum of enabled scores.
+
+    // Calculate the sum of score values that are enabled.
     let sum = 0;
-    scores.forEach((element) => {
-      sum += element;
-      console.log(element + " +");
-    });
+    let currentValue = 0;
+    for (let index = 0; index < scores.length; ++index) {
+      if (enabledScores[index]) {
+        ++numberOfEnabledScores;
+
+        currentValue = scores[index];
+        sum += currentValue;
+        console.log(currentValue + " +");
+      }
+    }
     console.log("= " + sum);
 
     // Calculate the average score value.
-    const avg = sum / scores.length;
+    const avg = sum / numberOfEnabledScores;
     console.log("Average: " + avg);
 
     let rank = "R";
