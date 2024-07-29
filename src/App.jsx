@@ -17,10 +17,15 @@ function addButtonModule(index, queryText, numOfButtons, descending) {
 
 function App() {
   const inputModulesArray = [];
-  const [enabledScores] = useState(Array(5).fill(0));
+  const [enabledScores] = useState(Array(5).fill(true));
   const [scores] = useState(Array(5).fill(0));
   // TODO: use length of scores to set unique keys to the input modules
   const [rank, setRank] = useState("R");
+
+  const handleEnableClick = (enabledIndex, enabled) => {
+    enabledScores[enabledIndex] = enabled;
+    console.log(enabledScores);
+  }
 
   const handleInputClick = (valueIndex, value) => {
     console.log(valueIndex + ": " + value);
@@ -73,7 +78,13 @@ function App() {
         themeColor={themeColor}
       />,
     ];
-    return <StatModule gameName="Wordle" inputModules={inputModulesArray[0]} themeColor={themeColor} />
+    return <StatModule
+      enabledIndex={index}
+      gameName="Wordle"
+      inputModules={inputModulesArray[0]}
+      onEnableClick={handleEnableClick}
+      themeColor={themeColor}
+    />
   }
 
   function createConnectionsStatModule(themeColor) {
@@ -89,7 +100,13 @@ function App() {
         themeColor={themeColor}
       />,
     ];
-    return <StatModule gameName="Connections" inputModules={inputModulesArray[1]} themeColor={themeColor} />
+    return <StatModule
+      enabledIndex={index}
+      gameName="Connections"
+      inputModules={inputModulesArray[1]}
+      onEnableClick={handleEnableClick}
+      themeColor={themeColor}
+    />
   }
 
   function createSymbleStatModule(themeColor) {
@@ -105,7 +122,13 @@ function App() {
         themeColor={themeColor}
       />,
     ];
-    return <StatModule gameName="Symble" inputModules={inputModulesArray[2]} themeColor={themeColor} />
+    return <StatModule
+      enabledIndex={index}
+      gameName="Symble"
+      inputModules={inputModulesArray[2]}
+      onEnableClick={handleEnableClick}
+      themeColor={themeColor}
+    />
   }
 
   function createStrandsStatModule(themeColor) {
@@ -121,7 +144,13 @@ function App() {
         themeColor={themeColor}
       />,
     ];
-    return <StatModule gameName="Strands" inputModules={inputModulesArray[3]} themeColor={themeColor} />
+    return <StatModule
+      enabledIndex={index}
+      gameName="Strands"
+      inputModules={inputModulesArray[3]}
+      onEnableClick={handleEnableClick}
+      themeColor={themeColor}
+    />
   }
 
   function createSpotleStatModule(themeColor) {
@@ -137,7 +166,13 @@ function App() {
         themeColor={themeColor}
       />,
     ];
-    return <StatModule gameName="Spotle" inputModules={inputModulesArray[4]} themeColor={themeColor} />
+    return <StatModule
+      enabledIndex={index}
+      gameName="Spotle"
+      inputModules={inputModulesArray[4]}
+      onEnableClick={handleEnableClick}
+      themeColor={themeColor}
+    />
   }
 
   const statModules = [

@@ -4,9 +4,6 @@ export const InputModule = ({ valueIndex, queryText, buttonLabels, buttonValues,
     const [selectedButtonIndex, setSelectedButtonIndex] = useState(null);
     const buttons = [];
 
-    // Clear the button text string.
-    let buttonText = "";
-
     // Create each button with ascending or descending numbers.
     for (let index = 0; index < buttonLabels.length; ++index) {
         let value = buttonValues[index];

@@ -1,6 +1,6 @@
 import { EnableButton } from "./EnableButton";
 
-export function StatModule({ gameName, inputModules, themeColor }) {
+export function StatModule({ enabledIndex, gameName, inputModules, onEnableClick, themeColor }) {
     // Set the translucent colour for the background.
     let translucentThemeColor = themeColor + "25";
 
@@ -12,7 +12,7 @@ export function StatModule({ gameName, inputModules, themeColor }) {
 
     return (
         <div className="statModule" style={statModuleStyle}>
-            <EnableButton enabled={true}/>
+            <EnableButton onEnableClick={(enabled) => onEnableClick(enabledIndex, enabled)} backgroundColor={themeColor} />
             <h2>{gameName}</h2>
             {inputModules}
         </div>

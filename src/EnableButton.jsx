@@ -1,18 +1,18 @@
 import { useState } from "react";
 
-export const EnableButton = ({ enabled }) => {
+export const EnableButton = ({ onEnableClick, backgroundColor }) => {
     const [isClicked, setIsClicked] = useState(true);
 
     function handleClick() {
-        const toggledState = isClicked === true ? false : true;
-        isClicked = setIsClicked(toggledState);
-        enabled = toggledState;
+        const enabled = isClicked === true ? false : true
+        setIsClicked(enabled);
+        onEnableClick(enabled);
     }
 
     return (
         <button
             className="enablebutton"
-            style={{ backgroundColor: isClicked ? "gold" : "white" }}
+            style={{ backgroundColor: isClicked ? backgroundColor : "white", color: "black" }}
             onClick={() => handleClick()}
         >
             Enable
