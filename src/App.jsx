@@ -3,6 +3,7 @@ import './App.css'
 import { StatModule } from './StatModule'
 import { ButtonModule } from './ButtonModule'
 import { InputModule } from './InputModule';
+import { EnableSwitch } from './EnableSwitch';
 
 function addButtonModule(index, queryText, numOfButtons, descending) {
   // have an array of arrays of input modules (or a map?). Each array of input modules is then
@@ -201,7 +202,6 @@ function App() {
       </div> */}
 
       <h1>RANKLE</h1>
-
       <button style={{ marginBottom: '10px' }} onClick={handleRankClick}>
         Click to regenerate Rank: {rank}
       </button>

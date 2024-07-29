@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { EnableButton } from "./EnableButton";
+import { EnableSwitch } from "./EnableSwitch";
 
 export function StatModule({ enabledIndex, gameName, inputModules, onEnableClick, themeColor }) {
     // Set the translucent colour for the background.
@@ -10,9 +12,16 @@ export function StatModule({ enabledIndex, gameName, inputModules, onEnableClick
         backgroundColor: translucentThemeColor,
     }
 
+    const [value, setValue] = useState(false);
+
     return (
         <div className="statModule" style={statModuleStyle}>
             <EnableButton onEnableClick={(enabled) => onEnableClick(enabledIndex, enabled)} backgroundColor={themeColor} />
+            <EnableSwitch
+                switchId={enabledIndex}
+                onEnableClick={(enabled) => onEnableClick(enabledIndex, enabled)}
+                backgroundColor={themeColor}
+            />
             <h2>{gameName}</h2>
             {inputModules}
         </div>
