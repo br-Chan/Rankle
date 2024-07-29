@@ -3,7 +3,6 @@ import './App.css'
 import { StatModule } from './StatModule'
 import { ButtonModule } from './ButtonModule'
 import { InputModule } from './InputModule';
-import { EnableSwitch } from './EnableSwitch';
 
 function addButtonModule(index, queryText, numOfButtons, descending) {
   // have an array of arrays of input modules (or a map?). Each array of input modules is then
@@ -73,6 +72,15 @@ function App() {
     // Update the rank.
     setRank(rank + " (" + avg + ")");
   }
+
+  const statModules = [
+    createWordleStatModule("#67a561"),
+    createConnectionsStatModule("#bc70c4"),
+    createSymbleStatModule("#f11415"),
+    createStrandsStatModule("#a5beba"),
+    createSpotleStatModule("#8370de"),
+    // <StatModule gameName="Dordle"  themeColor="#fccc04" />,
+  ];
 
   function createWordleStatModule(themeColor) {
     const index = 0;
@@ -184,15 +192,6 @@ function App() {
     />
   }
 
-  const statModules = [
-    createWordleStatModule("#67a561"),
-    createConnectionsStatModule("#bc70c4"),
-    createSymbleStatModule("#f11415"),
-    createStrandsStatModule("#a5beba"),
-    createSpotleStatModule("#8370de"),
-    // <StatModule gameName="Dordle"  themeColor="#fccc04" />,
-  ];
-
   return (
     <>
       {/* <div>
@@ -207,7 +206,6 @@ function App() {
       </button>
 
       <div className="statModuleContainer">
-
         {statModules}
       </div>
     </>

@@ -27,7 +27,7 @@ export const InputModule = ({ valueIndex, queryText, buttonLabels, buttonValues,
 
     return (
         <>
-            <label>{queryText}<br /></label>
+            <label>{queryText}</label>
             <div className="statModuleButtonContainer">
                 {buttons}
             </div>

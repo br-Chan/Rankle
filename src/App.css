@@ -20,6 +20,8 @@
   border-radius: 16px;
   border-color: gold;
   background-color: rgb(255 215 0 / 25%);
+
+  transition: 0.2s;
 }
 
 .statModuleButtonContainer {
@@ -34,6 +36,8 @@
 
   width: 5em;
   height: 2.4em;
+  
+  transition: 0.2s;
 }
 
 .statModuleButtonClicked {
