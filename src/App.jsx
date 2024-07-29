@@ -17,7 +17,9 @@ function addButtonModule(index, queryText, numOfButtons, descending) {
 
 function App() {
   const inputModulesArray = [];
+  const [enabledScores] = useState(Array(5).fill(0));
   const [scores] = useState(Array(5).fill(0));
+  // TODO: use length of scores to set unique keys to the input modules
   const [rank, setRank] = useState("R");
 
   const handleInputClick = (valueIndex, value) => {

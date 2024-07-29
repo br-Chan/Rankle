@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export const InputModule = ({ valueIndex, queryText, buttonLabels, buttonValues, onInputClick, themeColor }) => {
     const [selectedButtonIndex, setSelectedButtonIndex] = useState(null);
