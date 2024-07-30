@@ -17,8 +17,8 @@ function addButtonModule(index, queryText, numOfButtons, descending) {
 
 function App() {
   const inputModulesArray = [];
-  const [enabledScores] = useState(Array(5).fill(true)); // true if score is enabled, false otherwise.
-  const [scores] = useState(Array(5).fill(0)); // value of each score.
+  const [enabledScores] = useState(Array().fill(true)); // true if score is enabled, false otherwise.
+  const [scores] = useState(Array().fill(0)); // value of each score.
   // TODO: use length of scores to set unique keys to the input modules
   const [rank, setRank] = useState("R");
 
@@ -93,6 +93,7 @@ function App() {
         buttonValues={[100, 90, 80, 60, 40, 20, 0]} // change these values
         onInputClick={handleInputClick}
         themeColor={themeColor}
+        isEnabled={enabledScores[index]}
       />,
     ];
     return <StatModule
@@ -115,6 +116,7 @@ function App() {
         buttonValues={[85, 80, 70, 60, 30, 15, 5]}
         onInputClick={handleInputClick}
         themeColor={themeColor}
+        isEnabled={enabledScores[index]}
       />,
     ];
     return <StatModule
@@ -137,6 +139,7 @@ function App() {
         buttonValues={[100, 95, 90, 80, 70, 60, 40, 30, 5]} // change these values
         onInputClick={handleInputClick}
         themeColor={themeColor}
+        isEnabled={enabledScores[index]}
       />,
     ];
     return <StatModule
@@ -159,6 +162,7 @@ function App() {
         buttonValues={[80, 75, 70, 60, 40, 30, 20, 5]} // change these values
         onInputClick={handleInputClick}
         themeColor={themeColor}
+        isEnabled={enabledScores[index]}
       />,
     ];
     return <StatModule
@@ -181,6 +185,7 @@ function App() {
         buttonValues={[100, 95, 90, 80, 75, 65, 55, 45, 30, 10, 0]} // change these values
         onInputClick={handleInputClick}
         themeColor={themeColor}
+        isEnabled={enabledScores[index]}
       />,
     ];
     return <StatModule

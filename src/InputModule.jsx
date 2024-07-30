@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const InputModule = ({ valueIndex, queryText, buttonLabels, buttonValues, onInputClick, themeColor }) => {
+export const InputModule = ({ valueIndex, queryText, buttonLabels, buttonValues, onInputClick, themeColor, isEnabled}) => {
     const [selectedButtonIndex, setSelectedButtonIndex] = useState(null);
     const buttons = [];
 
@@ -12,7 +12,7 @@ export const InputModule = ({ valueIndex, queryText, buttonLabels, buttonValues,
                 className="statModuleButton"
                 key={index}
                 value={value}
-                style={{ backgroundColor: selectedButtonIndex === index ? themeColor : "white" }}
+                style={{ backgroundColor: selectedButtonIndex === index ? themeColor : "white" , borderColor: isEnabled ? themeColor : "grey"}}
                 onClick={() => handleClick(index, valueIndex, value)}
             >
                 {buttonLabels[index]}
