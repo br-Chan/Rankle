@@ -70,7 +70,7 @@ function App() {
     else if (avg >= 0) rank = "F";
 
     // Update the rank.
-    setRank(rank + " (" + avg + ")");
+    setRank(rank + " (" + Math.floor(avg) + ")");
   }
 
   const statModules = [
@@ -79,6 +79,7 @@ function App() {
     createSymbleStatModule("#f11415"),
     createStrandsStatModule("#a5beba"),
     createSpotleStatModule("#8370de"),
+    createBandleStatModule("#fcdcb4"),
     // <StatModule gameName="Dordle"  themeColor="#fccc04" />,
   ];
 
@@ -187,6 +188,28 @@ function App() {
       enabledIndex={index}
       gameName="Spotle"
       inputModules={inputModulesArray[4]}
+      onEnableClick={handleEnableClick}
+      themeColor={themeColor}
+    />
+  }
+
+  function createBandleStatModule(themeColor) {
+    const index = 5;
+    inputModulesArray[5] = [
+      <InputModule
+        key={index}
+        valueIndex={index}
+        queryText="Guesses made:"
+        buttonLabels={[1, 2, 3, 4, 5, 6, "X"]}
+        buttonValues={[100, 90, 80, 60, 40, 20, 0]} // change these values
+        onInputClick={handleInputClick}
+        themeColor={themeColor}
+      />,
+    ];
+    return <StatModule
+      enabledIndex={index}
+      gameName="Bandle"
+      inputModules={inputModulesArray[5]}
       onEnableClick={handleEnableClick}
       themeColor={themeColor}
     />
