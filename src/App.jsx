@@ -25,7 +25,7 @@ function App() {
   const handleEnableClick = (enabledIndex, enabled) => {
     enabledScores[enabledIndex] = enabled;
     console.log(enabledScores);
-  }
+  };
 
   const handleInputClick = (valueIndex, value) => {
     console.log(valueIndex + ": " + value);
@@ -80,6 +80,7 @@ function App() {
     createStrandsStatModule("#a5beba"),
     createSpotleStatModule("#8370de"),
     createBandleStatModule("#fcdcb4"),
+    console.log(enabledScores)
     // <StatModule gameName="Dordle"  themeColor="#fccc04" />,
   ];
 
@@ -94,6 +95,7 @@ function App() {
         buttonValues={[100, 90, 80, 60, 40, 20, 0]} // change these values
         onInputClick={handleInputClick}
         themeColor={themeColor}
+        isEnabled={enabledScores[index]}
       />,
     ];
     return <StatModule
@@ -116,6 +118,7 @@ function App() {
         buttonValues={[85, 80, 70, 60, 30, 15, 5]}
         onInputClick={handleInputClick}
         themeColor={themeColor}
+        isEnabled={enabledScores[index]}
       />,
     ];
     return <StatModule
@@ -138,6 +141,7 @@ function App() {
         buttonValues={[100, 95, 90, 80, 70, 60, 40, 30, 5]} // change these values
         onInputClick={handleInputClick}
         themeColor={themeColor}
+        isEnabled={enabledScores[index]}
       />,
     ];
     return <StatModule
@@ -160,6 +164,7 @@ function App() {
         buttonValues={[80, 75, 70, 60, 40, 30, 20, 5]} // change these values
         onInputClick={handleInputClick}
         themeColor={themeColor}
+        isEnabled={enabledScores[index]}
       />,
     ];
     return <StatModule
@@ -182,6 +187,7 @@ function App() {
         buttonValues={[100, 95, 90, 80, 75, 65, 55, 45, 30, 10, 0]} // change these values
         onInputClick={handleInputClick}
         themeColor={themeColor}
+        isEnabled={enabledScores[index]}
       />,
     ];
     return <StatModule

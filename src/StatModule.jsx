@@ -1,10 +1,11 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { EnableButton } from "./EnableButton";
 import { EnableSwitch } from "./EnableSwitch";
 
 export function StatModule({ enabledIndex, gameName, inputModules, onEnableClick, themeColor }) {
     const [borderColor, setBorderColor] = useState(themeColor);
     const [backgroundColor, setBackgroundColor] = useState(borderColor + "25");
+    const [enabled, setEnabled] = useState(true);
 
     // Set the translucent colour for the background.
     let translucentBorderColor = borderColor + "25";
@@ -24,7 +25,7 @@ export function StatModule({ enabledIndex, gameName, inputModules, onEnableClick
             setBackgroundColor("white");
             
         }
-
+        setEnabled(enabled)
         onEnableClick(enabledIndex, enabled)
     }
 
@@ -37,7 +38,9 @@ export function StatModule({ enabledIndex, gameName, inputModules, onEnableClick
                 backgroundColor={themeColor}
             />
             <h2>{gameName}</h2>
-            {inputModules}
+            {React.Children.map(inputModules, (inputModule) =>
+                React.cloneElement(inputModule, { isEnabled: enabled })
+            )}
         </div>
     );
 }
