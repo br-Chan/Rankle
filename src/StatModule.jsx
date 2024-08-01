@@ -23,6 +23,7 @@ export function StatModule({ enabledIndex, gameName, inputModules, onEnableClick
         } else {
             setBorderColor("lightgrey");
             setBackgroundColor("white");
+            
         }
         setEnabled(enabled)
         onEnableClick(enabledIndex, enabled)
