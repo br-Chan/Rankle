@@ -13,7 +13,7 @@ export function InputModule({ valueIndex, queryText, buttonLabels, buttonValues,
                 className="statModuleButton"
                 key={index}
                 value={value}
-                style={{ backgroundColor: selectedButtonIndex === index ? (enabled ? themeColor : "grey") : "white"}}
+                style={{ backgroundColor: selectedButtonIndex === index ? (enabled ? themeColor : "lightgrey") : "white"}}
                 onClick={() => handleClick(index, valueIndex, value)}
             >
                 {buttonLabels[index]}
