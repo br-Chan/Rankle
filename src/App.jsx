@@ -17,15 +17,15 @@ function addButtonModule(index, queryText, numOfButtons, descending) {
 
 function App() {
   const inputModulesArray = [];
-  const [enabledScores] = useState(Array().fill(true)); // true if score is enabled, false otherwise.
-  const [scores] = useState(Array().fill(0)); // value of each score.
+  const [enabledScores] = useState(Array(5).fill(true)); // true if score is enabled, false otherwise.
+  const [scores] = useState(Array(5).fill(0)); // value of each score.
   // TODO: use length of scores to set unique keys to the input modules
   const [rank, setRank] = useState("R");
 
   const handleEnableClick = (enabledIndex, enabled) => {
     enabledScores[enabledIndex] = enabled;
     console.log(enabledScores);
-  }
+  };
 
   const handleInputClick = (valueIndex, value) => {
     console.log(valueIndex + ": " + value);
@@ -79,6 +79,7 @@ function App() {
     createSymbleStatModule("#f11415"),
     createStrandsStatModule("#a5beba"),
     createSpotleStatModule("#8370de"),
+    console.log(enabledScores)
     // <StatModule gameName="Dordle"  themeColor="#fccc04" />,
   ];
 

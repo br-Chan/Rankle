@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-export const InputModule = ({ valueIndex, queryText, buttonLabels, buttonValues, onInputClick, themeColor, isEnabled}) => {
+export function InputModule({ valueIndex, queryText, buttonLabels, buttonValues, onInputClick, themeColor, isEnabled }){
     const [selectedButtonIndex, setSelectedButtonIndex] = useState(null);
+    const [enabled, setEnabled] = useState(true);
     const buttons = [];
 
     // Create each button with ascending or descending numbers.
@@ -12,7 +13,7 @@ export const InputModule = ({ valueIndex, queryText, buttonLabels, buttonValues,
                 className="statModuleButton"
                 key={index}
                 value={value}
-                style={{ backgroundColor: selectedButtonIndex === index ? (isEnabled ? themeColor : "grey") : "white"}}
+                style={{ backgroundColor: selectedButtonIndex === index ? (enabled ? themeColor : "grey") : "white"}}
                 onClick={() => handleClick(index, valueIndex, value)}
             >
                 {buttonLabels[index]}
@@ -24,6 +25,10 @@ export const InputModule = ({ valueIndex, queryText, buttonLabels, buttonValues,
         setSelectedButtonIndex(index);
         onInputClick(valueIndex, value);
     }
+
+    useEffect(() => {
+        setEnabled(isEnabled)
+    }, [isEnabled]);
 
     return (
         <>
