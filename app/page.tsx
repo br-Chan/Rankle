@@ -1,7 +1,35 @@
 import Image from "next/image";
 import { StatModule } from "./ui/statModule";
 
-const inputModules = [
+const inputModuleData = [
+  // Wordle
+  {
+    queryText: "Guesses made:",
+    buttonLabels: [1, 2, 3, 4, 5, 6, "X"],
+    buttonValues: [100, 90, 80, 60, 40, 20, 0],
+  },
+  // Connections
+  {
+    queryText: "Groups made | Mistakes remaining",
+    buttonLabels: ["4|4", "4|3", "4|2", "4|1", "2|X", "1|X", "0|X"],
+    buttonValues: [85, 80, 70, 60, 30, 15, 5],
+  },
+  //Symble
+  {
+    queryText: "Guesses made:",
+    buttonLabels: [1, 2, 3, 4, 5, 6, 7, 8, "X"],
+    buttonValues: [100, 95, 90, 80, 70, 60, 40, 30, 5],
+  },
+  {
+    queryText: "Hints used:",
+    buttonLabels: [0, 1, 2, 3, 4, 5, 6, 7],
+    buttonValues: [80, 75, 70, 60, 40, 30, 20, 5],
+  },
+  {
+    queryText: "Guesses made:",
+    buttonLabels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "X"],
+    buttonValues: [100, 95, 90, 80, 75, 65, 55, 45, 30, 10, 0],
+  },
   {
     queryText: "Guesses made:",
     buttonLabels: [1, 2, 3, 4, 5, 6, "X"],
@@ -9,14 +37,54 @@ const inputModules = [
   },
 ]
 
-const statModules = [
+const statModuleData = [
   {
     id: '3958dc9e-712f-4377-85e9-fec4b6a6442a',
     gameName: 'Wordle',
     inputModules: [
-      inputModules[0],
+      inputModuleData[0],
     ],
     themeColor: '#67a561',
+  },
+  {
+    id: '3958dc9e-712f-4377-85e9-fec4b6a6442a',
+    gameName: 'Connections',
+    inputModules: [
+      inputModuleData[1],
+    ],
+    themeColor: '#bc70c4',
+  },
+  {
+    id: '3958dc9e-712f-4377-85e9-fec4b6a6442a',
+    gameName: 'Symble',
+    inputModules: [
+      inputModuleData[2],
+    ],
+    themeColor: '#f11415',
+  },
+  {
+    id: '3958dc9e-712f-4377-85e9-fec4b6a6442a',
+    gameName: 'Strands',
+    inputModules: [
+      inputModuleData[3],
+    ],
+    themeColor: '#a5beba',
+  },
+  {
+    id: '3958dc9e-712f-4377-85e9-fec4b6a6442a',
+    gameName: 'Spotle',
+    inputModules: [
+      inputModuleData[4],
+    ],
+    themeColor: '#8370de',
+  },
+  {
+    id: '3958dc9e-712f-4377-85e9-fec4b6a6442a',
+    gameName: 'Bandle',
+    inputModules: [
+      inputModuleData[5],
+    ],
+    themeColor: '#fcdcb4',
   },
 ]
 
@@ -40,125 +108,13 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <StatModule data={statModules[0]} />
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+      <div className="mb-32 grid gap-2 text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
+        <StatModule data={statModuleData[0]} />
+        <StatModule data={statModuleData[1]} />
+        <StatModule data={statModuleData[2]} />
+        <StatModule data={statModuleData[3]} />
+        <StatModule data={statModuleData[4]} />
+        <StatModule data={statModuleData[5]} />
       </div>
     </main>
   );

@@ -23,18 +23,16 @@ export const StatModule = ({ data }: { data: StatModuleData }) => {
     }
 
     return (
-        <>
-            <div
-                className="py-2 px-5 text-center border-4 rounded-2xl"
-                style={{
-                    borderColor: data.themeColor,
-                    backgroundColor: `${data.themeColor}25`,
-                }}
-            >
-                <h2 className="py-4 text-2xl font-bold">{data.gameName}</h2>
-                {inputModules}
-            </div>
-        </>
+        <div
+            className="w-72 py-2 px-5 text-center border-4 rounded-2xl"
+            style={{
+                borderColor: data.themeColor,
+                backgroundColor: `${data.themeColor}25`,
+            }}
+        >
+            <h2 className="py-4 text-2xl font-bold">{data.gameName}</h2>
+            {inputModules}
+        </div>
 
     );
 
