@@ -1,39 +1,48 @@
 import Image from "next/image";
 import { StatModule } from "./ui/statModule";
+import { InputModuleData } from "./ui/inputModule";
 
-const inputModuleData = [
+let inputModuleData: InputModuleData[] = [];
+
+inputModuleData = [
   // Wordle
   {
+    scoreIndex: 0,
     queryText: "Guesses made:",
     buttonLabels: [1, 2, 3, 4, 5, 6, "X"],
-    buttonValues: [100, 90, 80, 60, 40, 20, 0],
+    buttonScores: [100, 90, 80, 60, 40, 20, 0],
   },
   // Connections
   {
+    scoreIndex: 1,
     queryText: "Groups made | Mistakes remaining",
     buttonLabels: ["4|4", "4|3", "4|2", "4|1", "2|X", "1|X", "0|X"],
-    buttonValues: [85, 80, 70, 60, 30, 15, 5],
+    buttonScores: [85, 80, 70, 60, 30, 15, 5],
   },
   //Symble
   {
+    scoreIndex: 2,
     queryText: "Guesses made:",
     buttonLabels: [1, 2, 3, 4, 5, 6, 7, 8, "X"],
-    buttonValues: [100, 95, 90, 80, 70, 60, 40, 30, 5],
+    buttonScores: [100, 95, 90, 80, 70, 60, 40, 30, 5],
   },
   {
+    scoreIndex: 3,
     queryText: "Hints used:",
     buttonLabels: [0, 1, 2, 3, 4, 5, 6, 7],
-    buttonValues: [80, 75, 70, 60, 40, 30, 20, 5],
+    buttonScores: [80, 75, 70, 60, 40, 30, 20, 5],
   },
   {
+    scoreIndex: 4,
     queryText: "Guesses made:",
     buttonLabels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "X"],
-    buttonValues: [100, 95, 90, 80, 75, 65, 55, 45, 30, 10, 0],
+    buttonScores: [100, 95, 90, 80, 75, 65, 55, 45, 30, 10, 0],
   },
   {
+    scoreIndex: 5,
     queryText: "Guesses made:",
     buttonLabels: [1, 2, 3, 4, 5, 6, "X"],
-    buttonValues: [100, 90, 80, 60, 40, 20, 0],
+    buttonScores: [100, 90, 80, 60, 40, 20, 0],
   },
 ]
 
@@ -108,13 +117,16 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="mb-32 grid gap-2 text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <StatModule data={statModuleData[0]} />
+      <div className="mb-32 grid gap-2 text-center lg:mb-0 lg:max-w-7xl lg:min-w-fit lg:grid-cols-4 lg:text-left">
+        {statModuleData.map((data, index) => (
+          <StatModule key={index} data={data} />
+        ))}
+        {/* <StatModule data={statModuleData[0]} />
         <StatModule data={statModuleData[1]} />
         <StatModule data={statModuleData[2]} />
         <StatModule data={statModuleData[3]} />
         <StatModule data={statModuleData[4]} />
-        <StatModule data={statModuleData[5]} />
+        <StatModule data={statModuleData[5]} /> */}
       </div>
     </main>
   );
