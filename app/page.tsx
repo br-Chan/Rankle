@@ -1,10 +1,10 @@
-import Image from "next/image";
-import { StatModule } from "./ui/statModule";
+"use client";
+
+import { StatModule, StatModuleData } from "./ui/statModule";
 import { InputModuleData } from "./ui/inputModule";
+import { useState } from "react";
 
-let inputModuleData: InputModuleData[] = [];
-
-inputModuleData = [
+const inputModuleData: InputModuleData[] = [
   // Wordle
   {
     scoreIndex: 0,
@@ -46,7 +46,7 @@ inputModuleData = [
   },
 ]
 
-const statModuleData = [
+const statModuleData: StatModuleData[] = [
   {
     id: '3958dc9e-712f-4377-85e9-fec4b6a6442a',
     gameName: 'Wordle',
@@ -97,8 +97,63 @@ const statModuleData = [
   },
 ]
 
+const ranks = [
+  { threshold: 91, rank: "S" },
+  { threshold: 84, rank: "A+" },
+  { threshold: 77, rank: "A" },
+  { threshold: 70, rank: "A-" },
+  { threshold: 63, rank: "B+" },
+  { threshold: 56, rank: "B" },
+  { threshold: 49, rank: "B-" },
+  { threshold: 42, rank: "C+" },
+  { threshold: 35, rank: "C" },
+  { threshold: 28, rank: "C-" },
+  { threshold: 21, rank: "D+" },
+  { threshold: 14, rank: "D" },
+  { threshold: 7, rank: "D-" },
+  { threshold: 0, rank: "F" },
+];
+
 
 export default function Home() {
+
+  const [scores] = useState(Array(5).fill(0));
+  const [rank, setRank] = useState("R");
+
+  const handleInputClick = (scoreIndex: number, score: number) => {
+    console.log(scoreIndex + ": " + score);
+    scores[scoreIndex] = score;
+    updateRank();
+  }
+
+  const updateRank = () => {
+    let numberOfEnabledScores = 0; // to divide the sum of enabled scores.
+
+    // Calculate the sum of score values that are enabled.
+    let sum = 0;
+    let currentScore = 0;
+    for (let index = 0; index < scores.length; ++index) {
+      // if (enabledScores[index]) {
+      ++numberOfEnabledScores;
+
+      currentScore = scores[index];
+      sum += currentScore;
+      console.log(currentScore + " +");
+      // }
+    }
+    console.log("= " + sum);
+
+    // Calculate the average score value.
+    const avg = sum / numberOfEnabledScores;
+    console.log("Average: " + avg);
+
+    // Update the rank.
+    setRank(
+      ranks.find(({ threshold }) => avg >= threshold)?.rank || "R"
+      + " (" + Math.floor(avg) + ")"
+    );
+  }
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
@@ -106,27 +161,16 @@ export default function Home() {
           RANKLE
         </h1>
         <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center text-lg font-black bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Rank: R
-          </a>
+          <p className="flex place-items-center gap-2 text-center p-8 lg:p-0">
+            RANK<br />{rank}
+          </p>
         </div>
       </div>
 
       <div className="mb-32 grid gap-2 text-center lg:mb-0 lg:max-w-7xl lg:min-w-fit lg:grid-cols-4 lg:text-left">
         {statModuleData.map((data, index) => (
-          <StatModule key={index} data={data} />
+          <StatModule key={index} data={data} handleInputClick={handleInputClick} />
         ))}
-        {/* <StatModule data={statModuleData[0]} />
-        <StatModule data={statModuleData[1]} />
-        <StatModule data={statModuleData[2]} />
-        <StatModule data={statModuleData[3]} />
-        <StatModule data={statModuleData[4]} />
-        <StatModule data={statModuleData[5]} /> */}
       </div>
     </main>
   );

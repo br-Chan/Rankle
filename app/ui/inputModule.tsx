@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useState } from "react";
 
@@ -19,7 +19,7 @@ export const InputModule = ({
     onInputClick: (scoreIndex: number, score: number) => void
 }) => {
 
-    const [selectedButtonIndex, setSelectedButtonIndex] = useState(0);
+    const [selectedButtonIndex, setSelectedButtonIndex] = useState<number | null>(null);
     const [enabled, setEnabled] = useState(true); // TODO: not implemented yet, always will be true
     const buttons = [];
 

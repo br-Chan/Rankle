@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import { InputModule, InputModuleData } from "./inputModule";
 
@@ -9,13 +9,15 @@ export type StatModuleData = {
     themeColor: string;
 };
 
-export const StatModule = ({ data }: { data: StatModuleData }) => {
+export const StatModule = ({
+    data,
+    handleInputClick
+}: {
+    data: StatModuleData,
+    handleInputClick: (scoreIndex: number, score: number) => void
+}) => {
 
     const inputModules = [];
-
-    const handleInputClick = (scoreIndex: number, score: number) => {
-        console.log(scoreIndex + ": " + score);
-    }
 
     // Create each input module.
     for (let index = 0; index < data.inputModules.length; ++index) {
