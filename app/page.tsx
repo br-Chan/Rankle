@@ -199,7 +199,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="mb-32 grid gap-2 text-center lg:mb-0 lg:max-w-7xl lg:min-w-fit lg:grid-cols-4 lg:text-left">
+      <div className="mb-32 grid gap-4 text-center md:max-w-7xl md:min-w-fit md:grid-cols-2 lg:grid-cols-3 lg:text-left 2xl:grid-cols-4">
         {statModuleData.map((data, index) => (
           <StatModule key={index} data={data} handleEnableClick={handleEnableClick} handleInputClick={handleInputClick} />
         ))}
