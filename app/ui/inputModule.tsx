@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 export type InputModuleData = {
+    statModuleId: string;
     scoreIndex: number;
     queryText: string;
     buttonLabels: (number | string)[];

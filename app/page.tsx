@@ -7,6 +7,7 @@ import { useState } from "react";
 const inputModuleData: InputModuleData[] = [
   // Wordle
   {
+    statModuleId: 'a',
     scoreIndex: 0,
     queryText: "Guesses made:",
     buttonLabels: [1, 2, 3, 4, 5, 6, "X"],
@@ -15,6 +16,7 @@ const inputModuleData: InputModuleData[] = [
   },
   // Connections
   {
+    statModuleId: 'b',
     scoreIndex: 1,
     queryText: "Groups made | Mistakes left:",
     buttonLabels: ["4|4", "4|3", "4|2", "4|1", "2|X", "1|X", "0|X"],
@@ -23,6 +25,7 @@ const inputModuleData: InputModuleData[] = [
   },
   //Symble
   {
+    statModuleId: 'c',
     scoreIndex: 2,
     queryText: "Guesses made:",
     buttonLabels: [1, 2, 3, 4, 5, 6, 7, 8, "X"],
@@ -31,6 +34,7 @@ const inputModuleData: InputModuleData[] = [
   },
   // Strands
   {
+    statModuleId: 'd',
     scoreIndex: 3,
     queryText: "Hints used:",
     buttonLabels: [0, 1, 2, 3, 4, 5, 6, 7],
@@ -39,6 +43,7 @@ const inputModuleData: InputModuleData[] = [
   },
   // Spotle
   {
+    statModuleId: 'e',
     scoreIndex: 4,
     queryText: "Guesses made:",
     buttonLabels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "X"],
@@ -47,17 +52,18 @@ const inputModuleData: InputModuleData[] = [
   },
   // Bandle
   {
+    statModuleId: 'f',
     scoreIndex: 5,
     queryText: "Guesses made:",
     buttonLabels: [1, 2, 3, 4, 5, 6, "X"],
     buttonScores: [100, 90, 80, 60, 40, 20, 0],
     enabled: true,
   },
-]
+];
 
 const statModuleData: StatModuleData[] = [
   {
-    id: '3958dc9e-712f-4377-85e9-fec4b6a6442a',
+    id: 'a',
     gameName: 'Wordle',
     inputModules: [
       inputModuleData[0],
@@ -66,7 +72,7 @@ const statModuleData: StatModuleData[] = [
     enabled: true,
   },
   {
-    id: 'a',
+    id: 'b',
     gameName: 'Connections',
     inputModules: [
       inputModuleData[1],
@@ -75,7 +81,7 @@ const statModuleData: StatModuleData[] = [
     enabled: true,
   },
   {
-    id: 'b',
+    id: 'c',
     gameName: 'Symble',
     inputModules: [
       inputModuleData[2],
@@ -84,7 +90,7 @@ const statModuleData: StatModuleData[] = [
     enabled: true,
   },
   {
-    id: 'c',
+    id: 'd',
     gameName: 'Strands',
     inputModules: [
       inputModuleData[3],
@@ -93,7 +99,7 @@ const statModuleData: StatModuleData[] = [
     enabled: true,
   },
   {
-    id: 'd',
+    id: 'e',
     gameName: 'Spotle',
     inputModules: [
       inputModuleData[4],
@@ -102,7 +108,7 @@ const statModuleData: StatModuleData[] = [
     enabled: true,
   },
   {
-    id: 'e',
+    id: 'f',
     gameName: 'Bandle',
     inputModules: [
       inputModuleData[5],
@@ -110,7 +116,7 @@ const statModuleData: StatModuleData[] = [
     themeColor: '#fcdcb4',
     enabled: true,
   },
-]
+];
 
 const ranks = [
   { threshold: 91, rank: "S" },
@@ -135,8 +141,22 @@ export default function Home() {
   const [scores] = useState(Array(inputModuleData.length).fill(null));
   const [rank, setRank] = useState("R");
 
-  const handleEnableClick = () => {
-    console.log("not implemented")
+  const handleEnableClick = (statModuleId: string) => {
+    console.log(statModuleId)
+
+    // Enable/disable stat module.
+    const statModuleDataToChange = statModuleData.find(({ id }) => statModuleId === id);
+    if (statModuleDataToChange === undefined) {return} // To handle finding no matching id
+    statModuleDataToChange.enabled = !statModuleDataToChange.enabled;
+
+    // Enable/disable stat module's input module(s).
+    inputModuleData.forEach((inputModuleData) => {
+      if (inputModuleData.statModuleId === statModuleId) {
+        inputModuleData.enabled = !inputModuleData.enabled;
+      }
+    })
+
+    updateRank();
   }
 
   const handleInputClick = (scoreIndex: number, score: number) => {
@@ -153,11 +173,11 @@ export default function Home() {
     let currentScore = 0;
     for (let index = 0; index < scores.length; ++index) {
       if (inputModuleData[index].enabled === true && scores[index] !== null) {
-      ++numberOfEnabledScores;
+        ++numberOfEnabledScores;
 
-      currentScore = scores[index];
-      sum += currentScore;
-      console.log(currentScore + " +");
+        currentScore = scores[index];
+        sum += currentScore;
+        console.log(currentScore + " +");
       }
     }
     console.log("= " + sum);
@@ -188,7 +208,7 @@ export default function Home() {
 
       <div className="mb-32 grid gap-2 text-center lg:mb-0 lg:max-w-7xl lg:min-w-fit lg:grid-cols-4 lg:text-left">
         {statModuleData.map((data, index) => (
-          <StatModule key={index} data={data} handleInputClick={handleInputClick} handleEnableClick={handleEnableClick} />
+          <StatModule key={index} data={data} handleEnableClick={handleEnableClick} handleInputClick={handleInputClick} />
         ))}
       </div>
     </main>

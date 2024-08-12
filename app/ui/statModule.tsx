@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { EnableSwitch } from "./enableSwitch";
 import { InputModule, InputModuleData } from "./inputModule";
 
@@ -14,12 +13,12 @@ export type StatModuleData = {
 
 export const StatModule = ({
     data,
-    handleInputClick,
     handleEnableClick,
+    handleInputClick,
 }: {
     data: StatModuleData,
+    handleEnableClick: (statModuleId: string) => void,
     handleInputClick: (scoreIndex: number, score: number) => void,
-    handleEnableClick: () => void,
 }) => {
 
     const inputModules = [];
@@ -58,7 +57,7 @@ export const StatModule = ({
             </div>
             <div className="absolute top-2 left-2 h-full opacity-100">
                 <EnableSwitch
-                    onEnableClick={handleEnableClick}
+                    onEnableClick={() => handleEnableClick(data.id)}
                     backgroundColor={data.themeColor} />
             </div>
         </div>
