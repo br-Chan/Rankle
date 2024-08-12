@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+import { EnableSwitch } from "./enableSwitch";
 import { InputModule, InputModuleData } from "./inputModule";
 
 export type StatModuleData = {
@@ -7,14 +9,17 @@ export type StatModuleData = {
     gameName: string;
     inputModules: InputModuleData[];
     themeColor: string;
+    enabled: boolean;
 };
 
 export const StatModule = ({
     data,
-    handleInputClick
+    handleInputClick,
+    handleEnableClick,
 }: {
     data: StatModuleData,
-    handleInputClick: (scoreIndex: number, score: number) => void
+    handleInputClick: (scoreIndex: number, score: number) => void,
+    handleEnableClick: () => void,
 }) => {
 
     const inputModules = [];
@@ -32,15 +37,30 @@ export const StatModule = ({
     }
 
     return (
-        <div
-            className="w-72 py-2 px-5 text-center border-4 rounded-2xl"
-            style={{
-                borderColor: data.themeColor,
-                backgroundColor: `${data.themeColor}25`,
-            }}
-        >
-            <h2 className="py-4 text-2xl font-bold">{data.gameName}</h2>
-            {inputModules}
+        <div className="relative">
+            <div
+                className="w-72 py-2 px-5 text-center transition-all duration-300 border-4 rounded-2xl"
+                style={{
+                    borderColor: data.enabled ? `${data.themeColor}` : `${data.themeColor}40`,
+                    backgroundColor: data.enabled ? `${data.themeColor}25` : `${data.themeColor}10`,
+                }}
+            >
+                <div
+                    className="transition-all duration-300"
+                    style={{
+                        opacity: data.enabled ? 1 : 0.25
+                    }}
+                >
+                    <h2 className="text-2xl font-bold">{data.gameName}</h2>
+                    {inputModules}
+                </div>
+
+            </div>
+            <div className="absolute top-2 left-2 h-full opacity-100">
+                <EnableSwitch
+                    onEnableClick={handleEnableClick}
+                    backgroundColor={data.themeColor} />
+            </div>
         </div>
 
     );
