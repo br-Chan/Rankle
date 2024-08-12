@@ -142,8 +142,6 @@ export default function Home() {
   const [rank, setRank] = useState("R");
 
   const handleEnableClick = (statModuleId: string) => {
-    console.log(statModuleId)
-
     // Enable/disable stat module.
     const statModuleDataToChange = statModuleData.find(({ id }) => statModuleId === id);
     if (statModuleDataToChange === undefined) {return} // To handle finding no matching id
@@ -177,26 +175,21 @@ export default function Home() {
 
         currentScore = scores[index];
         sum += currentScore;
-        console.log(currentScore + " +");
       }
     }
-    console.log("= " + sum);
 
     // Calculate the average score value.
-    const avg = sum / numberOfEnabledScores;
-    console.log("Average: " + avg);
+    const avg: number = sum / numberOfEnabledScores;
+    const scoreDisplay: string = isNaN(avg) ? "" : " (" +  Math.floor(avg) + ")";
 
     // Update the rank.
-    setRank(
-      (ranks.find(({ threshold }) => avg >= threshold)?.rank || "R")
-      + " (" + Math.floor(avg) + ")"
-    );
+    setRank( (ranks.find(({ threshold }) => avg >= threshold)?.rank || "R") + scoreDisplay);
   }
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <h1 className="fixed left-0 top-0 flex w-full justify-center text-4xl text-black font-bold bg-gradient-to-b from-amber-500 to-yellow-300 border-b-2 border-black pb-1 pt-2 dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
+      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm">
+        <h1 className="fixed left-0 top-0 flex w-full justify-center text-4xl text-black font-bold bg-gradient-to-b from-amber-500 to-yellow-300 border-b-2 border-black pb-1 pt-2 dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
           RANKLE
         </h1>
         <div className="pointer-events-none fixed bottom-0 left-0 flex h-40 w-full items-end justify-center text-lg font-black bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">

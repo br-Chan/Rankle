@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { EnableSwitch } from "./enableSwitch";
 import { InputModule, InputModuleData } from "./inputModule";
 
@@ -22,6 +23,7 @@ export const StatModule = ({
 }) => {
 
     const inputModules = [];
+    const [opacity, setOpacity] = useState<number>(1);
 
     // Create each input module.
     for (let index = 0; index < data.inputModules.length; ++index) {
@@ -33,6 +35,11 @@ export const StatModule = ({
                 onInputClick={handleInputClick}
             />
         );
+    }
+
+    const handleEnableClickStat = (id: string) => {
+        handleEnableClick(id);
+        setOpacity(data.enabled === true ? 1 : 0.25);
     }
 
     return (
@@ -47,7 +54,7 @@ export const StatModule = ({
                 <div
                     className="transition-all duration-300"
                     style={{
-                        opacity: data.enabled ? 1 : 0.25
+                        opacity: opacity
                     }}
                 >
                     <h2 className="text-2xl font-bold">{data.gameName}</h2>
@@ -57,7 +64,7 @@ export const StatModule = ({
             </div>
             <div className="absolute top-2 left-2 h-full opacity-100">
                 <EnableSwitch
-                    onEnableClick={() => handleEnableClick(data.id)}
+                    onEnableClick={() => handleEnableClickStat(data.id)}
                     backgroundColor={data.themeColor} />
             </div>
         </div>
