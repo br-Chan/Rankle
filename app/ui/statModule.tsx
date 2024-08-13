@@ -45,7 +45,7 @@ export const StatModule = ({
     return (
         <div className="relative">
             <div
-                className="w-72 py-2 px-5 text-center transition-all duration-300 border-4 rounded-2xl"
+                className="w-72 h-full py-2 px-5 text-center transition-all duration-300 border-4 rounded-2xl"
                 style={{
                     borderColor: data.enabled ? `${data.themeColor}` : `${data.themeColor}40`,
                     backgroundColor: data.enabled ? `${data.themeColor}25` : `${data.themeColor}10`,
@@ -62,7 +62,7 @@ export const StatModule = ({
                 </div>
 
             </div>
-            <div className="absolute top-2 left-2 h-full opacity-100">
+            <div className="absolute top-2 left-2 h-fit opacity-100">
                 <EnableSwitch
                     onEnableClick={() => handleEnableClickStat(data.id)}
                     backgroundColor={data.themeColor} />
