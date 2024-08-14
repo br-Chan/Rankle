@@ -1,10 +1,11 @@
 "use client";
 
 import { StatModule, StatModuleData } from "./ui/statModule";
-import { InputModuleData } from "./ui/inputModule";
+import { ButtonModuleData } from "./ui/buttonModule";
 import { useState } from "react";
+import { CheckboxModuleData } from "./ui/checkboxModule";
 
-const inputModuleData: InputModuleData[] = [
+const inputModuleData: (ButtonModuleData | CheckboxModuleData)[] = [
   // Wordle
   {
     statModuleId: 'a',
@@ -144,7 +145,7 @@ export default function Home() {
   const handleEnableClick = (statModuleId: string) => {
     // Enable/disable stat module.
     const statModuleDataToChange = statModuleData.find(({ id }) => statModuleId === id);
-    if (statModuleDataToChange === undefined) {return} // To handle finding no matching id
+    if (statModuleDataToChange === undefined) { return } // To handle finding no matching id
     statModuleDataToChange.enabled = !statModuleDataToChange.enabled;
 
     // Enable/disable stat module's input module(s).
@@ -180,10 +181,10 @@ export default function Home() {
 
     // Calculate the average score value.
     const avg: number = sum / numberOfEnabledScores;
-    const scoreDisplay: string = isNaN(avg) ? "" : " (" +  Math.floor(avg) + ")";
+    const scoreDisplay: string = isNaN(avg) ? "" : " (" + Math.floor(avg) + ")";
 
     // Update the rank.
-    setRank( (ranks.find(({ threshold }) => avg >= threshold)?.rank || "R") + scoreDisplay);
+    setRank((ranks.find(({ threshold }) => avg >= threshold)?.rank || "R") + scoreDisplay);
   }
 
   return (

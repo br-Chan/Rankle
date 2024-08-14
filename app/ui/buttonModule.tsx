@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export type InputModuleData = {
+export type ButtonModuleData = {
     statModuleId: string;
     scoreIndex: number;
     queryText: string;
@@ -11,12 +11,12 @@ export type InputModuleData = {
     enabled: boolean;
 }
 
-export const InputModule = ({
+export const ButtonModule = ({
     data,
     themeColor,
     onInputClick,
 }: {
-    data: InputModuleData,
+    data: ButtonModuleData,
     themeColor: string,
     onInputClick: (scoreIndex: number, score: number) => void
 }) => {

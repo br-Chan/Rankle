@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import { EnableSwitch } from "./enableSwitch";
-import { InputModule, InputModuleData } from "./inputModule";
+import { ButtonModule, ButtonModuleData } from "./buttonModule";
+import { CheckboxModuleData } from "./checkboxModule";
 
 export type StatModuleData = {
     id: string;
     gameName: string;
-    inputModules: InputModuleData[];
+    inputModules: (ButtonModuleData | CheckboxModuleData)[];
     themeColor: string;
     enabled: boolean;
 };
@@ -28,7 +29,7 @@ export const StatModule = ({
     // Create each input module.
     for (let index = 0; index < data.inputModules.length; ++index) {
         inputModules.push(
-            <InputModule
+            <ButtonModule
                 key={index}
                 data={data.inputModules[index]}
                 themeColor={data.themeColor}
