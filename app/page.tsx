@@ -3,9 +3,8 @@
 import { StatModule, StatModuleData } from "./ui/statModule";
 import { ButtonModuleData } from "./ui/buttonModule";
 import { useState } from "react";
-import { CheckboxModuleData } from "./ui/checkboxModule";
 
-const inputModuleData: (ButtonModuleData | CheckboxModuleData)[] = [
+const inputModuleData: ButtonModuleData[] = [
   // Wordle
   {
     statModuleId: 'a',
@@ -71,6 +70,9 @@ const statModuleData: StatModuleData[] = [
     ],
     themeColor: '#67a561',
     enabled: true,
+    hasHardMode: true,
+    hardModeEnabled: false,
+    hardModeMultiplier: 1.2,
   },
   {
     id: 'b',
@@ -80,6 +82,9 @@ const statModuleData: StatModuleData[] = [
     ],
     themeColor: '#bc70c4',
     enabled: true,
+    hasHardMode: true,
+    hardModeEnabled: false,
+    hardModeMultiplier: 1.2,
   },
   {
     id: 'c',
@@ -89,6 +94,9 @@ const statModuleData: StatModuleData[] = [
     ],
     themeColor: '#f11415',
     enabled: true,
+    hasHardMode: false,
+    hardModeEnabled: false,
+    hardModeMultiplier: 1,
   },
   {
     id: 'd',
@@ -98,6 +106,9 @@ const statModuleData: StatModuleData[] = [
     ],
     themeColor: '#a5beba',
     enabled: true,
+    hasHardMode: false,
+    hardModeEnabled: false,
+    hardModeMultiplier: 1,
   },
   {
     id: 'e',
@@ -107,6 +118,9 @@ const statModuleData: StatModuleData[] = [
     ],
     themeColor: '#8370de',
     enabled: true,
+    hasHardMode: false,
+    hardModeEnabled: false,
+    hardModeMultiplier: 1,
   },
   {
     id: 'f',
@@ -116,6 +130,9 @@ const statModuleData: StatModuleData[] = [
     ],
     themeColor: '#fcdcb4',
     enabled: true,
+    hasHardMode: false,
+    hardModeEnabled: false,
+    hardModeMultiplier: 1,
   },
 ];
 
@@ -142,9 +159,13 @@ export default function Home() {
   const [scores] = useState(Array(inputModuleData.length).fill(null));
   const [rank, setRank] = useState("R");
 
+  const getStatModuleData = (statModuleId: string) => {
+    return statModuleData.find(({ id }) => statModuleId === id);
+  }
+
   const handleEnableClick = (statModuleId: string) => {
     // Enable/disable stat module.
-    const statModuleDataToChange = statModuleData.find(({ id }) => statModuleId === id);
+    const statModuleDataToChange = getStatModuleData(statModuleId);
     if (statModuleDataToChange === undefined) { return } // To handle finding no matching id
     statModuleDataToChange.enabled = !statModuleDataToChange.enabled;
 
@@ -155,6 +176,13 @@ export default function Home() {
       }
     })
 
+    updateRank();
+  }
+
+  const handleHardModeClick = (statModuleId: string) => {
+    const statModuleDataToChange = getStatModuleData(statModuleId);
+    if (statModuleDataToChange === undefined) { return } // To handle finding no matching id
+    statModuleDataToChange.hardModeEnabled = ! statModuleDataToChange.hardModeEnabled;
     updateRank();
   }
 
@@ -174,7 +202,12 @@ export default function Home() {
       if (inputModuleData[index].enabled === true && scores[index] !== null) {
         ++numberOfEnabledScores;
 
-        currentScore = scores[index];
+        const parentStatModuleData = statModuleData.find(({ id }) =>
+          inputModuleData[index].statModuleId === id
+        );
+        if (parentStatModuleData === undefined) { return } // To handle finding no matching id
+
+        currentScore = scores[index] * (parentStatModuleData.hardModeEnabled ? parentStatModuleData.hardModeMultiplier : 1);
         sum += currentScore;
       }
     }
@@ -202,7 +235,12 @@ export default function Home() {
 
       <div className="mb-32 grid gap-4 text-center md:max-w-7xl md:min-w-fit md:grid-cols-2 lg:grid-cols-3 lg:text-left 2xl:grid-cols-4">
         {statModuleData.map((data, index) => (
-          <StatModule key={index} data={data} handleEnableClick={handleEnableClick} handleInputClick={handleInputClick} />
+          <StatModule
+            key={index}
+            data={data}
+            handleEnableClick={handleEnableClick}
+            handleHardModeClick={handleHardModeClick}
+            handleInputClick={handleInputClick} />
         ))}
       </div>
     </main>

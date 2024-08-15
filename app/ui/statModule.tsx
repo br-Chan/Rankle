@@ -3,23 +3,28 @@
 import { useState } from "react";
 import { EnableSwitch } from "./enableSwitch";
 import { ButtonModule, ButtonModuleData } from "./buttonModule";
-import { CheckboxModuleData } from "./checkboxModule";
+import { HardModeModule } from "./hardModeModule";
 
 export type StatModuleData = {
     id: string;
     gameName: string;
-    inputModules: (ButtonModuleData | CheckboxModuleData)[];
+    inputModules: ButtonModuleData[];
     themeColor: string;
     enabled: boolean;
+    hasHardMode: boolean;
+    hardModeEnabled: boolean;
+    hardModeMultiplier: number;
 };
 
 export const StatModule = ({
     data,
     handleEnableClick,
+    handleHardModeClick,
     handleInputClick,
 }: {
     data: StatModuleData,
     handleEnableClick: (statModuleId: string) => void,
+    handleHardModeClick: (statModuleId: string) => void,
     handleInputClick: (scoreIndex: number, score: number) => void,
 }) => {
 
@@ -38,7 +43,7 @@ export const StatModule = ({
         );
     }
 
-    const handleEnableClickStat = (id: string) => {
+    const handleEnableClickInStatModule = (id: string) => {
         handleEnableClick(id);
         setOpacity(data.enabled === true ? 1 : 0.25);
     }
@@ -59,22 +64,19 @@ export const StatModule = ({
                     }}
                 >
                     <h2 className="text-2xl font-bold">{data.gameName}</h2>
+                    {data.hasHardMode ? (
+                        <HardModeModule onHardModeClick={() => handleHardModeClick(data.id)} />
+                    ) : null}
                     {inputModules}
                 </div>
 
             </div>
             <div className="absolute top-2 left-2 h-fit opacity-100">
                 <EnableSwitch
-                    onEnableClick={() => handleEnableClickStat(data.id)}
+                    onEnableClick={() => handleEnableClickInStatModule(data.id)}
                     backgroundColor={data.themeColor} />
             </div>
         </div>
 
     );
-
-    // padding: 1.5em;
-    // border: 3px solid;
-    // border-radius: 16px;
-    // border-color: gold;
-    // background-color: rgb(255 215 0 / 25%);
 }
