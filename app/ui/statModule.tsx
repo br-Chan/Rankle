@@ -51,7 +51,7 @@ export const StatModule = ({
     return (
         <div className="relative">
             <div
-                className="w-72 h-full py-2 px-5 text-center transition-all duration-300 border-4 rounded-2xl"
+                className="h-full py-2 px-5 text-center transition-all duration-300 border-4 rounded-2xl"
                 style={{
                     borderColor: data.enabled ? `${data.themeColor}` : `${data.themeColor}40`,
                     backgroundColor: data.enabled ? `${data.themeColor}25` : `${data.themeColor}10`,
