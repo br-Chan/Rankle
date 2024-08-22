@@ -46,8 +46,6 @@ export default function Home() {
 
     return (
         <main>
-
-            {/* FIREBASE */}
             <div>
                 <h1 className="text-2xl mb-2">
                     Add data to Firestore database:
@@ -99,7 +97,6 @@ export default function Home() {
                     </div>
                 </form>
             </div>
-            {/* FIREBASE */}
         </main>
     )
 }
