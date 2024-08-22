@@ -9,8 +9,8 @@ type FirestoreDocument = {
     [key: string]: any; // This represents any other fields in the document
 };
 
-async function fetchDataFromFirestore() {
-    const querySnapshot = await getDocs(collection(db, "messages"));
+async function fetchDataFromFirestore(collectionName: string) {
+    const querySnapshot = await getDocs(collection(db, collectionName));
 
     const data: FirestoreDocument[] = [];
     querySnapshot.forEach((doc) => {
@@ -23,12 +23,27 @@ async function fetchDataFromFirestore() {
 
 export default function Home() {
     const [messageData, setMessageData] = useState<FirestoreDocument[]>([]);
+    const [statModuleData, setStatModuleData] = useState<FirestoreDocument[]>([]);
+    const name: string = "";
+    const email: string = "";
+    const message: string = "";
 
     // run code when component 'mounts' (not every time it re-renders)
     useEffect(() => {
         async function fetchData() {
-            const data: FirestoreDocument[] = await fetchDataFromFirestore();
+            const data: FirestoreDocument[] = await fetchDataFromFirestore("messages");
             setMessageData(data);
+            messageData.map((item) => (
+                <div key={item.id} className="mb-4">
+                    <p className="font-bold">{item.name}</p>
+                    <p>{item.email}</p>
+                    <p>{item.message}</p>
+
+                    {/* <p className="font-bold">{item.gameName}</p>
+                    <p>{item.themeColor}</p>
+                    <p>{"Hard mode: " + item.hasHardMode}</p> */}
+                </div>
+            ))
         }
         fetchData();
 
@@ -47,6 +62,10 @@ export default function Home() {
                         <p className="font-bold">{item.name}</p>
                         <p>{item.email}</p>
                         <p>{item.message}</p>
+
+                        {/* <p className="font-bold">{item.gameName}</p>
+                        <p>{item.themeColor}</p>
+                        <p>{"Hard mode: " + item.hasHardMode}</p> */}
                     </div>
                 ))}
             </div>

@@ -182,7 +182,7 @@ export default function Home() {
   const handleHardModeClick = (statModuleId: string) => {
     const statModuleDataToChange = getStatModuleData(statModuleId);
     if (statModuleDataToChange === undefined) { return } // To handle finding no matching id
-    statModuleDataToChange.hardModeEnabled = ! statModuleDataToChange.hardModeEnabled;
+    statModuleDataToChange.hardModeEnabled = !statModuleDataToChange.hardModeEnabled;
     updateRank();
   }
 
@@ -221,19 +221,20 @@ export default function Home() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm">
-        <h1 className="fixed left-0 top-0 flex w-full justify-center text-4xl text-black font-bold bg-gradient-to-b from-amber-500 to-yellow-300 border-black border-2 rounded-3xl pb-1 pt-2 dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          RANKLE
-        </h1>
-        <div className="pointer-events-none fixed bottom-0 left-0 flex h-40 w-full items-end justify-center text-lg font-black bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <p className="flex place-items-center gap-2 text-center text-2xl p-4 lg:p-0">
-            RANK<br />{rank}
-          </p>
-        </div>
+    <main >
+      <div className="pointer-events-none fixed bottom-0 left-0 z-50 flex h-40 w-full items-end justify-center text-lg font-black bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
+        <p className="mb-2 flex place-items-center gap-2 text-center text-2xl p-4 lg:p-0">
+          RANK<br />{rank}
+        </p>
       </div>
 
-      <div className="mb-32 grid gap-4 text-center md:max-w-7xl md:min-w-fit md:grid-cols-2 lg:grid-cols-3 lg:text-left 2xl:grid-cols-4">
+      <div className="
+        mb-32 grid gap-4 text-center
+        grid-cols-1 w-[288px]
+        md:grid-cols-2 md:w-[576px]
+        lg:grid-cols-3 lg:w-[864px]
+        2xl:grid-cols-4 2xl:w-[1152px]
+      ">
         {statModuleData.map((data, index) => (
           <StatModule
             key={index}
