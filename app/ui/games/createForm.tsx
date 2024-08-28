@@ -4,7 +4,7 @@ import { useState } from "react";
 // Firebase code in this page from this tutorial: https://www.youtube.com/watch?v=5MzCK3k3XlQ
 import { db } from "@/app/firebaseConfig";
 import { addDoc, collection } from "firebase/firestore";
-import { InputModuleForm } from "./inputModuleForm";
+import { ButtonModuleForm } from "./buttonModuleForm";
 
 async function addDataToFirestore(name: string, themeColor: string,) {
     try {
@@ -24,7 +24,14 @@ export const CreateForm = () => {
     const [gameName, setGameName] = useState("");
     const [themeColor, setThemeColor] = useState("#fcd34d");
     const [themeColorName, setThemeColorName] = useState("Sunglow");
-    const [inputModuleForms, setInputModuleForms] = useState([<InputModuleForm />,]); // change to 2 arrays or something
+    const [inputModuleForms, setInputModuleForms] = useState([
+        <ButtonModuleForm queryText="" data={[
+            {
+                label: "",
+                score: 0
+            },
+        ]} />,
+    ]);
 
 
     // Updates both the theme colour and the displayed name of the colour.
@@ -42,7 +49,10 @@ export const CreateForm = () => {
     };
 
     const addInputModuleForm = () => {
-        setInputModuleForms([...inputModuleForms, <InputModuleForm />]);
+        setInputModuleForms([...inputModuleForms, <ButtonModuleForm queryText="" data={[{
+            label: "",
+            score: 0
+        }]} />,]);
     };
 
     // FIREBASE
@@ -88,11 +98,12 @@ export const CreateForm = () => {
                 {/* Theme color picker */}
                 <div className="mb-4">
                     <div>
+                        <div className="block font-semibold">Colour:</div>
                         <label
                             htmlFor="themeColor"
                             className="block text-gray-700 font-mono"
                         >
-                            {themeColorName}
+                            "{themeColorName}"
                         </label>
                         <input
                             type="color"
@@ -116,7 +127,7 @@ export const CreateForm = () => {
                     <input
                         type="button"
                         id="addInputModuleForm"
-                        className="w-fit py-2 px-2 text-black font-semibold transition-colors duration-300 border-2 border-black rounded-lg"
+                        className="w-fit py-2 px-2 text-black font-semibold transition-colors duration-300 border-2 border-black rounded-lg cursor-pointer"
                         onClick={addInputModuleForm}
                         value="+ Button module"
                     />
