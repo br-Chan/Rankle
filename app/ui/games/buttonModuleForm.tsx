@@ -12,7 +12,7 @@ export const ButtonModuleForm = ({
     index: number,
     queryText: string,
     data: ButtonFormData[],
-    handleAddButtonFormClick: (index: number) => void,
+    handleAddButtonFormClick: (index: number, add: boolean) => void,
 }) => {
 
     const handleLabelChange = (label: string) => {
@@ -59,16 +59,32 @@ export const ButtonModuleForm = ({
                         />
                     </div>
                 ))}
-                <input
-                    type="button"
-                    id="addInputModuleForm"
-                    className="w-24 h-16 my-1 mx-1 border-2 border-black rounded-lg bg-white bg-opacity-50 text-black font-semibold transition-colors duration-300 cursor-pointer"
-                    onClick={() => {
-                        console.log("+Button clicked")
-                        handleAddButtonFormClick(index)
-                    }}
-                    value="+Button"
-                />
+
+                <div key={index} className="group flex flex-col w-24 h-16 my-1 mx-1 border-2 border-black rounded-lg bg-white bg-opacity-50">
+                    <input
+                        type="button"
+                        id="addInputModuleForm"
+                        className="h-[30px] border-b-[1px] rounded-t-md outline-none bg-white bg-opacity-50 text-black font-mono transition-colors duration-300 cursor-pointer"
+                        onClick={() => {
+                            console.log("+Button clicked")
+                            handleAddButtonFormClick(index, true)
+                        }}
+                        value="+Button"
+                    />
+                    <input
+                        type="button"
+                        id="addInputModuleForm"
+                        className="h-[30px] border-b-[1px] rounded-t-md outline-none bg-white bg-opacity-50 text-black font-mono transition-colors duration-300 cursor-pointer"
+                        onClick={() => {
+                            console.log("-Button clicked")
+                            handleAddButtonFormClick(index, false)
+                        }}
+                        value="-Button"
+                    />
+                </div>
+
+
+
             </div>
         </>
 

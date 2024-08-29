@@ -61,19 +61,23 @@ export const CreateForm = () => {
     // };
 
     // Adds a button to the specified button module.
-    const addButtonForm = (buttonModuleIndex: number) => {
-        console.log("I should be adding a button")
+    const addButtonForm = (buttonModuleIndex: number, add: boolean) => {
         // Copy the current inputModuleForms array.
         const newInputModuleForms = [...inputModuleForms];
 
-        // Get the 'data' array of buttons we want and add a new ButtonFormData to it.
-        newInputModuleForms[buttonModuleIndex].data = [
-            ...newInputModuleForms[buttonModuleIndex].data,
-            {
-                label: "",
-                score: 0,
-            },
-        ];
+        if (add) {
+            console.log("add button");
+            newInputModuleForms[buttonModuleIndex].data = [
+                ...newInputModuleForms[buttonModuleIndex].data,
+                {
+                    label: "",
+                    score: 0,
+                },
+            ]
+        } else {
+            console.log("remove button");
+            newInputModuleForms[buttonModuleIndex].data.pop();
+        }
 
         // Replace the current array with the new one.
         setInputModuleForms(newInputModuleForms);
@@ -146,11 +150,11 @@ export const CreateForm = () => {
                 <div className="flex flex-col justify-center text-center mb-4">
                     {inputModuleForms.map((item, index) => (
                         <ButtonModuleForm
-                        key={index}
-                        index={index}
-                        queryText=""
-                        data={item.data}
-                        handleAddButtonFormClick={(index) => addButtonForm(index)}
+                            key={index}
+                            index={index}
+                            queryText=""
+                            data={item.data}
+                            handleAddButtonFormClick={(index, add) => addButtonForm(index, add)}
                         />
                     ))}
 
