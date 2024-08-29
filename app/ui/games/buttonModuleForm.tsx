@@ -1,3 +1,6 @@
+import { query } from "firebase/firestore";
+import { useDebouncedCallback } from "use-debounce";
+
 export type ButtonFormData = {
     label: string;
     score: number | null;
@@ -5,18 +8,22 @@ export type ButtonFormData = {
 
 export const ButtonModuleForm = ({
     index,
-    queryText,
     data,
     handleAddButtonFormClick,
 }: {
     index: number,
-    queryText: string,
     data: ButtonFormData[],
     handleAddButtonFormClick: (index: number, add: boolean) => void,
 }) => {
 
+    // TODO Make these 3 functions into just 1, with input to say which to change. Then put in props
+
+    const handleQueryTextChange = useDebouncedCallback((queryText: string) => {
+        console.log(queryText);
+    }, 300);
+
     const handleLabelChange = (label: string) => {
-        console.log(label)
+        console.log(label);
     }
 
     const handleScoreChange = (score: number) => {
@@ -32,7 +39,7 @@ export const ButtonModuleForm = ({
                 className="px-1 py-2 border-2 rounded-lg outline-none bg-white bg-opacity-50 text-center text-xl font-bold focus:border-amber-500"
                 // value={item.label}
                 placeholder="Query text"
-                onChange={(e) => handleLabelChange(e.target.value)}
+                onChange={(e) => handleQueryTextChange(e.target.value)}
             />
 
             {/* Buttons input */}
@@ -64,7 +71,7 @@ export const ButtonModuleForm = ({
                     <input
                         type="button"
                         id="addInputModuleForm"
-                        className="h-[30px] border-b-[1px] rounded-t-md outline-none bg-white bg-opacity-50 text-black font-mono transition-colors duration-300 cursor-pointer"
+                        className="h-[30px] border-b-[1px] border-amber-200 rounded-t-md outline-none bg-amber-300 hover:bg-amber-500 text-black font-mono cursor-pointer"
                         onClick={() => {
                             console.log("+Button clicked")
                             handleAddButtonFormClick(index, true)
@@ -74,7 +81,7 @@ export const ButtonModuleForm = ({
                     <input
                         type="button"
                         id="addInputModuleForm"
-                        className="h-[30px] border-b-[1px] rounded-t-md outline-none bg-white bg-opacity-50 text-black font-mono transition-colors duration-300 cursor-pointer"
+                        className="h-[30px] border-t-[1px] border-amber-200 rounded-b-md outline-none bg-amber-300 hover:bg-amber-500 text-black font-mono cursor-pointer"
                         onClick={() => {
                             console.log("-Button clicked")
                             handleAddButtonFormClick(index, false)

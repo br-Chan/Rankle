@@ -28,7 +28,12 @@ export const CreateForm = () => {
     // Array of object literal containing the 'data' field, which is an array of ButtonFormData's.
     const [inputModuleForms, setInputModuleForms] = useState([
         {
+            queryText: "",
             data: [
+                {
+                    label: "",
+                    score: 0,
+                },
                 {
                     label: "",
                     score: 0,
@@ -74,7 +79,7 @@ export const CreateForm = () => {
                     score: 0,
                 },
             ]
-        } else {
+        } else if (newInputModuleForms[buttonModuleIndex].data.length > 2) {
             console.log("remove button");
             newInputModuleForms[buttonModuleIndex].data.pop();
         }
@@ -131,7 +136,7 @@ export const CreateForm = () => {
                             htmlFor="themeColor"
                             className="block text-gray-700 font-mono"
                         >
-                            "{themeColorName}"
+                            &quot;{themeColorName}&quot;
                         </label>
                         <input
                             type="color"
@@ -152,7 +157,6 @@ export const CreateForm = () => {
                         <ButtonModuleForm
                             key={index}
                             index={index}
-                            queryText=""
                             data={item.data}
                             handleAddButtonFormClick={(index, add) => addButtonForm(index, add)}
                         />
