@@ -25,12 +25,14 @@ export const CreateForm = () => {
     const [themeColor, setThemeColor] = useState("#fcd34d");
     const [themeColorName, setThemeColorName] = useState("Sunglow");
     const [inputModuleForms, setInputModuleForms] = useState([
-        <ButtonModuleForm queryText="" data={[
-            {
-                label: "",
-                score: 0
-            },
-        ]} />,
+        {
+            data: [
+                {
+                    label: "",
+                    score: 0,
+                },
+            ],
+        },
     ]);
 
 
@@ -48,12 +50,13 @@ export const CreateForm = () => {
         setThemeColor(hexCode);
     };
 
-    const addInputModuleForm = () => {
-        setInputModuleForms([...inputModuleForms, <ButtonModuleForm queryText="" data={[{
-            label: "",
-            score: 0
-        }]} />,]);
-    };
+    // Adding a button module, abandoned for now
+    // const addInputModuleForm = () => {
+    //     setInputModuleForms([...inputModuleForms, <ButtonModuleForm queryText="" data={[{
+    //         label: "",
+    //         score: 0
+    //     }]} />,]);
+    // };
 
     // FIREBASE
     const handleSubmit = async (e: React.FormEvent) => {
@@ -74,7 +77,7 @@ export const CreateForm = () => {
 
     return (
         // Main form for stat module creation
-        <form onSubmit={() => { }} className="p-4" > {/* handleSubmit */}
+        <form onSubmit={() => { console.log("I have been pressed!") }} className="p-4" > {/* handleSubmit */}
             {/* Stat module form */}
             <div
                 className="mb-2 h-full py-2 px-5 text-center transition-all duration-300 border-4 rounded-2xl"
@@ -88,7 +91,7 @@ export const CreateForm = () => {
                     <input
                         type="text"
                         id="gameName"
-                        className="w-4/6 px-3 py-2 border rounded-lg outline-none bg-white bg-opacity-50 text-center text-2xl font-bold focus:border-amber-500"
+                        className="w-4/6 px-3 py-2 border-2 rounded-lg outline-none bg-white bg-opacity-50 text-center text-2xl font-bold focus:border-amber-500"
                         value={gameName}
                         placeholder="Game name"
                         onChange={(e) => setGameName(e.target.value)}
@@ -108,7 +111,7 @@ export const CreateForm = () => {
                         <input
                             type="color"
                             id="themeColor"
-                            className="p-1 h-10 w-14 bg-white border rounded-lg cursor-pointer focus:outline-none focus:border-amber-500"
+                            className="p-1 h-10 w-14 bg-white border-2 rounded-lg cursor-pointer focus:outline-none focus:border-amber-500"
                             value={themeColor}
                             onChange={(e) => {
                                 updateThemeColor(e.target.value);
@@ -120,17 +123,18 @@ export const CreateForm = () => {
 
                 {/* Input module creation */}
                 <div className="flex flex-col justify-center text-center mb-4">
-                    {inputModuleForms.map((module, index) => (
-                        module
+                    {inputModuleForms.map((item, index) => (
+                        <ButtonModuleForm key={index} queryText="" data={item.data} />
                     ))}
 
-                    <input
+                    {/* Adding a button module, abandoned for now */}
+                    {/* <input
                         type="button"
                         id="addInputModuleForm"
                         className="w-fit py-2 px-2 text-black font-semibold transition-colors duration-300 border-2 border-black rounded-lg cursor-pointer"
                         onClick={addInputModuleForm}
                         value="+ Button module"
-                    />
+                    /> */}
 
 
                 </div>
