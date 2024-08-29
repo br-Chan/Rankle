@@ -4,7 +4,7 @@ import { useState } from "react";
 // Firebase code in this page from this tutorial: https://www.youtube.com/watch?v=5MzCK3k3XlQ
 import { db } from "@/app/firebaseConfig";
 import { addDoc, collection } from "firebase/firestore";
-import { ButtonModuleForm } from "./buttonModuleForm";
+import { ButtonFormData, ButtonModuleForm } from "./buttonModuleForm";
 
 async function addDataToFirestore(name: string, themeColor: string,) {
     try {
@@ -24,6 +24,8 @@ export const CreateForm = () => {
     const [gameName, setGameName] = useState("");
     const [themeColor, setThemeColor] = useState("#fcd34d");
     const [themeColorName, setThemeColorName] = useState("Sunglow");
+
+    // Array of object literal containing the 'data' field, which is an array of ButtonFormData's.
     const [inputModuleForms, setInputModuleForms] = useState([
         {
             data: [
@@ -57,6 +59,25 @@ export const CreateForm = () => {
     //         score: 0
     //     }]} />,]);
     // };
+
+    // Adds a button to the specified button module.
+    const addButtonForm = (buttonModuleIndex: number) => {
+        console.log("I should be adding a button")
+        // Copy the current inputModuleForms array.
+        const newInputModuleForms = [...inputModuleForms];
+
+        // Get the 'data' array of buttons we want and add a new ButtonFormData to it.
+        newInputModuleForms[buttonModuleIndex].data = [
+            ...newInputModuleForms[buttonModuleIndex].data,
+            {
+                label: "",
+                score: 0,
+            },
+        ];
+
+        // Replace the current array with the new one.
+        setInputModuleForms(newInputModuleForms);
+    }
 
     // FIREBASE
     const handleSubmit = async (e: React.FormEvent) => {
@@ -124,7 +145,13 @@ export const CreateForm = () => {
                 {/* Input module creation */}
                 <div className="flex flex-col justify-center text-center mb-4">
                     {inputModuleForms.map((item, index) => (
-                        <ButtonModuleForm key={index} queryText="" data={item.data} />
+                        <ButtonModuleForm
+                        key={index}
+                        index={index}
+                        queryText=""
+                        data={item.data}
+                        handleAddButtonFormClick={(index) => addButtonForm(index)}
+                        />
                     ))}
 
                     {/* Adding a button module, abandoned for now */}
