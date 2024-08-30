@@ -104,9 +104,18 @@ export const CreateForm = () => {
         const newInputModuleForms = [...inputModuleForms];
 
         if (fieldType === "queryText") {
-            newInputModuleForms[buttonModuleIndex].queryText = String(newValue);
+            newValue = String(newValue);
+            newInputModuleForms[buttonModuleIndex].queryText = newValue;
+        } else if (fieldType === "label") {
+            buttonIndex = Number(buttonIndex);
+            newValue = String(newValue);
+            newInputModuleForms[buttonModuleIndex].data[Number(buttonIndex)].label = newValue;
+        } else if (fieldType === "score") {
+            buttonIndex = Number(buttonIndex);
+            newValue = Number(newValue);
+            newInputModuleForms[buttonModuleIndex].data[Number(buttonIndex)].score = newValue;
         } else {
-            // TODO
+            alert("Error - invalid field type");
         }
 
         console.log(newInputModuleForms)

@@ -18,20 +18,6 @@ export const ButtonModuleForm = ({
     handleButtonModuleFormChange: (fieldType: string, newValue: string | number, buttonModuleIndex: number, buttonIndex: number | null) => void,
 }) => {
 
-    // TODO Make these 3 functions into just 1, with input to say which to change. Then put in props
-
-    const handleQueryTextChange = useDebouncedCallback((queryText: string) => {
-        console.log(queryText);
-    }, 300);
-
-    const handleLabelChange = (label: string) => {
-        console.log(label);
-    }
-
-    const handleScoreChange = (score: number) => {
-        console.log(score);
-    }
-
     return (
         <>
             {/* Query text input */}
@@ -69,7 +55,7 @@ export const ButtonModuleForm = ({
                     </div>
                 ))}
 
-                <div key={index} className="group flex flex-col w-24 h-16 my-1 mx-1 border-2 border-black rounded-lg bg-white bg-opacity-50">
+                <div key={index} className="group flex flex-col w-24 my-1 mx-1 border-2 border-black rounded-lg">
                     <input
                         type="button"
                         id="addInputModuleForm"
