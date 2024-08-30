@@ -5,6 +5,12 @@ import { useState } from "react";
 import { db } from "@/app/firebaseConfig";
 import { addDoc, collection } from "firebase/firestore";
 import { ButtonFormData, ButtonModuleForm } from "./buttonModuleForm";
+import { useDebouncedCallback } from "use-debounce";
+
+type InputModuleFormData = {
+    queryText: string | null;
+    data: ButtonFormData[];
+}
 
 async function addDataToFirestore(name: string, themeColor: string,) {
     try {
@@ -26,9 +32,9 @@ export const CreateForm = () => {
     const [themeColorName, setThemeColorName] = useState("Sunglow");
 
     // Array of object literal containing the 'data' field, which is an array of ButtonFormData's.
-    const [inputModuleForms, setInputModuleForms] = useState([
+    const [inputModuleForms, setInputModuleForms] = useState<InputModuleFormData[]>([
         {
-            queryText: "",
+            queryText: null,
             data: [
                 {
                     label: "",
@@ -44,7 +50,7 @@ export const CreateForm = () => {
 
 
     // Updates both the theme colour and the displayed name of the colour.
-    const updateThemeColor = async (hexCode: string) => {
+    const updateThemeColor = useDebouncedCallback(async (hexCode: string) => {
         try {
             const response = await fetch(`https://www.thecolorapi.com/id?hex=${hexCode.substring(1)}`);
 
@@ -55,7 +61,7 @@ export const CreateForm = () => {
         }
 
         setThemeColor(hexCode);
-    };
+    }, 20);
 
     // Adding a button module, abandoned for now
     // const addInputModuleForm = () => {
@@ -70,8 +76,7 @@ export const CreateForm = () => {
         // Copy the current inputModuleForms array.
         const newInputModuleForms = [...inputModuleForms];
 
-        if (add) {
-            console.log("add button");
+        if (add) { // Add a button
             newInputModuleForms[buttonModuleIndex].data = [
                 ...newInputModuleForms[buttonModuleIndex].data,
                 {
@@ -79,8 +84,7 @@ export const CreateForm = () => {
                     score: 0,
                 },
             ]
-        } else if (newInputModuleForms[buttonModuleIndex].data.length > 2) {
-            console.log("remove button");
+        } else if (newInputModuleForms[buttonModuleIndex].data.length > 2) { // Remove a button
             newInputModuleForms[buttonModuleIndex].data.pop();
         }
 
@@ -88,8 +92,33 @@ export const CreateForm = () => {
         setInputModuleForms(newInputModuleForms);
     }
 
+    const handleButtonModuleFormChange = useDebouncedCallback((
+        fieldType: string,
+        newValue: string | number,
+        buttonModuleIndex: number,
+        buttonIndex: number | null
+    ) => {
+        console.log(fieldType + buttonModuleIndex + buttonIndex);
+        console.log(newValue);
+
+        const newInputModuleForms = [...inputModuleForms];
+
+        if (fieldType === "queryText") {
+            newInputModuleForms[buttonModuleIndex].queryText = String(newValue);
+        } else {
+            // TODO
+        }
+
+        console.log(newInputModuleForms)
+        setInputModuleForms(newInputModuleForms);
+
+    }, 300);
+
     // FIREBASE
     const handleSubmit = async (e: React.FormEvent) => {
+        // debouncedCallback.flush();
+        // TODO do this so latest thing is invoked immediately
+
         console.log("hi");
         e.preventDefault(); // prevents the default behaviour of reloading the page.
         console.log("hi");
@@ -159,6 +188,12 @@ export const CreateForm = () => {
                             index={index}
                             data={item.data}
                             handleAddButtonFormClick={(index, add) => addButtonForm(index, add)}
+                            handleButtonModuleFormChange={(
+                                fieldType,
+                                newValue,
+                                buttonModuleIndex,
+                                buttonIndex
+                            ) => handleButtonModuleFormChange(fieldType, newValue, buttonModuleIndex, buttonIndex)}
                         />
                     ))}
 
