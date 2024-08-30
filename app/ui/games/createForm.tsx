@@ -19,15 +19,31 @@ async function addDataToFirestore(
 ) {
     try {
         // Add stat module document to statModules collection.
-        const docRef = await addDoc(collection(db, "statModules"), {
+        const statModuleDocRef = await addDoc(collection(db, "statModules"), {
             gameName: gameName,
             hasHardMode: false, // TODO Add option to form
             hardModeMultiplier: 1, // TODO Add option to form
             themeColor: themeColor,
         });
-        console.log("Stat module document written with ID: ", docRef.id);
+        console.log("Stat module document written with ID: ", statModuleDocRef.id);
 
-        // const statModulesReference = doc(db, "statModules", docRef.id);
+        inputModuleForms.map(async (inputModuleFormData, i) => {
+            inputModuleFormData.data[i].label;
+            let buttonLabels: string[] = [];
+            let buttonScores: number[] = [];
+
+            inputModuleFormData.data.map((buttonFormData) => {
+                buttonLabels = [...buttonLabels, String(buttonFormData.label)];
+                buttonScores = [...buttonScores, Number(buttonFormData.score)];
+            });
+
+            const inputModuleDocRef = await addDoc(collection(statModuleDocRef, "inputModules"), {
+                queryText: inputModuleFormData.queryText,
+                buttonLabels: buttonLabels,
+                buttonScores: buttonScores,
+            });
+            console.log("Input module document written with ID: ", inputModuleDocRef.id);
+        })
 
         return true;
     } catch (error) {
