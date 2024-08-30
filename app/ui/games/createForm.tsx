@@ -158,11 +158,9 @@ export const CreateForm = () => {
         console.log("Adding data to firestore...");
         const added = await addDataToFirestore(gameName, themeColor, inputModuleForms);
         if (added) {
-            setGameName("");
-
-            alert("YOoooo baby, you added a thingie to Firestore! How FIRE is that?");
+            alert("Success, data added to Firestore!");
         } else {
-            alert("nooooooo...");
+            alert("Something didn't work, data not added to Firestore.");
         }
     }
 
