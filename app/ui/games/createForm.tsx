@@ -3,7 +3,7 @@
 import { useState } from "react";
 // Firebase code in this page from this tutorial: https://www.youtube.com/watch?v=5MzCK3k3XlQ
 import { db } from "@/app/firebaseConfig";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, doc } from "firebase/firestore";
 import { ButtonFormData, ButtonModuleForm } from "./buttonModuleForm";
 import { useDebouncedCallback } from "use-debounce";
 
@@ -12,13 +12,23 @@ type InputModuleFormData = {
     data: ButtonFormData[];
 }
 
-async function addDataToFirestore(name: string, themeColor: string,) {
+async function addDataToFirestore(
+    gameName: string,
+    themeColor: string,
+    inputModuleForms: InputModuleFormData[],
+) {
     try {
-        const docRef = await addDoc(collection(db, "messages"), {
-            name: name,
+        // Add stat module document to statModules collection.
+        const docRef = await addDoc(collection(db, "statModules"), {
+            gameName: gameName,
+            hasHardMode: false, // TODO Add option to form
+            hardModeMultiplier: 1, // TODO Add option to form
             themeColor: themeColor,
         });
-        console.log("Document written with ID: ", docRef.id);
+        console.log("Stat module document written with ID: ", docRef.id);
+
+        // const statModulesReference = doc(db, "statModules", docRef.id);
+
         return true;
     } catch (error) {
         console.error("Error adding document ", error);
@@ -123,15 +133,14 @@ export const CreateForm = () => {
 
     }, 300);
 
-    // FIREBASE
     const handleSubmit = async (e: React.FormEvent) => {
-        // debouncedCallback.flush();
-        // TODO do this so latest thing is invoked immediately
+        // Invoke latest changes to button module forms immediately.
+        handleButtonModuleFormChange.flush();
 
-        console.log("hi");
         e.preventDefault(); // prevents the default behaviour of reloading the page.
-        console.log("hi");
-        const added = await addDataToFirestore(gameName, themeColor);
+
+        console.log("Adding data to firestore...");
+        const added = await addDataToFirestore(gameName, themeColor, inputModuleForms);
         if (added) {
             setGameName("");
 
@@ -141,11 +150,9 @@ export const CreateForm = () => {
         }
     }
 
-    // FIREBASE
-
     return (
         // Main form for stat module creation
-        <form onSubmit={() => { console.log("I have been pressed!") }} className="p-4" > {/* handleSubmit */}
+        <form onSubmit={handleSubmit} className="p-4" >
             {/* Stat module form */}
             <div
                 className="mb-2 h-full py-2 px-5 text-center transition-all duration-300 border-4 rounded-2xl"
