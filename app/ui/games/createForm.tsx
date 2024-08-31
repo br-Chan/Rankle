@@ -29,12 +29,12 @@ async function addDataToFirestore(
 
         inputModuleForms.map(async (inputModuleFormData, i) => {
             inputModuleFormData.data[i].label;
-            let buttonLabels: string[] = [];
-            let buttonScores: number[] = [];
+            const buttonLabels: string[] = [];
+            const buttonScores: number[] = [];
 
             inputModuleFormData.data.map((buttonFormData) => {
-                buttonLabels = [...buttonLabels, String(buttonFormData.label)];
-                buttonScores = [...buttonScores, Number(buttonFormData.score)];
+                buttonLabels.push(String(buttonFormData.label));
+                buttonScores.push(Number(buttonFormData.score));
             });
 
             const inputModuleDocRef = await addDoc(collection(statModuleDocRef, "inputModules"), {

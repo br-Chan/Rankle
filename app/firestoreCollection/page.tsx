@@ -23,7 +23,7 @@ async function fetchDataFromFirestore(collectionName: string) {
 
 export default function Home() {
     const [messageData, setMessageData] = useState<FirestoreDocument[]>([]);
-    const [statModuleData, setStatModuleData] = useState<FirestoreDocument[]>([]);
+    
     const name: string = "";
     const email: string = "";
     const message: string = "";
@@ -31,19 +31,20 @@ export default function Home() {
     // run code when component 'mounts' (not every time it re-renders)
     useEffect(() => {
         async function fetchData() {
+            console.log("fetching data...")
             const data: FirestoreDocument[] = await fetchDataFromFirestore("messages");
             setMessageData(data);
-            messageData.map((item) => (
-                <div key={item.id} className="mb-4">
-                    <p className="font-bold">{item.name}</p>
-                    <p>{item.email}</p>
-                    <p>{item.message}</p>
+            // messageData.map((item) => (
+            //     <div key={item.id} className="mb-4">
+            //         <p className="font-bold">{item.name}</p>
+            //         <p>{item.email}</p>
+            //         <p>{item.message}</p>
 
-                    {/* <p className="font-bold">{item.gameName}</p>
-                    <p>{item.themeColor}</p>
-                    <p>{"Hard mode: " + item.hasHardMode}</p> */}
-                </div>
-            ))
+            //         {/* <p className="font-bold">{item.gameName}</p>
+            //         <p>{item.themeColor}</p>
+            //         <p>{"Hard mode: " + item.hasHardMode}</p> */}
+            //     </div>
+            // ))
         }
         fetchData();
 

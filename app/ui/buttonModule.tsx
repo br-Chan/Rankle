@@ -6,7 +6,7 @@ export type ButtonModuleData = {
     statModuleId: string;
     scoreIndex: number;
     queryText: string;
-    buttonLabels: (number | string)[];
+    buttonLabels: string[];
     buttonScores: number[];
     enabled: boolean;
 }
