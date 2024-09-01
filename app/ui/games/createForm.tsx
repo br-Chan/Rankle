@@ -3,7 +3,7 @@
 import { useState } from "react";
 // Firebase code in this page from this tutorial: https://www.youtube.com/watch?v=5MzCK3k3XlQ
 import { db } from "@/app/firebaseConfig";
-import { addDoc, collection, doc } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { ButtonFormData, ButtonModuleForm } from "./buttonModuleForm";
 import { useDebouncedCallback } from "use-debounce";
 
@@ -24,6 +24,7 @@ async function addDataToFirestore(
             hasHardMode: false, // TODO Add option to form
             hardModeMultiplier: 1, // TODO Add option to form
             themeColor: themeColor,
+            timeStamp: serverTimestamp(), // The time it was created
         });
         console.log("Stat module document written with ID: ", statModuleDocRef.id);
 
