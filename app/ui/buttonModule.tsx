@@ -33,15 +33,28 @@ export const ButtonModule = ({
     for (let index = 0; index < data.buttonLabels.length; ++index) {
         let score = data.buttonScores[index];
         buttons.push(
-            <button
-                className="basis-7 py-2 px-2 text-black font-semibold transition-colors duration-300 border-2 border-black rounded-lg"
-                key={index}
-                value={score}
-                style={{ backgroundColor: selectedButtonIndex === index ? themeColor : "white" }}
-                onClick={() => handleClick(index, data.scoreIndex, score)}
-            >
-                {data.buttonLabels[index]}
-            </button>
+            <div className="text-black font-semibold border-2 border-black rounded-lg" key={index}>
+                <button
+                    className="peer w-full py-2 transition-colors duration-300  rounded-md"
+                    value={score}
+                    style={{ backgroundColor: selectedButtonIndex === index ? themeColor : "white" }}
+                    onClick={() => handleClick(index, data.scoreIndex, score)}
+                >
+                    {data.buttonLabels[index]}
+                </button>
+                <div
+                    className="absolute invisible opacity-0 peer-hover:visible peer-hover:opacity-100 border-2 border-black text-sm rounded py-1 px-0.5 z-10 mb-1"
+                    style={{
+                        backgroundColor: selectedButtonIndex === index ? "white" : themeColor,
+                        color: selectedButtonIndex === index ? themeColor : "white",
+                        transition: "opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease",
+                        transitionDelay: "0.5s, 0s, 0s",
+                    }}
+                >
+                    Score: {score}
+                </div>
+            </div>
+
         );
     }
 
