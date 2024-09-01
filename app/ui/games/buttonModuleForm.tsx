@@ -43,7 +43,7 @@ export const ButtonModuleForm = ({
                         <input
                             type="number"
                             id="score"
-                            className="h-[30px] px-1 py-2 pl-5 border-t-[1px] rounded-b-md outline-none bg-white bg-opacity-50 text-center text-lg font-semibold"
+                            className="h-[30px] px-1 py-2 pl-5 border-t-[1px] rounded-b-md outline-none bg-white bg-opacity-50 text-center text-lg text-gray-700"
                             // value={i.score}
                             placeholder="score"
                             autoComplete="off"
