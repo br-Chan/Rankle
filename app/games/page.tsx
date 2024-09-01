@@ -39,69 +39,69 @@ export default function Home() {
         async function fetchData() {
             console.log("Fetching data...");
 
-            const statModuleDocuments: statModulesFirestoreData[] = [];
-
-            // Fetch the stat module data and iterate through them.
+            // Fetch stat module data and iterate through them to initialise statModuleDocuments.
             const statModulesSnapshot = await fetchStatModules();
-            statModulesSnapshot.forEach(async (doc) => {
-                // Gets all the fields and values from the stat module document's data.
-                const docData = doc.data();
+            const statModuleDocuments: statModulesFirestoreData[] = await Promise.all(
+                statModulesSnapshot.docs.map(async (doc) => {
+                    // Get all fields and values from stat module document's data.
+                    const statModuleDocData = doc.data();
 
-                const inputModuleDocuments: buttonModulesFirestoreData[] = [];
+                    // Fetch input module data for this stat module and iterate through them to
+                    // initialise inputModuleDocuments.
+                    const inputModulesSnapshot = await fetchInputModules(doc.id);
+                    const inputModuleDocuments: buttonModulesFirestoreData[] =
+                        inputModulesSnapshot.docs.map((inputDoc) => {
+                            // Get all fields and values from input module document's data.
+                            const inputModuleDocData = inputDoc.data();
 
-                // Fetch the input module data for this stat module and iterate through  them.
-                const inputModulesSnapshot = await fetchInputModules(doc.id);
-                inputModulesSnapshot.forEach((doc) => {
-                    // Get all the fields and values from the input module document's data.
-                    const docData = doc.data();
+                            return {
+                                statModuleId: doc.id,
+                                queryText: inputModuleDocData.queryText,
+                                buttonLabels: inputModuleDocData.buttonLabels,
+                                buttonScores: inputModuleDocData.buttonScores,
+                            };
+                        });
 
-                    inputModuleDocuments.push({
-                        statModuleId: "", // TODO docData.statModuleId 
-                        queryText: docData.queryText,
-                        buttonLabels: docData.buttonLabels,
-                        buttonScores: docData.buttonScores,
-                    })
+                    return {
+                        id: doc.id,
+                        gameName: statModuleDocData.gameName,
+                        inputModules: inputModuleDocuments,
+                        themeColor: statModuleDocData.themeColor,
+                        hasHardMode: statModuleDocData.hasHardMode,
+                        hardModeMultiplier: statModuleDocData.hardModeMultiplier,
+                    }
                 })
+            );
 
-                statModuleDocuments.push({
-                    id: doc.id,
-                    gameName: docData.gameName,
-                    inputModules: inputModuleDocuments,
-                    themeColor: docData.themeColor,
-                    hasHardMode: docData.hasHardMode,
-                    hardModeMultiplier: docData.hardModeMultiplier,
-                })
-            });
-
-            // Then create StatModuleData[] from firestoreData and also get input module firestore data
-            setStatModulesData(statModuleDocuments);
-        }
-        fetchData();
+    // Then create StatModuleData[] from firestoreData and also get input module firestore data
+    setStatModulesData(statModuleDocuments);
+}
+fetchData();
 
     }, []);
 
-    return (
-        <main className="">
-            <h1 className="gap-2 text-center text-2xl font-black">
-                GAMES
-            </h1>
-            <p className="text-center">Add custom games or create your own!</p>
-            <div className="
+return (
+    <main className="">
+        <h1 className="gap-2 text-center text-2xl font-black">
+            GAMES
+        </h1>
+        <p className="text-center">Add custom games or create your own!</p>
+        <div className="
                 mb-32 grid gap-4 text-center
                 grid-cols-1 w-[288px]
                 md:grid-cols-2 md:w-[576px]
                 lg:grid-cols-3 lg:w-[864px]
                 2xl:grid-cols-4 2xl:w-[1152px]
             ">
-                {statModulesData.map((item, index) => (
-                    // <div key={item.id} className=" ">
-                    //     <p>{item.id}</p>
-                    //     <p className="font-bold">{item.gameName}</p>
-                    //     <p>{item.themeColor}</p>
-                    //     <p>{item.inputModules[0].queryText}</p>
-                    //     <p>{item.inputModules[0].buttonLabels}</p>
-                    // </div>
-                    <StatModule
+            {statModulesData.map((item, index) => (
+                // <div key={item.id} className=" ">
+                //     <p>{item.id}</p>
+                //     <p className="font-bold">{item.gameName}</p>
+                //     <p>{item.themeColor}</p>
+                //     <p>{item.inputModules[0].queryText}</p>
+                //     <p>{item.inputModules[0].buttonLabels}</p>
+                // </div>
+                <StatModule
                     key={index}
                     data={{
                         id: item.id,
@@ -125,8 +125,8 @@ export default function Home() {
                     handleEnableClick={() => { }}
                     handleHardModeClick={() => { }}
                     handleInputClick={() => { }} />
-                ))}
-            </div>
-        </main>
-    );
+            ))}
+        </div>
+    </main>
+);
 }

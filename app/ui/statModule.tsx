@@ -45,7 +45,7 @@ export const StatModule = ({
 
     const handleEnableClickInStatModule = (id: string) => {
         handleEnableClick(id);
-        setOpacity(data.enabled === true ? 1 : 0.25);
+        setOpacity(opacity === 0.25 ? 1 : 0.25);
     }
 
     return (
@@ -53,8 +53,8 @@ export const StatModule = ({
             <div
                 className="h-full py-2 px-5 text-center transition-all duration-300 border-4 rounded-2xl"
                 style={{
-                    borderColor: data.enabled ? `${data.themeColor}` : `${data.themeColor}40`,
-                    backgroundColor: data.enabled ? `${data.themeColor}25` : `${data.themeColor}10`,
+                    borderColor: opacity === 1 ? `${data.themeColor}` : `${data.themeColor}40`,
+                    backgroundColor: opacity === 1 ? `${data.themeColor}25` : `${data.themeColor}10`,
                 }}
             >
                 <div
