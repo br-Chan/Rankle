@@ -17,7 +17,7 @@ export const EnableSwitch = ({
     }
 
     return (
-        <label className="inline-flex items-center cursor-pointer">
+        <label className="mr-1 inline-flex items-center cursor-pointer">
             <input
                 type="checkbox"
                 value=""
