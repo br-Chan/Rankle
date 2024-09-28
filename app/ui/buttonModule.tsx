@@ -42,15 +42,7 @@ export const ButtonModule = ({
                 >
                     {data.buttonLabels[index]}
                 </button>
-                <div
-                    className="absolute invisible opacity-0 peer-hover:visible peer-hover:opacity-100 border-2 border-black text-sm rounded py-1 px-0.5 z-10 mb-1"
-                    style={{
-                        backgroundColor: selectedButtonIndex === index ? "white" : themeColor,
-                        color: selectedButtonIndex === index ? themeColor : "white",
-                        transition: "opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease",
-                        transitionDelay: "0.5s, 0s, 0s",
-                    }}
-                >
+                <div className="absolute invisible opacity-0 peer-hover:visible peer-hover:opacity-100 peer-hover:delay-300 bg-slate-700 text-sm text-white rounded py-1 px-0.5 z-10 mb-1">
                     Score: {score}
                 </div>
             </div>

@@ -45,7 +45,7 @@ export const StatModule = ({
 
     const handleEnableClickInStatModule = (id: string) => {
         handleEnableClick(id);
-        setOpacity(opacity === 0.4 ? 1 : 0.4);
+        setOpacity(opacity === 1 ? 0.3 : 1);
     }
 
     return (
