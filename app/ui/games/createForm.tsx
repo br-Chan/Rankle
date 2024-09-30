@@ -267,7 +267,7 @@ export const CreateForm = () => {
                         min="1.0"
                         step="0.1"
                         onChange={(e) => setHardModeMultiplier(parseFloat(e.target.value))}
-                        onKeyDown={(e) => e.preventDefault()} // Prevent manual typing
+                        onKeyDown={(e) => e.preventDefault()} // Prevents manual typing
                     />
                 </div>
 

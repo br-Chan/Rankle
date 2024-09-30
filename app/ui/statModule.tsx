@@ -4,6 +4,7 @@ import { useState } from "react";
 import { EnableSwitch } from "./enableSwitch";
 import { ButtonModule, ButtonModuleData } from "./buttonModule";
 import { HardModeModule } from "./hardModeModule";
+import { HoverTooltip } from "./hoverTooltip";
 
 // Data type for stat modules when displaying them to the user.
 export type StatModuleData = {
@@ -74,7 +75,10 @@ export const StatModule = ({
                         }}
                     ></div> */}
                     {data.hardModeMultiplier !== 1 ? (
-                        <HardModeModule onHardModeClick={() => handleHardModeClick(data.id)} />
+                        <HardModeModule
+                            hardModeMultiplier={data.hardModeMultiplier}
+                            onHardModeClick={() => handleHardModeClick(data.id)}
+                        />
                     ) : null}
                     {inputModules}
                 </div>
