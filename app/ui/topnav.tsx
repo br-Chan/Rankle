@@ -1,3 +1,4 @@
+// The site navigation bar located along the top of the screen.
 export default function TopNav() {
     return (
         <div>

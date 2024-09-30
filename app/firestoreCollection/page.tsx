@@ -4,6 +4,8 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { useEffect, useState } from "react";
 
+// Temporary test page for testing data fetching from Firestore.
+
 type FirestoreDocument = {
     id: string;
     [key: string]: any; // This represents any other fields in the document
@@ -14,7 +16,7 @@ async function fetchDataFromFirestore(collectionName: string) {
 
     const data: FirestoreDocument[] = [];
     querySnapshot.forEach((doc) => {
-        data.push({ id: doc.id, ...doc.data() })
+        data.push({ id: doc.id, ...doc.data() });
         // doc.data gets all the fields and values from the document data and puts it in the object
     });
 
@@ -23,7 +25,7 @@ async function fetchDataFromFirestore(collectionName: string) {
 
 export default function Home() {
     const [messageData, setMessageData] = useState<FirestoreDocument[]>([]);
-    
+
     const name: string = "";
     const email: string = "";
     const message: string = "";
@@ -31,7 +33,7 @@ export default function Home() {
     // run code when component 'mounts' (not every time it re-renders)
     useEffect(() => {
         async function fetchData() {
-            console.log("fetching data...")
+            console.log("fetching data...");
             const data: FirestoreDocument[] = await fetchDataFromFirestore("messages");
             setMessageData(data);
             // messageData.map((item) => (
@@ -47,15 +49,12 @@ export default function Home() {
             // ))
         }
         fetchData();
-
     }, []);
 
     return (
         <main className="flex min-h screen flex-col itmes-center justify-between p-24">
             <div>
-                <h1 className="text-2xl mb-2">
-                    Fetch data from Firestore database:
-                </h1>
+                <h1 className="text-2xl mb-2">Fetch data from Firestore database:</h1>
             </div>
             <div>
                 {messageData.map((item) => (
@@ -71,5 +70,5 @@ export default function Home() {
                 ))}
             </div>
         </main>
-    )
+    );
 }

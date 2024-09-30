@@ -5,6 +5,8 @@ import { useState } from "react";
 import { db } from "../firebaseConfig";
 import { collection, addDoc } from "firebase/firestore";
 
+// Test page for testing sending data to Firestore.
+
 async function addDataToFirestore(name: string, email: string, message: string) {
     try {
         const docRef = await addDoc(collection(db, "messages"), {
@@ -40,17 +42,18 @@ export default function Home() {
         } else {
             alert("nooooooo...");
         }
-    }
+    };
 
     // FIREBASE
 
     return (
         <main>
             <div>
-                <h1 className="text-2xl mb-2">
-                    Add data to Firestore database:
-                </h1>
-                <form onSubmit={handleSubmit} className="max-w-md mx-auto p-4 bg-white shadow-md rounded-lg" >
+                <h1 className="text-2xl mb-2">Add data to Firestore database:</h1>
+                <form
+                    onSubmit={handleSubmit}
+                    className="max-w-md mx-auto p-4 bg-white shadow-md rounded-lg"
+                >
                     <div className="mb-4">
                         <label htmlFor="name" className="block text-gray-700 font-bold mb-2">
                             Name:
@@ -98,5 +101,5 @@ export default function Home() {
                 </form>
             </div>
         </main>
-    )
+    );
 }

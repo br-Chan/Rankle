@@ -1,10 +1,14 @@
 "use client";
 
-import { getDocs, collection, DocumentReference, DocumentData, CollectionReference } from "firebase/firestore";
+import {
+    getDocs,
+    collection,
+} from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { useEffect, useState } from "react";
 import { StatModule } from "../ui/statModule";
 
+// Data type for stat modules, to use when adding or fetching data from Firestore.
 type statModulesFirestoreData = {
     id: string;
     gameName: string;
@@ -12,29 +16,35 @@ type statModulesFirestoreData = {
     themeColor: string;
     hasHardMode: boolean;
     hardModeMultiplier: number;
-}
+};
 
+// Data type for button modules, to use when adding or fetching data from Firestore.
 type buttonModulesFirestoreData = {
     statModuleId: string;
     queryText: string;
     buttonLabels: string[];
     buttonScores: number[];
-}
+};
 
 const fetchStatModules = async () => {
     const querySnapshot = await getDocs(collection(db, "statModules"));
     return querySnapshot;
-}
+};
 
+// Fetches the input module documents of the stat module associated with the input ID.
 const fetchInputModules = async (statModuleId: string) => {
-    const querySnapshot = await getDocs(collection(db, "statModules", statModuleId, "inputModules"));
+    const querySnapshot = await getDocs(
+        collection(db, "statModules", statModuleId, "inputModules")
+    );
     return querySnapshot;
-}
+};
 
+// Page where users can view user-created stat modules and add them to their own lists.
 export default function Home() {
+    // Array of data for all stat modules fetched from Firestore.
     const [statModulesData, setStatModulesData] = useState<statModulesFirestoreData[]>([]);
 
-    // run code when component 'mounts' (not every time it re-renders)
+    // Fetch data when component 'mounts' (not every time it re-renders).
     useEffect(() => {
         async function fetchData() {
             console.log("Fetching data...");
@@ -69,66 +79,56 @@ export default function Home() {
                         themeColor: statModuleDocData.themeColor,
                         hasHardMode: statModuleDocData.hasHardMode,
                         hardModeMultiplier: statModuleDocData.hardModeMultiplier,
-                    }
+                    };
                 })
             );
 
-    setStatModulesData(statModuleDocuments);
-}
-fetchData();
-
+            setStatModulesData(statModuleDocuments);
+        }
+        fetchData();
     }, []);
 
-return (
-    <main className="">
-        <h1 className="gap-2 text-center text-2xl font-black">
-            GAMES
-        </h1>
-        <p className="text-center">Add custom games or create your own!</p>
-        <div className="
+    return (
+        <main className="">
+            <h1 className="gap-2 text-center text-2xl font-black">GAMES</h1>
+            <p className="text-center">Add custom games or create your own!</p>
+            <div
+                className="
                 mb-32 grid gap-4 text-center
                 grid-cols-1 w-[288px]
                 md:grid-cols-2 md:w-[576px]
                 lg:grid-cols-3 lg:w-[864px]
                 2xl:grid-cols-4 2xl:w-[1152px]
-            ">
-            {statModulesData.map((item, index) => (
-                <StatModule
-                    key={index}
-                    data={{
-                        id: item.id,
-                        gameName: item.gameName,
-                        inputModules: item.inputModules.map((item, index) => {
-                            return {
-                                statModuleId: item.statModuleId,
-                                scoreIndex: index,
-                                queryText: item.queryText,
-                                buttonLabels: item.buttonLabels,
-                                buttonScores: item.buttonScores,
-                                enabled: true,
-                            }                           
-                        }),
-                        // [
-                        //     {
-                        //         statModuleId: 'a',
-                        //         scoreIndex: 0,
-                        //         queryText: "Guesses made:",
-                        //         buttonLabels: [1, 2, 3, 4, 5, 6, "X"],
-                        //         buttonScores: [100, 90, 80, 60, 40, 20, 0],
-                        //         enabled: true,
-                        //     },
-                        // ],
-                        themeColor: item.themeColor,
-                        enabled: true,
-                        hasHardMode: item.hasHardMode,
-                        hardModeEnabled: false,
-                        hardModeMultiplier: item.hardModeMultiplier,
-                    }}
-                    handleEnableClick={() => { }}
-                    handleHardModeClick={() => { }}
-                    handleInputClick={() => { }} />
-            ))}
-        </div>
-    </main>
-);
+            "
+            >
+                {statModulesData.map((item, index) => (
+                    <StatModule
+                        key={index}
+                        data={{
+                            id: item.id,
+                            gameName: item.gameName,
+                            inputModules: item.inputModules.map((item, index) => {
+                                return {
+                                    statModuleId: item.statModuleId,
+                                    scoreIndex: index,
+                                    queryText: item.queryText,
+                                    buttonLabels: item.buttonLabels,
+                                    buttonScores: item.buttonScores,
+                                    enabled: true,
+                                };
+                            }),
+                            themeColor: item.themeColor,
+                            enabled: true,
+                            hasHardMode: item.hasHardMode,
+                            hardModeEnabled: false,
+                            hardModeMultiplier: item.hardModeMultiplier,
+                        }}
+                        handleEnableClick={() => {}}
+                        handleHardModeClick={() => {}}
+                        handleInputClick={() => {}}
+                    />
+                ))}
+            </div>
+        </main>
+    );
 }
