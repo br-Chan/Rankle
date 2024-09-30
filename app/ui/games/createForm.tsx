@@ -24,7 +24,6 @@ async function addDataToFirestore(
         // Add stat module document to statModules collection.
         const statModuleDocRef = await addDoc(collection(db, "statModules"), {
             gameName: gameName,
-            hasHardMode: false, // TODO Add option to form
             hardModeMultiplier: 1, // TODO Add option to form
             themeColor: themeColor,
             timeStamp: serverTimestamp(), // The time it was created
