@@ -116,10 +116,6 @@ export const CreateForm = () => {
         setThemeColor(hexCode);
     }, 20);
 
-    const handleHardModeInputChange = useDebouncedCallback((hardModeMultiplier: number) => {
-        setHardModeMultiplier(hardModeMultiplier);
-    }, 300);
-
     // Adding a button module, abandoned for now
     // const addInputModuleForm = () => {
     //     setInputModuleForms([...inputModuleForms, <ButtonModuleForm queryText="" data={[{
@@ -260,13 +256,17 @@ export const CreateForm = () => {
 
                 {/* Hard mode input */}
                 <div>
+                    Hard mode multiplier:
                     <input
                         type="number"
                         id="hardModeMultiplier"
-                        className="h-[30px] px-1 py-2 pl-5 border-t-[1px] rounded-b-md outline-none bg-white bg-opacity-50 text-center text-lg text-gray-700"
-                        placeholder="hard mode multiplier"
+                        className="ml-1 mb-5 h-[30px] w-20 px-1 py-2 pl-5 border-2 rounded-lg outline-none bg-white bg-opacity-50 text-center text-lg text-gray-700 focus:border-amber-500"
+                        value={hardModeMultiplier}
                         autoComplete="off"
-                        onChange={(e) => handleHardModeInputChange(parseFloat(e.target.value))}
+                        min="1.0"
+                        step="0.1"
+                        onChange={(e) => setHardModeMultiplier(parseFloat(e.target.value))}
+                        onKeyDown={(e) => e.preventDefault()} // Prevent manual typing
                     />
                 </div>
 
