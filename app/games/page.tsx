@@ -14,7 +14,6 @@ type statModulesFirestoreData = {
     gameName: string;
     inputModules: buttonModulesFirestoreData[];
     themeColor: string;
-    hasHardMode: boolean;
     hardModeMultiplier: number;
 };
 
@@ -77,7 +76,6 @@ export default function Home() {
                         gameName: statModuleDocData.gameName,
                         inputModules: inputModuleDocuments,
                         themeColor: statModuleDocData.themeColor,
-                        hasHardMode: statModuleDocData.hasHardMode,
                         hardModeMultiplier: statModuleDocData.hardModeMultiplier,
                     };
                 })
@@ -119,7 +117,6 @@ export default function Home() {
                             }),
                             themeColor: item.themeColor,
                             enabled: true,
-                            hasHardMode: item.hasHardMode,
                             hardModeEnabled: false,
                             hardModeMultiplier: item.hardModeMultiplier,
                         }}

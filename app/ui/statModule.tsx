@@ -12,7 +12,6 @@ export type StatModuleData = {
     inputModules: ButtonModuleData[];
     themeColor: string;
     enabled: boolean;
-    hasHardMode: boolean;
     hardModeEnabled: boolean;
     hardModeMultiplier: number;
 };
