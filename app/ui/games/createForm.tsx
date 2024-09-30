@@ -231,6 +231,7 @@ export const CreateForm = () => {
                         className="w-4/6 px-3 py-2 border-2 rounded-lg outline-none bg-white bg-opacity-50 text-center text-2xl font-bold focus:border-amber-500"
                         value={gameName}
                         placeholder="Game name"
+                        autoComplete="off"
                         onChange={(e) => setGameName(e.target.value)}
                     />
                 </div>
