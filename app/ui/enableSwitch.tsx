@@ -2,7 +2,12 @@
 
 import { useState } from "react";
 
-// Switch for users to click and toggle the enabled status of the stat module.
+/**
+ * Switch for users to click and toggle the enabled status of the stat module.
+ *
+ * @param props Component props
+ * @returns Enable switch
+ */
 export const EnableSwitch = ({
     onEnableClick,
     backgroundColor,
@@ -12,8 +17,10 @@ export const EnableSwitch = ({
 }) => {
     const [isClicked, setIsClicked] = useState(true);
 
-    // Toggles the local isClicked state variable and calls the function passed down as a prop to
-    // handle disabling the stat module.
+    /**
+     * Toggles the local isClicked state variable and calls the function passed down as a prop to
+     * handle disabling the stat module.
+     */
     function handleClick() {
         setIsClicked(!isClicked);
         onEnableClick();

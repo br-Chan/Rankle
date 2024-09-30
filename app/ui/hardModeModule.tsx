@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { HoverTooltip } from "./hoverTooltip";
 
+/**
+ * A module with a checkbox for users to toggle hard mode in a stat module, multiplying each input
+ * module's selected score by the given amount.
+ * 
+ * @param props Component props
+ * @returns Hard mode module
+ */
 export const HardModeModule = ({
     hardModeMultiplier,
     onHardModeClick,
@@ -10,8 +17,11 @@ export const HardModeModule = ({
 }) => {
     const [isClicked, setIsClicked] = useState(false);
 
-    // Toggles the local isClicked state variable and calls the function passed down as a prop to
-    // handle unchecking hard mode.
+
+    /**
+     * Toggles the local isClicked state variable and calls the function passed down as a prop to
+     * handle unchecking hard mode.
+     */
     function handleClick() {
         setIsClicked(!isClicked);
         onHardModeClick();
