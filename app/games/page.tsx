@@ -3,7 +3,7 @@
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { useEffect, useState } from "react";
-import { StatModule } from "../ui/statModule";
+import { StatModulePane } from "../ui/games/statModulePane";
 
 /**
  * Data type for stat modules, to use when adding or fetching data from Firestore.
@@ -116,7 +116,7 @@ export default function Home() {
             "
             >
                 {statModulesData.map((item, index) => (
-                    <StatModule
+                    <StatModulePane
                         key={index}
                         data={{
                             id: item.id,
