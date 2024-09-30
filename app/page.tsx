@@ -120,7 +120,9 @@ const statModuleData: StatModuleData[] = [
     },
 ];
 
-// List of Ranks and their attribute minimum scores to attain it.
+/**
+ * List of Ranks and their attribute minimum scores to attain it.
+ */
 const ranks = [
     { threshold: 91, rank: "S" },
     { threshold: 84, rank: "A+" },
@@ -138,17 +140,31 @@ const ranks = [
     { threshold: 0, rank: "F" },
 ];
 
-// Home page for Rankle.
+/**
+ * Home page for Rankle, where the user can interact with stat module, view their Rank and access
+ * other pages of the site.
+ *
+ * @returns Home page
+ */
 export default function Home() {
     const [scores] = useState(Array(inputModuleData.length).fill(null));
     const [rank, setRank] = useState("R");
 
-    // Returns the stat module data of the stat module associated with the input id.
+    /**
+     * Returns the stat module data of the stat module associated with the input id.
+     *
+     * @param statModuleId id of the stat module to find
+     * @returns the stat module found
+     */
     const getStatModuleData = (statModuleId: string) => {
         return statModuleData.find(({ id }) => statModuleId === id);
     };
 
-    // Disables the stat module and all of its input modules.
+    /**
+     * Disables the stat module and all of its input modules.
+     *
+     * @param statModuleId the id of the stat module to disable
+     */
     const handleEnableClick = (statModuleId: string) => {
         // Enable/disable stat module.
         const statModuleDataToChange = getStatModuleData(statModuleId);
@@ -168,7 +184,11 @@ export default function Home() {
         updateRank();
     };
 
-    // Turns on hard mode for the stat module associated with the input id.
+    /**
+     * Turns on hard mode for the stat module associated with the input id.
+     *
+     * @param statModuleId id of the stat module whose hard mode checkbox was checked/unchecked
+     */
     const handleHardModeClick = (statModuleId: string) => {
         const statModuleDataToChange = getStatModuleData(statModuleId);
         if (statModuleDataToChange === undefined) {
@@ -180,14 +200,21 @@ export default function Home() {
         updateRank();
     };
 
-    // Updates the score for a specific input module and updates the overall Rank.
+    /**
+     * Updates the score for a specific input module and updates the overall Rank.
+     * 
+     * @param scoreIndex the index of the array of input modules' scores that is to be updated
+     * @param score the new score to update with
+     */
     const handleInputClick = (scoreIndex: number, score: number) => {
         console.log(scoreIndex + ": " + score);
         scores[scoreIndex] = score;
         updateRank();
     };
 
-    // Calculates the average scores of all enabled input modules, and updates the display.
+    /**
+     * Calculates the average scores of all enabled input modules, and updates the display.
+     */
     const updateRank = () => {
         let numberOfEnabledScores = 0; // to divide the sum of enabled scores.
 

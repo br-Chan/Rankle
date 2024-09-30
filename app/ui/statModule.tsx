@@ -5,7 +5,9 @@ import { EnableSwitch } from "./enableSwitch";
 import { ButtonModule, ButtonModuleData } from "./buttonModule";
 import { HardModeModule } from "./hardModeModule";
 
-// Data type for stat modules when displaying them to the user.
+/**
+ * Data type for stat modules when displaying them to the user.
+ */
 export type StatModuleData = {
     id: string;
     gameName: string;
@@ -16,7 +18,11 @@ export type StatModuleData = {
     hardModeMultiplier: number;
 };
 
-// Stat module for a single game, that the user interacts with to input their stat for the game.
+/**
+ * Stat module for a single game, that the user interacts with to input their stat for the game.
+ * @param props Component props
+ * @returns Stat module
+ */
 export const StatModule = ({
     data,
     handleEnableClick,
@@ -43,8 +49,13 @@ export const StatModule = ({
         );
     }
 
-    // Dims the stat module to show that it has been disabled and call the function passed down as a
-    // prop to handle disabling it when calculating the Rank.
+
+    /**
+     * Dims the stat module to show that it has been disabled and call the function passed down as a
+     * prop to handle disabling it when calculating the Rank.
+     * 
+     * @param id the id of the stat module
+     */
     const handleEnableClickInStatModule = (id: string) => {
         handleEnableClick(id);
         setOpacity(opacity === 1 ? 0.3 : 1);
@@ -74,7 +85,10 @@ export const StatModule = ({
                         }}
                     ></div> */}
                     {data.hardModeMultiplier !== 1 ? (
-                        <HardModeModule onHardModeClick={() => handleHardModeClick(data.id)} />
+                        <HardModeModule
+                            hardModeMultiplier={data.hardModeMultiplier}
+                            onHardModeClick={() => handleHardModeClick(data.id)}
+                        />
                     ) : null}
                     {inputModules}
                 </div>

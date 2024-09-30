@@ -1,4 +1,8 @@
-// The site navigation bar located along the top of the screen.
+/**
+ * The site navigation bar and app title located along the top of the screen.
+ * 
+ * @returns navigation bar
+ */
 export default function TopNav() {
     return (
         <div>

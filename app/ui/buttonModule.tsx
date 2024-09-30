@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { HoverTooltip } from "./hoverTooltip";
 
 /**
  * Data type for button modules, to be used when displaying a stat module to the user.
@@ -51,9 +52,9 @@ export const ButtonModule = ({
     for (let index = 0; index < data.buttonLabels.length; ++index) {
         let score = data.buttonScores[index];
         buttons.push(
-            <div className="text-black font-semibold border-2 border-black rounded-lg" key={index}>
+            <div className="relative text-black font-semibold border-2 border-black rounded-lg" key={index}>
                 <button
-                    className="peer w-full py-2 transition-colors duration-300  rounded-md"
+                    className="peer w-full py-2 transition-colors duration-300 rounded-md"
                     value={score}
                     style={{
                         backgroundColor: selectedButtonIndex === index ? themeColor : "white",
@@ -62,9 +63,7 @@ export const ButtonModule = ({
                 >
                     {data.buttonLabels[index]}
                 </button>
-                <div className="absolute invisible opacity-0 peer-hover:visible peer-hover:opacity-100 peer-hover:delay-300 bg-slate-700 text-sm text-white rounded py-1 px-0.5 z-10 mb-1">
-                    Score: {score}
-                </div>
+                <HoverTooltip tooltipText={`Score: ${score}`} />
             </div>
         );
     }

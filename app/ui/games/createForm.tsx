@@ -27,13 +27,14 @@ type InputModuleFormData = {
 async function addDataToFirestore(
     gameName: string,
     themeColor: string,
+    hardModeMultiplier: number,
     inputModuleForms: InputModuleFormData[]
 ) {
     try {
         // Add stat module document to statModules collection.
         const statModuleDocRef = await addDoc(collection(db, "statModules"), {
             gameName: gameName,
-            hardModeMultiplier: 1, // TODO Add option to form
+            hardModeMultiplier: hardModeMultiplier,
             themeColor: themeColor,
             timeStamp: serverTimestamp(), // The time it was created
         });
@@ -70,13 +71,14 @@ async function addDataToFirestore(
 /**
  * The form that the user can fill in to create their stat module before submitting it and adding
  * the data to Firestore. Is visually designed to be similar to a stat module.
- * 
+ *
  * @returns Create form
  */
 export const CreateForm = () => {
     const [gameName, setGameName] = useState("");
     const [themeColor, setThemeColor] = useState("#fcd34d");
     const [themeColorName, setThemeColorName] = useState("Sunglow");
+    const [hardModeMultiplier, setHardModeMultiplier] = useState(1);
 
     // Array of InputModuleFormData, initialised with 2 empty ButtonFormData objects.
     const [inputModuleForms, setInputModuleForms] = useState<InputModuleFormData[]>([
@@ -124,7 +126,7 @@ export const CreateForm = () => {
 
     /**
      * Adds a button form to the specified button module.
-     * 
+     *
      * @param buttonModuleIndex the index of inputModuleForms that contains the data set of button
      * forms that is being added to or removed from.
      * @param add true if a button form is to be added, false if the last is to be removed.
@@ -189,7 +191,7 @@ export const CreateForm = () => {
 
     /**
      * Handles adding the data in the form to Firestore and informs the user if it worked.
-     * 
+     *
      * @param e event object when the form is submitted
      */
     const handleSubmit = async (e: React.FormEvent) => {
@@ -199,7 +201,12 @@ export const CreateForm = () => {
         e.preventDefault(); // prevents the default behaviour of reloading the page.
 
         console.log("Adding data to firestore...");
-        const added = await addDataToFirestore(gameName, themeColor, inputModuleForms);
+        const added = await addDataToFirestore(
+            gameName,
+            themeColor,
+            hardModeMultiplier,
+            inputModuleForms
+        );
         if (added) {
             alert("Success, data added to Firestore!");
         } else {
@@ -224,6 +231,7 @@ export const CreateForm = () => {
                         className="w-4/6 px-3 py-2 border-2 rounded-lg outline-none bg-white bg-opacity-50 text-center text-2xl font-bold focus:border-amber-500"
                         value={gameName}
                         placeholder="Game name"
+                        autoComplete="off"
                         onChange={(e) => setGameName(e.target.value)}
                     />
                 </div>
@@ -245,6 +253,22 @@ export const CreateForm = () => {
                             }}
                         />
                     </div>
+                </div>
+
+                {/* Hard mode input */}
+                <div>
+                    Hard mode multiplier:
+                    <input
+                        type="number"
+                        id="hardModeMultiplier"
+                        className="ml-1 mb-5 h-[30px] w-20 px-1 py-2 pl-5 border-2 rounded-lg outline-none bg-white bg-opacity-50 text-center text-lg text-gray-700 focus:border-amber-500"
+                        value={hardModeMultiplier}
+                        autoComplete="off"
+                        min="1.0"
+                        step="0.1"
+                        onChange={(e) => setHardModeMultiplier(parseFloat(e.target.value))}
+                        onKeyDown={(e) => e.preventDefault()} // Prevents manual typing
+                    />
                 </div>
 
                 {/* Input module creation */}
