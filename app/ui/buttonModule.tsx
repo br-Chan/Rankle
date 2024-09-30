@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 
-// Data type for button modules, to be used when displaying a stat module to the user.
+/**
+ * Data type for button modules, to be used when displaying a stat module to the user.
+ */
 export type ButtonModuleData = {
     statModuleId: string;
     scoreIndex: number;
@@ -12,8 +14,13 @@ export type ButtonModuleData = {
     enabled: boolean;
 };
 
-// Button module that displays a query, a set of buttons and handles colour changes when a button is
-// selected.
+/**
+ * Button module that displays a query, a set of buttons and handles colour changes when a button is
+ * selected.
+ * 
+ * @param props Component props
+ * @returns Button module
+ */
 export const ButtonModule = ({
     data,
     themeColor,
@@ -26,8 +33,15 @@ export const ButtonModule = ({
     const [selectedButtonIndex, setSelectedButtonIndex] = useState<number | null>(null);
     const buttons = [];
 
-    // Reassigns the button with the 'selected' theme colour to the clicked button and calls the
-    // function passed down as a prop to handle storing the new selected score.
+
+    /**
+     * Reassigns the button with the 'selected' theme colour to the clicked button and calls the
+     * function passed down as a prop to handle storing the new selected score.
+     * 
+     * @param index the index of the buttons array that has been selected
+     * @param scoreIndex the index of the input module data array to update
+     * @param score the new updated score
+     */
     const handleClick = (index: number, scoreIndex: number, score: number) => {
         setSelectedButtonIndex(index);
         onInputClick(scoreIndex, score);

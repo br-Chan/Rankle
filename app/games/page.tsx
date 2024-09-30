@@ -1,14 +1,13 @@
 "use client";
 
-import {
-    getDocs,
-    collection,
-} from "firebase/firestore";
+import { getDocs, collection } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { useEffect, useState } from "react";
 import { StatModule } from "../ui/statModule";
 
-// Data type for stat modules, to use when adding or fetching data from Firestore.
+/**
+ * Data type for stat modules, to use when adding or fetching data from Firestore.
+ */
 type statModulesFirestoreData = {
     id: string;
     gameName: string;
@@ -17,7 +16,9 @@ type statModulesFirestoreData = {
     hardModeMultiplier: number;
 };
 
-// Data type for button modules, to use when adding or fetching data from Firestore.
+/**
+ * Data type for button modules, to use when adding or fetching data from Firestore.
+ */
 type buttonModulesFirestoreData = {
     statModuleId: string;
     queryText: string;
@@ -25,12 +26,23 @@ type buttonModulesFirestoreData = {
     buttonScores: number[];
 };
 
+/**
+ * Fetches all stat module documents.
+ *
+ * @returns query snapshot of searching for the documents in the statModules collection
+ */
 const fetchStatModules = async () => {
     const querySnapshot = await getDocs(collection(db, "statModules"));
     return querySnapshot;
 };
 
-// Fetches the input module documents of the stat module associated with the input ID.
+/**
+ * Fetches the input module documents of the stat module associated with the input ID.
+ *
+ * @param statModuleId id of the stat module to search for
+ * @returns query snapshot of searching for the documents in the inputModules collection of the stat
+ * module
+ */
 const fetchInputModules = async (statModuleId: string) => {
     const querySnapshot = await getDocs(
         collection(db, "statModules", statModuleId, "inputModules")
@@ -38,7 +50,11 @@ const fetchInputModules = async (statModuleId: string) => {
     return querySnapshot;
 };
 
-// Page where users can view user-created stat modules and add them to their own lists.
+/**
+ * Page where users can view user-created stat modules and add them to their own lists.
+ * 
+ * @returns Games page
+ */
 export default function Home() {
     // Array of data for all stat modules fetched from Firestore.
     const [statModulesData, setStatModulesData] = useState<statModulesFirestoreData[]>([]);

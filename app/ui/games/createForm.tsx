@@ -8,13 +8,22 @@ import { useDebouncedCallback } from "use-debounce";
 
 // Firebase code in this page from this tutorial: https://www.youtube.com/watch?v=5MzCK3k3XlQ
 
-// Data type for input module forms, to use when collecting data from the user in the Create form.
+/**
+ * Data type for input module forms, to use when collecting data from the user in the Create form.
+ */
 type InputModuleFormData = {
     queryText: string | null;
     data: ButtonFormData[];
 };
 
-// Adds a stat module document to Firestore with all associated data.
+/**
+ * Adds a stat module document to Firestore with all associated data.
+ *
+ * @param gameName name of the game
+ * @param themeColor theme color for the stat module
+ * @param inputModuleForms the data for the input modules of the stat module
+ * @returns true if the document was successfully written to Firestore, false otherwise
+ */
 async function addDataToFirestore(
     gameName: string,
     themeColor: string,
@@ -58,8 +67,12 @@ async function addDataToFirestore(
     }
 }
 
-// The form that the user can create their stat module with before submitting it and adding the data
-// to Firestore. Is visually designed to be similar to a stat module.
+/**
+ * The form that the user can fill in to create their stat module before submitting it and adding
+ * the data to Firestore. Is visually designed to be similar to a stat module.
+ * 
+ * @returns Create form
+ */
 export const CreateForm = () => {
     const [gameName, setGameName] = useState("");
     const [themeColor, setThemeColor] = useState("#fcd34d");
@@ -82,7 +95,9 @@ export const CreateForm = () => {
         },
     ]);
 
-    // Updates both the theme colour and the displayed name of the colour.
+    /**
+     * Updates both the theme colour and the displayed name of the colour.
+     */
     const updateThemeColor = useDebouncedCallback(async (hexCode: string) => {
         try {
             const response = await fetch(
@@ -107,7 +122,13 @@ export const CreateForm = () => {
     //     }]} />,]);
     // };
 
-    // Adds a button form to the specified button module.
+    /**
+     * Adds a button form to the specified button module.
+     * 
+     * @param buttonModuleIndex the index of inputModuleForms that contains the data set of button
+     * forms that is being added to or removed from.
+     * @param add true if a button form is to be added, false if the last is to be removed.
+     */
     const addButtonForm = (buttonModuleIndex: number, add: boolean) => {
         // Copy the current inputModuleForms array.
         const newInputModuleForms = [...inputModuleForms];
@@ -130,7 +151,9 @@ export const CreateForm = () => {
         setInputModuleForms(newInputModuleForms);
     };
 
-    // Updates the inputModuleForms array with the specified field of data.
+    /**
+     * Updates the inputModuleForms array with the specified field of data.
+     */
     const handleButtonModuleFormChange = useDebouncedCallback(
         (
             fieldType: string,
@@ -164,7 +187,11 @@ export const CreateForm = () => {
         300
     );
 
-    // Handles adding the data in the form to Firestore and informs the user if it worked.
+    /**
+     * Handles adding the data in the form to Firestore and informs the user if it worked.
+     * 
+     * @param e event object when the form is submitted
+     */
     const handleSubmit = async (e: React.FormEvent) => {
         // Invoke latest changes to button module forms immediately.
         handleButtonModuleFormChange.flush();

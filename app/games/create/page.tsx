@@ -1,6 +1,10 @@
 import { CreateForm } from "@/app/ui/games/createForm";
 
-// Page where users can create their own games.
+/**
+ * Page where users can create their own games.
+ * 
+ * @returns Create form page
+ */
 export default function Home() {
     return (
         <main className="flex flex-col justify-center w-[288px] md:w-[576px] text-center">
