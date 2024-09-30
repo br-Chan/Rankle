@@ -74,7 +74,7 @@ export const StatModule = ({
                             borderColor: `${data.themeColor}`,
                         }}
                     ></div> */}
-                    {data.hasHardMode ? (
+                    {data.hardModeMultiplier !== 1 ? (
                         <HardModeModule onHardModeClick={() => handleHardModeClick(data.id)} />
                     ) : null}
                     {inputModules}

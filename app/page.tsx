@@ -82,7 +82,7 @@ const statModuleData: StatModuleData[] = [
         enabled: true,
         hasHardMode: true,
         hardModeEnabled: false,
-        hardModeMultiplier: 1.1,
+        hardModeMultiplier: 1.0,
     },
     {
         id: "c",
