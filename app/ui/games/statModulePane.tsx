@@ -1,22 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { ButtonModule, ButtonModuleData } from "../buttonModule";
-import { HardModeModule } from "../hardModeModule";
-import { EnableSwitch } from "../enableSwitch";
+import { ButtonModule } from "../buttonModule";
 
-/**
- * Data type for stat modules when displaying them to the user.
- */
-export type StatModuleData = {
-    id: string;
-    gameName: string;
-    inputModules: ButtonModuleData[];
-    themeColor: string;
-    enabled: boolean;
-    hardModeEnabled: boolean;
-    hardModeMultiplier: number;
-};
+import { StatModuleData } from "../statModule";
+import { ButtonModulePane } from "./buttonModulePane";
+
+// TODO EDIT ALL COMMENTS
 
 /**
  * Stat module for a single game, that the user interacts with to input their stat for the game.
@@ -29,11 +19,9 @@ export const StatModulePane = ({ data }: { data: StatModuleData }) => {
     // Create each input module using data from the prop.
     for (let index = 0; index < data.inputModules.length; ++index) {
         inputModules.push(
-            <ButtonModule
+            <ButtonModulePane
                 key={index}
                 data={data.inputModules[index]}
-                themeColor={data.themeColor}
-                onInputClick={() => {}}
             />
         );
     }
@@ -64,7 +52,7 @@ export const StatModulePane = ({ data }: { data: StatModuleData }) => {
                             borderColor: `${data.themeColor}`,
                         }}
                     ></div>
-                    <div className="bg-white border-2 border-black rounded-md mx-10">
+                    <div className="text-sm bg-white border-2 border-white rounded-md mx-10">
                         {data.hardModeMultiplier !== 1 ? (
                             // <HardModeModule
                             //     hardModeMultiplier={data.hardModeMultiplier}
