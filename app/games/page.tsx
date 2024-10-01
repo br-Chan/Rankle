@@ -136,9 +136,6 @@ export default function Home() {
                             hardModeEnabled: false,
                             hardModeMultiplier: item.hardModeMultiplier,
                         }}
-                        handleEnableClick={() => {}}
-                        handleHardModeClick={() => {}}
-                        handleInputClick={() => {}}
                     />
                 ))}
             </div>
