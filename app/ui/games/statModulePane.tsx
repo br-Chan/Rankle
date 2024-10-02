@@ -27,14 +27,6 @@ export const StatModulePane = ({ data }: { data: StatModuleData }) => {
         );
     }
 
-    /**
-     * Dims the stat module to show that it has been disabled and call the function passed down as a
-     * prop to handle disabling it when calculating the Rank.
-     *
-     * @param id the id of the stat module
-     */
-    const handleEnableClickInStatModule = (id: string) => {};
-
     return (
         <div className="relative transition-all duration-300">
             {/* Body of the stat module pane*/}
@@ -54,15 +46,9 @@ export const StatModulePane = ({ data }: { data: StatModuleData }) => {
                         }}
                     ></div>
                     <div className="text-sm bg-white border-2 border-white rounded-md mx-10">
-                        {data.hardModeMultiplier !== 1 ? (
-                            // <HardModeModule
-                            //     hardModeMultiplier={data.hardModeMultiplier}
-                            //     onHardModeClick={() => {}}
-                            // />
-                            `Hard mode: ×${data.hardModeMultiplier}`
-                        ) : (
-                            "No hard mode"
-                        )}
+                        {data.hardModeMultiplier !== 1
+                            ? `Hard mode: ×${data.hardModeMultiplier}`
+                            : "No hard mode"}
                     </div>
                     {inputModules}
                 </div>

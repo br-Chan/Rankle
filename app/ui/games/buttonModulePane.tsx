@@ -1,6 +1,7 @@
 "use client";
 
 import { ButtonModuleData } from "../buttonModule";
+import { HoverTooltip } from "../hoverTooltip";
 
 // TODO EDIT ALL COMMENTS
 
@@ -20,22 +21,26 @@ export const ButtonModulePane = ({
 }) => {
     const buttons = [];
 
-    // Create each button using data from the prop.
+    // Create each button pane displaying the label and the score.
     for (let index = 0; index < data.buttonLabels.length; ++index) {
-        let score = data.buttonScores[index];
+        const label =  data.buttonLabels[index];
+        const score = data.buttonScores[index];
         buttons.push(
-            <div className="text-sm border-black rounded-lg" key={index}>
-                <div className="w-full text-black font-semibold bg-white rounded-t-md">
-                    {data.buttonLabels[index]}
+            <div className="relative">
+                <div className="peer text-sm border-black rounded-lg" key={index}>
+                    <div className="w-full text-black font-semibold bg-white rounded-t-md">
+                        {label}
+                    </div>
+                    <div
+                        className="w-full text-gray-700 bg-white rounded-b-md border-t-2"
+                        style={{
+                            borderColor: `${themeColor}`,
+                        }}
+                    >
+                        {score}
+                    </div>
                 </div>
-                <div
-                    className="w-full text-gray-700 bg-white rounded-b-md border-t-2"
-                    style={{
-                        borderColor: `${themeColor}`,
-                    }}
-                >
-                    {data.buttonScores[index]}
-                </div>
+                <HoverTooltip tooltipText={`Label: ${label}, Score: ${score}`} />
             </div>
         );
     }
