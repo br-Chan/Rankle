@@ -6,7 +6,7 @@ import { ButtonModulePane } from "./buttonModulePane";
 /**
  * Stat module pane for a single game, displaying all information about the stat module. The user
  * can select the stat module pane to add it to their personalised list of stat modules.
- * 
+ *
  * @param props Component props
  * @returns Stat module pane
  */
@@ -25,7 +25,7 @@ export const StatModulePane = ({ data }: { data: StatModuleData }) => {
     }
 
     return (
-        <div className="relative transition-all duration-300">
+        <div className="relative transition-all duration-300 cursor-default">
             {/* Body of the stat module pane*/}
             <div
                 className="h-full py-2 px-5 text-center transition-all duration-300 border-4 rounded-2xl"

@@ -47,9 +47,9 @@ export const ButtonModulePane = ({
     }
 
     return (
-        <>
-            <label>{data.queryText}</label>
+        <div className="mt-2 p-2 rounded-md" style={{ backgroundColor: `${themeColor}25` }}>
+            <div>{data.queryText}</div>
             <div className="grid grid-cols-3 gap-1">{buttons}</div>
-        </>
+        </div>
     );
 };
