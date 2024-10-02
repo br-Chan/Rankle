@@ -3,14 +3,12 @@
 import { ButtonModuleData } from "../buttonModule";
 import { HoverTooltip } from "../hoverTooltip";
 
-// TODO EDIT ALL COMMENTS
-
 /**
- * Button module that displays a query, a set of buttons and handles colour changes when a button is
- * selected.
+ * Button module pane that displays the query and set of buttons of the button module, with each
+ * button displaying the label and corresponding score.
  *
  * @param props Component props
- * @returns Button module
+ * @returns Button module pane
  */
 export const ButtonModulePane = ({
     data,
@@ -23,14 +21,17 @@ export const ButtonModulePane = ({
 
     // Create each button pane displaying the label and the score.
     for (let index = 0; index < data.buttonLabels.length; ++index) {
-        const label =  data.buttonLabels[index];
+        const label = data.buttonLabels[index];
         const score = data.buttonScores[index];
         buttons.push(
             <div className="relative">
                 <div className="peer text-sm border-black rounded-lg" key={index}>
+                    {/* Button label */}
                     <div className="w-full text-black font-semibold bg-white rounded-t-md">
                         {label}
                     </div>
+
+                    {/* Button score */}
                     <div
                         className="w-full text-gray-700 bg-white rounded-b-md border-t-2"
                         style={{

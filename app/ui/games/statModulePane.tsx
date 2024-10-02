@@ -1,24 +1,21 @@
 "use client";
 
-import { useState } from "react";
-import { ButtonModule } from "../buttonModule";
-
 import { StatModuleData } from "../statModule";
 import { ButtonModulePane } from "./buttonModulePane";
 
-// TODO EDIT ALL COMMENTS
-
 /**
- * Stat module for a single game, that the user interacts with to input their stat for the game.
+ * Stat module pane for a single game, displaying all information about the stat module. The user
+ * can select the stat module pane to add it to their personalised list of stat modules.
+ * 
  * @param props Component props
- * @returns Stat module
+ * @returns Stat module pane
  */
 export const StatModulePane = ({ data }: { data: StatModuleData }) => {
-    const inputModules = [];
+    const inputModulePanes = [];
 
-    // Create each input module using data from the prop.
+    // Create each input module pane using data from the prop.
     for (let index = 0; index < data.inputModules.length; ++index) {
-        inputModules.push(
+        inputModulePanes.push(
             <ButtonModulePane
                 key={index}
                 data={data.inputModules[index]}
@@ -45,12 +42,16 @@ export const StatModulePane = ({ data }: { data: StatModuleData }) => {
                             borderColor: `${data.themeColor}`,
                         }}
                     ></div>
+
+                    {/* Hard mode display pane */}
                     <div className="text-sm bg-white border-2 border-white rounded-md mx-10">
                         {data.hardModeMultiplier !== 1
                             ? `Hard mode: ×${data.hardModeMultiplier}`
                             : "No hard mode"}
                     </div>
-                    {inputModules}
+
+                    {/* Input module panes */}
+                    {inputModulePanes}
                 </div>
             </div>
 
