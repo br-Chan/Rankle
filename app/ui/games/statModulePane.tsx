@@ -22,6 +22,7 @@ export const StatModulePane = ({ data }: { data: StatModuleData }) => {
             <ButtonModulePane
                 key={index}
                 data={data.inputModules[index]}
+                themeColor={data.themeColor}
             />
         );
     }
