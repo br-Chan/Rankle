@@ -41,7 +41,7 @@ export const ButtonModulePane = ({
                         {score}
                     </div>
                 </div>
-                <HoverTooltip tooltipText={`Label: ${label}, Score: ${score}`} />
+                <HoverTooltip tooltipText={`Label: ${label}\nScore: ${score}`} />
             </div>
         );
     }
