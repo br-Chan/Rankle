@@ -1,6 +1,6 @@
 "use client";
 
-import { getDocs, collection } from "firebase/firestore";
+import { getDocs, collection, query, orderBy } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { useEffect, useState } from "react";
 import { StatModulePane } from "../ui/games/statModulePane";
@@ -27,12 +27,15 @@ type buttonModulesFirestoreData = {
 };
 
 /**
- * Fetches all stat module documents.
+ * Fetches all stat module documents in the order they were created, newest at the top left.
  *
  * @returns query snapshot of searching for the documents in the statModules collection
  */
 const fetchStatModules = async () => {
-    const querySnapshot = await getDocs(collection(db, "statModules"));
+    // Order the collection by timeStamp.
+    const q = query(collection(db, "statModules"), orderBy("timeStamp", "desc"));
+
+    const querySnapshot = await getDocs(q);
     return querySnapshot;
 };
 

@@ -24,7 +24,7 @@ export const ButtonModulePane = ({
         const label = data.buttonLabels[index];
         const score = data.buttonScores[index];
         buttons.push(
-            <div className="relative">
+            <div className="relative" key={index}>
                 <div className="peer text-sm border-black rounded-lg" key={index}>
                     {/* Button label */}
                     <div className="w-full text-black font-semibold bg-white rounded-t-md">
