@@ -14,6 +14,7 @@ const inputModuleData: ButtonModuleData[] = [
         buttonLabels: [1, 2, 3, 4, 5, 6, "X"],
         buttonScores: [100, 90, 80, 60, 40, 20, 0],
         enabled: true,
+        selectedButtonIndex: null,
     },
     // Connections
     {
@@ -23,6 +24,7 @@ const inputModuleData: ButtonModuleData[] = [
         buttonLabels: ["4|4", "4|3", "4|2", "4|1", "2|X", "1|X", "0|X"],
         buttonScores: [85, 80, 70, 60, 30, 15, 5],
         enabled: true,
+        selectedButtonIndex: null,
     },
     //Symble
     {
@@ -32,6 +34,7 @@ const inputModuleData: ButtonModuleData[] = [
         buttonLabels: [1, 2, 3, 4, 5, 6, 7, 8, "X"],
         buttonScores: [100, 95, 90, 80, 70, 60, 40, 30, 5],
         enabled: true,
+        selectedButtonIndex: null,
     },
     // Strands
     {
@@ -41,6 +44,7 @@ const inputModuleData: ButtonModuleData[] = [
         buttonLabels: [0, 1, 2, 3, 4, 5, 6, 7],
         buttonScores: [80, 75, 70, 60, 40, 30, 20, 5],
         enabled: true,
+        selectedButtonIndex: null,
     },
     // Spotle
     {
@@ -50,6 +54,7 @@ const inputModuleData: ButtonModuleData[] = [
         buttonLabels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "X"],
         buttonScores: [100, 95, 90, 80, 75, 65, 55, 45, 30, 10, 0],
         enabled: true,
+        selectedButtonIndex: null,
     },
     // Bandle
     {
@@ -59,6 +64,7 @@ const inputModuleData: ButtonModuleData[] = [
         buttonLabels: [1, 2, 3, 4, 5, 6, "X"],
         buttonScores: [100, 90, 80, 60, 40, 20, 0],
         enabled: true,
+        selectedButtonIndex: null,
     },
 ];
 
@@ -160,6 +166,10 @@ export default function Home() {
         return statModuleData.find(({ id }) => statModuleId === id);
     };
 
+    const getInputModuleData = (index: number) => {
+        return inputModuleData[index];
+    }
+
     /**
      * Disables the stat module and all of its input modules.
      *
@@ -206,10 +216,32 @@ export default function Home() {
      * @param scoreIndex the index of the array of input modules' scores that is to be updated
      * @param score the new score to update with
      */
-    const handleInputClick = (scoreIndex: number, score: number) => {
+    const handleInputClick = (index: number, scoreIndex: number, score: number) => {
         console.log(scoreIndex + ": " + score);
         scores[scoreIndex] = score;
+
+        // Update input module's selected button index in its data.
+        const inputModuleDataToChange = getInputModuleData(scoreIndex);
+        if (inputModuleDataToChange === undefined) {
+            return; // To handle finding no matching score index
+        }
+        inputModuleDataToChange.selectedButtonIndex = index;
+
         updateRank();
+
+        // // Enable/disable stat module.
+        // const statModuleDataToChange = getStatModuleData(statModuleId);
+        // if (statModuleDataToChange === undefined) {
+        //     return; // To handle finding no matching id
+        // }
+        // statModuleDataToChange.enabled = !statModuleDataToChange.enabled;
+
+        // // Enable/disable stat module's input module(s).
+        // inputModuleData.forEach((inputModuleData) => {
+        //     if (inputModuleData.statModuleId === statModuleId) {
+        //         inputModuleData.enabled = !inputModuleData.enabled;
+        //     }
+        // });
     };
 
     /**
