@@ -57,12 +57,14 @@ export const StatModulePane = ({ data }: { data: StatModuleData }) => {
 
             {/* Title bar of the stat module pane*/}
             <div
-                className="absolute flex px-1 top-0 left-0 h-fit w-full justify-center opacity-100 transition-all duration-300 border-t-4 border-l-4 border-r-4 rounded-t-2xl"
+                className="absolute flex px-1 top-0 left-0 h-fit w-full text-2xl font-bold justify-around opacity-100 transition-all duration-300 border-t-4 border-l-4 border-r-4 rounded-t-2xl"
                 style={{
                     borderColor: `${data.themeColor}`,
                 }}
             >
-                <h2 className="text-2xl font-bold">{data.gameName}</h2>
+                <button className="text-2xl font-black text-green-500">+</button>
+                <h2 className="">{data.gameName}</h2>
+                <button className="text-red-500">X</button>
             </div>
         </div>
     );
