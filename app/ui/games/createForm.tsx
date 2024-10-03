@@ -186,7 +186,7 @@ export const CreateForm = () => {
             console.log(newInputModuleForms);
             setInputModuleForms(newInputModuleForms);
         },
-        300
+        20
     );
 
     /**
