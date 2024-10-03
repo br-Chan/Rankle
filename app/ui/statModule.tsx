@@ -35,7 +35,7 @@ export const StatModule = ({
     handleInputClick: (scoreIndex: number, score: number) => void;
 }) => {
     const inputModules = [];
-    const [opacity, setOpacity] = useState<number>(1);
+    const [opacity, setOpacity] = useState<number>(data.enabled ? 1 : 0.3);
 
     // Create each input module using data from the prop.
     for (let index = 0; index < data.inputModules.length; ++index) {
