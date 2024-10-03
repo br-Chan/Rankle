@@ -132,6 +132,7 @@ export default function Home() {
                                     buttonLabels: item.buttonLabels,
                                     buttonScores: item.buttonScores,
                                     enabled: true,
+                                    selectedButtonIndex: null,
                                 };
                             }),
                             themeColor: item.themeColor,
