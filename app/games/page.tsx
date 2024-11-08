@@ -111,7 +111,7 @@ export default function Home() {
             <p className="text-center">Add custom games or create your own!</p>
             <div
                 className="
-                mb-32 grid gap-4 text-center
+                pt-4 mb-32 grid gap-4 text-center
                 grid-cols-1 w-[288px]
                 md:grid-cols-2 md:w-[576px]
                 lg:grid-cols-3 lg:w-[864px]
