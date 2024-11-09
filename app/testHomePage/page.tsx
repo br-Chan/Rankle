@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { doc, setDoc, getDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { useAuth } from "../hooks/useAuth";
 import { db } from "../firebaseConfig";
 import {
@@ -17,40 +17,22 @@ export default function HomePage() {
     // Array of data for user's stat modules fetched from Firestore.
     const [statModulesData, setStatModulesData] = useState<statModulesFirestoreData[]>([]);
 
-    // // Initialize default data for new users
-    // useEffect(() => {
-    //     const initializeUserData = async () => {
-    //         if (!user) return;
-
-    //         const userDocRef = doc(db, "userSelections", user.uid);
-    //         const userDocSnap = await getDoc(userDocRef);
-
-    //         if (!userDocSnap.exists()) {
-    //             addStatModuleToUser(user.uid, "fNwVk0dhntmBWj6oAT0U");
-    //             addStatModuleToUser(user.uid, "gzF6eumgBN9QiVF1LxM4");
-    //             addStatModuleToUser(user.uid, "ZNWNu2GzygcgvcqrcPxf");
-    //             addStatModuleToUser(user.uid, "SHP4lWxnM5ONQJpRK5sH");
-    //             addStatModuleToUser(user.uid, "fNwVk0dhntmBWj6oAT0U");
-    //         }
-    //     };
-
-    //     initializeUserData();
-    // }, [user]);
-
-    // Fetch user data
+    // Fetch user data, initialising default data first if new user.
     useEffect(() => {
         async function fetchUserData() {
             if (user) {
-                const userDocRef = doc(db, "userSelections", user.uid);
-                const userDocSnap = await getDoc(userDocRef);
+                const userStatModulesCollectionRef = collection(db, "users", user.uid, "userStatModules");
+                const userStatModulesSnap = await getDocs(userStatModulesCollectionRef);
 
-                if (!userDocSnap.exists()) {
+                if (userStatModulesSnap.empty) {
+                    console.log("adding stat modules to user");
                     await Promise.all([
                         addStatModuleToUser(user.uid, "fNwVk0dhntmBWj6oAT0U"),
                         addStatModuleToUser(user.uid, "gzF6eumgBN9QiVF1LxM4"),
                         addStatModuleToUser(user.uid, "ZNWNu2GzygcgvcqrcPxf"),
                         addStatModuleToUser(user.uid, "SHP4lWxnM5ONQJpRK5sH"),
                         addStatModuleToUser(user.uid, "fNwVk0dhntmBWj6oAT0U"),
+                        addStatModuleToUser(user.uid, "ZyUFFw9Cdwix8w4UvW9O"),
                     ]);
                 }
 
