@@ -99,7 +99,7 @@ export const fetchStatModules = async () => {
 };
 
 export const fetchUserStatModules = async (userId: string) => {
-    const q = query(collection(db, "users", userId));
+    const q = query(collection(db, "users", userId, "userStatModules"));
 
     const querySnapshot = await getDocs(q);
     return fetchStatModulesData(querySnapshot);
