@@ -6,7 +6,6 @@ import { useAuth } from "../hooks/useAuth";
 import { db } from "../firebaseConfig";
 import {
     addStatModuleToUser,
-    fetchStatModules,
     fetchUserStatModules,
     statModulesFirestoreData,
 } from "../lib/firestoreUtils";
@@ -18,41 +17,52 @@ export default function HomePage() {
     // Array of data for user's stat modules fetched from Firestore.
     const [statModulesData, setStatModulesData] = useState<statModulesFirestoreData[]>([]);
 
-    // Initialize default data for new users
-    useEffect(() => {
-        const initializeUserData = async () => {
-            if (!user) return;
+    // // Initialize default data for new users
+    // useEffect(() => {
+    //     const initializeUserData = async () => {
+    //         if (!user) return;
 
-            const userDocRef = doc(db, "userSelections", user.uid);
-            const userDocSnap = await getDoc(userDocRef);
+    //         const userDocRef = doc(db, "userSelections", user.uid);
+    //         const userDocSnap = await getDoc(userDocRef);
 
-            if (!userDocSnap.exists()) {
-                addStatModuleToUser(user.uid, "fNwVk0dhntmBWj6oAT0U");
+    //         if (!userDocSnap.exists()) {
+    //             addStatModuleToUser(user.uid, "fNwVk0dhntmBWj6oAT0U");
+    //             addStatModuleToUser(user.uid, "gzF6eumgBN9QiVF1LxM4");
+    //             addStatModuleToUser(user.uid, "ZNWNu2GzygcgvcqrcPxf");
+    //             addStatModuleToUser(user.uid, "SHP4lWxnM5ONQJpRK5sH");
+    //             addStatModuleToUser(user.uid, "fNwVk0dhntmBWj6oAT0U");
+    //         }
+    //     };
 
-                // // Set default data
-                // const defaultData = {
-                //     selections: [], // Empty selection list
-                //     createdAt: new Date().toISOString(),
-                // };
-                // await setDoc(userDocRef, defaultData);
-                // console.log("Default data initialized for new user");
-            }
-        };
-
-        initializeUserData();
-    }, [user]);
+    //     initializeUserData();
+    // }, [user]);
 
     // Fetch user data
     useEffect(() => {
-        async function fetchData() {
-            if (!user) return;
-            
-            const statModuleDocuments: statModulesFirestoreData[] = await fetchUserStatModules(
-                user.uid
-            );
-            setStatModulesData(statModuleDocuments);
+        async function fetchUserData() {
+            if (user) {
+                const userDocRef = doc(db, "userSelections", user.uid);
+                const userDocSnap = await getDoc(userDocRef);
+
+                if (!userDocSnap.exists()) {
+                    await Promise.all([
+                        addStatModuleToUser(user.uid, "fNwVk0dhntmBWj6oAT0U"),
+                        addStatModuleToUser(user.uid, "gzF6eumgBN9QiVF1LxM4"),
+                        addStatModuleToUser(user.uid, "ZNWNu2GzygcgvcqrcPxf"),
+                        addStatModuleToUser(user.uid, "SHP4lWxnM5ONQJpRK5sH"),
+                        addStatModuleToUser(user.uid, "fNwVk0dhntmBWj6oAT0U"),
+                    ]);
+                }
+
+                const statModuleDocuments: statModulesFirestoreData[] = await fetchUserStatModules(
+                    user.uid
+                );
+                setStatModulesData(statModuleDocuments);
+            } else {
+                console.log("User data doesn't exist yet.");
+            }
         }
-        fetchData();
+        fetchUserData();
     }, [user]);
 
     return (
