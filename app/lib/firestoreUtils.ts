@@ -1,4 +1,4 @@
-import { collection, doc, getDoc, getDocs, orderBy, query, setDoc } from "firebase/firestore";
+import { collection, doc, DocumentData, getDoc, getDocs, orderBy, query, QuerySnapshot, setDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 
 /**
@@ -46,11 +46,11 @@ export const addStatModuleToUser = async (userId: string, statModuleId: string) 
     }
 }
 
-export async function fetchStatModulesData() {
+export const fetchStatModulesData = async (statModulesSnapshot: QuerySnapshot<DocumentData, DocumentData>) => {
     console.log("Fetching data...");
 
     // Fetch stat module data and iterate through them to initialise statModuleDocuments.
-    const statModulesSnapshot = await fetchStatModules();
+    // const statModulesSnapshot = await fetchStatModules();
     const statModuleDocuments: statModulesFirestoreData[] = await Promise.all(
         statModulesSnapshot.docs.map(async (doc) => {
             // Get all fields and values from stat module document's data.
@@ -88,15 +88,22 @@ export async function fetchStatModulesData() {
 /**
  * Fetches all stat module documents in the order they were created, newest at the top left.
  *
- * @returns query snapshot of searching for the documents in the statModules collection
+ * @returns Firestore data of all stat modules in the statModules collection
  */
 export const fetchStatModules = async () => {
     // Order the collection by timeStamp.
     const q = query(collection(db, "statModules"), orderBy("timeStamp", "desc"));
 
     const querySnapshot = await getDocs(q);
-    return querySnapshot;
+    return fetchStatModulesData(querySnapshot);
 };
+
+export const fetchUserStatModules = async (userId: string) => {
+    const q = query(collection(db, "users", userId));
+
+    const querySnapshot = await getDocs(q);
+    return fetchStatModulesData(querySnapshot);
+}
 
 /**
  * Fetches the input module documents of the stat module associated with the input ID.
