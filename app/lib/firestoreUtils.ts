@@ -46,6 +46,26 @@ export const addStatModuleToUser = async (userId: string, statModuleId: string) 
     }
 }
 
+/**
+ * Fetches all stat module documents in the order they were created, newest at the top left.
+ *
+ * @returns Firestore data of all stat modules in the statModules collection
+ */
+export const fetchStatModules = async () => {
+    // Order the collection by timeStamp.
+    const q = query(collection(db, "statModules"), orderBy("timeStamp", "desc"));
+
+    const querySnapshot = await getDocs(q);
+    return fetchStatModulesData(querySnapshot);
+};
+
+export const fetchUserStatModules = async (userId: string) => {
+    const q = query(collection(db, "users", userId, "userStatModules"), orderBy("timeStamp", "asc"));
+
+    const querySnapshot = await getDocs(q);
+    return fetchStatModulesData(querySnapshot);
+}
+
 export const fetchStatModulesData = async (statModulesSnapshot: QuerySnapshot<DocumentData, DocumentData>) => {
     console.log("Fetching data...");
 
@@ -83,26 +103,6 @@ export const fetchStatModulesData = async (statModulesSnapshot: QuerySnapshot<Do
     );
 
     return statModuleDocuments;
-}
-
-/**
- * Fetches all stat module documents in the order they were created, newest at the top left.
- *
- * @returns Firestore data of all stat modules in the statModules collection
- */
-export const fetchStatModules = async () => {
-    // Order the collection by timeStamp.
-    const q = query(collection(db, "statModules"), orderBy("timeStamp", "desc"));
-
-    const querySnapshot = await getDocs(q);
-    return fetchStatModulesData(querySnapshot);
-};
-
-export const fetchUserStatModules = async (userId: string) => {
-    const q = query(collection(db, "users", userId, "userStatModules"));
-
-    const querySnapshot = await getDocs(q);
-    return fetchStatModulesData(querySnapshot);
 }
 
 /**
