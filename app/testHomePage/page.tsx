@@ -68,43 +68,47 @@ export default function HomePage() {
     return (
         <div>
             <h1>My Home Page</h1>
-            {statModulesData.map((item, index) => (
-                <StatModule
-                    key={index}
-                    data={{
-                        id: item.id,
-                        gameName: item.gameName,
-                        inputModules: item.inputModules.map((item, index) => {
-                            return {
-                                statModuleId: item.statModuleId,
-                                scoreIndex: index,
-                                queryText: item.queryText,
-                                buttonLabels: item.buttonLabels,
-                                buttonScores: item.buttonScores,
-                                enabled: true,
-                                selectedButtonIndex: null,
-                            };
-                        }),
-                        themeColor: item.themeColor,
-                        enabled: true,
-                        hardModeEnabled: false,
-                        hardModeMultiplier: item.hardModeMultiplier,
-                    }}
-                    handleEnableClick={function (statModuleId: string): void {
-                        throw new Error("Function not implemented.");
-                    }}
-                    handleHardModeClick={function (statModuleId: string): void {
-                        throw new Error("Function not implemented.");
-                    }}
-                    handleInputClick={function (
-                        index: number,
-                        scoreIndex: number,
-                        score: number
-                    ): void {
-                        throw new Error("Function not implemented.");
-                    }}
-                />
-            ))}
+            {statModulesData.length === 0 ? (
+                <p>Loading your games...</p>
+            ) : (
+                statModulesData.map((item, index) => (
+                    <StatModule
+                        key={index}
+                        data={{
+                            id: item.id,
+                            gameName: item.gameName,
+                            inputModules: item.inputModules.map((item, index) => {
+                                return {
+                                    statModuleId: item.statModuleId,
+                                    scoreIndex: index,
+                                    queryText: item.queryText,
+                                    buttonLabels: item.buttonLabels,
+                                    buttonScores: item.buttonScores,
+                                    enabled: true,
+                                    selectedButtonIndex: null,
+                                };
+                            }),
+                            themeColor: item.themeColor,
+                            enabled: true,
+                            hardModeEnabled: false,
+                            hardModeMultiplier: item.hardModeMultiplier,
+                        }}
+                        handleEnableClick={function (statModuleId: string): void {
+                            throw new Error("Function not implemented.");
+                        }}
+                        handleHardModeClick={function (statModuleId: string): void {
+                            throw new Error("Function not implemented.");
+                        }}
+                        handleInputClick={function (
+                            index: number,
+                            scoreIndex: number,
+                            score: number
+                        ): void {
+                            throw new Error("Function not implemented.");
+                        }}
+                    />
+                ))
+            )}
         </div>
     );
 }
