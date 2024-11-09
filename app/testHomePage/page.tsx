@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { useAuth } from "../hooks/useAuth";
 import { db } from "../firebaseConfig";
+import { addStatModuleToUser } from "../lib/firestoreUtils";
 
 export default function HomePage() {
   const { user } = useAuth();
@@ -11,7 +12,6 @@ export default function HomePage() {
 
   // Initialize default data for new users
   useEffect(() => {
-    console.log("hi")
     const initializeUserData = async () => {
       if (!user) return;
 
@@ -19,6 +19,8 @@ export default function HomePage() {
       const userDocSnap = await getDoc(userDocRef);
 
       if (!userDocSnap.exists()) {
+        addStatModuleToUser(user.uid, "fNwVk0dhntmBWj6oAT0U");
+
         // Set default data
         const defaultData = {
           selections: [], // Empty selection list
@@ -37,7 +39,7 @@ export default function HomePage() {
     const fetchUserData = async () => {
       if (!user) return;
 
-      const userDocRef = doc(db, "userSelections", user.uid);
+      const userDocRef = doc(db, "users", user.uid);
       const userDocSnap = await getDoc(userDocRef);
 
       if (userDocSnap.exists()) {
