@@ -2,7 +2,10 @@
 
 import { StatModule, StatModuleData } from "./ui/statModule";
 import { ButtonModuleData } from "./ui/buttonModule";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useAuth } from "./hooks/useAuth";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "./firebaseConfig";
 
 // Hard-coded input module data for every stat module.
 const inputModuleData: ButtonModuleData[] = [
@@ -153,8 +156,27 @@ const ranks = [
  * @returns Home page
  */
 export default function Home() {
+    // const { user }: { user: any } = useAuth();
+    // const [statModules,  setStatModules] = useState<StatModuleData[]>([]);
+
     const [scores] = useState(Array(inputModuleData.length).fill(null));
     const [rank, setRank] = useState("R");
+
+    // Initialise default data for new users.
+    // useEffect(() => {
+    //     const initialiseUserData = async () => {
+    //         if (!user) return;
+
+    //         const userDocRef  = doc(db, "userSelections", user.uid);
+    //         const userDocSnap = await getDoc(userDocRef);
+
+    //         if (!userDocSnap.exists()) {
+    //             const defaultData = {
+
+    //             }
+    //         }
+    //     }
+    // });
 
     /**
      * Returns the stat module data of the stat module associated with the input id.
