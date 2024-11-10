@@ -76,6 +76,8 @@ export const addStatModuleToUser = async (userId: string, statModuleId: string) 
             const userInputModuleRef = doc(db, "users", userId, "userStatModules", statModuleId, "inputModules", inputModuleDoc.id);
             await setDoc(userInputModuleRef, inputModuleDoc.data());
         });
+
+        console.log("Stat module added!");
     } else {
         console.error("Stat module not found");
     }

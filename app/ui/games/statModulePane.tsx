@@ -1,7 +1,9 @@
 "use client";
 
+import { addStatModuleToUser } from "@/app/lib/firestoreUtils";
 import { StatModuleData } from "../statModule";
 import { ButtonModulePane } from "./buttonModulePane";
+import { useAuth } from "@/app/hooks/useAuth";
 
 /**
  * Stat module pane for a single game, displaying all information about the stat module. The user
@@ -11,6 +13,7 @@ import { ButtonModulePane } from "./buttonModulePane";
  * @returns Stat module pane
  */
 export const StatModulePane = ({ data }: { data: StatModuleData }) => {
+    const { user } = useAuth();
     const inputModulePanes = [];
 
     // Create each input module pane using data from the prop.
@@ -62,7 +65,14 @@ export const StatModulePane = ({ data }: { data: StatModuleData }) => {
                     borderColor: `${data.themeColor}`,
                 }}
             >
-                <button className="text-sm text-green-500">add</button>
+                <button
+                    className="text-sm text-green-500"
+                    onClick={() => {
+                        addStatModuleToUser(user.uid, data.id);
+                    }}
+                >
+                    add
+                </button>
                 <h2 className="col-span-10">{data.gameName}</h2>
                 <button className="text-sm text-red-500">del</button>
             </div>
