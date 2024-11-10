@@ -10,6 +10,7 @@ import {
     statModulesFirestoreData,
 } from "../lib/firestoreUtils";
 import { StatModule } from "../ui/statModule";
+import { ButtonModuleData } from "../ui/buttonModule";
 
 export default function HomePage() {
     const { user } = useAuth();
@@ -83,8 +84,8 @@ export default function HomePage() {
                             throw new Error("Function not implemented.");
                         }}
                         handleInputClick={function (
+                            data: ButtonModuleData,
                             index: number,
-                            scoreIndex: number,
                             score: number
                         ): void {
                             throw new Error("Function not implemented.");

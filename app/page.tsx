@@ -225,8 +225,13 @@ export default function Home() {
         return statModuleData.find(({ id }) => statModuleId === id);
     };
 
-    const getInputModuleData = (index: number) => {
-        return inputModuleData[index];
+    const getInputModuleData = (statModuleId: string, inputModuleId: string) => {
+        const statModule = getStatModuleData(statModuleId);
+        if (statModule === undefined) {
+            return;
+        }
+
+        return statModule.inputModules.find(({ id }) => inputModuleId === id);
     };
 
     /**
@@ -272,15 +277,16 @@ export default function Home() {
     /**
      * Updates the score for a specific input module and updates the overall Rank.
      *
-     * @param scoreIndex the index of the array of input modules' scores that is to be updated
+     * @param data the button module data of the input module that has been clicked on
+     * @param index the index of the buttons array that has been selected in the input module
      * @param score the new score to update with
      */
-    const handleInputClick = (index: number, scoreIndex: number, score: number) => {
-        console.log(scoreIndex + ": " + score);
-        scores[scoreIndex] = score;
+    const handleInputClick = (data: ButtonModuleData, index: number, score: number) => {
+        console.log(data.queryText + ": " + score);
+        // scores[scoreIndex] = score;
 
         // Update input module's selected button index in its data.
-        const inputModuleDataToChange = getInputModuleData(scoreIndex);
+        const inputModuleDataToChange = getInputModuleData(data.statModuleId, data.id);
         if (inputModuleDataToChange === undefined) {
             return; // To handle finding no matching score index
         }
