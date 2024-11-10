@@ -4,8 +4,13 @@ import { StatModule, StatModuleData } from "./ui/statModule";
 import { ButtonModuleData } from "./ui/buttonModule";
 import { useEffect, useState } from "react";
 import { useAuth } from "./hooks/useAuth";
-import { doc, getDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { db } from "./firebaseConfig";
+import {
+    addStatModuleToUser,
+    fetchUserStatModules,
+    statModulesFirestoreData,
+} from "./lib/firestoreUtils";
 
 // Hard-coded input module data for every stat module.
 const inputModuleData: ButtonModuleData[] = [
@@ -156,27 +161,48 @@ const ranks = [
  * @returns Home page
  */
 export default function Home() {
-    // const { user }: { user: any } = useAuth();
-    // const [statModules,  setStatModules] = useState<StatModuleData[]>([]);
+    const { user } = useAuth();
+
+    // Array of data for user's stat modules fetched from Firestore.
+    const [statModulesData, setStatModulesData] = useState<statModulesFirestoreData[]>([]);
 
     const [scores] = useState(Array(inputModuleData.length).fill(null));
     const [rank, setRank] = useState("R");
 
-    // Initialise default data for new users.
-    // useEffect(() => {
-    //     const initialiseUserData = async () => {
-    //         if (!user) return;
+    // Fetch user data, initialising default data first if new user.
+    useEffect(() => {
+        async function fetchUserData() {
+            if (user) {
+                const userStatModulesCollectionRef = collection(
+                    db,
+                    "users",
+                    user.uid,
+                    "userStatModules"
+                );
+                const userStatModulesSnap = await getDocs(userStatModulesCollectionRef);
 
-    //         const userDocRef  = doc(db, "userSelections", user.uid);
-    //         const userDocSnap = await getDoc(userDocRef);
+                if (userStatModulesSnap.empty) {
+                    console.log("adding stat modules to user");
+                    await Promise.all([
+                        addStatModuleToUser(user.uid, "fNwVk0dhntmBWj6oAT0U"),
+                        addStatModuleToUser(user.uid, "gzF6eumgBN9QiVF1LxM4"),
+                        addStatModuleToUser(user.uid, "ZNWNu2GzygcgvcqrcPxf"),
+                        addStatModuleToUser(user.uid, "SHP4lWxnM5ONQJpRK5sH"),
+                        addStatModuleToUser(user.uid, "fNwVk0dhntmBWj6oAT0U"),
+                        addStatModuleToUser(user.uid, "ZyUFFw9Cdwix8w4UvW9O"),
+                    ]);
+                }
 
-    //         if (!userDocSnap.exists()) {
-    //             const defaultData = {
-
-    //             }
-    //         }
-    //     }
-    // });
+                const statModuleDocuments: statModulesFirestoreData[] = await fetchUserStatModules(
+                    user.uid
+                );
+                setStatModulesData(statModuleDocuments);
+            } else {
+                console.log("User data doesn't exist yet.");
+            }
+        }
+        fetchUserData();
+    }, [user]);
 
     /**
      * Returns the stat module data of the stat module associated with the input id.
@@ -190,7 +216,7 @@ export default function Home() {
 
     const getInputModuleData = (index: number) => {
         return inputModuleData[index];
-    }
+    };
 
     /**
      * Disables the stat module and all of its input modules.
@@ -234,7 +260,7 @@ export default function Home() {
 
     /**
      * Updates the score for a specific input module and updates the overall Rank.
-     * 
+     *
      * @param scoreIndex the index of the array of input modules' scores that is to be updated
      * @param score the new score to update with
      */
@@ -324,7 +350,7 @@ export default function Home() {
         2xl:grid-cols-4 2xl:w-[1152px]
       "
             >
-                {statModuleData.map((data, index) => (
+                {/* {statModuleData.map((data, index) => (
                     <StatModule
                         key={index}
                         data={data}
@@ -332,7 +358,38 @@ export default function Home() {
                         handleHardModeClick={handleHardModeClick}
                         handleInputClick={handleInputClick}
                     />
-                ))}
+                ))} */}
+                {statModulesData.length === 0 ? (
+                    <p>Loading your games...</p>
+                ) : (
+                    statModulesData.map((item, index) => (
+                        <StatModule
+                            key={index}
+                            data={{
+                                id: item.id,
+                                gameName: item.gameName,
+                                inputModules: item.inputModules.map((item, index) => {
+                                    return {
+                                        statModuleId: item.statModuleId,
+                                        scoreIndex: index,
+                                        queryText: item.queryText,
+                                        buttonLabels: item.buttonLabels,
+                                        buttonScores: item.buttonScores,
+                                        enabled: true,
+                                        selectedButtonIndex: null,
+                                    };
+                                }),
+                                themeColor: item.themeColor,
+                                enabled: true,
+                                hardModeEnabled: false,
+                                hardModeMultiplier: item.hardModeMultiplier,
+                            }}
+                            handleEnableClick={handleEnableClick}
+                            handleHardModeClick={handleHardModeClick}
+                            handleInputClick={handleInputClick}
+                        />
+                    ))
+                )}
             </div>
         </main>
     );
