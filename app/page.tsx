@@ -282,7 +282,7 @@ export default function Home() {
      * @param score the new score to update with
      */
     const handleInputClick = (data: ButtonModuleData, index: number, score: number) => {
-        console.log(data.queryText + ": " + score);
+        console.log(data.queryText + ": " + score + " in index " + index);
         // scores[scoreIndex] = score;
 
         // Update input module's selected button index in its data.
@@ -321,7 +321,7 @@ export default function Home() {
             let currentScore = 0;
             if (statModule.enabled) {
                 statModule.inputModules.forEach((buttonModule) => {
-                    if (buttonModule.selectedButtonIndex) {
+                    if (buttonModule.selectedButtonIndex != null) {
                         ++numberOfEnabledScores;
                         currentScore =
                             buttonModule.buttonScores[buttonModule.selectedButtonIndex] *
