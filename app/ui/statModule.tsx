@@ -32,7 +32,7 @@ export const StatModule = ({
     data: StatModuleData;
     handleEnableClick: (statModuleId: string) => void;
     handleHardModeClick: (statModuleId: string) => void;
-    handleInputClick: (index: number, scoreIndex: number, score: number) => void;
+    handleInputClick: (data: ButtonModuleData, index: number, score: number) => void;
 }) => {
     const inputModules = [];
     const [opacity, setOpacity] = useState<number>(data.enabled ? 1 : 0.3);

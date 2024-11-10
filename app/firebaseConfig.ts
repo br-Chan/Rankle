@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { getAuth, onAuthStateChanged, signInAnonymously } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -19,6 +20,17 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+export const db = getFirestore(app);
+export const auth = getAuth(app);
 
-export { db };
+// Handle Anonymous Authentication
+export const initialiseAnonymousUser = async () => {
+    const userCredential = await signInAnonymously(auth);
+    return userCredential.user;
+}
+
+export const onAuthStateChange = (callback: (user: any) => void) => {
+    return onAuthStateChanged(auth, callback);
+}
+
+// export { db, auth };

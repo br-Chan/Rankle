@@ -7,6 +7,7 @@ import { HoverTooltip } from "./hoverTooltip";
  * Data type for button modules, to be used when displaying a stat module to the user.
  */
 export type ButtonModuleData = {
+    id: string;
     statModuleId: string;
     scoreIndex: number;
     queryText: string;
@@ -30,7 +31,7 @@ export const ButtonModule = ({
 }: {
     data: ButtonModuleData;
     themeColor: string;
-    onInputClick: (index: number, scoreIndex: number, score: number) => void;
+    onInputClick: (data: ButtonModuleData, index: number, score: number) => void;
 }) => {
     const [selectedButtonIndex, setSelectedButtonIndex] = useState<number | null>(
         data.selectedButtonIndex
@@ -45,9 +46,9 @@ export const ButtonModule = ({
      * @param scoreIndex the index of the input module data array to update
      * @param score the new updated score
      */
-    const handleClick = (index: number, scoreIndex: number, score: number) => {
+    const handleClick = (data: ButtonModuleData, index: number, score: number) => {
         setSelectedButtonIndex(index);
-        onInputClick(index, scoreIndex, score);
+        onInputClick(data, index, score);
     };
 
     // Create each button using data from the prop.
@@ -64,7 +65,7 @@ export const ButtonModule = ({
                     style={{
                         backgroundColor: selectedButtonIndex === index ? themeColor : "white",
                     }}
-                    onClick={() => handleClick(index, data.scoreIndex, score)}
+                    onClick={() => handleClick(data, index, score)}
                 >
                     {data.buttonLabels[index]}
                 </button>

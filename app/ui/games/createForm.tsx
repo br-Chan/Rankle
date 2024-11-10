@@ -215,7 +215,7 @@ export const CreateForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="p-4">
+        <form onSubmit={handleSubmit} className="pt-4">
             <div
                 className="mb-2 h-full py-2 px-5 text-center transition-all duration-300 border-4 rounded-2xl"
                 style={{
