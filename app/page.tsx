@@ -220,29 +220,10 @@ export default function Home() {
                 {statModuleData.length === 0 ? (
                     <p className="">Loading your games...</p>
                 ) : (
-                    statModuleData.map((item, index) => (
+                    statModuleData.map((data, index) => (
                         <StatModule
                             key={index}
-                            data={{
-                                id: item.id,
-                                gameName: item.gameName,
-                                inputModules: item.inputModules.map((item, index) => {
-                                    return {
-                                        id: item.id,
-                                        statModuleId: item.statModuleId,
-                                        scoreIndex: index,
-                                        queryText: item.queryText,
-                                        buttonLabels: item.buttonLabels,
-                                        buttonScores: item.buttonScores,
-                                        enabled: true,
-                                        selectedButtonIndex: null,
-                                    };
-                                }),
-                                themeColor: item.themeColor,
-                                enabled: true,
-                                hardModeEnabled: false,
-                                hardModeMultiplier: item.hardModeMultiplier,
-                            }}
+                            data={data}
                             handleEnableClick={handleEnableClick}
                             handleHardModeClick={handleHardModeClick}
                             handleInputClick={handleInputClick}
