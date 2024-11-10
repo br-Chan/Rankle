@@ -208,19 +208,21 @@ export default function Home() {
             </div>
 
             {/* Stat modules */}
-            <div
-                className="
-        mb-32 grid gap-4 text-center
-        grid-cols-1 w-[288px]
-        md:grid-cols-2 md:w-[576px]
-        lg:grid-cols-3 lg:w-[864px]
-        2xl:grid-cols-4 2xl:w-[1152px]
-      "
-            >
-                {statModuleData.length === 0 ? (
-                    <p className="">Loading your games...</p>
-                ) : (
-                    statModuleData.map((data, index) => (
+            {statModuleData.length === 0 ? (
+                <p className="flex place-items-center px-16 py-1 rounded-xl font-mono text-2xl bg-amber-300">
+                    Loading your games...
+                </p>
+            ) : (
+                <div
+                    className="
+                    mb-32 grid gap-4 text-center
+                    grid-cols-1 w-[288px]
+                    md:grid-cols-2 md:w-[576px]
+                    lg:grid-cols-3 lg:w-[864px]
+                    2xl:grid-cols-4 2xl:w-[1152px]
+                "
+                >
+                    {statModuleData.map((data, index) => (
                         <StatModule
                             key={index}
                             data={data}
@@ -228,9 +230,9 @@ export default function Home() {
                             handleHardModeClick={handleHardModeClick}
                             handleInputClick={handleInputClick}
                         />
-                    ))
-                )}
-            </div>
+                    ))}
+                </div>
+            )}
         </main>
     );
 }
