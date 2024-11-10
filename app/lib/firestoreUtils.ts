@@ -1,5 +1,7 @@
 import { collection, doc, DocumentData, getDoc, getDocs, orderBy, query, QuerySnapshot, setDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
+import { StatModuleData } from "../ui/statModule";
+import { ButtonModuleData } from "../ui/buttonModule";
 
 /**
  * Data type for stat modules, to use when adding or fetching data from Firestore.
@@ -21,6 +23,37 @@ export type buttonModulesFirestoreData = {
     buttonLabels: string[];
     buttonScores: number[];
 };
+
+export const convertStatModuleFirestoreData = (firestoreData: statModulesFirestoreData) => {
+    const convertedButtonModulesData: ButtonModuleData[] = firestoreData.inputModules.map((data) => {
+        return convertButtonModuleFirestoreData(data);
+    })
+    const convertedData: StatModuleData = {
+        id: firestoreData.id,
+        gameName: firestoreData.gameName,
+        inputModules: convertedButtonModulesData,
+        themeColor: firestoreData.themeColor,
+        enabled: true,
+        hardModeEnabled: false,
+        hardModeMultiplier: firestoreData.hardModeMultiplier,
+    }
+
+    return convertedData;
+}
+
+export const convertButtonModuleFirestoreData = (firestoreData: buttonModulesFirestoreData) => {
+    const convertedData: ButtonModuleData = {
+        statModuleId: firestoreData.statModuleId,
+        scoreIndex: 0,
+        queryText: firestoreData.queryText,
+        buttonLabels: firestoreData.buttonLabels,
+        buttonScores: firestoreData.buttonScores,
+        enabled: true,
+        selectedButtonIndex: null
+    }
+
+    return convertedData;
+}
 
 export const addStatModuleToUser = async (userId: string, statModuleId: string) => {
     const statModuleRef = doc(db, "statModules", statModuleId);

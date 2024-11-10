@@ -8,6 +8,7 @@ import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 import {
     addStatModuleToUser,
+    convertStatModuleFirestoreData,
     fetchUserStatModules,
     statModulesFirestoreData,
 } from "./lib/firestoreUtils";
@@ -77,62 +78,62 @@ const inputModuleData: ButtonModuleData[] = [
 ];
 
 // Hard-coded stat module data for the home page.
-const statModuleData: StatModuleData[] = [
-    {
-        id: "a",
-        gameName: "Wordle",
-        inputModules: [inputModuleData[0]],
-        themeColor: "#67a561",
-        enabled: true,
-        hardModeEnabled: false,
-        hardModeMultiplier: 1.1,
-    },
-    {
-        id: "b",
-        gameName: "Connections",
-        inputModules: [inputModuleData[1]],
-        themeColor: "#bc70c4",
-        enabled: true,
-        hardModeEnabled: false,
-        hardModeMultiplier: 1,
-    },
-    {
-        id: "c",
-        gameName: "Symble",
-        inputModules: [inputModuleData[2]],
-        themeColor: "#f11415",
-        enabled: true,
-        hardModeEnabled: false,
-        hardModeMultiplier: 1,
-    },
-    {
-        id: "d",
-        gameName: "Strands",
-        inputModules: [inputModuleData[3]],
-        themeColor: "#a5beba",
-        enabled: true,
-        hardModeEnabled: false,
-        hardModeMultiplier: 1,
-    },
-    {
-        id: "e",
-        gameName: "Spotle",
-        inputModules: [inputModuleData[4]],
-        themeColor: "#8370de",
-        enabled: true,
-        hardModeEnabled: false,
-        hardModeMultiplier: 1,
-    },
-    {
-        id: "f",
-        gameName: "Bandle",
-        inputModules: [inputModuleData[5]],
-        themeColor: "#fcdcb4",
-        enabled: true,
-        hardModeEnabled: false,
-        hardModeMultiplier: 1,
-    },
-];
+// const statModuleData: StatModuleData[] = [
+//     {
+//         id: "a",
+//         gameName: "Wordle",
+//         inputModules: [inputModuleData[0]],
+//         themeColor: "#67a561",
+//         enabled: true,
+//         hardModeEnabled: false,
+//         hardModeMultiplier: 1.1,
+//     },
+//     {
+//         id: "b",
+//         gameName: "Connections",
+//         inputModules: [inputModuleData[1]],
+//         themeColor: "#bc70c4",
+//         enabled: true,
+//         hardModeEnabled: false,
+//         hardModeMultiplier: 1,
+//     },
+//     {
+//         id: "c",
+//         gameName: "Symble",
+//         inputModules: [inputModuleData[2]],
+//         themeColor: "#f11415",
+//         enabled: true,
+//         hardModeEnabled: false,
+//         hardModeMultiplier: 1,
+//     },
+//     {
+//         id: "d",
+//         gameName: "Strands",
+//         inputModules: [inputModuleData[3]],
+//         themeColor: "#a5beba",
+//         enabled: true,
+//         hardModeEnabled: false,
+//         hardModeMultiplier: 1,
+//     },
+//     {
+//         id: "e",
+//         gameName: "Spotle",
+//         inputModules: [inputModuleData[4]],
+//         themeColor: "#8370de",
+//         enabled: true,
+//         hardModeEnabled: false,
+//         hardModeMultiplier: 1,
+//     },
+//     {
+//         id: "f",
+//         gameName: "Bandle",
+//         inputModules: [inputModuleData[5]],
+//         themeColor: "#fcdcb4",
+//         enabled: true,
+//         hardModeEnabled: false,
+//         hardModeMultiplier: 1,
+//     },
+// ];
 
 /**
  * List of Ranks and their attribute minimum scores to attain it.
@@ -164,7 +165,7 @@ export default function Home() {
     const { user } = useAuth();
 
     // Array of data for user's stat modules fetched from Firestore.
-    const [statModulesData, setStatModulesData] = useState<statModulesFirestoreData[]>([]);
+    const [statModuleData, setStatModuleData] = useState<StatModuleData[]>([]);
 
     const [scores] = useState(Array(inputModuleData.length).fill(null));
     const [rank, setRank] = useState("R");
@@ -193,10 +194,15 @@ export default function Home() {
                     ]);
                 }
 
-                const statModuleDocuments: statModulesFirestoreData[] = await fetchUserStatModules(
-                    user.uid
+                const statModulesFirestoreData: statModulesFirestoreData[] =
+                    await fetchUserStatModules(user.uid);
+
+                setStatModuleData(
+                    statModulesFirestoreData.map((data) => {
+                        return convertStatModuleFirestoreData(data);
+                    })
                 );
-                setStatModulesData(statModuleDocuments);
+
             } else {
                 console.log("User data doesn't exist yet.");
             }
@@ -359,10 +365,10 @@ export default function Home() {
                         handleInputClick={handleInputClick}
                     />
                 ))} */}
-                {statModulesData.length === 0 ? (
+                {statModuleData.length === 0 ? (
                     <p>Loading your games...</p>
                 ) : (
-                    statModulesData.map((item, index) => (
+                    statModuleData.map((item, index) => (
                         <StatModule
                             key={index}
                             data={{
