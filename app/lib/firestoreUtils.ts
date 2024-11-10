@@ -18,6 +18,7 @@ export type statModulesFirestoreData = {
  * Data type for button modules, to use when adding or fetching data from Firestore.
  */
 export type buttonModulesFirestoreData = {
+    id: string;
     statModuleId: string;
     queryText: string;
     buttonLabels: string[];
@@ -43,6 +44,7 @@ export const convertStatModuleFirestoreData = (firestoreData: statModulesFiresto
 
 export const convertButtonModuleFirestoreData = (firestoreData: buttonModulesFirestoreData) => {
     const convertedData: ButtonModuleData = {
+        id: firestoreData.id,
         statModuleId: firestoreData.statModuleId,
         scoreIndex: 0,
         queryText: firestoreData.queryText,
@@ -118,6 +120,7 @@ export const fetchStatModulesData = async (statModulesSnapshot: QuerySnapshot<Do
                     const inputModuleDocData = inputDoc.data();
 
                     return {
+                        id: inputDoc.id,
                         statModuleId: doc.id,
                         queryText: inputModuleDocData.queryText,
                         buttonLabels: inputModuleDocData.buttonLabels,

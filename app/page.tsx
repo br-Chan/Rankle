@@ -17,6 +17,7 @@ import {
 const inputModuleData: ButtonModuleData[] = [
     // Wordle
     {
+        id: "1",
         statModuleId: "a",
         scoreIndex: 0,
         queryText: "Guesses made:",
@@ -27,6 +28,7 @@ const inputModuleData: ButtonModuleData[] = [
     },
     // Connections
     {
+        id: "2",
         statModuleId: "b",
         scoreIndex: 1,
         queryText: "Groups made | Mistakes left:",
@@ -37,6 +39,7 @@ const inputModuleData: ButtonModuleData[] = [
     },
     //Symble
     {
+        id: "3",
         statModuleId: "c",
         scoreIndex: 2,
         queryText: "Guesses made:",
@@ -47,6 +50,7 @@ const inputModuleData: ButtonModuleData[] = [
     },
     // Strands
     {
+        id: "4",
         statModuleId: "d",
         scoreIndex: 3,
         queryText: "Hints used:",
@@ -57,6 +61,7 @@ const inputModuleData: ButtonModuleData[] = [
     },
     // Spotle
     {
+        id: "5",
         statModuleId: "e",
         scoreIndex: 4,
         queryText: "Guesses made:",
@@ -67,6 +72,7 @@ const inputModuleData: ButtonModuleData[] = [
     },
     // Bandle
     {
+        id: "6",
         statModuleId: "f",
         scoreIndex: 5,
         queryText: "Guesses made:",
@@ -202,7 +208,6 @@ export default function Home() {
                         return convertStatModuleFirestoreData(data);
                     })
                 );
-
             } else {
                 console.log("User data doesn't exist yet.");
             }
@@ -306,26 +311,40 @@ export default function Home() {
 
         // Calculate the sum of score values that are enabled.
         let sum = 0;
-        let currentScore = 0;
-        for (let index = 0; index < scores.length; ++index) {
-            if (inputModuleData[index].enabled === true && scores[index] !== null) {
-                ++numberOfEnabledScores;
-
-                const parentStatModuleData = statModuleData.find(
-                    ({ id }) => inputModuleData[index].statModuleId === id
-                );
-                if (parentStatModuleData === undefined) {
-                    return; // To handle finding no matching id
-                }
-
-                currentScore =
-                    scores[index] *
-                    (parentStatModuleData.hardModeEnabled
-                        ? parentStatModuleData.hardModeMultiplier
-                        : 1);
-                sum += currentScore;
+        statModuleData.forEach((statModule) => {
+            let currentScore = 0;
+            if (statModule.enabled) {
+                statModule.inputModules.forEach((buttonModule) => {
+                    if (buttonModule.selectedButtonIndex) {
+                        ++numberOfEnabledScores;
+                        currentScore =
+                            buttonModule.buttonScores[buttonModule.selectedButtonIndex] *
+                            (statModule.hardModeEnabled ? statModule.hardModeMultiplier : 1);
+                        sum += currentScore;
+                    }
+                });
             }
-        }
+        });
+        // for (let index = 0; index < scores.length; ++index) {
+        //     let currentScore = 0;
+        //     if (inputModuleData[index].enabled === true && scores[index] !== null) {
+        //         ++numberOfEnabledScores;
+
+        //         const parentStatModuleData = statModuleData.find(
+        //             ({ id }) => inputModuleData[index].statModuleId === id
+        //         );
+        //         if (parentStatModuleData === undefined) {
+        //             return; // To handle finding no matching id
+        //         }
+
+        //         currentScore =
+        //             scores[index] *
+        //             (parentStatModuleData.hardModeEnabled
+        //                 ? parentStatModuleData.hardModeMultiplier
+        //                 : 1);
+        //         sum += currentScore;
+        //     }
+        // }
 
         // Calculate the average score value.
         const avg: number = sum / numberOfEnabledScores;
@@ -376,6 +395,7 @@ export default function Home() {
                                 gameName: item.gameName,
                                 inputModules: item.inputModules.map((item, index) => {
                                     return {
+                                        id: item.id,
                                         statModuleId: item.statModuleId,
                                         scoreIndex: index,
                                         queryText: item.queryText,

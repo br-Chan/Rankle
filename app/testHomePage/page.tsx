@@ -61,6 +61,7 @@ export default function HomePage() {
                             gameName: item.gameName,
                             inputModules: item.inputModules.map((item, index) => {
                                 return {
+                                    id: item.id,
                                     statModuleId: item.statModuleId,
                                     scoreIndex: index,
                                     queryText: item.queryText,

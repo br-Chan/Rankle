@@ -7,6 +7,7 @@ import { HoverTooltip } from "./hoverTooltip";
  * Data type for button modules, to be used when displaying a stat module to the user.
  */
 export type ButtonModuleData = {
+    id: string;
     statModuleId: string;
     scoreIndex: number;
     queryText: string;
