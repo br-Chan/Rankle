@@ -14,74 +14,74 @@ import {
 } from "./lib/firestoreUtils";
 
 // Hard-coded input module data for every stat module.
-const inputModuleData: ButtonModuleData[] = [
-    // Wordle
-    {
-        id: "1",
-        statModuleId: "a",
-        scoreIndex: 0,
-        queryText: "Guesses made:",
-        buttonLabels: [1, 2, 3, 4, 5, 6, "X"],
-        buttonScores: [100, 90, 80, 60, 40, 20, 0],
-        enabled: true,
-        selectedButtonIndex: null,
-    },
-    // Connections
-    {
-        id: "2",
-        statModuleId: "b",
-        scoreIndex: 1,
-        queryText: "Groups made | Mistakes left:",
-        buttonLabels: ["4|4", "4|3", "4|2", "4|1", "2|X", "1|X", "0|X"],
-        buttonScores: [85, 80, 70, 60, 30, 15, 5],
-        enabled: true,
-        selectedButtonIndex: null,
-    },
-    //Symble
-    {
-        id: "3",
-        statModuleId: "c",
-        scoreIndex: 2,
-        queryText: "Guesses made:",
-        buttonLabels: [1, 2, 3, 4, 5, 6, 7, 8, "X"],
-        buttonScores: [100, 95, 90, 80, 70, 60, 40, 30, 5],
-        enabled: true,
-        selectedButtonIndex: null,
-    },
-    // Strands
-    {
-        id: "4",
-        statModuleId: "d",
-        scoreIndex: 3,
-        queryText: "Hints used:",
-        buttonLabels: [0, 1, 2, 3, 4, 5, 6, 7],
-        buttonScores: [80, 75, 70, 60, 40, 30, 20, 5],
-        enabled: true,
-        selectedButtonIndex: null,
-    },
-    // Spotle
-    {
-        id: "5",
-        statModuleId: "e",
-        scoreIndex: 4,
-        queryText: "Guesses made:",
-        buttonLabels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "X"],
-        buttonScores: [100, 95, 90, 80, 75, 65, 55, 45, 30, 10, 0],
-        enabled: true,
-        selectedButtonIndex: null,
-    },
-    // Bandle
-    {
-        id: "6",
-        statModuleId: "f",
-        scoreIndex: 5,
-        queryText: "Guesses made:",
-        buttonLabels: [1, 2, 3, 4, 5, 6, "X"],
-        buttonScores: [100, 90, 80, 60, 40, 20, 0],
-        enabled: true,
-        selectedButtonIndex: null,
-    },
-];
+// const inputModuleData: ButtonModuleData[] = [
+//     // Wordle
+//     {
+//         id: "1",
+//         statModuleId: "a",
+//         scoreIndex: 0,
+//         queryText: "Guesses made:",
+//         buttonLabels: [1, 2, 3, 4, 5, 6, "X"],
+//         buttonScores: [100, 90, 80, 60, 40, 20, 0],
+//         enabled: true,
+//         selectedButtonIndex: null,
+//     },
+//     // Connections
+//     {
+//         id: "2",
+//         statModuleId: "b",
+//         scoreIndex: 1,
+//         queryText: "Groups made | Mistakes left:",
+//         buttonLabels: ["4|4", "4|3", "4|2", "4|1", "2|X", "1|X", "0|X"],
+//         buttonScores: [85, 80, 70, 60, 30, 15, 5],
+//         enabled: true,
+//         selectedButtonIndex: null,
+//     },
+//     //Symble
+//     {
+//         id: "3",
+//         statModuleId: "c",
+//         scoreIndex: 2,
+//         queryText: "Guesses made:",
+//         buttonLabels: [1, 2, 3, 4, 5, 6, 7, 8, "X"],
+//         buttonScores: [100, 95, 90, 80, 70, 60, 40, 30, 5],
+//         enabled: true,
+//         selectedButtonIndex: null,
+//     },
+//     // Strands
+//     {
+//         id: "4",
+//         statModuleId: "d",
+//         scoreIndex: 3,
+//         queryText: "Hints used:",
+//         buttonLabels: [0, 1, 2, 3, 4, 5, 6, 7],
+//         buttonScores: [80, 75, 70, 60, 40, 30, 20, 5],
+//         enabled: true,
+//         selectedButtonIndex: null,
+//     },
+//     // Spotle
+//     {
+//         id: "5",
+//         statModuleId: "e",
+//         scoreIndex: 4,
+//         queryText: "Guesses made:",
+//         buttonLabels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, "X"],
+//         buttonScores: [100, 95, 90, 80, 75, 65, 55, 45, 30, 10, 0],
+//         enabled: true,
+//         selectedButtonIndex: null,
+//     },
+//     // Bandle
+//     {
+//         id: "6",
+//         statModuleId: "f",
+//         scoreIndex: 5,
+//         queryText: "Guesses made:",
+//         buttonLabels: [1, 2, 3, 4, 5, 6, "X"],
+//         buttonScores: [100, 90, 80, 60, 40, 20, 0],
+//         enabled: true,
+//         selectedButtonIndex: null,
+//     },
+// ];
 
 // Hard-coded stat module data for the home page.
 // const statModuleData: StatModuleData[] = [
@@ -173,7 +173,7 @@ export default function Home() {
     // Array of data for user's stat modules fetched from Firestore.
     const [statModuleData, setStatModuleData] = useState<StatModuleData[]>([]);
 
-    const [scores] = useState(Array(inputModuleData.length).fill(null));
+    // const [scores] = useState(Array(inputModuleData.length).fill(null));
     const [rank, setRank] = useState("R");
 
     // Fetch user data, initialising default data first if new user.
@@ -248,11 +248,11 @@ export default function Home() {
         statModuleDataToChange.enabled = !statModuleDataToChange.enabled;
 
         // Enable/disable stat module's input module(s).
-        inputModuleData.forEach((inputModuleData) => {
-            if (inputModuleData.statModuleId === statModuleId) {
-                inputModuleData.enabled = !inputModuleData.enabled;
-            }
-        });
+        // inputModuleData.forEach((inputModuleData) => {
+        //     if (inputModuleData.statModuleId === statModuleId) {
+        //         inputModuleData.enabled = !inputModuleData.enabled;
+        //     }
+        // });
 
         // Update the Rank now that a stat module has been enabled/disabled.
         updateRank();
