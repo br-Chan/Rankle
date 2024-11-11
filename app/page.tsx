@@ -73,8 +73,9 @@ export default function Home() {
                 ]);
             }
 
-            const statModulesFirestoreData: statModulesFirestoreData[] =
-                await fetchUserStatModules(user.uid);
+            const statModulesFirestoreData: statModulesFirestoreData[] = await fetchUserStatModules(
+                user.uid
+            );
 
             setStatModuleData(
                 statModulesFirestoreData.map((data) => {
@@ -200,7 +201,7 @@ export default function Home() {
 
     function removeStatModuleFromUser(statModuleId: string): void {
         removeStatModuleFromUserInFirestore(user.uid, statModuleId);
-        fetchUserData();
+        setStatModuleData(statModuleData.filter((data) => data.id !== statModuleId));
     }
 
     return (
@@ -231,7 +232,7 @@ export default function Home() {
                 >
                     {statModuleData.map((data, index) => (
                         <StatModule
-                            key={index}
+                            key={data.id}
                             data={data}
                             handleEnableClick={handleEnableClick}
                             handleHardModeClick={handleHardModeClick}
