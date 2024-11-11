@@ -20,7 +20,7 @@ export type StatModuleData = {
 
 /**
  * Stat module for a single game, that the user interacts with to input their stat for the game.
- * 
+ *
  * @param props Component props
  * @returns Stat module
  */
@@ -50,11 +50,10 @@ export const StatModule = ({
         );
     }
 
-
     /**
      * Dims the stat module to show that it has been disabled and call the function passed down as a
      * prop to handle disabling it when calculating the Rank.
-     * 
+     *
      * @param id the id of the stat module
      */
     const handleEnableClickInStatModule = (id: string) => {
@@ -97,17 +96,23 @@ export const StatModule = ({
 
             {/* Title bar of the stat module */}
             <div
-                className="absolute flex px-1 top-0 left-0 h-10 w-full opacity-100 transition-all duration-300 border-4 rounded-t-2xl"
+                className="absolute flex justify-between items-center px-1 top-0 left-0 h-10 w-full opacity-100 transition-all duration-300 border-4 rounded-t-2xl"
                 style={{
                     borderColor: `${data.themeColor}`,
                     backgroundColor: `${data.themeColor}25`,
                 }}
             >
-                <EnableSwitch
-                    onEnableClick={() => handleEnableClickInStatModule(data.id)}
-                    backgroundColor={data.themeColor}
-                />
-                <h2 className="text-xl font-bold ">{data.gameName}</h2>
+                <div className="flex items-center">
+                    <EnableSwitch
+                        onEnableClick={() => handleEnableClickInStatModule(data.id)}
+                        backgroundColor={data.themeColor}
+                    />
+                    <h2 className="text-xl font-bold ">{data.gameName}</h2>
+                </div>
+                <div>
+                    <button className="font-bold text-blue-500 m-1">/</button>
+                    <button className="font-bold text-red-500 m-1">X</button>
+                </div>
             </div>
         </div>
     );
