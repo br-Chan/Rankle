@@ -1,4 +1,4 @@
-import { collection, doc, DocumentData, getDoc, getDocs, orderBy, query, QuerySnapshot, setDoc } from "firebase/firestore";
+import { collection, deleteDoc, doc, DocumentData, getDoc, getDocs, orderBy, query, QuerySnapshot, setDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { StatModuleData } from "../ui/statModule";
 import { ButtonModuleData } from "../ui/buttonModule";
@@ -81,6 +81,24 @@ export const addStatModuleToUser = async (userId: string, statModuleId: string) 
     } else {
         console.error("Stat module not found");
     }
+}
+
+export const removeStatModuleFromUser = async (userId: string, statModuleId: string) => {
+    const userStatModuleRef = doc(db, "users", userId, "userStatModules", statModuleId);
+    const userInputModulesRef = collection(userStatModuleRef, "inputModules");
+    const userInputModulesSnap = await getDocs(userInputModulesRef);
+
+    userInputModulesSnap.forEach(async (inputModuleDoc) => {
+        await deleteDoc(inputModuleDoc.ref);
+    });
+
+    await deleteDoc(userStatModuleRef);
+
+    console.log("stat module deleted!");
+}
+
+const deleteDocument = async (document: string) => {
+
 }
 
 /**

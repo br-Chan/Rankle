@@ -29,11 +29,13 @@ export const StatModule = ({
     handleEnableClick,
     handleHardModeClick,
     handleInputClick,
+    removeStatModuleFromUser,
 }: {
     data: StatModuleData;
     handleEnableClick: (statModuleId: string) => void;
     handleHardModeClick: (statModuleId: string) => void;
     handleInputClick: (data: ButtonModuleData, index: number, score: number) => void;
+    removeStatModuleFromUser: (statModuleId: string) => void;
 }) => {
     const inputModules = [];
     const [opacity, setOpacity] = useState<number>(data.enabled ? 1 : 0.3);
@@ -111,7 +113,9 @@ export const StatModule = ({
                 </div>
                 <div>
                     <button className="font-bold text-blue-500 m-1">/</button>
-                    <button className="font-bold text-red-500 m-1">X</button>
+                    <button className="font-bold text-red-500 m-1" onClick={() => {removeStatModuleFromUser(data.id)}}>
+                        X
+                    </button>
                 </div>
             </div>
         </div>
