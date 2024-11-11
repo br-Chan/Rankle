@@ -4,6 +4,7 @@ import { useState } from "react";
 import { EnableSwitch } from "./enableSwitch";
 import { ButtonModule, ButtonModuleData } from "./buttonModule";
 import { HardModeModule } from "./hardModeModule";
+import { ThemedButton } from "./themedButton";
 
 /**
  * Data type for stat modules when displaying them to the user.
@@ -113,18 +114,15 @@ export const StatModule = ({
                 </div>
                 <div className="flex items-center h-10">
                     {/* <button className="font-bold text-blue-500 m-1">/</button> */}
-                    <button
-                        className="cursor-default bg-transparent flex items-center h-6 text-3xl px-[2px] pb-2 m-1 rounded-md transition-colors hover:text-white hover:bg-red-500 hover:bg-opacity-100"
-                        // className="cursor-default flex items-center h-8 text-3xl px-2 pb-2 rounded-tr-xl transition-colors hover:text-white hover:bg-red-600"
-                        style={{
-                            backgroundColor: `${data.themeColor}`,
-                        }}
-                        onClick={() => {
-                            removeStatModuleFromUser(data.id);
-                        }}
-                    >
-                        ×
-                    </button>
+                    <div className="text-3xl">
+                        <ThemedButton
+                            themeColor={data.themeColor}
+                            handleClick={() => {
+                                console.log("I'm clicked!")
+                                removeStatModuleFromUser(data.id);
+                            }}
+                        />
+                    </div>
                 </div>
             </div>
         </div>
