@@ -20,6 +20,7 @@ export type StatModuleData = {
 
 /**
  * Stat module for a single game, that the user interacts with to input their stat for the game.
+ * 
  * @param props Component props
  * @returns Stat module
  */
@@ -96,7 +97,7 @@ export const StatModule = ({
 
             {/* Title bar of the stat module */}
             <div
-                className="absolute flex px-1 top-0 left-0 h-fit w-full opacity-100 transition-all duration-300 border-4 rounded-t-2xl"
+                className="absolute flex px-1 top-0 left-0 h-10 w-full opacity-100 transition-all duration-300 border-4 rounded-t-2xl"
                 style={{
                     borderColor: `${data.themeColor}`,
                     backgroundColor: `${data.themeColor}25`,
@@ -106,7 +107,7 @@ export const StatModule = ({
                     onEnableClick={() => handleEnableClickInStatModule(data.id)}
                     backgroundColor={data.themeColor}
                 />
-                <h2 className="text-2xl font-bold ">{data.gameName}</h2>
+                <h2 className="text-xl font-bold ">{data.gameName}</h2>
             </div>
         </div>
     );
