@@ -111,15 +111,19 @@ export const StatModule = ({
                     />
                     <h2 className="text-xl font-bold ">{data.gameName}</h2>
                 </div>
-                <div>
-                    <button className="font-bold text-blue-500 m-1">/</button>
+                <div className="flex items-center h-10">
+                    {/* <button className="font-bold text-blue-500 m-1">/</button> */}
                     <button
-                        className="font-bold text-red-500 m-1"
+                        className="cursor-default bg-transparent flex items-center h-6 text-3xl px-[2px] pb-2 m-1 rounded-md transition-colors hover:text-white hover:bg-red-500 hover:bg-opacity-100"
+                        // className="cursor-default flex items-center h-8 text-3xl px-2 pb-2 rounded-tr-xl transition-colors hover:text-white hover:bg-red-600"
+                        style={{
+                            backgroundColor: `${data.themeColor}`,
+                        }}
                         onClick={() => {
                             removeStatModuleFromUser(data.id);
                         }}
                     >
-                        X
+                        ×
                     </button>
                 </div>
             </div>
