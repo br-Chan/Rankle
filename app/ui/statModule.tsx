@@ -114,7 +114,10 @@ export const StatModule = ({
                 </div>
                 <div className="flex items-center h-10 mr-1">
                     {/* <button className="font-bold text-blue-500 m-1">/</button> */}
-                    <ThemedHoverComponent themeColor={data.themeColor} className="rounded-md">
+                    <ThemedHoverComponent
+                        hoveredBackgroundColor={data.themeColor}
+                        className="rounded-md"
+                    >
                         <button
                             className="cursor-default flex items-center h-6 px-[2px] pb-2 text-3xl"
                             onClick={() => {
