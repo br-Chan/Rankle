@@ -17,7 +17,6 @@ export const ThemedHoverComponent = ({
             style={{
                 backgroundColor: isHovered ? `${themeColor}` : "transparent",
                 color: isHovered ? "white" : "black",
-                // transition: "background-color 0.3s",
             }}
             onMouseEnter={() => {
                 setIsHovered(true);

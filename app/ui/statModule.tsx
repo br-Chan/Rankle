@@ -117,9 +117,7 @@ export const StatModule = ({
                     <ThemedHoverComponent themeColor={data.themeColor} className="rounded-md">
                         <button
                             className="cursor-default flex items-center h-6 px-[2px] pb-2 text-3xl"
-                            // className="cursor-default flex items-center h-8 text-3xl px-2 pb-2 rounded-tr-xl transition-colors hover:text-white hover:bg-red-600"
                             onClick={() => {
-                                console.log("I'm clicked!");
                                 removeStatModuleFromUser(data.id);
                             }}
                         >
