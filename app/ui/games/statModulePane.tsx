@@ -4,6 +4,7 @@ import { addStatModuleToUser } from "@/app/lib/firestoreUtils";
 import { StatModuleData } from "../statModule";
 import { ButtonModulePane } from "./buttonModulePane";
 import { useAuth } from "@/app/hooks/useAuth";
+import { ThemedHoverComponent } from "../themedHoverComponent";
 
 /**
  * Stat module pane for a single game, displaying all information about the stat module. The user
@@ -60,20 +61,27 @@ export const StatModulePane = ({ data }: { data: StatModuleData }) => {
 
             {/* Title bar of the stat module pane*/}
             <div
-                className="absolute grid grid-cols-12 px-3 top-0 left-0 h-fit w-full text-2xl font-bold justify-around opacity-100 transition-all duration-300 border-t-4 border-l-4 border-r-4 rounded-t-2xl"
+                className="absolute flex justify-between items-center px-3 top-0 left-0 h-9 w-full font-bold opacity-100 transition-all duration-300 border-t-4 border-l-4 border-r-4 rounded-t-2xl"
+                //                className="px-1 h-10 border-4 rounded-t-2xl"
                 style={{
                     borderColor: `${data.themeColor}`,
                 }}
             >
-                <button
-                    className="text-sm text-green-500"
-                    onClick={() => {
-                        addStatModuleToUser(user.uid, data.id);
-                    }}
+                <ThemedHoverComponent
+                    className="border-2 border-black cursor-pointer flex items-center h-6 rounded-md text-green-400"
+                    unhoveredBackgroundColor={data.themeColor}
+                    hoveredBackgroundColor="#4ade80"
                 >
-                    add
-                </button>
-                <h2 className="col-span-10">{data.gameName}</h2>
+                    <button
+                        className="text-sm px-[2px]"
+                        onClick={() => {
+                            addStatModuleToUser(user.uid, data.id);
+                        }}
+                    >
+                        add
+                    </button>
+                </ThemedHoverComponent>
+                <h2 className="text-xl">{data.gameName}</h2>
                 <button className="text-sm text-red-500">del</button>
             </div>
         </div>

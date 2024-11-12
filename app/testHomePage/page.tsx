@@ -79,18 +79,19 @@ export default function HomePage() {
                         }}
                         handleEnableClick={function (statModuleId: string): void {
                             throw new Error("Function not implemented.");
-                        }}
+                        } }
                         handleHardModeClick={function (statModuleId: string): void {
                             throw new Error("Function not implemented.");
-                        }}
+                        } }
                         handleInputClick={function (
                             data: ButtonModuleData,
                             index: number,
                             score: number
                         ): void {
                             throw new Error("Function not implemented.");
-                        }}
-                    />
+                        } } removeStatModuleFromUser={function (statModuleId: string): void {
+                            throw new Error("Function not implemented.");
+                        } }                    />
                 ))
             )}
         </div>

@@ -11,6 +11,7 @@ import {
     convertStatModuleFirestoreData,
     fetchUserStatModules,
     statModulesFirestoreData,
+    removeStatModuleFromUser as removeStatModuleFromUserInFirestore,
 } from "./lib/firestoreUtils";
 
 /**
@@ -49,40 +50,42 @@ export default function Home() {
 
     // Fetch user data, initialising default data first if new user.
     useEffect(() => {
-        async function fetchUserData() {
-            if (user) {
-                const userStatModulesCollectionRef = collection(
-                    db,
-                    "users",
-                    user.uid,
-                    "userStatModules"
-                );
-                const userStatModulesSnap = await getDocs(userStatModulesCollectionRef);
-
-                if (userStatModulesSnap.empty) {
-                    console.log("adding stat modules to new user");
-                    await Promise.all([
-                        addStatModuleToUser(user.uid, "fNwVk0dhntmBWj6oAT0U"), // Wordle
-                        addStatModuleToUser(user.uid, "gzF6eumgBN9QiVF1LxM4"), // Connections
-                        addStatModuleToUser(user.uid, "SHP4lWxnM5ONQJpRK5sH"), // Strands
-                        addStatModuleToUser(user.uid, "ZyUFFw9Cdwix8w4UvW9O"), // Mini Crossword
-                    ]);
-                }
-
-                const statModulesFirestoreData: statModulesFirestoreData[] =
-                    await fetchUserStatModules(user.uid);
-
-                setStatModuleData(
-                    statModulesFirestoreData.map((data) => {
-                        return convertStatModuleFirestoreData(data);
-                    })
-                );
-            } else {
-                console.log("User data doesn't exist yet.");
-            }
-        }
         fetchUserData();
     }, [user]);
+
+    async function fetchUserData() {
+        if (user) {
+            const userStatModulesCollectionRef = collection(
+                db,
+                "users",
+                user.uid,
+                "userStatModules"
+            );
+            const userStatModulesSnap = await getDocs(userStatModulesCollectionRef);
+
+            if (userStatModulesSnap.empty) {
+                console.log("adding stat modules to new user");
+                await Promise.all([
+                    addStatModuleToUser(user.uid, "fNwVk0dhntmBWj6oAT0U"), // Wordle
+                    addStatModuleToUser(user.uid, "gzF6eumgBN9QiVF1LxM4"), // Connections
+                    addStatModuleToUser(user.uid, "SHP4lWxnM5ONQJpRK5sH"), // Strands
+                    addStatModuleToUser(user.uid, "ZyUFFw9Cdwix8w4UvW9O"), // Mini Crossword
+                ]);
+            }
+
+            const statModulesFirestoreData: statModulesFirestoreData[] = await fetchUserStatModules(
+                user.uid
+            );
+
+            setStatModuleData(
+                statModulesFirestoreData.map((data) => {
+                    return convertStatModuleFirestoreData(data);
+                })
+            );
+        } else {
+            console.log("User data doesn't exist yet.");
+        }
+    }
 
     /**
      * Returns the stat module data of the stat module associated with the input id.
@@ -196,6 +199,11 @@ export default function Home() {
         setRank((ranks.find(({ threshold }) => avg >= threshold)?.rank || "R") + scoreDisplay);
     };
 
+    function removeStatModuleFromUser(statModuleId: string): void {
+        removeStatModuleFromUserInFirestore(user.uid, statModuleId);
+        setStatModuleData(statModuleData.filter((data) => data.id !== statModuleId));
+    }
+
     return (
         <main>
             {/* Rank display */}
@@ -224,11 +232,12 @@ export default function Home() {
                 >
                     {statModuleData.map((data, index) => (
                         <StatModule
-                            key={index}
+                            key={data.id}
                             data={data}
                             handleEnableClick={handleEnableClick}
                             handleHardModeClick={handleHardModeClick}
                             handleInputClick={handleInputClick}
+                            removeStatModuleFromUser={removeStatModuleFromUser}
                         />
                     ))}
                 </div>
