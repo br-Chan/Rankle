@@ -1,19 +1,19 @@
 import { ReactNode, useState } from "react";
 
 export const ThemedHoverComponent = ({
-    children,
     themeColor,
-}: // handleClick,
-{
-    children: ReactNode;
+    children,
+    className,
+}: {
     themeColor: string;
-    // handleClick: () => void;
+    children: ReactNode;
+    className?: string;
 }) => {
     const [isHovered, setIsHovered] = useState<boolean>(false);
 
     return (
         <div
-            className="rounded-md transition-all"
+            className={`transition-all ${className}`}
             style={{
                 backgroundColor: isHovered ? `${themeColor}` : "transparent",
                 color: isHovered ? "white" : "black",
@@ -28,6 +28,5 @@ export const ThemedHoverComponent = ({
         >
             {children}
         </div>
-
     );
 };
