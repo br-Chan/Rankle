@@ -112,26 +112,20 @@ export const StatModule = ({
                     />
                     <h2 className="text-xl font-bold ">{data.gameName}</h2>
                 </div>
-                <div className="flex items-center h-10">
+                <div className="flex items-center h-10 mr-1">
                     {/* <button className="font-bold text-blue-500 m-1">/</button> */}
-                    <div className="">
-                        <ThemedHoverComponent themeColor={data.themeColor}>
-                            <button
-                                className="cursor-default flex items-center h-6 px-[2px] pb-2 text-3xl transition-colors"
-                                // className="cursor-default flex items-center h-8 text-3xl px-2 pb-2 rounded-tr-xl transition-colors hover:text-white hover:bg-red-600"
-                                onClick={() => {
-                                    console.log("I'm clicked!");
-                                    removeStatModuleFromUser(data.id);
-                                }}
-                            >
-                                ×
-                            </button>
-                        </ThemedHoverComponent>
-                        {/* <ThemedButton
-                            themeColor={data.themeColor}
-
-                        /> */}
-                    </div>
+                    <ThemedHoverComponent themeColor={data.themeColor}>
+                        <button
+                            className="cursor-default flex items-center h-6 px-[2px] pb-2 text-3xl"
+                            // className="cursor-default flex items-center h-8 text-3xl px-2 pb-2 rounded-tr-xl transition-colors hover:text-white hover:bg-red-600"
+                            onClick={() => {
+                                console.log("I'm clicked!");
+                                removeStatModuleFromUser(data.id);
+                            }}
+                        >
+                            ×
+                        </button>
+                    </ThemedHoverComponent>
                 </div>
             </div>
         </div>

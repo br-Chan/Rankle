@@ -13,11 +13,11 @@ export const ThemedHoverComponent = ({
 
     return (
         <div
-            className="rounded-md"
+            className="rounded-md transition-all"
             style={{
                 backgroundColor: isHovered ? `${themeColor}` : "transparent",
                 color: isHovered ? "white" : "black",
-                transition: "background-color 0.3s",
+                // transition: "background-color 0.3s",
             }}
             onMouseEnter={() => {
                 setIsHovered(true);
