@@ -23,7 +23,11 @@ export default function TopNav() {
             <div className="w-96">
                 <button>hihi</button>
             </div>
-            <h1 className="text-4xl text-black font-bold">RANKLE</h1>
+
+            <Link href={"/"}>
+                <h1 className="text-4xl text-black font-bold">RANKLE</h1>
+            </Link>
+
             <div className="flex justify-end w-96">
                 {rightLinks.map((link) => {
                     return (
