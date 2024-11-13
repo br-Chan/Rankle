@@ -128,7 +128,7 @@ export const StatModule = ({
                         >
                             <XMarkIcon />
                         </button>
-                        <HoverTooltip tooltipText="remove" />
+                        <HoverTooltip tooltipText="remove" delay="1000" />
                     </ThemedHoverComponent>
                 </div>
             </div>
