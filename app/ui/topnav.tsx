@@ -19,12 +19,10 @@ const rightLinks = [
 export default function TopNav() {
     return (
         <div className="flex justify-between items-center w-full px-5">
-            <div className="w-96">
-                <button>hihi</button>
-            </div>
+            <div className="w-96"></div>
 
             <Link href={"/"}>
-                <h1 className="text-4xl text-black font-bold">RANKLE</h1>
+                <h1 className="text-2xl text-black font-bold md:text-4xl">RANKLE</h1>
             </Link>
 
             <div className="flex justify-end w-96">
@@ -36,8 +34,8 @@ export default function TopNav() {
                             className="relative mx-1 border-2 border-black rounded-lg hover:bg-amber-200"
                             href={link.href}
                         >
-                            <LinkIcon className="peer w-8" />
-                            <HoverTooltip key={`${link.name}`} tooltipText={link.name} />
+                            <LinkIcon className="peer w-6 md:w-8" />
+                            <HoverTooltip key={link.name} tooltipText={link.name} />
                         </Link>
                     );
                 })}
