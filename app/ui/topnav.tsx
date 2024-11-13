@@ -31,7 +31,7 @@ export default function TopNav() {
                     return (
                         <Link
                             key={link.name}
-                            className="relative mx-1 border-2 border-black rounded-lg hover:bg-amber-200"
+                            className="relative mx-1 border-2 border-black rounded-lg hover:bg-amber-500"
                             href={link.href}
                         >
                             <LinkIcon className="peer w-6 md:w-8" />
