@@ -5,6 +5,8 @@ import { EnableSwitch } from "./enableSwitch";
 import { ButtonModule, ButtonModuleData } from "./buttonModule";
 import { HardModeModule } from "./hardModeModule";
 import { ThemedHoverComponent } from "./themedHoverComponent";
+import { XMarkIcon } from "@heroicons/react/24/solid";
+import { HoverTooltip } from "./hoverTooltip";
 
 /**
  * Data type for stat modules when displaying them to the user.
@@ -116,16 +118,17 @@ export const StatModule = ({
                     {/* <button className="font-bold text-blue-500 m-1">/</button> */}
                     <ThemedHoverComponent
                         hoveredBackgroundColor={data.themeColor}
-                        className="rounded-md"
+                        className="rounded-md relative "
                     >
                         <button
-                            className="cursor-default flex items-center h-6 px-[2px] pb-2 text-3xl"
+                            className="peer cursor-default flex items-center h-6 w-6"
                             onClick={() => {
                                 removeStatModuleFromUser(data.id);
                             }}
                         >
-                            ×
+                            <XMarkIcon />
                         </button>
+                        <HoverTooltip tooltipText="remove" />
                     </ThemedHoverComponent>
                 </div>
             </div>
