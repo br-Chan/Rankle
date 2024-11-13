@@ -3,6 +3,9 @@
  * hovers over the peer component for a certain amount of time. displaying the text passed as a
  * prop.
  *
+ * To use: first, add 'peer' to the class name of the component that you want the tooltip to appear. Then, add 'relative' to the class name of the parent component so that
+ * tooltip knows which component exactly to 
+ *
  * @param props Component props
  * @returns the tooltip
  */
