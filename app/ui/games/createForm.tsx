@@ -5,6 +5,7 @@ import { db } from "@/app/firebaseConfig";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { ButtonFormData, ButtonModuleForm } from "./buttonModuleForm";
 import { useDebouncedCallback } from "use-debounce";
+import { useRouter } from "next/navigation";
 
 // Firebase code in this page from this tutorial: https://www.youtube.com/watch?v=5MzCK3k3XlQ
 
@@ -96,6 +97,8 @@ export const CreateForm = () => {
             ],
         },
     ]);
+
+    const router = useRouter();
 
     /**
      * Updates both the theme colour and the displayed name of the colour.
@@ -208,7 +211,7 @@ export const CreateForm = () => {
             inputModuleForms
         );
         if (added) {
-            alert("Success, data added to Firestore!");
+            router.push("/games");
         } else {
             alert("Something didn't work, data not added to Firestore.");
         }
