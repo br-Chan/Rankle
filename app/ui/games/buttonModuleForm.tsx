@@ -51,7 +51,7 @@ export const ButtonModuleForm = ({
                     >
                         <input
                             type="text"
-                            id="label"
+                            id={`${i}_label`}
                             className="h-[30px] px-1 py-2 border-b-[1px] rounded-t-md outline-none bg-white bg-opacity-50 text-center text-lg font-bold"
                             // value={i.label}
                             placeholder="label"
@@ -62,7 +62,7 @@ export const ButtonModuleForm = ({
                         />
                         <input
                             type="number"
-                            id="score"
+                            id={`${i}_score`}
                             className="h-[30px] px-1 py-2 pl-5 border-t-[1px] rounded-b-md outline-none bg-white bg-opacity-50 text-center text-lg text-gray-700"
                             // value={i.score}
                             placeholder="score"
@@ -94,7 +94,7 @@ export const ButtonModuleForm = ({
                     />
                     <input
                         type="button"
-                        id="addInputModuleForm"
+                        id="removeInputModuleForm"
                         className="h-[30px] border-t-[1px] border-amber-200 rounded-b-md outline-none bg-amber-300 hover:bg-amber-500 text-black font-mono cursor-pointer"
                         onClick={() => {
                             handleAddButtonFormClick(index, false);
