@@ -102,6 +102,18 @@ export const CreateForm = () => {
         }));
     };
 
+    const removeInputModuleForm = () => {
+        if (formData.inputModuleForms.length > 1) {
+            const newInputModuleForms = formData.inputModuleForms;
+            newInputModuleForms.pop();
+
+            setFormData((prevState) => ({
+                ...prevState,
+                inputModuleForms: newInputModuleForms,
+            }));
+        }
+    };
+
     /**
      * Adds a button form to the specified button module.
      *
@@ -285,13 +297,22 @@ export const CreateForm = () => {
                     ))}
 
                     {/* Adding a button module */}
-                    <input
-                        type="button"
-                        id="addInputModuleForm"
-                        className="w-fit py-2 px-2 text-black font-semibold transition-colors duration-300 border-2 border-black rounded-lg cursor-pointer"
-                        onClick={addInputModuleForm}
-                        value="+ Button module"
-                    />
+                    <div>
+                        <input
+                            type="button"
+                            id="addInputModuleForm"
+                            className="w-fit py-2 px-2 text-black font-semibold transition-colors duration-300 border-2 border-black rounded-lg cursor-pointer"
+                            onClick={addInputModuleForm}
+                            value="+Query"
+                        />
+                        <input
+                            type="button"
+                            id="removeInputModuleForm"
+                            className="w-fit py-2 px-2 text-black font-semibold transition-colors duration-300 border-2 border-black rounded-lg cursor-pointer"
+                            onClick={removeInputModuleForm}
+                            value="-Query"
+                        />
+                    </div>
                 </div>
             </div>
 
