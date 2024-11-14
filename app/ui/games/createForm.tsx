@@ -54,27 +54,6 @@ export const CreateForm = () => {
         themeColorName: "Sunglow",
         hardModeMultiplier: 1,
     });
-    // const [gameName, setGameName] = useState("");
-    // const [themeColor, setThemeColor] = useState("#fcd34d");
-    // const [themeColorName, setThemeColorName] = useState("Sunglow");
-    // const [hardModeMultiplier, setHardModeMultiplier] = useState(1);
-
-    // // Array of InputModuleFormData, initialised with 2 empty ButtonFormData objects.
-    // const [inputModuleForms, setInputModuleForms] = useState<InputModuleFormData[]>([
-    //     {
-    //         queryText: null,
-    //         data: [
-    //             {
-    //                 label: "",
-    //                 score: 0,
-    //             },
-    //             {
-    //                 label: "",
-    //                 score: 0,
-    //             },
-    //         ],
-    //     },
-    // ]);
 
     const router = useRouter();
 
@@ -102,13 +81,28 @@ export const CreateForm = () => {
         }));
     }, 20);
 
-    // Adding a button module, abandoned for now
-    // const addInputModuleForm = () => {
-    //     setInputModuleForms([...inputModuleForms, <ButtonModuleForm queryText="" data={[{
-    //         label: "",
-    //         score: 0
-    //     }]} />,]);
-    // };
+    // Adding a button module
+    const addInputModuleForm = () => {
+        setFormData((prevState) => ({
+            ...prevState,
+            inputModuleForms: [
+                ...prevState.inputModuleForms,
+                {
+                    queryText: null,
+                    data: [
+                        {
+                            label: "",
+                            score: 0,
+                        },
+                        {
+                            label: "",
+                            score: 0,
+                        },
+                    ],
+                },
+            ],
+        }));
+    };
 
     /**
      * Adds a button form to the specified button module.
@@ -292,14 +286,14 @@ export const CreateForm = () => {
                         />
                     ))}
 
-                    {/* Adding a button module, TODO */}
-                    {/* <input
+                    {/* Adding a button module */}
+                    <input
                         type="button"
                         id="addInputModuleForm"
                         className="w-fit py-2 px-2 text-black font-semibold transition-colors duration-300 border-2 border-black rounded-lg cursor-pointer"
                         onClick={addInputModuleForm}
                         value="+ Button module"
-                    /> */}
+                    />
                 </div>
             </div>
 
