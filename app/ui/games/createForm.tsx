@@ -25,7 +25,7 @@ type InputModuleFormData = {
  * @param inputModuleForms the data for the input modules of the stat module
  * @returns true if the document was successfully written to Firestore, false otherwise
  */
-async function addDataToFirestore(
+async function addDataToStatModules(
     gameName: string,
     themeColor: string,
     hardModeMultiplier: number,
@@ -204,7 +204,7 @@ export const CreateForm = () => {
         e.preventDefault(); // prevents the default behaviour of reloading the page.
 
         console.log("Adding data to firestore...");
-        const added = await addDataToFirestore(
+        const added = await addDataToStatModules(
             gameName,
             themeColor,
             hardModeMultiplier,
