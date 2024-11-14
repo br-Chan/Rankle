@@ -1,8 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { db } from "@/app/firebaseConfig";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { ButtonFormData, ButtonModuleForm } from "./buttonModuleForm";
 import { useDebouncedCallback } from "use-debounce";
 import { useRouter } from "next/navigation";

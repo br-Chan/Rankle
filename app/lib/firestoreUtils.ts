@@ -140,7 +140,7 @@ export const removeStatModuleFromUser = async (userId: string, statModuleId: str
     removeStatModule(userStatModuleRef, userInputModulesRef);
 }
 
-export const removeStatModule = async (
+const removeStatModule = async (
     statModuleRef: DocumentReference<DocumentData, DocumentData>,
     inputModulesRef: CollectionReference<DocumentData, DocumentData>
 ) => {

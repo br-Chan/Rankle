@@ -2,7 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { StatModulePane } from "../ui/games/statModulePane";
-import { fetchAllStatModules, statModulesFirestoreData } from "../lib/firestoreUtils";
+import {
+    fetchAllStatModules,
+    statModulesFirestoreData,
+    removeStatModuleFromStatModules as removeStatModuleFromStatModulesInFirestore,
+} from "../lib/firestoreUtils";
 
 /**
  * Page where users can view user-created stat modules and add them to their own lists.
@@ -21,6 +25,11 @@ export default function Home() {
         }
         fetchData();
     }, []);
+
+    const removeStatModuleFromStatModules = (statModuleId: string) => {
+        removeStatModuleFromStatModulesInFirestore(statModuleId);
+        setStatModulesData(statModulesData.filter((data) => data.id !== statModuleId));
+    };
 
     return (
         <main className="">
@@ -58,6 +67,7 @@ export default function Home() {
                             hardModeEnabled: false,
                             hardModeMultiplier: item.hardModeMultiplier,
                         }}
+                        removeStatModuleFromStatModules={removeStatModuleFromStatModules}
                     />
                 ))}
             </div>
