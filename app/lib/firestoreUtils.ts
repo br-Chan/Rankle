@@ -1,4 +1,4 @@
-import { addDoc, collection, deleteDoc, doc, DocumentData, getDoc, getDocs, orderBy, query, QuerySnapshot, serverTimestamp, setDoc } from "firebase/firestore";
+import { addDoc, collection, CollectionReference, deleteDoc, doc, DocumentData, DocumentReference, getDoc, getDocs, orderBy, query, QuerySnapshot, serverTimestamp, setDoc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { StatModuleData } from "../ui/statModule";
 import { ButtonModuleData } from "../ui/buttonModule";
@@ -77,7 +77,6 @@ export const addDataToStatModules = async (statModuleData: StatModuleFormData) =
 
         // Add input module documents to inputModules sub-collection in the statModules collection.
         statModuleData.inputModuleForms.map(async (inputModuleFormData, i) => {
-            // inputModuleFormData.data[i].label;
             const buttonLabels: string[] = [];
             const buttonScores: number[] = [];
 
@@ -129,16 +128,28 @@ export const addStatModuleToUser = async (userId: string, statModuleId: string) 
     }
 }
 
+export const removeStatModuleFromStatModules = async (statModuleId: string) => {
+    const statModuleRef = doc(db, "statModules", statModuleId);
+    const inputModuleRef = collection(statModuleRef, "inputModules");
+    removeStatModule(statModuleRef, inputModuleRef);
+}
+
 export const removeStatModuleFromUser = async (userId: string, statModuleId: string) => {
     const userStatModuleRef = doc(db, "users", userId, "userStatModules", statModuleId);
     const userInputModulesRef = collection(userStatModuleRef, "inputModules");
-    const userInputModulesSnap = await getDocs(userInputModulesRef);
+    removeStatModule(userStatModuleRef, userInputModulesRef);
+}
 
-    userInputModulesSnap.forEach(async (inputModuleDoc) => {
+export const removeStatModule = async (
+    statModuleRef: DocumentReference<DocumentData, DocumentData>,
+    inputModulesRef: CollectionReference<DocumentData, DocumentData>
+) => {
+    const inputModulesSnap = await getDocs(inputModulesRef);
+    inputModulesSnap.forEach(async (inputModuleDoc) => {
         await deleteDoc(inputModuleDoc.ref);
     });
 
-    await deleteDoc(userStatModuleRef);
+    await deleteDoc(statModuleRef);
 
     console.log("stat module deleted!");
 }
