@@ -9,6 +9,14 @@ import { useRouter } from "next/navigation";
 
 // Firebase code in this page from this tutorial: https://www.youtube.com/watch?v=5MzCK3k3XlQ
 
+type StatModuleFormData = {
+    gameName: string;
+    inputModuleForms: InputModuleFormData[];
+    themeColor: string;
+    themeColorName: string;
+    hardModeMultiplier: number;
+};
+
 /**
  * Data type for input module forms, to use when collecting data from the user in the Create form.
  */
@@ -25,24 +33,19 @@ type InputModuleFormData = {
  * @param inputModuleForms the data for the input modules of the stat module
  * @returns true if the document was successfully written to Firestore, false otherwise
  */
-async function addDataToStatModules(
-    gameName: string,
-    themeColor: string,
-    hardModeMultiplier: number,
-    inputModuleForms: InputModuleFormData[]
-) {
+async function addDataToStatModules(statModuleData: StatModuleFormData) {
     try {
         // Add stat module document to statModules collection.
         const statModuleDocRef = await addDoc(collection(db, "statModules"), {
-            gameName: gameName,
-            hardModeMultiplier: hardModeMultiplier,
-            themeColor: themeColor,
+            gameName: statModuleData.gameName,
+            hardModeMultiplier: statModuleData.hardModeMultiplier,
+            themeColor: statModuleData.themeColor,
             timeStamp: serverTimestamp(), // The time it was created
         });
         console.log("Stat module document written with ID: ", statModuleDocRef.id);
 
         // Add input module documents to inputModules sub-collection in the statModules collection.
-        inputModuleForms.map(async (inputModuleFormData, i) => {
+        statModuleData.inputModuleForms.map(async (inputModuleFormData, i) => {
             inputModuleFormData.data[i].label;
             const buttonLabels: string[] = [];
             const buttonScores: number[] = [];
@@ -76,27 +79,48 @@ async function addDataToStatModules(
  * @returns Create form
  */
 export const CreateForm = () => {
-    const [gameName, setGameName] = useState("");
-    const [themeColor, setThemeColor] = useState("#fcd34d");
-    const [themeColorName, setThemeColorName] = useState("Sunglow");
-    const [hardModeMultiplier, setHardModeMultiplier] = useState(1);
+    const [formData, setFormData] = useState<StatModuleFormData>({
+        gameName: "",
+        inputModuleForms: [
+            {
+                queryText: null,
+                data: [
+                    {
+                        label: "",
+                        score: 0,
+                    },
+                    {
+                        label: "",
+                        score: 0,
+                    },
+                ],
+            },
+        ],
+        themeColor: "#fcd34d",
+        themeColorName: "Sunglow",
+        hardModeMultiplier: 1,
+    });
+    // const [gameName, setGameName] = useState("");
+    // const [themeColor, setThemeColor] = useState("#fcd34d");
+    // const [themeColorName, setThemeColorName] = useState("Sunglow");
+    // const [hardModeMultiplier, setHardModeMultiplier] = useState(1);
 
-    // Array of InputModuleFormData, initialised with 2 empty ButtonFormData objects.
-    const [inputModuleForms, setInputModuleForms] = useState<InputModuleFormData[]>([
-        {
-            queryText: null,
-            data: [
-                {
-                    label: "",
-                    score: 0,
-                },
-                {
-                    label: "",
-                    score: 0,
-                },
-            ],
-        },
-    ]);
+    // // Array of InputModuleFormData, initialised with 2 empty ButtonFormData objects.
+    // const [inputModuleForms, setInputModuleForms] = useState<InputModuleFormData[]>([
+    //     {
+    //         queryText: null,
+    //         data: [
+    //             {
+    //                 label: "",
+    //                 score: 0,
+    //             },
+    //             {
+    //                 label: "",
+    //                 score: 0,
+    //             },
+    //         ],
+    //     },
+    // ]);
 
     const router = useRouter();
 
@@ -104,6 +128,7 @@ export const CreateForm = () => {
      * Updates both the theme colour and the displayed name of the colour.
      */
     const updateThemeColor = useDebouncedCallback(async (hexCode: string) => {
+        let newThemeColorName = formData.themeColorName;
         try {
             const response = await fetch(
                 `https://www.thecolorapi.com/id?hex=${hexCode.substring(1)}`
@@ -111,12 +136,16 @@ export const CreateForm = () => {
             );
 
             const data = await response.json();
-            setThemeColorName(data.name.value);
+            newThemeColorName = data.name.value;
         } catch (error) {
             console.error("Error fetching color data:", error);
         }
 
-        setThemeColor(hexCode);
+        setFormData((prevState) => ({
+            ...prevState,
+            themeColor: hexCode,
+            themeColorName: newThemeColorName,
+        }));
     }, 20);
 
     // Adding a button module, abandoned for now
@@ -136,7 +165,7 @@ export const CreateForm = () => {
      */
     const addButtonForm = (buttonModuleIndex: number, add: boolean) => {
         // Copy the current inputModuleForms array.
-        const newInputModuleForms = [...inputModuleForms];
+        const newInputModuleForms = formData.inputModuleForms;
 
         if (add) {
             // Add an empty button form.
@@ -153,7 +182,10 @@ export const CreateForm = () => {
         }
 
         // Replace the current array with the new one.
-        setInputModuleForms(newInputModuleForms);
+        setFormData((prevState) => ({
+            ...prevState,
+            inputModuleForms: newInputModuleForms,
+        }));
     };
 
     /**
@@ -169,7 +201,7 @@ export const CreateForm = () => {
             console.log(fieldType + buttonModuleIndex + buttonIndex);
             console.log(newValue);
 
-            const newInputModuleForms = [...inputModuleForms];
+            const newInputModuleForms = formData.inputModuleForms;
 
             if (fieldType === "queryText") {
                 newValue = String(newValue);
@@ -187,7 +219,10 @@ export const CreateForm = () => {
             }
 
             console.log(newInputModuleForms);
-            setInputModuleForms(newInputModuleForms);
+            setFormData((prevState) => ({
+                ...prevState,
+                inputModuleForms: newInputModuleForms,
+            }));
         },
         20
     );
@@ -204,12 +239,7 @@ export const CreateForm = () => {
         e.preventDefault(); // prevents the default behaviour of reloading the page.
 
         console.log("Adding data to firestore...");
-        const added = await addDataToStatModules(
-            gameName,
-            themeColor,
-            hardModeMultiplier,
-            inputModuleForms
-        );
+        const added = await addDataToStatModules(formData);
         if (added) {
             router.push("/games");
         } else {
@@ -222,8 +252,8 @@ export const CreateForm = () => {
             <div
                 className="mb-2 h-full py-2 px-5 text-center transition-all duration-300 border-4 rounded-2xl"
                 style={{
-                    borderColor: `${themeColor}`,
-                    backgroundColor: `${themeColor}25`,
+                    borderColor: `${formData.themeColor}`,
+                    backgroundColor: `${formData.themeColor}25`,
                 }}
             >
                 {/* Game name input */}
@@ -232,10 +262,15 @@ export const CreateForm = () => {
                         type="text"
                         id="gameName"
                         className="w-4/6 px-3 py-2 border-2 rounded-lg outline-none bg-white bg-opacity-50 text-center text-2xl font-bold focus:border-amber-500"
-                        value={gameName}
+                        value={formData.gameName}
                         placeholder="Game name"
                         autoComplete="off"
-                        onChange={(e) => setGameName(e.target.value)}
+                        onChange={(e) =>
+                            setFormData((prevState) => ({
+                                ...prevState,
+                                gameName: e.target.value,
+                            }))
+                        }
                     />
                 </div>
 
@@ -244,13 +279,13 @@ export const CreateForm = () => {
                     <div>
                         <div className="block font-semibold">Colour:</div>
                         <label htmlFor="themeColor" className="block text-gray-700 font-mono">
-                            &quot;{themeColorName}&quot;
+                            &quot;{formData.themeColorName}&quot;
                         </label>
                         <input
                             type="color"
                             id="themeColor"
                             className="p-1 h-10 w-14 bg-white border-2 rounded-lg cursor-pointer focus:outline-none focus:border-amber-500"
-                            value={themeColor}
+                            value={formData.themeColor}
                             onChange={(e) => {
                                 updateThemeColor(e.target.value);
                             }}
@@ -265,18 +300,23 @@ export const CreateForm = () => {
                         type="number"
                         id="hardModeMultiplier"
                         className="ml-1 mb-5 h-[30px] w-20 px-1 py-2 pl-5 border-2 rounded-lg outline-none bg-white bg-opacity-50 text-center text-lg text-gray-700 focus:border-amber-500"
-                        value={hardModeMultiplier}
+                        value={formData.hardModeMultiplier}
                         autoComplete="off"
                         min="1.0"
                         step="0.1"
-                        onChange={(e) => setHardModeMultiplier(parseFloat(e.target.value))}
+                        onChange={(e) =>
+                            setFormData((prevState) => ({
+                                ...prevState,
+                                hardModeMultiplier: parseFloat(e.target.value),
+                            }))
+                        }
                         onKeyDown={(e) => e.preventDefault()} // Prevents manual typing
                     />
                 </div>
 
                 {/* Input module creation */}
                 <div className="flex flex-col justify-center text-center mb-4">
-                    {inputModuleForms.map((item, index) => (
+                    {formData.inputModuleForms.map((item, index) => (
                         <ButtonModuleForm
                             key={index}
                             index={index}
