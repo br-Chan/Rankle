@@ -6,10 +6,11 @@ import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { ButtonFormData, ButtonModuleForm } from "./buttonModuleForm";
 import { useDebouncedCallback } from "use-debounce";
 import { useRouter } from "next/navigation";
+import { addDataToStatModules } from "@/app/lib/firestoreUtils";
 
 // Firebase code in this page from this tutorial: https://www.youtube.com/watch?v=5MzCK3k3XlQ
 
-type StatModuleFormData = {
+export type StatModuleFormData = {
     gameName: string;
     inputModuleForms: InputModuleFormData[];
     themeColor: string;
@@ -24,53 +25,6 @@ type InputModuleFormData = {
     queryText: string | null;
     data: ButtonFormData[];
 };
-
-/**
- * Adds a stat module document to Firestore with all associated data.
- *
- * @param gameName name of the game
- * @param themeColor theme color for the stat module
- * @param inputModuleForms the data for the input modules of the stat module
- * @returns true if the document was successfully written to Firestore, false otherwise
- */
-async function addDataToStatModules(statModuleData: StatModuleFormData) {
-    try {
-        // Add stat module document to statModules collection.
-        const statModuleDocRef = await addDoc(collection(db, "statModules"), {
-            gameName: statModuleData.gameName,
-            hardModeMultiplier: statModuleData.hardModeMultiplier,
-            themeColor: statModuleData.themeColor,
-            timeStamp: serverTimestamp(), // The time it was created
-        });
-        console.log("Stat module document written with ID: ", statModuleDocRef.id);
-
-        // Add input module documents to inputModules sub-collection in the statModules collection.
-        statModuleData.inputModuleForms.map(async (inputModuleFormData, i) => {
-            inputModuleFormData.data[i].label;
-            const buttonLabels: string[] = [];
-            const buttonScores: number[] = [];
-
-            // Add all buttons' data to the arrays for labels and scores.
-            inputModuleFormData.data.map((buttonFormData) => {
-                buttonLabels.push(String(buttonFormData.label));
-                buttonScores.push(Number(buttonFormData.score));
-            });
-
-            //Add input module document to inputModules collection.
-            const inputModuleDocRef = await addDoc(collection(statModuleDocRef, "inputModules"), {
-                queryText: inputModuleFormData.queryText,
-                buttonLabels: buttonLabels,
-                buttonScores: buttonScores,
-            });
-            console.log("Input module document written with ID: ", inputModuleDocRef.id);
-        });
-
-        return true;
-    } catch (error) {
-        console.error("Error adding document ", error);
-        return false;
-    }
-}
 
 /**
  * The form that the user can fill in to create their stat module before submitting it and adding
