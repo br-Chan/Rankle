@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { StatModulePane } from "../ui/games/statModulePane";
-import { fetchStatModules, statModulesFirestoreData } from "../lib/firestoreUtils";
+import { fetchAllStatModules, statModulesFirestoreData } from "../lib/firestoreUtils";
 
 /**
  * Page where users can view user-created stat modules and add them to their own lists.
@@ -16,7 +16,7 @@ export default function Home() {
     // Fetch data when component 'mounts' (not every time it re-renders).
     useEffect(() => {
         async function fetchData() {
-            const statModuleDocuments: statModulesFirestoreData[] = await fetchStatModules();
+            const statModuleDocuments: statModulesFirestoreData[] = await fetchAllStatModules();
             setStatModulesData(statModuleDocuments);
         }
         fetchData();
