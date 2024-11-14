@@ -77,7 +77,7 @@ export const addDataToStatModules = async (statModuleData: StatModuleFormData) =
 
         // Add input module documents to inputModules sub-collection in the statModules collection.
         statModuleData.inputModuleForms.map(async (inputModuleFormData, i) => {
-            inputModuleFormData.data[i].label;
+            // inputModuleFormData.data[i].label;
             const buttonLabels: string[] = [];
             const buttonScores: number[] = [];
 
