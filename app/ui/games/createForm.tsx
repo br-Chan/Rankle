@@ -300,14 +300,14 @@ export const CreateForm = () => {
                     <input
                         type="button"
                         id="addInputModuleForm"
-                        className="w-fit border-r-[1px] border-amber-200 transition-colors duration-300 cursor-pointer"
+                        className="w-1/2 border-r-[1px] border-amber-200 rounded-l-md bg-amber-300 hover:bg-amber-500 text-black transition-colors duration-300 font-mono cursor-pointer"
                         onClick={addInputModuleForm}
                         value="+Query"
                     />
                     <input
                         type="button"
                         id="removeInputModuleForm"
-                        className="w-fit border-l-[1px] border-amber-200 transition-colors duration-300 cursor-pointer"
+                        className="w-1/2 border-l-[1px] border-amber-200 rounded-r-md bg-amber-300 hover:bg-amber-500 text-black transition-colors duration-300 font-mono cursor-pointer"
                         onClick={removeInputModuleForm}
                         value="-Query"
                     />
