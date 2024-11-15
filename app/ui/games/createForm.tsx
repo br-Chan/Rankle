@@ -234,7 +234,6 @@ export const CreateForm = () => {
 
                 {/* Theme color picker */}
                 <div className="flex justify-between items-center w-full mb-4 space-x-2">
-                    {/* <div className="flex items-center font-semibold space-x-2"> */}
                     <span className="w-60 text-right font-semibold">Colour:</span>
                     <input
                         type="color"
@@ -245,7 +244,6 @@ export const CreateForm = () => {
                             updateThemeColor(e.target.value);
                         }}
                     />
-                    {/* </div> */}
                     <label htmlFor="themeColor" className="w-60 text-left text-gray-700 font-mono">
                         &quot;{formData.themeColorName}&quot;
                     </label>
