@@ -233,24 +233,22 @@ export const CreateForm = () => {
                 </div>
 
                 {/* Theme color picker */}
-                <div className="mb-4">
-                    <div>
-                        <div className="flex items-center font-semibold space-x-2">
-                            <span>Colour: </span>
-                            <input
-                                type="color"
-                                id="themeColor"
-                                className="p-1 h-10 w-14 bg-white border-2 rounded-lg cursor-pointer focus:outline-none focus:border-amber-500"
-                                value={formData.themeColor}
-                                onChange={(e) => {
-                                    updateThemeColor(e.target.value);
-                                }}
-                            />
-                        </div>
-                        <label htmlFor="themeColor" className="block text-gray-700 font-mono">
-                            &quot;{formData.themeColorName}&quot;
-                        </label>
-                    </div>
+                <div className="flex justify-between items-center w-full mb-4 space-x-2">
+                    {/* <div className="flex items-center font-semibold space-x-2"> */}
+                    <span className="w-60 text-right font-semibold">Colour:</span>
+                    <input
+                        type="color"
+                        id="themeColor"
+                        className="p-1 h-10 w-14 bg-white border-2 rounded-lg cursor-pointer focus:outline-none focus:border-amber-500"
+                        value={formData.themeColor}
+                        onChange={(e) => {
+                            updateThemeColor(e.target.value);
+                        }}
+                    />
+                    {/* </div> */}
+                    <label htmlFor="themeColor" className="w-60 text-left text-gray-700 font-mono">
+                        &quot;{formData.themeColorName}&quot;
+                    </label>
                 </div>
 
                 {/* Hard mode input */}
