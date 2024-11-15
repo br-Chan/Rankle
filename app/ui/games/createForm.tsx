@@ -208,7 +208,7 @@ export const CreateForm = () => {
     return (
         <form onSubmit={handleSubmit} className="pt-4">
             <div
-                className="mb-2 h-full py-2 px-5 text-center transition-all duration-300 border-4 rounded-2xl"
+                className="flex flex-col items-center mb-2 h-full pt-2 px-5 text-center transition-all duration-300 border-4 rounded-2xl"
                 style={{
                     borderColor: `${formData.themeColor}`,
                     backgroundColor: `${formData.themeColor}25`,
@@ -219,7 +219,7 @@ export const CreateForm = () => {
                     <input
                         type="text"
                         id="gameName"
-                        className="w-4/6 px-3 py-2 border-2 rounded-lg outline-none bg-white bg-opacity-50 text-center text-2xl font-bold focus:border-amber-500"
+                        className="w-80 px-3 py-2 border-2 rounded-lg outline-none bg-white bg-opacity-50 text-center text-2xl font-bold focus:border-amber-500"
                         value={formData.gameName}
                         placeholder="Game name"
                         autoComplete="off"
@@ -235,29 +235,31 @@ export const CreateForm = () => {
                 {/* Theme color picker */}
                 <div className="mb-4">
                     <div>
-                        <div className="block font-semibold">Colour:</div>
+                        <div className="flex items-center font-semibold space-x-2">
+                            <span>Colour: </span>
+                            <input
+                                type="color"
+                                id="themeColor"
+                                className="p-1 h-10 w-14 bg-white border-2 rounded-lg cursor-pointer focus:outline-none focus:border-amber-500"
+                                value={formData.themeColor}
+                                onChange={(e) => {
+                                    updateThemeColor(e.target.value);
+                                }}
+                            />
+                        </div>
                         <label htmlFor="themeColor" className="block text-gray-700 font-mono">
                             &quot;{formData.themeColorName}&quot;
                         </label>
-                        <input
-                            type="color"
-                            id="themeColor"
-                            className="p-1 h-10 w-14 bg-white border-2 rounded-lg cursor-pointer focus:outline-none focus:border-amber-500"
-                            value={formData.themeColor}
-                            onChange={(e) => {
-                                updateThemeColor(e.target.value);
-                            }}
-                        />
                     </div>
                 </div>
 
                 {/* Hard mode input */}
-                <div>
-                    Hard mode multiplier:
+                <div className="flex items-center mb-4 space-x-2">
+                    <span className="font-semibold">Hard mode multiplier:</span>
                     <input
                         type="number"
                         id="hardModeMultiplier"
-                        className="ml-1 mb-5 h-[30px] w-20 px-1 py-2 pl-5 border-2 rounded-lg outline-none bg-white bg-opacity-50 text-center text-lg text-gray-700 focus:border-amber-500"
+                        className="ml-1 h-[30px] w-20 px-1 py-2 pl-5 border-2 rounded-lg outline-none bg-white bg-opacity-50 text-center text-lg text-gray-700 focus:border-amber-500"
                         value={formData.hardModeMultiplier}
                         autoComplete="off"
                         min="1.0"
@@ -273,7 +275,7 @@ export const CreateForm = () => {
                 </div>
 
                 {/* Input module creation */}
-                <div className="flex flex-col justify-center text-center mb-4">
+                <div className="flex flex-col w-full mb-4 items-center text-center">
                     {formData.inputModuleForms.map((item, index) => (
                         <ButtonModuleForm
                             key={index}
@@ -295,24 +297,24 @@ export const CreateForm = () => {
                             }
                         />
                     ))}
+                </div>
 
-                    {/* Adding a button module */}
-                    <div>
-                        <input
-                            type="button"
-                            id="addInputModuleForm"
-                            className="w-fit py-2 px-2 text-black font-semibold transition-colors duration-300 border-2 border-black rounded-lg cursor-pointer"
-                            onClick={addInputModuleForm}
-                            value="+Query"
-                        />
-                        <input
-                            type="button"
-                            id="removeInputModuleForm"
-                            className="w-fit py-2 px-2 text-black font-semibold transition-colors duration-300 border-2 border-black rounded-lg cursor-pointer"
-                            onClick={removeInputModuleForm}
-                            value="-Query"
-                        />
-                    </div>
+                {/* Add/remove a button module */}
+                <div className="group flex w-32 mb-2 text-sm border-2 border-black rounded-lg">
+                    <input
+                        type="button"
+                        id="addInputModuleForm"
+                        className="w-fit border-r-[1px] border-amber-200 transition-colors duration-300 cursor-pointer"
+                        onClick={addInputModuleForm}
+                        value="+Query"
+                    />
+                    <input
+                        type="button"
+                        id="removeInputModuleForm"
+                        className="w-fit border-l-[1px] border-amber-200 transition-colors duration-300 cursor-pointer"
+                        onClick={removeInputModuleForm}
+                        value="-Query"
+                    />
                 </div>
             </div>
 

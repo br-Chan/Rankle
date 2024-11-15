@@ -34,7 +34,7 @@ export const ButtonModuleForm = ({
             <input
                 type="text"
                 id="queryText"
-                className="px-1 py-2 border-2 rounded-lg outline-none bg-white bg-opacity-50 text-center text-xl font-bold focus:border-amber-500"
+                className="w-full px-1 py-2 border-2 rounded-lg outline-none bg-white bg-opacity-50 text-center text-xl font-bold focus:border-amber-500"
                 placeholder="Query text"
                 autoComplete="off"
                 onChange={(e) =>
