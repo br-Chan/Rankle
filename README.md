@@ -1,12 +1,19 @@
-## Visitable pages (take a look!)
+This project uses:
+- [React](https://react.dev/)
+- [Next.js](https://nextjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Firebase](https://firebase.google.com/)
+- [The Color API](https://www.thecolorapi.com/)
+- [@heroicons/react](https://www.npmjs.com/package/@heroicons/react)
+- [use-debounce](https://www.npmjs.com/package/use-debounce)
 
-- [Main page](https://rankle-rho.vercel.app/)
-- [User-made games list](https://rankle-rho.vercel.app/games)
-- [User-made games form](https://rankle-rho.vercel.app/games/create)
+## Visitable pages (have a play!)
+
+- [Home page](https://rankle-rho.vercel.app/)
+- [See user-made games](https://rankle-rho.vercel.app/games)
+- [Add your own game with the Create form](https://rankle-rho.vercel.app/games/create)
 
 ## Contributing
-
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 To run the development server:
 
@@ -20,6 +27,4 @@ pnpm dev (I use this)
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Open [http://localhost:3000](http://localhost:3000) with your browser.
