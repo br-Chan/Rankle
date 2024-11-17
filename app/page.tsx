@@ -53,6 +53,10 @@ export default function Home() {
         fetchUserData();
     }, [user]);
 
+    useEffect(() => {
+        updateRank();
+    }, [statModuleData])
+
     async function fetchUserData() {
         if (user) {
             const userStatModulesCollectionRef = collection(
@@ -166,6 +170,13 @@ export default function Home() {
         updateRank();
     };
 
+    const removeStatModuleFromUser = (statModuleId: string) => {
+        removeStatModuleFromUserInFirestore(user.uid, statModuleId);
+        setStatModuleData(statModuleData.filter((data) => data.id !== statModuleId));
+        
+        updateRank();
+    };
+
     /**
      * Calculates the average scores of all enabled input modules, and updates the display.
      */
@@ -197,11 +208,6 @@ export default function Home() {
 
         // Update the rank.
         setRank((ranks.find(({ threshold }) => avg >= threshold)?.rank || "R") + scoreDisplay);
-    };
-
-    const removeStatModuleFromUser = (statModuleId: string) => {
-        removeStatModuleFromUserInFirestore(user.uid, statModuleId);
-        setStatModuleData(statModuleData.filter((data) => data.id !== statModuleId));
     };
 
     return (
