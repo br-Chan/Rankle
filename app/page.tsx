@@ -4,7 +4,7 @@ import { StatModule, StatModuleData } from "./ui/statModule";
 import { ButtonModuleData } from "./ui/buttonModule";
 import { useEffect, useState } from "react";
 import { useAuth } from "./hooks/useAuth";
-import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 import {
     addStatModuleToUser,
@@ -199,10 +199,10 @@ export default function Home() {
         setRank((ranks.find(({ threshold }) => avg >= threshold)?.rank || "R") + scoreDisplay);
     };
 
-    function removeStatModuleFromUser(statModuleId: string): void {
+    const removeStatModuleFromUser = (statModuleId: string) => {
         removeStatModuleFromUserInFirestore(user.uid, statModuleId);
         setStatModuleData(statModuleData.filter((data) => data.id !== statModuleId));
-    }
+    };
 
     return (
         <main>

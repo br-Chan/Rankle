@@ -13,7 +13,13 @@ import { ThemedHoverComponent } from "../themedHoverComponent";
  * @param props Component props
  * @returns Stat module pane
  */
-export const StatModulePane = ({ data }: { data: StatModuleData }) => {
+export const StatModulePane = ({
+    data,
+    removeStatModuleFromStatModules,
+}: {
+    data: StatModuleData;
+    removeStatModuleFromStatModules: (statModuleId: string) => void;
+}) => {
     const { user } = useAuth();
     const inputModulePanes = [];
 
@@ -68,9 +74,9 @@ export const StatModulePane = ({ data }: { data: StatModuleData }) => {
                 }}
             >
                 <ThemedHoverComponent
-                    className="border-2 border-black cursor-pointer flex items-center h-6 rounded-md text-green-400"
+                    className="border-2 border-black cursor-pointer flex items-center h-6 rounded-md"
                     unhoveredBackgroundColor={data.themeColor}
-                    hoveredBackgroundColor="#4ade80"
+                    hoveredBackgroundColor="#4ade80" // text-green-400
                 >
                     <button
                         className="text-sm px-[2px]"
@@ -82,7 +88,20 @@ export const StatModulePane = ({ data }: { data: StatModuleData }) => {
                     </button>
                 </ThemedHoverComponent>
                 <h2 className="text-xl">{data.gameName}</h2>
-                <button className="text-sm text-red-500">del</button>
+                <ThemedHoverComponent
+                    className="border-2 border-black cursor-pointer flex items-center h-6 rounded-md"
+                    unhoveredBackgroundColor={data.themeColor}
+                    hoveredBackgroundColor="#ef4444" // text-red-500
+                >
+                    <button
+                        className="text-sm px-[2px]"
+                        onClick={() => {
+                            removeStatModuleFromStatModules(data.id);
+                        }}
+                    >
+                        del
+                    </button>
+                </ThemedHoverComponent>
             </div>
         </div>
     );
