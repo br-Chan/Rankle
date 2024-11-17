@@ -44,6 +44,7 @@ export const ButtonModuleForm = ({
                 onChange={(e) =>
                     handleButtonModuleFormChange("queryText", e.target.value, index, null)
                 }
+                required
             />
 
             {/* Buttons input */}
