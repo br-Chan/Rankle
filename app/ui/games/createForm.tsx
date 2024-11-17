@@ -1,28 +1,33 @@
 "use client";
 
 import { useState } from "react";
-import { ButtonFormData, ButtonModuleForm } from "./buttonModuleForm";
+import { ButtonFormData, ButtonFormDataSchema, ButtonModuleForm } from "./buttonModuleForm";
 import { useDebouncedCallback } from "use-debounce";
 import { useRouter } from "next/navigation";
 import { addDataToStatModules } from "@/app/lib/firestoreUtils";
+import { z } from "zod";
 
 // Firebase code in this page from this tutorial: https://www.youtube.com/watch?v=5MzCK3k3XlQ
 
-export type StatModuleFormData = {
-    gameName: string;
-    inputModuleForms: InputModuleFormData[];
-    themeColor: string;
-    themeColorName: string;
-    hardModeMultiplier: number;
-};
+const InputModuleFormDataSchema = z.object({
+    queryText: z.string(),
+    data: z.array(ButtonFormDataSchema),
+});
+
+const StatModuleFormDataSchema = z.object({
+    gameName: z.string(),
+    inputModuleForms: z.array(InputModuleFormDataSchema),
+    themeColor: z.string(),
+    themeColorName: z.string(),
+    hardModeMultiplier: z.number(),
+});
 
 /**
  * Data type for input module forms, to use when collecting data from the user in the Create form.
  */
-type InputModuleFormData = {
-    queryText: string | null;
-    data: ButtonFormData[];
-};
+type InputModuleFormData = z.infer<typeof InputModuleFormDataSchema>;
+
+export type StatModuleFormData = z.infer<typeof StatModuleFormDataSchema>;
 
 /**
  * The form that the user can fill in to create their stat module before submitting it and adding
@@ -35,7 +40,7 @@ export const CreateForm = () => {
         gameName: "",
         inputModuleForms: [
             {
-                queryText: null,
+                queryText: "",
                 data: [
                     {
                         label: "",
@@ -86,7 +91,7 @@ export const CreateForm = () => {
             inputModuleForms: [
                 ...prevState.inputModuleForms,
                 {
-                    queryText: null,
+                    queryText: "",
                     data: [
                         {
                             label: "",
@@ -238,7 +243,7 @@ export const CreateForm = () => {
                     <input
                         type="color"
                         id="themeColor"
-                        className="p-1 h-10 w-14 bg-white border-2 rounded-lg cursor-pointer focus:outline-none focus:border-amber-500"
+                        className="p-1 h-10 w-14 bg-white bg-opacity-50 border-2 rounded-lg cursor-pointer focus:outline-none focus:border-amber-500"
                         value={formData.themeColor}
                         onChange={(e) => {
                             updateThemeColor(e.target.value);
