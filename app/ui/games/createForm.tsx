@@ -15,7 +15,7 @@ const InputModuleFormDataSchema = z.object({
 });
 
 const StatModuleFormDataSchema = z.object({
-    gameName: z.string(),
+    gameName: z.string().min(1, "Game name is required"),
     inputModuleForms: z.array(InputModuleFormDataSchema),
     themeColor: z.string(),
     themeColorName: z.string(),
@@ -199,7 +199,15 @@ export const CreateForm = () => {
         // Invoke latest changes to button module forms immediately.
         handleButtonModuleFormChange.flush();
 
-        e.preventDefault(); // prevents the default behaviour of reloading the page.
+        // Prevent default behaviour of reloading the page.
+        e.preventDefault();
+
+        // Validate the form data using Zod.
+        const validationResult = StatModuleFormDataSchema.safeParse(formData);
+        if (!validationResult.success) {
+            console.error("Validation errors:", validationResult.error.errors);
+            return;
+        }
 
         console.log("Adding data to firestore...");
         const added = await addDataToStatModules(formData);
