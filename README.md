@@ -1,3 +1,5 @@
+## Tech stack
+
 This project uses:
 - [React](https://react.dev/)
 - [Next.js](https://nextjs.org/)
