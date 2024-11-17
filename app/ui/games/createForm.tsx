@@ -202,12 +202,12 @@ export const CreateForm = () => {
         // Prevent default behaviour of reloading the page.
         e.preventDefault();
 
-        // Validate the form data using Zod.
-        const validationResult = StatModuleFormDataSchema.safeParse(formData);
-        if (!validationResult.success) {
-            console.error("Validation errors:", validationResult.error.errors);
-            return;
-        }
+        // Validate the form data using Zod. UNUSED FOR NOW
+        // const validationResult = StatModuleFormDataSchema.safeParse(formData);
+        // if (!validationResult.success) {
+        //     console.error("Validation errors:", validationResult.error.errors);
+        //     return;
+        // }
 
         console.log("Adding data to firestore...");
         const added = await addDataToStatModules(formData);
@@ -242,6 +242,7 @@ export const CreateForm = () => {
                                 gameName: e.target.value,
                             }))
                         }
+                        required
                     />
                 </div>
 

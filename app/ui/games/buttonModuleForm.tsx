@@ -63,6 +63,7 @@ export const ButtonModuleForm = ({
                             onChange={(e) =>
                                 handleButtonModuleFormChange("label", e.target.value, index, i)
                             }
+                            required
                         />
                         <input
                             type="number"
@@ -79,6 +80,7 @@ export const ButtonModuleForm = ({
                                     i
                                 )
                             }
+                            required
                         />
                     </div>
                 ))}
