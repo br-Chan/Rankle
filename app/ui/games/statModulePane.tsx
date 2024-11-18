@@ -54,7 +54,7 @@ export const StatModulePane = ({
                     ></div>
 
                     {/* Theme colour */}
-                    <div className="text-sm bg-white border-2 border-white rounded-md mx-4">
+                    <div className="text-sm bg-white border-2 border-white rounded-md mx-10">
                         {`Theme: ${data.themeColor}`}
                     </div>
                     
