@@ -6,6 +6,7 @@ import { ButtonModulePane } from "./buttonModulePane";
 import { useAuth } from "@/app/hooks/useAuth";
 import { ThemedHoverComponent } from "../themedHoverComponent";
 import { UserPlusIcon, TrashIcon } from "@heroicons/react/24/solid";
+import { HoverTooltip } from "../hoverTooltip";
 
 /**
  * Stat module pane for a single game, displaying all information about the stat module. The user
@@ -39,7 +40,7 @@ export const StatModulePane = ({
         <div className="relative transition-all duration-300 cursor-default">
             {/* Title bar of the stat module pane*/}
             <div
-                className="absolute flex justify-between items-center px-3 top-0 left-0 h-9 w-full font-bold opacity-100 transition-all duration-300 border-t-4 border-l-4 border-r-4 rounded-t-2xl"
+                className="absolute flex justify-between items-center px-3 top-0 left-0 h-9 w-full opacity-100 transition-all duration-300 border-t-4 border-l-4 border-r-4 rounded-t-2xl"
                 style={{
                     borderColor: `${data.themeColor}`,
                 }}
@@ -49,26 +50,28 @@ export const StatModulePane = ({
                     hoveredBackgroundColor="#4ade80" // text-green-400
                 >
                     <button
-                        className="text-sm px-[2px] h-6 w-6"
+                        className="relative text-sm px-[2px] h-6 w-6"
                         onClick={() => {
                             addStatModuleToUser(user.uid, data.id);
                         }}
                     >
-                        <UserPlusIcon />
+                        <UserPlusIcon className="peer" />
+                        <HoverTooltip tooltipText="Add to your list" />
                     </button>
                 </ThemedHoverComponent>
-                <h2 className="text-xl">{data.gameName}</h2>
+                <h2 className="font-bold text-xl">{data.gameName}</h2>
                 <ThemedHoverComponent
                     className="border-2 border-black cursor-pointer flex items-center rounded-md"
                     hoveredBackgroundColor="#ef4444" // text-red-500
                 >
                     <button
-                        className="text-sm px-[2px] h-6 w-6"
+                        className="relative text-sm px-[2px] h-6 w-6"
                         onClick={() => {
                             removeStatModuleFromStatModules(data.id);
                         }}
                     >
-                        <TrashIcon />
+                        <TrashIcon className="peer" />
+                        <HoverTooltip tooltipText="Delete" />
                     </button>
                 </ThemedHoverComponent>
             </div>
@@ -94,7 +97,7 @@ export const StatModulePane = ({
                     <div className="text-sm bg-white border-2 border-white rounded-md mx-10">
                         {`Theme: ${data.themeColor}`}
                     </div>
-                    
+
                     {/* Hard mode display pane */}
                     <div className="text-sm bg-white border-2 border-white rounded-md mx-10">
                         {data.hardModeMultiplier !== 1
