@@ -44,15 +44,20 @@ export const StatModulePane = ({
                     backgroundColor: `${data.themeColor}25`,
                 }}
             >
-                <div className="mt-6 transition-all duration-300">
+                <div className="mt-6 transition-all duration-300 space-y-2">
                     {/* Horizontal line at the top of the body to divide it from title bar */}
                     <div
-                        className="border-2 mb-2"
+                        className="border-2"
                         style={{
                             borderColor: `${data.themeColor}`,
                         }}
                     ></div>
 
+                    {/* Theme colour */}
+                    <div className="text-sm bg-white border-2 border-white rounded-md mx-4">
+                        {`Theme: ${data.themeColor}`}
+                    </div>
+                    
                     {/* Hard mode display pane */}
                     <div className="text-sm bg-white border-2 border-white rounded-md mx-10">
                         {data.hardModeMultiplier !== 1
