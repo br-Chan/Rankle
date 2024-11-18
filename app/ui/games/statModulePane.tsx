@@ -7,6 +7,7 @@ import { useAuth } from "@/app/hooks/useAuth";
 import { ThemedHoverComponent } from "../themedHoverComponent";
 import { UserPlusIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { HoverTooltip } from "../hoverTooltip";
+import { useState } from "react";
 
 /**
  * Stat module pane for a single game, displaying all information about the stat module. The user
@@ -24,6 +25,8 @@ export const StatModulePane = ({
 }) => {
     const { user } = useAuth();
     const inputModulePanes = [];
+
+    const [added, setAdded] = useState<boolean>(false);
 
     // Create each input module pane using data from the prop.
     for (let index = 0; index < data.inputModules.length; ++index) {
@@ -53,13 +56,16 @@ export const StatModulePane = ({
                         className="relative text-sm h-6 w-6"
                         onClick={() => {
                             addStatModuleToUser(user.uid, data.id);
+                            setAdded(true);
                         }}
                     >
                         <UserPlusIcon className="peer px-[2px]" />
-                        <HoverTooltip tooltipText="Add to your list" />
+                        <HoverTooltip tooltipText={added ? "Added!" : "Add to your list"} />
                     </button>
                 </ThemedHoverComponent>
+
                 <h2 className="font-bold text-xl">{data.gameName}</h2>
+
                 <ThemedHoverComponent
                     className="border-2 border-black cursor-pointer flex items-center rounded-md"
                     hoveredBackgroundColor="#ef4444" // text-red-500
