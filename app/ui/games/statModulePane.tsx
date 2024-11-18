@@ -50,12 +50,12 @@ export const StatModulePane = ({
                     hoveredBackgroundColor="#4ade80" // text-green-400
                 >
                     <button
-                        className="relative text-sm px-[2px] h-6 w-6"
+                        className="relative text-sm h-6 w-6"
                         onClick={() => {
                             addStatModuleToUser(user.uid, data.id);
                         }}
                     >
-                        <UserPlusIcon className="peer" />
+                        <UserPlusIcon className="peer px-[2px]" />
                         <HoverTooltip tooltipText="Add to your list" />
                     </button>
                 </ThemedHoverComponent>
@@ -65,12 +65,12 @@ export const StatModulePane = ({
                     hoveredBackgroundColor="#ef4444" // text-red-500
                 >
                     <button
-                        className="relative text-sm px-[2px] h-6 w-6"
+                        className="relative text-sm h-6 w-6"
                         onClick={() => {
                             removeStatModuleFromStatModules(data.id);
                         }}
                     >
-                        <TrashIcon className="peer" />
+                        <TrashIcon className="peer px-[2px]" />
                         <HoverTooltip tooltipText="Delete" />
                     </button>
                 </ThemedHoverComponent>
