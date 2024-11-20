@@ -46,7 +46,7 @@ export default function Home() {
     // Array of data for user's stat modules fetched from Firestore.
     const [statModuleData, setStatModuleData] = useState<StatModuleData[]>([]);
 
-    const [rank, setRank] = useState("R");
+    const [rank, setRank] = useState("-- (--)");
 
     // Fetch user data, initialising default data first if new user.
     useEffect(() => {
@@ -207,7 +207,7 @@ export default function Home() {
         const scoreDisplay: string = isNaN(avg) ? "" : " (" + Math.floor(avg) + ")";
 
         // Update the rank.
-        setRank((ranks.find(({ threshold }) => avg >= threshold)?.rank || "R") + scoreDisplay);
+        setRank((ranks.find(({ threshold }) => avg >= threshold)?.rank || "-- (--)") + scoreDisplay);
     };
 
     return (
