@@ -13,6 +13,7 @@ import {
     statModulesFirestoreData,
     removeStatModuleFromUser as removeStatModuleFromUserInFirestore,
 } from "./lib/firestoreUtils";
+import { HoverTooltip } from "./ui/hoverTooltip";
 
 /**
  * List of Ranks and their attributed minimum scores to attain it.
@@ -208,7 +209,7 @@ export default function Home() {
         });
 
         // Calculate the average score.
-        const avg = sum / numberOfEnabledScores;
+        const avg = Math.floor(sum / numberOfEnabledScores);
         const grade = ranks.find(({ threshold }) => avg >= threshold)?.rank || "unranked";
 
         // Update the rank.
@@ -218,13 +219,23 @@ export default function Home() {
     return (
         <main>
             {/* Rank display */}
-            <div className="flex pointer-events-none fixed bottom-0 left-0 z-10 h-40 w-full items-end justify-center bg-gradient-to-t from-zinc-200 via-zinc-200 lg:via-70% to-transparent lg:to-95% lg:top-0 lg:bottom-auto lg:mt-16 lg:h-32 lg:bg-gradient-to-b">
+            <div className="flex fixed bottom-0 left-0 z-10 h-40 w-full items-end justify-center bg-gradient-to-t from-zinc-200 via-zinc-200 lg:via-70% to-transparent lg:to-95% lg:top-0 lg:bottom-auto lg:mt-16 lg:h-32 lg:bg-gradient-to-b">
                 <div className="flex items-center w-full mb-2 p-4 lg:mb-10 lg:p-0 space-x-2">
                     <div className="flex flex-1 justify-end space-x-2">
                         <span className="text-sm">peanuts</span>
                     </div>
-                    <div className="flex justify-center mx-auto p-4 w-32 border-2 border-black bg-white font-black text-2xl rounded-md">
-                        {rank ? rank.grade : "unranked"}
+                    <div className="flex justify-center items-center mx-auto cursor-default p-4 h-16 w-28 border-2 border-black bg-white font-black rounded-md">
+                        {rank ? (
+                            <div className="relative">
+                                <div className="peer flex justify-center text-4xl">{rank.grade}</div>
+                                <div className="peer flex justify-center">{rank.averageScore}</div>
+                                <HoverTooltip
+                                    tooltipText={`${rank.grade} - ${rank.averageScore.toString()}`}
+                                />
+                            </div>
+                        ) : (
+                            "unranked"
+                        )}
                     </div>
                     <div className="flex flex-1 justify-start space-x-2">
                         <span>pienuts are cool too</span>
@@ -234,7 +245,7 @@ export default function Home() {
 
             {/* Stat modules */}
             {statModuleData.length === 0 ? (
-                <p className="flex place-items-center px-16 py-1 rounded-xl font-mono text-2xl bg-amber-300 lg:mt-28">
+                <p className="flex place-items-center px-16 py-1 rounded-xl font-mono text-2xl bg-amber-300 lg:mt-24">
                     Loading your games...
                 </p>
             ) : (
