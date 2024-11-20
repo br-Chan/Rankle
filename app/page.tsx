@@ -34,6 +34,11 @@ const ranks = [
     { threshold: 0, rank: "F" },
 ];
 
+type RankleRank = {
+    grade: string;
+    averageScore: number;
+};
+
 /**
  * Home page for Rankle, where the user can interact with stat module, view their Rank and access
  * other pages of the site.
@@ -46,7 +51,7 @@ export default function Home() {
     // Array of data for user's stat modules fetched from Firestore.
     const [statModuleData, setStatModuleData] = useState<StatModuleData[]>([]);
 
-    const [rank, setRank] = useState("unranked");
+    const [rank, setRank] = useState<RankleRank | undefined>(undefined);
 
     // Fetch user data, initialising default data first if new user.
     useEffect(() => {
@@ -203,13 +208,11 @@ export default function Home() {
         });
 
         // Calculate the average score.
-        const avg: number = sum / numberOfEnabledScores;
-        const scoreDisplay: string = isNaN(avg) ? "" : " (" + Math.floor(avg) + ")";
+        const avg = sum / numberOfEnabledScores;
+        const grade = ranks.find(({ threshold }) => avg >= threshold)?.rank || "unranked";
 
         // Update the rank.
-        setRank(
-            (ranks.find(({ threshold }) => avg >= threshold)?.rank || "unranked") + scoreDisplay
-        );
+        setRank(isNaN(avg) ? undefined : { grade: grade, averageScore: avg });
     };
 
     return (
@@ -221,7 +224,7 @@ export default function Home() {
                         <span className="text-sm">peanuts</span>
                     </div>
                     <div className="flex justify-center mx-auto p-4 w-32 border-2 border-black bg-white font-black text-2xl rounded-md">
-                        {rank}
+                        {rank ? rank.grade : "unranked"}
                     </div>
                     <div className="flex flex-1 justify-start space-x-2">
                         <span>pienuts are cool too</span>
