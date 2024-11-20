@@ -213,8 +213,8 @@ export default function Home() {
     return (
         <main>
             {/* Rank display */}
-            <div className="pointer-events-none fixed bottom-0 left-0 z-50 flex h-40 w-full items-end justify-center text-lg font-black bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-                <p className="mb-2 flex place-items-center gap-2 text-center text-2xl p-4 lg:p-0">
+            <div className="pointer-events-none fixed bottom-0 left-0 z-10 flex h-40 w-full items-end justify-center text-lg font-black bg-gradient-to-t from-white via-white lg:top-0 lg:bottom-auto lg:mt-16 lg:h-28 lg:bg-gradient-to-b">
+                <p className="mb-2 flex place-items-center gap-2 text-center text-2xl p-4 lg:mb-4 lg:p-0">
                     RANK
                     <br />
                     {rank}
@@ -234,6 +234,7 @@ export default function Home() {
                     md:grid-cols-2 md:w-[576px]
                     lg:grid-cols-3 lg:w-[864px]
                     2xl:grid-cols-4 2xl:w-[1152px]
+                    lg:mt-20
                 "
                 >
                     {statModuleData.map((data, index) => (
