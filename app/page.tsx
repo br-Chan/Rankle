@@ -223,7 +223,7 @@ export default function Home() {
 
             {/* Stat modules */}
             {statModuleData.length === 0 ? (
-                <p className="flex place-items-center px-16 py-1 rounded-xl font-mono text-2xl bg-amber-300">
+                <p className="flex place-items-center px-16 py-1 rounded-xl font-mono text-2xl bg-amber-300 lg:mt-28">
                     Loading your games...
                 </p>
             ) : (
