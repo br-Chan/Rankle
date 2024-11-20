@@ -46,7 +46,7 @@ export default function Home() {
     // Array of data for user's stat modules fetched from Firestore.
     const [statModuleData, setStatModuleData] = useState<StatModuleData[]>([]);
 
-    const [rank, setRank] = useState("-- (--)");
+    const [rank, setRank] = useState("unranked");
 
     // Fetch user data, initialising default data first if new user.
     useEffect(() => {
@@ -55,7 +55,7 @@ export default function Home() {
 
     useEffect(() => {
         updateRank();
-    }, [statModuleData])
+    }, [statModuleData]);
 
     async function fetchUserData() {
         if (user) {
@@ -173,7 +173,7 @@ export default function Home() {
     const removeStatModuleFromUser = (statModuleId: string) => {
         removeStatModuleFromUserInFirestore(user.uid, statModuleId);
         setStatModuleData(statModuleData.filter((data) => data.id !== statModuleId));
-        
+
         updateRank();
     };
 
@@ -207,18 +207,26 @@ export default function Home() {
         const scoreDisplay: string = isNaN(avg) ? "" : " (" + Math.floor(avg) + ")";
 
         // Update the rank.
-        setRank((ranks.find(({ threshold }) => avg >= threshold)?.rank || "-- (--)") + scoreDisplay);
+        setRank(
+            (ranks.find(({ threshold }) => avg >= threshold)?.rank || "unranked") + scoreDisplay
+        );
     };
 
     return (
         <main>
             {/* Rank display */}
-            <div className="pointer-events-none fixed bottom-0 left-0 z-10 flex h-40 w-full items-end justify-center text-lg font-black bg-gradient-to-t from-white via-white lg:via-70% to-transparent lg:to-95% lg:top-0 lg:bottom-auto lg:mt-16 lg:h-32 lg:bg-gradient-to-b">
-                <p className="mb-2 flex place-items-center gap-2 text-center text-2xl p-4 lg:mb-8 lg:p-0">
-                    RANK
-                    <br />
-                    {rank}
-                </p>
+            <div className="flex pointer-events-none fixed bottom-0 left-0 z-10 h-40 w-full items-end justify-center text-lg font-black bg-gradient-to-t from-zinc-200 via-zinc-200 lg:via-70% to-transparent lg:to-95% lg:top-0 lg:bottom-auto lg:mt-16 lg:h-32 lg:bg-gradient-to-b">
+                <div className="flex flex-rows mb-2 p-4 lg:mb-10 lg:p-0 space-x-2">
+                    <div className="flex flex-1 justify-start space-x-2">
+                        <span className="text-sm font-mono"></span>
+                    </div>
+                    <div className="flex justify-center mx-auto p-4 w-32 border-2 border-black bg-white text-2xl rounded-md">
+                        {rank}
+                    </div>
+                    <div className="flex flex-1 justify-end space-x-2">
+                        <span></span>
+                    </div>
+                </div>
             </div>
 
             {/* Stat modules */}
