@@ -213,8 +213,8 @@ export default function Home() {
     return (
         <main>
             {/* Rank display */}
-            <div className="pointer-events-none fixed bottom-0 left-0 z-10 flex h-40 w-full items-end justify-center text-lg font-black bg-gradient-to-t from-white via-white lg:via-85% lg:top-0 lg:bottom-auto lg:mt-16 lg:h-28 lg:bg-gradient-to-b">
-                <p className="mb-2 flex place-items-center gap-2 text-center text-2xl p-4 lg:mb-4 lg:p-0">
+            <div className="pointer-events-none fixed bottom-0 left-0 z-10 flex h-40 w-full items-end justify-center text-lg font-black bg-gradient-to-t from-white via-white lg:via-70% to-transparent lg:to-95% lg:top-0 lg:bottom-auto lg:mt-16 lg:h-32 lg:bg-gradient-to-b">
+                <p className="mb-2 flex place-items-center gap-2 text-center text-2xl p-4 lg:mb-8 lg:p-0">
                     RANK
                     <br />
                     {rank}
