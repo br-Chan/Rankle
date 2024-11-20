@@ -215,16 +215,16 @@ export default function Home() {
     return (
         <main>
             {/* Rank display */}
-            <div className="flex pointer-events-none fixed bottom-0 left-0 z-10 h-40 w-full items-end justify-center text-lg font-black bg-gradient-to-t from-zinc-200 via-zinc-200 lg:via-70% to-transparent lg:to-95% lg:top-0 lg:bottom-auto lg:mt-16 lg:h-32 lg:bg-gradient-to-b">
-                <div className="flex flex-rows mb-2 p-4 lg:mb-10 lg:p-0 space-x-2">
-                    <div className="flex flex-1 justify-start space-x-2">
-                        <span className="text-sm font-mono"></span>
+            <div className="flex pointer-events-none fixed bottom-0 left-0 z-10 h-40 w-full items-end justify-center bg-gradient-to-t from-zinc-200 via-zinc-200 lg:via-70% to-transparent lg:to-95% lg:top-0 lg:bottom-auto lg:mt-16 lg:h-32 lg:bg-gradient-to-b">
+                <div className="flex items-center w-full mb-2 p-4 lg:mb-10 lg:p-0 space-x-2">
+                    <div className="flex flex-1 justify-end space-x-2">
+                        <span className="text-sm">peanuts</span>
                     </div>
-                    <div className="flex justify-center mx-auto p-4 w-32 border-2 border-black bg-white text-2xl rounded-md">
+                    <div className="flex justify-center mx-auto p-4 w-32 border-2 border-black bg-white font-black text-2xl rounded-md">
                         {rank}
                     </div>
-                    <div className="flex flex-1 justify-end space-x-2">
-                        <span></span>
+                    <div className="flex flex-1 justify-start space-x-2">
+                        <span>pienuts are cool too</span>
                     </div>
                 </div>
             </div>
