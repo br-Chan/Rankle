@@ -38,8 +38,9 @@ export default function Home() {
 
             {/* Stat module panes */}
             {statModulesData.length === 0 ? (
-                <p className="flex place-items-center px-16 py-1 rounded-xl font-mono text-2xl bg-amber-300">
-                    Loading all games...
+                <p className="flex flex-col lg:flex-row text-center px-16 py-1 rounded-xl font-mono text-2xl bg-amber-300 lg:mt-10">
+                    <span>Loading all games</span>
+                    <span>...</span>
                 </p>
             ) : (
                 <div
