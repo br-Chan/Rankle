@@ -222,7 +222,7 @@ export default function Home() {
             <div className="flex fixed bottom-0 left-0 z-10 h-40 w-full items-end justify-center bg-gradient-to-t from-zinc-200 via-zinc-200 lg:via-70% to-transparent lg:to-95% lg:top-0 lg:bottom-auto lg:mt-16 lg:h-32 lg:bg-gradient-to-b">
                 <div className="flex items-center w-full mb-2 p-4 lg:mb-10 lg:p-0 space-x-2">
                     <div className="flex flex-1 justify-end space-x-2">
-                        <span className="text-sm">left span</span>
+                        <span>---</span>
                     </div>
                     <div className="flex justify-center items-center mx-auto cursor-default p-4 h-16 w-28 border-2 border-black bg-white font-black rounded-md">
                         {rank ? (
@@ -240,7 +240,7 @@ export default function Home() {
                         )}
                     </div>
                     <div className="flex flex-1 justify-start space-x-2">
-                        <span>right span</span>
+                        <span>---</span>
                     </div>
                 </div>
             </div>
