@@ -13,6 +13,7 @@ import {
     statModulesFirestoreData,
     removeStatModuleFromUser as removeStatModuleFromUserInFirestore,
 } from "./lib/firestoreUtils";
+import { HoverTooltip } from "./ui/hoverTooltip";
 
 /**
  * List of Ranks and their attributed minimum scores to attain it.
@@ -34,6 +35,11 @@ const ranks = [
     { threshold: 0, rank: "F" },
 ];
 
+type RankleRank = {
+    grade: string;
+    averageScore: number;
+};
+
 /**
  * Home page for Rankle, where the user can interact with stat module, view their Rank and access
  * other pages of the site.
@@ -46,7 +52,7 @@ export default function Home() {
     // Array of data for user's stat modules fetched from Firestore.
     const [statModuleData, setStatModuleData] = useState<StatModuleData[]>([]);
 
-    const [rank, setRank] = useState("R");
+    const [rank, setRank] = useState<RankleRank | undefined>(undefined);
 
     // Fetch user data, initialising default data first if new user.
     useEffect(() => {
@@ -55,7 +61,7 @@ export default function Home() {
 
     useEffect(() => {
         updateRank();
-    }, [statModuleData])
+    }, [statModuleData]);
 
     async function fetchUserData() {
         if (user) {
@@ -173,7 +179,7 @@ export default function Home() {
     const removeStatModuleFromUser = (statModuleId: string) => {
         removeStatModuleFromUserInFirestore(user.uid, statModuleId);
         setStatModuleData(statModuleData.filter((data) => data.id !== statModuleId));
-        
+
         updateRank();
     };
 
@@ -203,29 +209,48 @@ export default function Home() {
         });
 
         // Calculate the average score.
-        const avg: number = sum / numberOfEnabledScores;
-        const scoreDisplay: string = isNaN(avg) ? "" : " (" + Math.floor(avg) + ")";
+        const avg = Math.floor(sum / numberOfEnabledScores);
+        const grade = ranks.find(({ threshold }) => avg >= threshold)?.rank || "unranked";
 
         // Update the rank.
-        setRank((ranks.find(({ threshold }) => avg >= threshold)?.rank || "R") + scoreDisplay);
+        setRank(isNaN(avg) ? undefined : { grade: grade, averageScore: avg });
     };
 
     return (
         <main>
             {/* Rank display */}
-            <div className="pointer-events-none fixed bottom-0 left-0 z-50 flex h-40 w-full items-end justify-center text-lg font-black bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-                <p className="mb-2 flex place-items-center gap-2 text-center text-2xl p-4 lg:p-0">
-                    RANK
-                    <br />
-                    {rank}
-                </p>
+            <div className="flex fixed bottom-0 left-0 z-10 h-40 w-full items-end justify-center bg-gradient-to-t from-zinc-200 via-zinc-200 lg:via-70% to-transparent lg:to-95% lg:top-0 lg:bottom-auto lg:mt-16 lg:h-32 lg:bg-gradient-to-b">
+                <div className="flex items-center w-full mb-2 p-4 lg:mb-10 lg:p-0 space-x-2">
+                    <div className="flex flex-1 justify-end space-x-2">
+                        <span>---</span>
+                    </div>
+                    <div className="flex justify-center items-center mx-auto cursor-default p-4 h-16 w-28 border-2 border-black bg-white font-black rounded-md">
+                        {rank ? (
+                            <div className="relative">
+                                <div className="peer flex justify-center text-4xl">
+                                    {rank.grade}
+                                </div>
+                                <div className="peer flex justify-center">{rank.averageScore}</div>
+                                <HoverTooltip
+                                    tooltipText={`${rank.grade} - ${rank.averageScore.toString()}`}
+                                />
+                            </div>
+                        ) : (
+                            "unranked"
+                        )}
+                    </div>
+                    <div className="flex flex-1 justify-start space-x-2">
+                        <span>---</span>
+                    </div>
+                </div>
             </div>
 
             {/* Stat modules */}
             {statModuleData.length === 0 ? (
-                <p className="flex place-items-center px-16 py-1 rounded-xl font-mono text-2xl bg-amber-300">
-                    Loading your games...
-                </p>
+                <div className="flex flex-col lg:flex-row text-center px-16 py-1 rounded-xl font-mono text-2xl bg-amber-300 lg:mt-24">
+                    <span>Loading your games</span>
+                    <span>...</span>
+                </div>
             ) : (
                 <div
                     className="
@@ -234,6 +259,7 @@ export default function Home() {
                     md:grid-cols-2 md:w-[576px]
                     lg:grid-cols-3 lg:w-[864px]
                     2xl:grid-cols-4 2xl:w-[1152px]
+                    lg:mt-20
                 "
                 >
                     {statModuleData.map((data, index) => (
