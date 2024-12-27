@@ -232,7 +232,7 @@ export const CreateForm = () => {
                     <input
                         type="text"
                         id="gameName"
-                        className="dark:placeholder-gray-600 w-80 px-3 py-2 border-2 rounded-lg outline-none bg-white bg-opacity-50 text-center text-2xl font-bold focus:border-amber-500"
+                        className="dark:placeholder-gray-600 w-full md:w-4/5 px-3 py-2 border-2 rounded-lg outline-none bg-white bg-opacity-50 text-center text-2xl font-bold focus:border-amber-500"
                         value={formData.gameName}
                         placeholder="Game name"
                         autoComplete="off"

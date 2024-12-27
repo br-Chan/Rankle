@@ -52,7 +52,7 @@ export const ButtonModuleForm = ({
                 {data.map((item, i) => (
                     <div
                         key={i}
-                        className="group flex flex-col w-24 my-1 mx-1 border-2 border-black rounded-lg focus-within:border-amber-500"
+                        className="group flex flex-col w-24 my-1 mx-1 border-2 border-gray-200 rounded-lg focus-within:border-amber-500"
                     >
                         <input
                             type="text"
