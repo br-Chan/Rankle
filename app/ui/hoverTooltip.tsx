@@ -20,7 +20,7 @@ export const HoverTooltip = ({ tooltipText, delay }: { tooltipText: string; dela
 
     return (
         <div
-            className={`${hoverDelay} absolute left-1/2 transform -translate-x-1/2 w-max invisible opacity-0 peer-hover:visible peer-hover:opacity-100 bg-slate-700 text-sm text-white whitespace-pre-line rounded py-1 px-1 z-10 mt-1 mb-1`}
+            className={`${hoverDelay} absolute left-1/2 transform -translate-x-1/2 w-max invisible opacity-0 peer-hover:visible peer-hover:opacity-100 bg-slate-800 text-sm text-white whitespace-pre-line rounded py-1 px-1 z-10 mt-1 mb-1`}
         >
             {tooltipText}
         </div>

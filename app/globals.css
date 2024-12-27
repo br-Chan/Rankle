@@ -11,8 +11,12 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    /* zinc:
+     --background-start-rgb: 63, 63, 70;
+    --background-end-rgb: 39, 39, 42; */
+    --background-start-rgb: 51, 65, 85;
+    --background-end-rgb: 30, 41, 59;
+    
   }
 }
 
