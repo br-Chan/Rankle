@@ -49,7 +49,7 @@ export const StatModulePane = ({
                 }}
             >
                 <ThemedHoverComponent
-                    className="border-2 border-black cursor-pointer flex items-center rounded-md"
+                    className="border-2 border-black dark:border-white cursor-pointer flex items-center rounded-md"
                     hoveredBackgroundColor="#4ade80" // text-green-400
                 >
                     <button
@@ -59,7 +59,7 @@ export const StatModulePane = ({
                             setAdded(true);
                         }}
                     >
-                        <UserPlusIcon className="peer px-[2px]" />
+                        <UserPlusIcon className="peer px-[2px] dark:text-white" />
                         <HoverTooltip tooltipText={added ? "Added!" : "Add to your list"} />
                     </button>
                 </ThemedHoverComponent>
@@ -67,11 +67,11 @@ export const StatModulePane = ({
                 <h2 className="font-bold text-xl">{data.gameName}</h2>
 
                 <ThemedHoverComponent
-                    className="border-2 border-black cursor-pointer flex items-center rounded-md"
+                    className="border-2 border-black dark:border-white cursor-pointer flex items-center rounded-md"
                     hoveredBackgroundColor="#ef4444" // text-red-500
                 >
                     <button
-                        className="relative text-sm h-6 w-6"
+                        className="relative text-sm h-6 w-6 dark:text-white"
                         onClick={() => {
                             removeStatModuleFromStatModules(data.id);
                         }}
@@ -100,12 +100,12 @@ export const StatModulePane = ({
                     ></div>
 
                     {/* Theme colour */}
-                    <div className="text-sm bg-white border-2 border-white rounded-md mx-10">
+                    <div className="text-sm text-black bg-white border-2 border-white rounded-md mx-10">
                         {`Theme: ${data.themeColor}`}
                     </div>
 
                     {/* Hard mode display pane */}
-                    <div className="text-sm bg-white border-2 border-white rounded-md mx-10">
+                    <div className="text-sm text-black bg-white border-2 border-white rounded-md mx-10">
                         {data.hardModeMultiplier !== 1
                             ? `Hard mode: ×${data.hardModeMultiplier}`
                             : "No hard mode"}
