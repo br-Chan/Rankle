@@ -232,7 +232,7 @@ export const CreateForm = () => {
                     <input
                         type="text"
                         id="gameName"
-                        className="w-80 px-3 py-2 border-2 rounded-lg outline-none bg-white bg-opacity-50 text-center text-2xl font-bold focus:border-amber-500"
+                        className="dark:placeholder-gray-600 w-80 px-3 py-2 border-2 rounded-lg outline-none bg-white bg-opacity-50 text-center text-2xl font-bold focus:border-amber-500"
                         value={formData.gameName}
                         placeholder="Game name"
                         autoComplete="off"
@@ -248,7 +248,7 @@ export const CreateForm = () => {
 
                 {/* Theme color picker */}
                 <div className="flex justify-between items-center w-full mb-4 space-x-2">
-                    <span className="w-60 text-right font-semibold">Colour:</span>
+                    <span className="flex-1 text-right font-semibold">Colour:</span>
                     <input
                         type="color"
                         id="themeColor"
@@ -258,7 +258,7 @@ export const CreateForm = () => {
                             updateThemeColor(e.target.value);
                         }}
                     />
-                    <label htmlFor="themeColor" className="w-60 text-left text-gray-700 font-mono">
+                    <label htmlFor="themeColor" className="flex-1 text-left text-gray-700 dark:text-gray-300 font-mono">
                         &quot;{formData.themeColorName}&quot;
                     </label>
                 </div>
@@ -269,7 +269,7 @@ export const CreateForm = () => {
                     <input
                         type="number"
                         id="hardModeMultiplier"
-                        className="ml-1 h-[30px] w-20 px-1 py-2 pl-5 border-2 rounded-lg outline-none bg-white bg-opacity-50 text-center text-lg text-gray-700 focus:border-amber-500"
+                        className="dark:text-white ml-1 h-[30px] w-20 px-1 py-2 pl-5 border-2 rounded-lg outline-none bg-white bg-opacity-50 text-center text-lg text-gray-700 focus:border-amber-500"
                         value={formData.hardModeMultiplier}
                         autoComplete="off"
                         min="1.0"
@@ -332,7 +332,7 @@ export const CreateForm = () => {
             <div className="text-center">
                 <button
                     type="submit"
-                    className="bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded-lg"
+                    className="bg-amber-300 hover:bg-amber-500 hover:text-white transition-colours duration-300 text-black font-bold py-2 px-4 rounded-lg"
                 >
                     SUBMIT
                 </button>

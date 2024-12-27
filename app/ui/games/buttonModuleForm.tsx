@@ -38,7 +38,7 @@ export const ButtonModuleForm = ({
             <input
                 type="text"
                 id="queryText"
-                className="w-full px-1 py-2 border-2 rounded-lg outline-none bg-white bg-opacity-50 text-center text-xl font-bold focus:border-amber-500"
+                className="dark:placeholder-gray-600 w-full px-1 py-2 border-2 rounded-lg outline-none bg-white bg-opacity-50 text-center text-xl font-bold focus:border-amber-500"
                 placeholder="Query text"
                 autoComplete="off"
                 onChange={(e) =>
@@ -57,7 +57,7 @@ export const ButtonModuleForm = ({
                         <input
                             type="text"
                             id={`${i}_label`}
-                            className="h-[30px] px-1 py-2 border-b-[1px] rounded-t-md outline-none bg-white bg-opacity-50 text-center text-lg font-bold"
+                            className="dark:placeholder-gray-600 h-[30px] px-1 py-2 border-b-[1px] rounded-t-md outline-none bg-white bg-opacity-50 text-center text-lg font-bold"
                             // value={i.label}
                             placeholder="label"
                             autoComplete="off"
@@ -69,7 +69,7 @@ export const ButtonModuleForm = ({
                         <input
                             type="number"
                             id={`${i}_score`}
-                            className="h-[30px] px-1 py-2 pl-5 border-t-[1px] rounded-b-md outline-none bg-white bg-opacity-50 text-center text-lg text-gray-700"
+                            className="dark:placeholder-gray-600 dark:text-white h-[30px] px-1 py-2 pl-5 border-t-[1px] rounded-b-md outline-none bg-white bg-opacity-50 text-center text-lg text-gray-700"
                             // value={i.score}
                             placeholder="score"
                             autoComplete="off"
