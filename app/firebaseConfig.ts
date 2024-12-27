@@ -27,10 +27,10 @@ export const auth = getAuth(app);
 export const initialiseAnonymousUser = async () => {
     const userCredential = await signInAnonymously(auth);
     return userCredential.user;
-}
+};
 
 export const onAuthStateChange = (callback: (user: any) => void) => {
     return onAuthStateChanged(auth, callback);
-}
+};
 
 // export { db, auth };

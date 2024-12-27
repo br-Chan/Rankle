@@ -1,4 +1,19 @@
-import { addDoc, collection, CollectionReference, deleteDoc, doc, DocumentData, DocumentReference, getDoc, getDocs, orderBy, query, QuerySnapshot, serverTimestamp, setDoc } from "firebase/firestore";
+import {
+    addDoc,
+    collection,
+    CollectionReference,
+    deleteDoc,
+    doc,
+    DocumentData,
+    DocumentReference,
+    getDoc,
+    getDocs,
+    orderBy,
+    query,
+    QuerySnapshot,
+    serverTimestamp,
+    setDoc,
+} from "firebase/firestore";
 import { db } from "../firebaseConfig";
 import { StatModuleData } from "../ui/statModule";
 import { ButtonModuleData } from "../ui/buttonModule";
@@ -26,10 +41,13 @@ export type buttonModulesFirestoreData = {
     buttonScores: number[];
 };
 
-export const convertStatModuleFirestoreData = (firestoreData: statModulesFirestoreData) => {
-    const convertedButtonModulesData: ButtonModuleData[] = firestoreData.inputModules.map((data) => {
-        return convertButtonModuleFirestoreData(data);
-    })
+export const convertStatModuleFirestoreData = (
+    firestoreData: statModulesFirestoreData
+) => {
+    const convertedButtonModulesData: ButtonModuleData[] =
+        firestoreData.inputModules.map((data) => {
+            return convertButtonModuleFirestoreData(data);
+        });
     const convertedData: StatModuleData = {
         id: firestoreData.id,
         gameName: firestoreData.gameName,
@@ -38,12 +56,14 @@ export const convertStatModuleFirestoreData = (firestoreData: statModulesFiresto
         enabled: true,
         hardModeEnabled: false,
         hardModeMultiplier: firestoreData.hardModeMultiplier,
-    }
+    };
 
     return convertedData;
-}
+};
 
-export const convertButtonModuleFirestoreData = (firestoreData: buttonModulesFirestoreData) => {
+export const convertButtonModuleFirestoreData = (
+    firestoreData: buttonModulesFirestoreData
+) => {
     const convertedData: ButtonModuleData = {
         id: firestoreData.id,
         statModuleId: firestoreData.statModuleId,
@@ -52,19 +72,21 @@ export const convertButtonModuleFirestoreData = (firestoreData: buttonModulesFir
         buttonLabels: firestoreData.buttonLabels,
         buttonScores: firestoreData.buttonScores,
         enabled: true,
-        selectedButtonIndex: null
-    }
+        selectedButtonIndex: null,
+    };
 
     return convertedData;
-}
+};
 
 /**
  * Adds a stat module document to Firestore with all associated data.
- * 
+ *
  * @param statModuleData the form data that is to be written to Firestore
  * @returns true if the document was successfully written to Firestore, false otherwise
  */
-export const addDataToStatModules = async (statModuleData: StatModuleFormData) => {
+export const addDataToStatModules = async (
+    statModuleData: StatModuleFormData
+) => {
     try {
         // Add stat module document to statModules collection.
         const statModuleDocRef = await addDoc(collection(db, "statModules"), {
@@ -73,7 +95,10 @@ export const addDataToStatModules = async (statModuleData: StatModuleFormData) =
             themeColor: statModuleData.themeColor,
             timeStamp: serverTimestamp(), // The time it was created
         });
-        console.log("Stat module document written with ID: ", statModuleDocRef.id);
+        console.log(
+            "Stat module document written with ID: ",
+            statModuleDocRef.id
+        );
 
         // Add input module documents to inputModules sub-collection in the statModules collection.
         statModuleData.inputModuleForms.map(async (inputModuleFormData, i) => {
@@ -87,12 +112,18 @@ export const addDataToStatModules = async (statModuleData: StatModuleFormData) =
             });
 
             //Add input module document to inputModules collection.
-            const inputModuleDocRef = await addDoc(collection(statModuleDocRef, "inputModules"), {
-                queryText: inputModuleFormData.queryText,
-                buttonLabels: buttonLabels,
-                buttonScores: buttonScores,
-            });
-            console.log("Input module document written with ID: ", inputModuleDocRef.id);
+            const inputModuleDocRef = await addDoc(
+                collection(statModuleDocRef, "inputModules"),
+                {
+                    queryText: inputModuleFormData.queryText,
+                    buttonLabels: buttonLabels,
+                    buttonScores: buttonScores,
+                }
+            );
+            console.log(
+                "Input module document written with ID: ",
+                inputModuleDocRef.id
+            );
         });
 
         return true;
@@ -100,16 +131,25 @@ export const addDataToStatModules = async (statModuleData: StatModuleFormData) =
         console.error("Error adding document ", error);
         return false;
     }
-}
+};
 
-export const addStatModuleToUser = async (userId: string, statModuleId: string) => {
+export const addStatModuleToUser = async (
+    userId: string,
+    statModuleId: string
+) => {
     const statModuleRef = doc(db, "statModules", statModuleId);
     const statModuleSnap = await getDoc(statModuleRef);
 
     if (statModuleSnap.exists()) {
         const statModuleData = statModuleSnap.data();
 
-        const userStatModuleRef = doc(db, "users", userId, "userStatModules", statModuleId);
+        const userStatModuleRef = doc(
+            db,
+            "users",
+            userId,
+            "userStatModules",
+            statModuleId
+        );
         await setDoc(userStatModuleRef, {
             ...statModuleData,
         });
@@ -118,7 +158,15 @@ export const addStatModuleToUser = async (userId: string, statModuleId: string) 
         const inputModulesSnap = await getDocs(inputModulesRef);
 
         inputModulesSnap.forEach(async (inputModuleDoc) => {
-            const userInputModuleRef = doc(db, "users", userId, "userStatModules", statModuleId, "inputModules", inputModuleDoc.id);
+            const userInputModuleRef = doc(
+                db,
+                "users",
+                userId,
+                "userStatModules",
+                statModuleId,
+                "inputModules",
+                inputModuleDoc.id
+            );
             await setDoc(userInputModuleRef, inputModuleDoc.data());
         });
 
@@ -126,19 +174,28 @@ export const addStatModuleToUser = async (userId: string, statModuleId: string) 
     } else {
         console.error("Stat module not found");
     }
-}
+};
 
 export const removeStatModuleFromStatModules = async (statModuleId: string) => {
     const statModuleRef = doc(db, "statModules", statModuleId);
     const inputModuleRef = collection(statModuleRef, "inputModules");
     removeStatModule(statModuleRef, inputModuleRef);
-}
+};
 
-export const removeStatModuleFromUser = async (userId: string, statModuleId: string) => {
-    const userStatModuleRef = doc(db, "users", userId, "userStatModules", statModuleId);
+export const removeStatModuleFromUser = async (
+    userId: string,
+    statModuleId: string
+) => {
+    const userStatModuleRef = doc(
+        db,
+        "users",
+        userId,
+        "userStatModules",
+        statModuleId
+    );
     const userInputModulesRef = collection(userStatModuleRef, "inputModules");
     removeStatModule(userStatModuleRef, userInputModulesRef);
-}
+};
 
 const removeStatModule = async (
     statModuleRef: DocumentReference<DocumentData, DocumentData>,
@@ -152,7 +209,7 @@ const removeStatModule = async (
     await deleteDoc(statModuleRef);
 
     console.log("stat module deleted!");
-}
+};
 
 /**
  * Fetches all stat module documents in the order they were created, newest at the top left.
@@ -161,20 +218,28 @@ const removeStatModule = async (
  */
 export const fetchAllStatModules = async () => {
     // Order the collection by timeStamp.
-    const q = query(collection(db, "statModules"), orderBy("timeStamp", "desc"));
+    const q = query(
+        collection(db, "statModules"),
+        orderBy("timeStamp", "desc")
+    );
 
     const querySnapshot = await getDocs(q);
     return fetchStatModules(querySnapshot);
 };
 
 export const fetchUserStatModules = async (userId: string) => {
-    const q = query(collection(db, "users", userId, "userStatModules"), orderBy("timeStamp", "asc"));
+    const q = query(
+        collection(db, "users", userId, "userStatModules"),
+        orderBy("timeStamp", "asc")
+    );
 
     const querySnapshot = await getDocs(q);
     return fetchStatModules(querySnapshot);
-}
+};
 
-export const fetchStatModules = async (statModulesSnapshot: QuerySnapshot<DocumentData, DocumentData>) => {
+export const fetchStatModules = async (
+    statModulesSnapshot: QuerySnapshot<DocumentData, DocumentData>
+) => {
     console.log("Fetching data...");
 
     // Fetch stat module data and iterate through them to initialise statModuleDocuments.
@@ -212,7 +277,7 @@ export const fetchStatModules = async (statModulesSnapshot: QuerySnapshot<Docume
     );
 
     return statModuleDocuments;
-}
+};
 
 /**
  * Fetches the input module documents of the stat module associated with the input ID.

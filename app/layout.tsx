@@ -17,7 +17,7 @@ export default function RootLayout({
         <html lang="en">
             <body className={`${inter.className} antialiased`}>
                 <main className="flex min-h-screen flex-col items-center justify-between p-24">
-                    <div className="fixed left-0 top-0 z-50 flex w-full justify-center bg-amber-300 border-black border-b-2 pb-1 pt-2 lg:p-4">
+                    <div className="fixed left-0 top-0 z-50 flex w-full justify-center border-b-2 border-black bg-amber-300 pb-1 pt-2 lg:p-4">
                         <TopNav />
                     </div>
                     {children}
