@@ -127,7 +127,7 @@ export const StatModule = ({
                         className="relative rounded-md"
                     >
                         <button
-                            className="peer flex h-6 w-6 cursor-default items-center"
+                            className="peer flex h-6 w-6 cursor-default items-center dark:text-white"
                             onClick={() => {
                                 removeStatModuleFromUser(data.id);
                             }}

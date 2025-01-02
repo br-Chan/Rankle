@@ -238,8 +238,7 @@ export default function Home() {
     return (
         <main>
             {/* Rank display */}
-            <div className="fixed bottom-0 left-0 z-10 flex h-40 w-full items-end justify-center bg-gradient-to-t from-zinc-200 via-zinc-200 to-transparent lg:bottom-auto lg:top-0 lg:mt-16 lg:h-32 lg:bg-gradient-to-b lg:via-70% lg:to-95% dark:from-slate-700 dark:via-slate-700">
-                {/*dark:from-zinc-700 dark:via-zinc-700 */}
+            <div className="fixed bottom-0 left-0 z-10 flex h-40 w-full items-end justify-center bg-gradient-to-t from-zinc-200 via-zinc-200 to-transparent lg:bottom-auto lg:top-0 lg:mt-16 lg:h-32 lg:bg-gradient-to-b lg:via-70% lg:to-95% dark:from-zinc-800 dark:via-zinc-800">
                 <div className="mb-2 flex w-full items-center space-x-2 p-4 lg:mb-10 lg:p-0">
                     <div className="flex flex-1 justify-end space-x-2">
                         <span>---</span>
