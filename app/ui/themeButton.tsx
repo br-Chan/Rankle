@@ -4,7 +4,7 @@ import {
     ComputerDesktopIcon,
     MoonIcon,
     SunIcon,
-} from "@heroicons/react/24/solid";
+} from "@heroicons/react/24/outline";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
@@ -17,15 +17,15 @@ const ThemeButton = () => {
     return mounted ? (
         <button
             type="button"
-            className="*:hover:bg-amber-500 *:hover:transition-colors"
+            className="*:border-2 *:border-black *:text-black *:hover:bg-amber-500 *:hover:transition-colors"
             onClick={() => {
                 setTheme(resolvedTheme === "dark" ? "light" : "dark");
             }}
         >
             {resolvedTheme === "dark" ? (
-                <SunIcon className="w-7 rounded-full border-2 border-white p-1 text-white md:w-9" />
+                <SunIcon className="w-7 rounded-full p-1 md:w-9" />
             ) : (
-                <MoonIcon className="w-7 rounded-full border-2 border-black p-1 text-black md:w-9" />
+                <MoonIcon className="w-7 rounded-full p-1 md:w-9" />
             )}
         </button>
     ) : (
