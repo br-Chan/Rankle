@@ -72,20 +72,20 @@ export const StatModule = ({
 
     return (
         <div
-            className="relative transition-all duration-300"
+            className="relative transition-opacity duration-300"
             style={{
                 opacity: opacity,
             }}
         >
             {/* Body of the stat module */}
             <div
-                className="h-full rounded-2xl border-4 px-5 py-2 text-center transition-all duration-300"
+                className="h-full rounded-2xl border-4 px-5 py-2 text-center transition-opacity duration-300"
                 style={{
                     borderColor: `${data.themeColor}`,
                     backgroundColor: `${data.themeColor}25`,
                 }}
             >
-                <div className="mt-7 transition-all duration-300">
+                <div className="mt-7 transition-opacity duration-300">
                     {/* Horizontal line (decide if should do this) */}
                     {/* <div
                         className="border-2"
@@ -105,7 +105,7 @@ export const StatModule = ({
 
             {/* Title bar of the stat module */}
             <div
-                className="absolute left-0 top-0 flex h-10 w-full items-center justify-between rounded-t-2xl border-4 px-1 opacity-100 transition-all duration-300"
+                className="absolute left-0 top-0 flex h-10 w-full items-center justify-between rounded-t-2xl border-4 px-1 opacity-100 transition-opacity duration-300"
                 style={{
                     borderColor: `${data.themeColor}`,
                     backgroundColor: `${data.themeColor}25`,

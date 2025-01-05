@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { HoverTooltip } from "./hoverTooltip";
 import { PlusIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
+import ThemeButton from "./themeButton";
 
 const leftLinks = [];
 
@@ -19,7 +20,9 @@ const rightLinks = [
 export default function TopNav() {
     return (
         <div className="flex w-full items-center justify-between px-5">
-            <div className="w-96"></div>
+            <div className="flex flex-1">
+                <ThemeButton />
+            </div>
 
             <Link className="relative" href={"/"}>
                 <h1 className="peer text-2xl font-bold text-black md:text-4xl">
@@ -28,7 +31,7 @@ export default function TopNav() {
                 <HoverTooltip tooltipText="Home" delay="1000" />
             </Link>
 
-            <div className="flex w-96 justify-end">
+            <div className="flex flex-1 justify-end">
                 {rightLinks.map((link) => {
                     const LinkIcon = link.icon;
                     return (
