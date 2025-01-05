@@ -23,13 +23,13 @@ const ThemeButton = () => {
             }}
         >
             {resolvedTheme === "dark" ? (
-                <SunIcon className="w-5 rounded-full border-2 border-white p-1 text-white md:w-8" />
+                <SunIcon className="w-7 rounded-full border-2 border-white p-1 text-white md:w-9" />
             ) : (
-                <MoonIcon className="w-5 rounded-full border-2 border-black p-1 text-black md:w-8" />
+                <MoonIcon className="w-7 rounded-full border-2 border-black p-1 text-black md:w-9" />
             )}
         </button>
     ) : (
-        <ComputerDesktopIcon className="h-5 w-5 rounded-full border-2 border-gray-500 p-1 text-gray-500 md:h-8 md:w-8" />
+        <ComputerDesktopIcon className="h-7 w-7 rounded-full border-2 border-gray-500 p-1 text-gray-500 md:h-9 md:w-9" />
     );
 };
 
