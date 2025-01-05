@@ -229,7 +229,7 @@ export const CreateForm = () => {
     return (
         <form onSubmit={handleSubmit} className="pt-4">
             <div
-                className="mb-2 flex h-full flex-col items-center rounded-2xl border-4 px-5 pt-2 text-center transition-all duration-300"
+                className="mb-2 flex h-full flex-col items-center rounded-2xl border-4 px-5 pt-2 text-center transition-bg-border duration-300"
                 style={{
                     borderColor: `${formData.themeColor}`,
                     backgroundColor: `${formData.themeColor}25`,

@@ -40,10 +40,10 @@ export const StatModulePane = ({
     }
 
     return (
-        <div className="relative cursor-default transition-all duration-300">
+        <div className="relative cursor-default">
             {/* Title bar of the stat module pane*/}
             <div
-                className="absolute left-0 top-0 flex h-9 w-full items-center justify-between rounded-t-2xl border-l-4 border-r-4 border-t-4 px-3 opacity-100 transition-all duration-300"
+                className="absolute left-0 top-0 flex h-9 w-full items-center justify-between rounded-t-2xl border-l-4 border-r-4 border-t-4 px-3 opacity-100"
                 style={{
                     borderColor: `${data.themeColor}`,
                 }}
@@ -86,13 +86,13 @@ export const StatModulePane = ({
 
             {/* Body of the stat module pane*/}
             <div
-                className="h-full rounded-2xl border-4 px-5 py-2 text-center transition-all duration-300"
+                className="h-full rounded-2xl border-4 px-5 py-2 text-center"
                 style={{
                     borderColor: `${data.themeColor}`,
                     backgroundColor: `${data.themeColor}25`,
                 }}
             >
-                <div className="mt-6 space-y-2 transition-all duration-300">
+                <div className="mt-6 space-y-2">
                     {/* Horizontal line at the top of the body to divide it from title bar */}
                     <div
                         className="border-2"

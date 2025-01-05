@@ -26,7 +26,7 @@ export const ThemedHoverComponent = ({
 
     return (
         <div
-            className={`transition-all ${className}`}
+            className={`hover:transition-all ${className}`}
             style={{
                 backgroundColor: isHovered
                     ? hoveredBackgroundColor
