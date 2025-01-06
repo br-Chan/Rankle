@@ -102,12 +102,12 @@ export const StatModulePane = ({
                     ></div>
 
                     {/* Theme colour */}
-                    <div className="mx-10 rounded-md border-2 border-white bg-white text-sm text-black">
+                    <div className="mx-10 rounded-md bg-white p-[2px] text-sm text-black dark:bg-zinc-800 dark:text-white">
                         {`Theme: ${data.themeColor}`}
                     </div>
 
                     {/* Hard mode display pane */}
-                    <div className="mx-10 rounded-md border-2 border-white bg-white text-sm text-black">
+                    <div className="mx-10 rounded-md bg-white p-[2px] text-sm text-black  dark:bg-zinc-800 dark:text-white">
                         {data.hardModeMultiplier !== 1
                             ? `Hard mode: ×${data.hardModeMultiplier}`
                             : "No hard mode"}

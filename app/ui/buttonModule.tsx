@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { HoverTooltip } from "./hoverTooltip";
+import { useTheme } from "next-themes";
 
 /**
  * Data type for button modules, to be used when displaying a stat module to the user.
@@ -37,6 +38,7 @@ export const ButtonModule = ({
         score: number
     ) => void;
 }) => {
+    const { resolvedTheme } = useTheme();
     const [selectedButtonIndex, setSelectedButtonIndex] = useState<
         number | null
     >(data.selectedButtonIndex);
@@ -64,17 +66,27 @@ export const ButtonModule = ({
         let score = data.buttonScores[index];
         buttons.push(
             <div
-                className="relative rounded-lg border-2 border-black font-semibold text-black"
+                className="relative rounded-lg border-2 border-black font-semibold dark:border-white"
                 key={index}
             >
                 <button
-                    className="peer w-full rounded-md py-2 transition-colors duration-300"
+                    className="peer w-full rounded-md py-2 text-black duration-300 dark:text-white"
                     value={score}
                     style={{
                         backgroundColor:
                             selectedButtonIndex === index
                                 ? themeColor
-                                : "white",
+                                : resolvedTheme === "dark"
+                                  ? "#27272a"
+                                  : "white",
+                        color:
+                            selectedButtonIndex === index
+                                ? "black"
+                                : resolvedTheme === "dark"
+                                  ? "white"
+                                  : "black",
+                        transitionDuration:
+                            selectedButtonIndex === index ? "0.3s" : "0s",
                     }}
                     onClick={() => handleClick(data, index, score)}
                 >

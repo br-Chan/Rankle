@@ -243,7 +243,7 @@ export default function Home() {
                     <div className="flex flex-1 justify-end space-x-2">
                         <span>---</span>
                     </div>
-                    <div className="mx-auto flex h-16 w-28 cursor-default items-center justify-center rounded-md border-2 border-black bg-white p-4 font-black text-black">
+                    <div className="mx-auto flex h-16 w-28 cursor-default items-center justify-center rounded-md border-2 border-black dark:border-white bg-white dark:bg-zinc-900 dark:text-white p-4 font-black text-black">
                         {rank ? (
                             <div className="relative">
                                 <div className="peer flex justify-center text-4xl">

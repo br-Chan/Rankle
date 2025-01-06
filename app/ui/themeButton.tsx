@@ -17,15 +17,15 @@ const ThemeButton = () => {
     return mounted ? (
         <button
             type="button"
-            className="*:border-2 *:border-black *:text-black *:hover:bg-amber-500 *:hover:transition-colors"
+            className="*:border-2 *:border-black *:text-black *:hover:transition-colors"
             onClick={() => {
                 setTheme(resolvedTheme === "dark" ? "light" : "dark");
             }}
         >
             {resolvedTheme === "dark" ? (
-                <SunIcon className="w-7 rounded-full p-1 md:w-9" />
+                <SunIcon className="w-7 rounded-full p-1 md:w-9 hover:bg-amber-300" />
             ) : (
-                <MoonIcon className="w-7 rounded-full p-1 md:w-9" />
+                <MoonIcon className="w-7 rounded-full p-1 md:w-9 hover:bg-amber-500" />
             )}
         </button>
     ) : (

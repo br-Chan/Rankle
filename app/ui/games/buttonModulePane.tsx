@@ -30,13 +30,13 @@ export const ButtonModulePane = ({
                     key={index}
                 >
                     {/* Button label */}
-                    <div className="w-full rounded-t-md bg-white font-semibold text-black">
+                    <div className="w-full rounded-t-md bg-white font-semibold text-black dark:bg-zinc-800 dark:text-white">
                         {label}
                     </div>
 
                     {/* Button score */}
                     <div
-                        className="w-full rounded-b-md border-t-2 bg-white text-gray-700"
+                        className="w-full rounded-b-md border-t-2 bg-white text-gray-700 dark:bg-zinc-800 dark:text-white"
                         style={{
                             borderColor: `${themeColor}`,
                         }}
