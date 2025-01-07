@@ -25,15 +25,18 @@ export const ButtonModulePane = ({
         const score = data.buttonScores[index];
         buttons.push(
             <div className="relative" key={index}>
-                <div className="peer text-sm border-black rounded-lg" key={index}>
+                <div
+                    className="peer rounded-lg border-black text-sm"
+                    key={index}
+                >
                     {/* Button label */}
-                    <div className="w-full text-black font-semibold bg-white rounded-t-md">
+                    <div className="w-full rounded-t-md bg-white font-semibold text-black dark:bg-zinc-800 dark:text-white">
                         {label}
                     </div>
 
                     {/* Button score */}
                     <div
-                        className="w-full text-gray-700 bg-white rounded-b-md border-t-2"
+                        className="w-full rounded-b-md border-t-2 bg-white text-gray-700 dark:bg-zinc-800 dark:text-white"
                         style={{
                             borderColor: `${themeColor}`,
                         }}
@@ -41,13 +44,18 @@ export const ButtonModulePane = ({
                         {score}
                     </div>
                 </div>
-                <HoverTooltip tooltipText={`Label: ${label}\nScore: ${score}`} />
+                <HoverTooltip
+                    tooltipText={`Label: ${label}\nScore: ${score}`}
+                />
             </div>
         );
     }
 
     return (
-        <div className="mt-2 p-2 rounded-md" style={{ backgroundColor: `${themeColor}25` }}>
+        <div
+            className="mt-2 rounded-md p-2"
+            style={{ backgroundColor: `${themeColor}25` }}
+        >
             <div>{data.queryText}</div>
             <div className="grid grid-cols-3 gap-1">{buttons}</div>
         </div>

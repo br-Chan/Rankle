@@ -37,7 +37,11 @@ export const StatModule = ({
     data: StatModuleData;
     handleEnableClick: (statModuleId: string) => void;
     handleHardModeClick: (statModuleId: string) => void;
-    handleInputClick: (data: ButtonModuleData, index: number, score: number) => void;
+    handleInputClick: (
+        data: ButtonModuleData,
+        index: number,
+        score: number
+    ) => void;
     removeStatModuleFromUser: (statModuleId: string) => void;
 }) => {
     const inputModules = [];
@@ -68,20 +72,20 @@ export const StatModule = ({
 
     return (
         <div
-            className="relative transition-all duration-300"
+            className="relative transition-opacity duration-300"
             style={{
                 opacity: opacity,
             }}
         >
             {/* Body of the stat module */}
             <div
-                className="h-full py-2 px-5 text-center transition-all duration-300 border-4 rounded-2xl"
+                className="h-full rounded-2xl border-4 px-5 py-2 text-center transition-opacity duration-300"
                 style={{
                     borderColor: `${data.themeColor}`,
                     backgroundColor: `${data.themeColor}25`,
                 }}
             >
-                <div className="mt-7 transition-all duration-300">
+                <div className="mt-7 transition-opacity duration-300">
                     {/* Horizontal line (decide if should do this) */}
                     {/* <div
                         className="border-2"
@@ -101,7 +105,7 @@ export const StatModule = ({
 
             {/* Title bar of the stat module */}
             <div
-                className="absolute flex justify-between items-center px-1 top-0 left-0 h-10 w-full opacity-100 transition-all duration-300 border-4 rounded-t-2xl"
+                className="absolute left-0 top-0 flex h-10 w-full items-center justify-between rounded-t-2xl border-4 px-1 opacity-100 transition-opacity duration-300"
                 style={{
                     borderColor: `${data.themeColor}`,
                     backgroundColor: `${data.themeColor}25`,
@@ -109,19 +113,21 @@ export const StatModule = ({
             >
                 <div className="flex items-center">
                     <EnableSwitch
-                        onEnableClick={() => handleEnableClickInStatModule(data.id)}
+                        onEnableClick={() =>
+                            handleEnableClickInStatModule(data.id)
+                        }
                         backgroundColor={data.themeColor}
                     />
-                    <h2 className="text-xl font-bold ">{data.gameName}</h2>
+                    <h2 className="text-xl font-bold">{data.gameName}</h2>
                 </div>
-                <div className="flex items-center h-10 mr-1">
+                <div className="mr-1 flex h-10 items-center">
                     {/* <button className="font-bold text-blue-500 m-1">/</button> */}
                     <ThemedHoverComponent
                         hoveredBackgroundColor={data.themeColor}
-                        className="rounded-md relative "
+                        className="relative rounded-md"
                     >
                         <button
-                            className="peer cursor-default flex items-center h-6 w-6"
+                            className="peer flex h-6 w-6 cursor-default items-center dark:text-white"
                             onClick={() => {
                                 removeStatModuleFromUser(data.id);
                             }}

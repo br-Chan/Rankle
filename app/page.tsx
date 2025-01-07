@@ -71,7 +71,9 @@ export default function Home() {
                 user.uid,
                 "userStatModules"
             );
-            const userStatModulesSnap = await getDocs(userStatModulesCollectionRef);
+            const userStatModulesSnap = await getDocs(
+                userStatModulesCollectionRef
+            );
 
             if (userStatModulesSnap.empty) {
                 console.log("adding stat modules to new user");
@@ -83,9 +85,8 @@ export default function Home() {
                 ]);
             }
 
-            const statModulesFirestoreData: statModulesFirestoreData[] = await fetchUserStatModules(
-                user.uid
-            );
+            const statModulesFirestoreData: statModulesFirestoreData[] =
+                await fetchUserStatModules(user.uid);
 
             setStatModuleData(
                 statModulesFirestoreData.map((data) => {
@@ -114,7 +115,10 @@ export default function Home() {
      * @param inputModuleId id of the input module to find
      * @returns the input module found
      */
-    const getInputModuleData = (statModuleId: string, inputModuleId: string) => {
+    const getInputModuleData = (
+        statModuleId: string,
+        inputModuleId: string
+    ) => {
         const statModule = getStatModuleData(statModuleId);
         if (statModule === undefined) {
             return undefined;
@@ -150,7 +154,8 @@ export default function Home() {
         if (statModuleDataToChange === undefined) {
             return; // To handle finding no matching id
         }
-        statModuleDataToChange.hardModeEnabled = !statModuleDataToChange.hardModeEnabled;
+        statModuleDataToChange.hardModeEnabled =
+            !statModuleDataToChange.hardModeEnabled;
 
         // Update the Rank now that hard mode has been turned on for a stat module.
         updateRank();
@@ -163,11 +168,18 @@ export default function Home() {
      * @param index the index of the buttons array that has been selected in the input module
      * @param score the new score to update with
      */
-    const handleInputClick = (data: ButtonModuleData, index: number, score: number) => {
+    const handleInputClick = (
+        data: ButtonModuleData,
+        index: number,
+        score: number
+    ) => {
         console.log(data.queryText + ": " + score + " in index " + index);
 
         // Update input module's selected button index in its data.
-        const inputModuleDataToChange = getInputModuleData(data.statModuleId, data.id);
+        const inputModuleDataToChange = getInputModuleData(
+            data.statModuleId,
+            data.id
+        );
         if (inputModuleDataToChange === undefined) {
             return; // To handle finding no matching score index
         }
@@ -178,7 +190,9 @@ export default function Home() {
 
     const removeStatModuleFromUser = (statModuleId: string) => {
         removeStatModuleFromUserInFirestore(user.uid, statModuleId);
-        setStatModuleData(statModuleData.filter((data) => data.id !== statModuleId));
+        setStatModuleData(
+            statModuleData.filter((data) => data.id !== statModuleId)
+        );
 
         updateRank();
     };
@@ -200,8 +214,12 @@ export default function Home() {
                     if (buttonModule.selectedButtonIndex != null) {
                         ++numberOfEnabledScores;
                         currentScore =
-                            buttonModule.buttonScores[buttonModule.selectedButtonIndex] *
-                            (statModule.hardModeEnabled ? statModule.hardModeMultiplier : 1);
+                            buttonModule.buttonScores[
+                                buttonModule.selectedButtonIndex
+                            ] *
+                            (statModule.hardModeEnabled
+                                ? statModule.hardModeMultiplier
+                                : 1);
                         sum += currentScore;
                     }
                 });
@@ -210,7 +228,8 @@ export default function Home() {
 
         // Calculate the average score.
         const avg = Math.floor(sum / numberOfEnabledScores);
-        const grade = ranks.find(({ threshold }) => avg >= threshold)?.rank || "unranked";
+        const grade =
+            ranks.find(({ threshold }) => avg >= threshold)?.rank || "unranked";
 
         // Update the rank.
         setRank(isNaN(avg) ? undefined : { grade: grade, averageScore: avg });
@@ -219,18 +238,20 @@ export default function Home() {
     return (
         <main>
             {/* Rank display */}
-            <div className="flex fixed bottom-0 left-0 z-10 h-40 w-full items-end justify-center bg-gradient-to-t from-zinc-200 via-zinc-200 lg:via-70% to-transparent lg:to-95% lg:top-0 lg:bottom-auto lg:mt-16 lg:h-32 lg:bg-gradient-to-b">
-                <div className="flex items-center w-full mb-2 p-4 lg:mb-10 lg:p-0 space-x-2">
+            <div className="fixed bottom-0 left-0 z-10 flex h-40 w-full items-end justify-center bg-gradient-to-t from-zinc-200 via-zinc-200 to-transparent lg:bottom-auto lg:top-0 lg:mt-16 lg:h-32 lg:bg-gradient-to-b lg:via-70% lg:to-95% dark:from-zinc-800 dark:via-zinc-800">
+                <div className="mb-2 flex w-full items-center space-x-2 p-4 lg:mb-10 lg:p-0">
                     <div className="flex flex-1 justify-end space-x-2">
                         <span>---</span>
                     </div>
-                    <div className="flex justify-center items-center mx-auto cursor-default p-4 h-16 w-28 border-2 border-black bg-white font-black rounded-md">
+                    <div className="mx-auto flex h-16 w-28 cursor-default items-center justify-center rounded-md border-2 border-black dark:border-white bg-white dark:bg-zinc-900 dark:text-white p-4 font-black text-black">
                         {rank ? (
                             <div className="relative">
                                 <div className="peer flex justify-center text-4xl">
                                     {rank.grade}
                                 </div>
-                                <div className="peer flex justify-center">{rank.averageScore}</div>
+                                <div className="peer flex justify-center">
+                                    {rank.averageScore}
+                                </div>
                                 <HoverTooltip
                                     tooltipText={`${rank.grade} - ${rank.averageScore.toString()}`}
                                 />
@@ -247,21 +268,12 @@ export default function Home() {
 
             {/* Stat modules */}
             {statModuleData.length === 0 ? (
-                <div className="flex flex-col lg:flex-row text-center px-16 py-1 rounded-xl font-mono text-2xl bg-amber-300 lg:mt-24">
+                <div className="flex flex-col rounded-xl bg-amber-300 px-16 py-1 text-center font-mono text-2xl text-black lg:mt-24 lg:flex-row">
                     <span>Loading your games</span>
                     <span>...</span>
                 </div>
             ) : (
-                <div
-                    className="
-                    mb-32 grid gap-4 text-center
-                    grid-cols-1 w-[288px]
-                    md:grid-cols-2 md:w-[576px]
-                    lg:grid-cols-3 lg:w-[864px]
-                    2xl:grid-cols-4 2xl:w-[1152px]
-                    lg:mt-20
-                "
-                >
+                <div className="mb-32 grid w-[288px] grid-cols-1 gap-4 text-center md:w-[576px] md:grid-cols-2 lg:mt-20 lg:w-[864px] lg:grid-cols-3 2xl:w-[1152px] 2xl:grid-cols-4">
                     {statModuleData.map((data, index) => (
                         <StatModule
                             key={data.id}

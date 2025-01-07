@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { HoverTooltip } from "./hoverTooltip";
 import { PlusIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
+import ThemeButton from "./themeButton";
 
 const leftLinks = [];
 
@@ -18,25 +19,32 @@ const rightLinks = [
  */
 export default function TopNav() {
     return (
-        <div className="flex justify-between items-center w-full px-5">
-            <div className="w-96"></div>
+        <div className="flex w-full items-center justify-between px-5">
+            <div className="flex flex-1">
+                <ThemeButton />
+            </div>
 
             <Link className="relative" href={"/"}>
-                <h1 className="peer text-2xl text-black font-bold md:text-4xl">RANKLE</h1>
+                <h1 className="peer text-2xl font-bold text-black md:text-4xl">
+                    RANKLE
+                </h1>
                 <HoverTooltip tooltipText="Home" delay="1000" />
             </Link>
 
-            <div className="flex justify-end w-96">
+            <div className="flex flex-1 justify-end">
                 {rightLinks.map((link) => {
                     const LinkIcon = link.icon;
                     return (
                         <Link
                             key={link.name}
-                            className="relative mx-1 border-2 border-black rounded-lg transition-all hover:bg-amber-500 hover:text-white"
+                            className="relative mx-1 rounded-lg border-2 border-black text-black hover:bg-amber-500 hover:text-white transition-colors dark:text-white dark:hover:bg-amber-300 dark:hover:text-black"
                             href={link.href}
                         >
                             <LinkIcon className="peer w-6 md:w-8" />
-                            <HoverTooltip key={link.name} tooltipText={link.name} />
+                            <HoverTooltip
+                                key={link.name}
+                                tooltipText={link.name}
+                            />
                         </Link>
                     );
                 })}

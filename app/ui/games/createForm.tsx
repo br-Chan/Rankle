@@ -1,7 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { ButtonFormData, ButtonFormDataSchema, ButtonModuleForm } from "./buttonModuleForm";
+import {
+    ButtonFormData,
+    ButtonFormDataSchema,
+    ButtonModuleForm,
+} from "./buttonModuleForm";
 import { useDebouncedCallback } from "use-debounce";
 import { useRouter } from "next/navigation";
 import { addDataToStatModules } from "@/app/lib/firestoreUtils";
@@ -172,11 +176,15 @@ export const CreateForm = () => {
             } else if (fieldType === "label") {
                 buttonIndex = Number(buttonIndex);
                 newValue = String(newValue);
-                newInputModuleForms[buttonModuleIndex].data[Number(buttonIndex)].label = newValue;
+                newInputModuleForms[buttonModuleIndex].data[
+                    Number(buttonIndex)
+                ].label = newValue;
             } else if (fieldType === "score") {
                 buttonIndex = Number(buttonIndex);
                 newValue = Number(newValue);
-                newInputModuleForms[buttonModuleIndex].data[Number(buttonIndex)].score = newValue;
+                newInputModuleForms[buttonModuleIndex].data[
+                    Number(buttonIndex)
+                ].score = newValue;
             } else {
                 alert("Error - invalid field type");
             }
@@ -221,7 +229,7 @@ export const CreateForm = () => {
     return (
         <form onSubmit={handleSubmit} className="pt-4">
             <div
-                className="flex flex-col items-center mb-2 h-full pt-2 px-5 text-center transition-all duration-300 border-4 rounded-2xl"
+                className="mb-2 flex h-full flex-col items-center rounded-2xl border-4 px-5 pt-2 text-center transition-bg-border duration-300"
                 style={{
                     borderColor: `${formData.themeColor}`,
                     backgroundColor: `${formData.themeColor}25`,
@@ -232,7 +240,7 @@ export const CreateForm = () => {
                     <input
                         type="text"
                         id="gameName"
-                        className="w-80 px-3 py-2 border-2 rounded-lg outline-none bg-white bg-opacity-50 text-center text-2xl font-bold focus:border-amber-500"
+                        className="w-full rounded-lg border-2 bg-white bg-opacity-50 px-3 py-2 text-center text-2xl font-bold outline-none focus:border-amber-500 md:w-4/5 dark:placeholder-gray-600"
                         value={formData.gameName}
                         placeholder="Game name"
                         autoComplete="off"
@@ -247,29 +255,34 @@ export const CreateForm = () => {
                 </div>
 
                 {/* Theme color picker */}
-                <div className="flex justify-between items-center w-full mb-4 space-x-2">
-                    <span className="w-60 text-right font-semibold">Colour:</span>
+                <div className="mb-4 flex w-full items-center justify-between space-x-2">
+                    <span className="flex-1 text-right font-semibold">
+                        Colour:
+                    </span>
                     <input
                         type="color"
                         id="themeColor"
-                        className="p-1 h-10 w-14 bg-white bg-opacity-50 border-2 rounded-lg cursor-pointer focus:outline-none focus:border-amber-500"
+                        className="h-10 w-14 cursor-pointer rounded-lg border-2 bg-white bg-opacity-50 p-1 focus:border-amber-500 focus:outline-none"
                         value={formData.themeColor}
                         onChange={(e) => {
                             updateThemeColor(e.target.value);
                         }}
                     />
-                    <label htmlFor="themeColor" className="w-60 text-left text-gray-700 font-mono">
+                    <label
+                        htmlFor="themeColor"
+                        className="flex-1 text-left font-mono text-gray-700 dark:text-gray-300"
+                    >
                         &quot;{formData.themeColorName}&quot;
                     </label>
                 </div>
 
                 {/* Hard mode input */}
-                <div className="flex items-center mb-4 space-x-2">
+                <div className="mb-4 flex items-center space-x-2">
                     <span className="font-semibold">Hard mode multiplier:</span>
                     <input
                         type="number"
                         id="hardModeMultiplier"
-                        className="ml-1 h-[30px] w-20 px-1 py-2 pl-5 border-2 rounded-lg outline-none bg-white bg-opacity-50 text-center text-lg text-gray-700 focus:border-amber-500"
+                        className="ml-1 h-[30px] w-20 rounded-lg border-2 bg-white bg-opacity-50 px-1 py-2 pl-5 text-center text-lg text-gray-700 outline-none focus:border-amber-500 dark:text-white"
                         value={formData.hardModeMultiplier}
                         autoComplete="off"
                         min="1.0"
@@ -285,13 +298,15 @@ export const CreateForm = () => {
                 </div>
 
                 {/* Input module creation */}
-                <div className="flex flex-col w-full mb-4 items-center text-center">
+                <div className="mb-4 flex w-full flex-col items-center text-center">
                     {formData.inputModuleForms.map((item, index) => (
                         <ButtonModuleForm
                             key={index}
                             index={index}
                             data={item.data}
-                            handleAddButtonFormClick={(index, add) => addButtonForm(index, add)}
+                            handleAddButtonFormClick={(index, add) =>
+                                addButtonForm(index, add)
+                            }
                             handleButtonModuleFormChange={(
                                 fieldType,
                                 newValue,
@@ -310,18 +325,18 @@ export const CreateForm = () => {
                 </div>
 
                 {/* Add/remove a button module */}
-                <div className="group flex w-32 mb-2 text-sm border-2 border-black rounded-lg">
+                <div className="group mb-2 flex w-32 rounded-lg border-2 border-black text-sm">
                     <input
                         type="button"
                         id="addInputModuleForm"
-                        className="w-1/2 border-r-[1px] border-amber-200 rounded-l-md bg-amber-300 hover:bg-amber-500 text-black transition-colors duration-300 font-mono cursor-pointer"
+                        className="w-1/2 cursor-pointer rounded-l-md border-r-[1px] border-amber-200 bg-amber-300 font-mono text-black transition-colors duration-300 hover:bg-amber-500"
                         onClick={addInputModuleForm}
                         value="+Query"
                     />
                     <input
                         type="button"
                         id="removeInputModuleForm"
-                        className="w-1/2 border-l-[1px] border-amber-200 rounded-r-md bg-amber-300 hover:bg-amber-500 text-black transition-colors duration-300 font-mono cursor-pointer"
+                        className="w-1/2 cursor-pointer rounded-r-md border-l-[1px] border-amber-200 bg-amber-300 font-mono text-black transition-colors duration-300 hover:bg-amber-500"
                         onClick={removeInputModuleForm}
                         value="-Query"
                     />
@@ -332,7 +347,7 @@ export const CreateForm = () => {
             <div className="text-center">
                 <button
                     type="submit"
-                    className="bg-amber-300 hover:bg-amber-500 text-black font-bold py-2 px-4 rounded-lg"
+                    className="transition-colours rounded-lg bg-amber-300 px-4 py-2 font-bold text-black duration-300 hover:bg-amber-500 hover:text-white"
                 >
                     SUBMIT
                 </button>

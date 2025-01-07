@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { HoverTooltip } from "./hoverTooltip";
+import { useTheme } from "next-themes";
 
 /**
  * Data type for button modules, to be used when displaying a stat module to the user.
@@ -31,11 +32,16 @@ export const ButtonModule = ({
 }: {
     data: ButtonModuleData;
     themeColor: string;
-    onInputClick: (data: ButtonModuleData, index: number, score: number) => void;
+    onInputClick: (
+        data: ButtonModuleData,
+        index: number,
+        score: number
+    ) => void;
 }) => {
-    const [selectedButtonIndex, setSelectedButtonIndex] = useState<number | null>(
-        data.selectedButtonIndex
-    );
+    const { resolvedTheme } = useTheme();
+    const [selectedButtonIndex, setSelectedButtonIndex] = useState<
+        number | null
+    >(data.selectedButtonIndex);
     const buttons = [];
 
     /**
@@ -46,7 +52,11 @@ export const ButtonModule = ({
      * @param scoreIndex the index of the input module data array to update
      * @param score the new updated score
      */
-    const handleClick = (data: ButtonModuleData, index: number, score: number) => {
+    const handleClick = (
+        data: ButtonModuleData,
+        index: number,
+        score: number
+    ) => {
         setSelectedButtonIndex(index);
         onInputClick(data, index, score);
     };
@@ -56,14 +66,27 @@ export const ButtonModule = ({
         let score = data.buttonScores[index];
         buttons.push(
             <div
-                className="relative text-black font-semibold border-2 border-black rounded-lg"
+                className="relative rounded-lg border-2 border-black font-semibold dark:border-white"
                 key={index}
             >
                 <button
-                    className="peer w-full py-2 transition-colors duration-300 rounded-md"
+                    className="peer w-full rounded-md py-2 text-black duration-300 dark:text-white"
                     value={score}
                     style={{
-                        backgroundColor: selectedButtonIndex === index ? themeColor : "white",
+                        backgroundColor:
+                            selectedButtonIndex === index
+                                ? themeColor
+                                : resolvedTheme === "dark"
+                                  ? "#27272a"
+                                  : "white",
+                        color:
+                            selectedButtonIndex === index
+                                ? "black"
+                                : resolvedTheme === "dark"
+                                  ? "white"
+                                  : "black",
+                        transitionDuration:
+                            selectedButtonIndex === index ? "0.3s" : "0s",
                     }}
                     onClick={() => handleClick(data, index, score)}
                 >

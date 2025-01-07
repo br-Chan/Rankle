@@ -3,7 +3,7 @@ import { z } from "zod";
 export const ButtonFormDataSchema = z.object({
     label: z.string(),
     score: z.number(),
-})
+});
 
 /**
  * Data type for button forms, to use when collecting data from the user in the Create form.
@@ -12,7 +12,7 @@ export type ButtonFormData = z.infer<typeof ButtonFormDataSchema>;
 
 /**
  * A 'form' for inputting data for a single button in a button module.
- * 
+ *
  * @param props Component props
  * @returns Button module form
  */
@@ -38,11 +38,16 @@ export const ButtonModuleForm = ({
             <input
                 type="text"
                 id="queryText"
-                className="w-full px-1 py-2 border-2 rounded-lg outline-none bg-white bg-opacity-50 text-center text-xl font-bold focus:border-amber-500"
+                className="w-full rounded-lg border-2 bg-white bg-opacity-50 px-1 py-2 text-center text-xl font-bold outline-none focus:border-amber-500 dark:placeholder-gray-600"
                 placeholder="Query text"
                 autoComplete="off"
                 onChange={(e) =>
-                    handleButtonModuleFormChange("queryText", e.target.value, index, null)
+                    handleButtonModuleFormChange(
+                        "queryText",
+                        e.target.value,
+                        index,
+                        null
+                    )
                 }
                 required
             />
@@ -52,24 +57,29 @@ export const ButtonModuleForm = ({
                 {data.map((item, i) => (
                     <div
                         key={i}
-                        className="group flex flex-col w-24 my-1 mx-1 border-2 border-black rounded-lg focus-within:border-amber-500"
+                        className="group mx-1 my-1 flex w-24 flex-col rounded-lg border-2 border-gray-200 focus-within:border-amber-500"
                     >
                         <input
                             type="text"
                             id={`${i}_label`}
-                            className="h-[30px] px-1 py-2 border-b-[1px] rounded-t-md outline-none bg-white bg-opacity-50 text-center text-lg font-bold"
+                            className="h-[30px] rounded-t-md border-b-[1px] bg-white bg-opacity-50 px-1 py-2 text-center text-lg font-bold outline-none dark:placeholder-gray-600"
                             // value={i.label}
                             placeholder="label"
                             autoComplete="off"
                             onChange={(e) =>
-                                handleButtonModuleFormChange("label", e.target.value, index, i)
+                                handleButtonModuleFormChange(
+                                    "label",
+                                    e.target.value,
+                                    index,
+                                    i
+                                )
                             }
                             required
                         />
                         <input
                             type="number"
                             id={`${i}_score`}
-                            className="h-[30px] px-1 py-2 pl-5 border-t-[1px] rounded-b-md outline-none bg-white bg-opacity-50 text-center text-lg text-gray-700"
+                            className="h-[30px] rounded-b-md border-t-[1px] bg-white bg-opacity-50 px-1 py-2 pl-5 text-center text-lg text-gray-700 outline-none dark:text-white dark:placeholder-gray-600"
                             // value={i.score}
                             placeholder="score"
                             autoComplete="off"
@@ -88,12 +98,12 @@ export const ButtonModuleForm = ({
 
                 <div
                     key={index}
-                    className="group flex flex-col w-24 my-1 mx-1 border-2 border-black rounded-lg"
+                    className="group mx-1 my-1 flex w-24 flex-col rounded-lg border-2 border-black"
                 >
                     <input
                         type="button"
                         id="addInputModuleForm"
-                        className="h-[30px] border-b-[1px] border-amber-200 rounded-t-md outline-none bg-amber-300 hover:bg-amber-500 text-black font-mono cursor-pointer"
+                        className="h-[30px] cursor-pointer rounded-t-md border-b-[1px] border-amber-200 bg-amber-300 font-mono text-black outline-none hover:bg-amber-500"
                         onClick={() => {
                             handleAddButtonFormClick(index, true);
                         }}
@@ -102,7 +112,7 @@ export const ButtonModuleForm = ({
                     <input
                         type="button"
                         id="removeInputModuleForm"
-                        className="h-[30px] border-t-[1px] border-amber-200 rounded-b-md outline-none bg-amber-300 hover:bg-amber-500 text-black font-mono cursor-pointer"
+                        className="h-[30px] cursor-pointer rounded-b-md border-t-[1px] border-amber-200 bg-amber-300 font-mono text-black outline-none hover:bg-amber-500"
                         onClick={() => {
                             handleAddButtonFormClick(index, false);
                         }}
