@@ -55,7 +55,7 @@ export const StatModulePane = ({
                     <button
                         className="relative h-6 w-6 text-sm"
                         onClick={() => {
-                            addStatModuleToUser(user.uid, data.id);
+                            addStatModuleToUser(user!.uid, data.id); // TODO: user has exclamation
                             setAdded(true);
                         }}
                     >
