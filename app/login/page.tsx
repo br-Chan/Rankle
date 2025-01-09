@@ -1,10 +1,13 @@
 "use client";
 
 import {
+    AuthErrorCodes,
     getAdditionalUserInfo,
     getAuth,
     GoogleAuthProvider,
     linkWithCredential,
+    linkWithPopup,
+    signInWithCredential,
     signInWithPopup,
     signOut,
     UserCredential,
@@ -21,36 +24,45 @@ export default function Home() {
     const auth = getAuth();
 
     const handleGoogleSignIn = async () => {
-        const provider = new GoogleAuthProvider();
-
         try {
-            const result = await signInWithPopup(auth, provider);
-            const isNewGoogleUser = getAdditionalUserInfo(result)?.isNewUser;
-            console.log("Signed in with Google.");
+            const provider = new GoogleAuthProvider();
 
-            if (isNewGoogleUser && user) {
-                console.log(
-                    "This user just registered with Google. Linking with anonymous user..."
-                );
+            await linkWithPopup(user!, provider);
+
+            // const result = await signInWithPopup(auth, provider);
+            // const isNewGoogleUser = getAdditionalUserInfo(result)?.isNewUser;
+            // console.log("Signed in with Google.");
+
+            // if (isNewGoogleUser && user) {
+            //     console.log(
+            //         "This user just registered with Google. Linking with anonymous user..."
+            //     );
+            //     const credential =
+            //         GoogleAuthProvider.credentialFromResult(result);
+            //     //  provider.credentialFromResult(auth, result);
+            //     // const token = credential.accessToken;
+
+            //     linkWithCredential(user, credential!)
+            //         .then((usercred) => {
+            //             const user = usercred.user;
+            //             console.log(
+            //                 "Anonymous account successfully upgraded",
+            //                 user
+            //             );
+            //         })
+            //         .catch((error) => {
+            //             console.log("Error upgrading anonymous account", error);
+            //         });
+            // }
+        } catch (error: any) {
+            if (error.code.includes("auth/credential-already-in-use")) {
+                //Now we use OAuthProvider.credentialFromError
                 const credential =
-                    GoogleAuthProvider.credentialFromResult(result);
-                //  provider.credentialFromResult(auth, result);
-                // const token = credential.accessToken;
-
-                linkWithCredential(user, credential!)
-                    .then((usercred) => {
-                        const user = usercred.user;
-                        console.log(
-                            "Anonymous account successfully upgraded",
-                            user
-                        );
-                    })
-                    .catch((error) => {
-                        console.log("Error upgrading anonymous account", error);
-                    });
+                    GoogleAuthProvider.credentialFromError(error);
+                signInWithCredential(auth, credential!);
+            } else {
+                console.error("Error signing in to Google with popup: ", error);
             }
-        } catch (error) {
-            console.error("Error signing in to Google with popup: ", error);
         }
     };
 
