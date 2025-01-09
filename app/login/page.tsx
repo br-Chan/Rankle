@@ -13,6 +13,7 @@ import {
     UserCredential,
 } from "firebase/auth";
 import { useAuth } from "../hooks/useAuth";
+import { useRouter } from "next/navigation";
 
 /**
  * Page where users can create their own games.
@@ -23,43 +24,21 @@ export default function Home() {
     const { user } = useAuth();
     const auth = getAuth();
 
+    const router = useRouter();
+
     const handleGoogleSignIn = async () => {
         try {
             const provider = new GoogleAuthProvider();
-
             await linkWithPopup(user!, provider);
 
-            // const result = await signInWithPopup(auth, provider);
-            // const isNewGoogleUser = getAdditionalUserInfo(result)?.isNewUser;
-            // console.log("Signed in with Google.");
-
-            // if (isNewGoogleUser && user) {
-            //     console.log(
-            //         "This user just registered with Google. Linking with anonymous user..."
-            //     );
-            //     const credential =
-            //         GoogleAuthProvider.credentialFromResult(result);
-            //     //  provider.credentialFromResult(auth, result);
-            //     // const token = credential.accessToken;
-
-            //     linkWithCredential(user, credential!)
-            //         .then((usercred) => {
-            //             const user = usercred.user;
-            //             console.log(
-            //                 "Anonymous account successfully upgraded",
-            //                 user
-            //             );
-            //         })
-            //         .catch((error) => {
-            //             console.log("Error upgrading anonymous account", error);
-            //         });
-            // }
+            router.push("/");
         } catch (error: any) {
             if (error.code.includes("auth/credential-already-in-use")) {
-                //Now we use OAuthProvider.credentialFromError
                 const credential =
                     GoogleAuthProvider.credentialFromError(error);
                 signInWithCredential(auth, credential!);
+
+                router.push("/");
             } else {
                 console.error("Error signing in to Google with popup: ", error);
             }

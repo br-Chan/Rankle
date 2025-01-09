@@ -189,7 +189,6 @@ export const CreateForm = () => {
                 alert("Error - invalid field type");
             }
 
-            console.log(newInputModuleForms);
             setFormData((prevState) => ({
                 ...prevState,
                 inputModuleForms: newInputModuleForms,

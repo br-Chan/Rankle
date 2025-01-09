@@ -1,6 +1,12 @@
 import Link from "next/link";
 import { HoverTooltip } from "./hoverTooltip";
-import { PlusIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
+import {
+    ArrowLeftEndOnRectangleIcon,
+    ArrowRightEndOnRectangleIcon,
+    PlusIcon,
+    Squares2X2Icon,
+    UserIcon,
+} from "@heroicons/react/24/outline";
 import ThemeButton from "./themeButton";
 
 const leftLinks = [];
@@ -8,6 +14,7 @@ const leftLinks = [];
 const rightLinks = [
     { name: "Add game", href: "/games/create", icon: PlusIcon },
     { name: "All games", href: "/games", icon: Squares2X2Icon },
+    { name: "Login", href: "/login", icon: ArrowLeftEndOnRectangleIcon },
     // {name:"", href:"", icon:,},
     // {name:"", href:"", icon:,},
 ];
@@ -37,7 +44,7 @@ export default function TopNav() {
                     return (
                         <Link
                             key={link.name}
-                            className="relative mx-1 rounded-lg border-2 border-black text-black hover:bg-amber-500 hover:text-white transition-colors dark:text-white dark:hover:bg-amber-300 dark:hover:text-black"
+                            className="relative mx-1 rounded-lg border-2 border-black text-black transition-colors hover:bg-amber-500 hover:text-white dark:text-white dark:hover:bg-amber-300 dark:hover:text-black"
                             href={link.href}
                         >
                             <LinkIcon className="peer w-6 md:w-8" />
