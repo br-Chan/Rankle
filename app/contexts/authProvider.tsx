@@ -7,13 +7,13 @@ import { auth } from "../firebaseConfig";
 
 type AuthContextValue = {
     currentUser: User | null;
-    isLoggedIn: boolean;
+    isSignedIn: boolean;
     isUserLoading: boolean;
 };
 
 const AuthContext = createContext<AuthContextValue>({
     currentUser: null,
-    isLoggedIn: false,
+    isSignedIn: false,
     isUserLoading: true,
 });
 
@@ -23,7 +23,7 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [currentUser, setCurrentUser] = useState<User | null>(null);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isSignedIn, setIsSignedIn] = useState(false);
     const [isUserLoading, setIsUserLoading] = useState(true);
 
     useEffect(() => {
@@ -36,15 +36,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const initialiseUser = async (user: User | null) => {
         if (user) {
             setCurrentUser(user);
-            setIsLoggedIn(true);
+            setIsSignedIn(true);
         } else {
             setCurrentUser(null);
-            setIsLoggedIn(false);
+            setIsSignedIn(false);
 
             console.log("user is falsey, creating anon user");
             const newAnonymousUser = await initialiseAnonymousUser();
             setCurrentUser(newAnonymousUser);
-            setIsLoggedIn(true);
+            setIsSignedIn(true);
         }
 
         setIsUserLoading(false);
@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     const value: AuthContextValue = {
         currentUser,
-        isLoggedIn,
+        isSignedIn,
         isUserLoading,
     };
 
