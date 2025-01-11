@@ -15,15 +15,12 @@ import {
  */
 export default function Home() {
     // Array of data for all stat modules fetched from Firestore.
-    const [statModulesData, setStatModulesData] = useState<
-        statModulesFirestoreData[]
-    >([]);
+    const [statModulesData, setStatModulesData] = useState<statModulesFirestoreData[]>([]);
 
     // Fetch data when component 'mounts' (not every time it re-renders).
     useEffect(() => {
         async function fetchData() {
-            const statModuleDocuments: statModulesFirestoreData[] =
-                await fetchAllStatModules();
+            const statModuleDocuments: statModulesFirestoreData[] = await fetchAllStatModules();
             setStatModulesData(statModuleDocuments);
         }
         fetchData();
@@ -31,17 +28,13 @@ export default function Home() {
 
     const removeStatModuleFromStatModules = (statModuleId: string) => {
         removeStatModuleFromStatModulesInFirestore(statModuleId);
-        setStatModulesData(
-            statModulesData.filter((data) => data.id !== statModuleId)
-        );
+        setStatModulesData(statModulesData.filter((data) => data.id !== statModuleId));
     };
 
     return (
         <main className="">
             <h1 className="gap-2 text-center text-2xl font-black">GAMES</h1>
-            <p className="mb-2 text-center">
-                Add custom player-made games to your list!
-            </p>
+            <p className="mb-2 text-center">Add custom player-made games to your list!</p>
 
             {/* Stat module panes */}
             {statModulesData.length === 0 ? (
@@ -57,28 +50,24 @@ export default function Home() {
                             data={{
                                 id: item.id,
                                 gameName: item.gameName,
-                                inputModules: item.inputModules.map(
-                                    (item, index) => {
-                                        return {
-                                            id: item.id,
-                                            statModuleId: item.statModuleId,
-                                            scoreIndex: index,
-                                            queryText: item.queryText,
-                                            buttonLabels: item.buttonLabels,
-                                            buttonScores: item.buttonScores,
-                                            enabled: true,
-                                            selectedButtonIndex: null,
-                                        };
-                                    }
-                                ),
+                                inputModules: item.inputModules.map((item, index) => {
+                                    return {
+                                        id: item.id,
+                                        statModuleId: item.statModuleId,
+                                        scoreIndex: index,
+                                        queryText: item.queryText,
+                                        buttonLabels: item.buttonLabels,
+                                        buttonScores: item.buttonScores,
+                                        enabled: true,
+                                        selectedButtonIndex: null,
+                                    };
+                                }),
                                 themeColor: item.themeColor,
                                 enabled: true,
                                 hardModeEnabled: false,
                                 hardModeMultiplier: item.hardModeMultiplier,
                             }}
-                            removeStatModuleFromStatModules={
-                                removeStatModuleFromStatModules
-                            }
+                            removeStatModuleFromStatModules={removeStatModuleFromStatModules}
                         />
                     ))}
                 </div>

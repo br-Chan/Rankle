@@ -42,12 +42,7 @@ export const ButtonModuleForm = ({
                 placeholder="Query text"
                 autoComplete="off"
                 onChange={(e) =>
-                    handleButtonModuleFormChange(
-                        "queryText",
-                        e.target.value,
-                        index,
-                        null
-                    )
+                    handleButtonModuleFormChange("queryText", e.target.value, index, null)
                 }
                 required
             />
@@ -67,12 +62,7 @@ export const ButtonModuleForm = ({
                             placeholder="label"
                             autoComplete="off"
                             onChange={(e) =>
-                                handleButtonModuleFormChange(
-                                    "label",
-                                    e.target.value,
-                                    index,
-                                    i
-                                )
+                                handleButtonModuleFormChange("label", e.target.value, index, i)
                             }
                             required
                         />

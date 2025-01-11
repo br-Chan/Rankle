@@ -1,10 +1,6 @@
 "use client";
 
-import {
-    ComputerDesktopIcon,
-    MoonIcon,
-    SunIcon,
-} from "@heroicons/react/24/outline";
+import { ComputerDesktopIcon, MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
@@ -23,9 +19,9 @@ const ThemeButton = () => {
             }}
         >
             {resolvedTheme === "dark" ? (
-                <SunIcon className="w-7 rounded-full p-1 md:w-9 hover:bg-amber-300" />
+                <SunIcon className="w-7 rounded-full p-1 hover:bg-amber-300 md:w-9" />
             ) : (
-                <MoonIcon className="w-7 rounded-full p-1 md:w-9 hover:bg-amber-500" />
+                <MoonIcon className="w-7 rounded-full p-1 hover:bg-amber-500 md:w-9" />
             )}
         </button>
     ) : (

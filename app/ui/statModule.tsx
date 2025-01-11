@@ -37,11 +37,7 @@ export const StatModule = ({
     data: StatModuleData;
     handleEnableClick: (statModuleId: string) => void;
     handleHardModeClick: (statModuleId: string) => void;
-    handleInputClick: (
-        data: ButtonModuleData,
-        index: number,
-        score: number
-    ) => void;
+    handleInputClick: (data: ButtonModuleData, index: number, score: number) => void;
     removeStatModuleFromUser: (statModuleId: string) => void;
 }) => {
     const inputModules = [];
@@ -113,9 +109,7 @@ export const StatModule = ({
             >
                 <div className="flex items-center">
                     <EnableSwitch
-                        onEnableClick={() =>
-                            handleEnableClickInStatModule(data.id)
-                        }
+                        onEnableClick={() => handleEnableClickInStatModule(data.id)}
                         backgroundColor={data.themeColor}
                     />
                     <h2 className="text-xl font-bold">{data.gameName}</h2>

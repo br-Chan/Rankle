@@ -57,7 +57,7 @@ export default function Home() {
 
     // Fetch user data, initialising default data first if new user.
     useEffect(() => {
-            fetchUserData();
+        fetchUserData();
     }, [currentUser]);
 
     useEffect(() => {
@@ -72,34 +72,21 @@ export default function Home() {
                 currentUser.uid,
                 "userStatModules"
             );
-            const userStatModulesSnap = await getDocs(
-                userStatModulesCollectionRef
-            );
+            const userStatModulesSnap = await getDocs(userStatModulesCollectionRef);
 
             if (userStatModulesSnap.empty) {
                 console.log("adding stat modules to new user");
                 await Promise.all([
-                    addStatModuleToUser(
-                        currentUser.uid,
-                        "fNwVk0dhntmBWj6oAT0U"
-                    ), // Wordle
-                    addStatModuleToUser(
-                        currentUser.uid,
-                        "gzF6eumgBN9QiVF1LxM4"
-                    ), // Connections
-                    addStatModuleToUser(
-                        currentUser.uid,
-                        "SHP4lWxnM5ONQJpRK5sH"
-                    ), // Strands
-                    addStatModuleToUser(
-                        currentUser.uid,
-                        "ZyUFFw9Cdwix8w4UvW9O"
-                    ), // Mini Crossword
+                    addStatModuleToUser(currentUser.uid, "fNwVk0dhntmBWj6oAT0U"), // Wordle
+                    addStatModuleToUser(currentUser.uid, "gzF6eumgBN9QiVF1LxM4"), // Connections
+                    addStatModuleToUser(currentUser.uid, "SHP4lWxnM5ONQJpRK5sH"), // Strands
+                    addStatModuleToUser(currentUser.uid, "ZyUFFw9Cdwix8w4UvW9O"), // Mini Crossword
                 ]);
             }
 
-            const statModulesFirestoreData: statModulesFirestoreData[] =
-                await fetchUserStatModules(currentUser.uid);
+            const statModulesFirestoreData: statModulesFirestoreData[] = await fetchUserStatModules(
+                currentUser.uid
+            );
 
             setStatModuleData(
                 statModulesFirestoreData.map((data) => {
@@ -130,10 +117,7 @@ export default function Home() {
      * @param inputModuleId id of the input module to find
      * @returns the input module found
      */
-    const getInputModuleData = (
-        statModuleId: string,
-        inputModuleId: string
-    ) => {
+    const getInputModuleData = (statModuleId: string, inputModuleId: string) => {
         const statModule = getStatModuleData(statModuleId);
         if (statModule === undefined) {
             return undefined;
@@ -169,8 +153,7 @@ export default function Home() {
         if (statModuleDataToChange === undefined) {
             return; // To handle finding no matching id
         }
-        statModuleDataToChange.hardModeEnabled =
-            !statModuleDataToChange.hardModeEnabled;
+        statModuleDataToChange.hardModeEnabled = !statModuleDataToChange.hardModeEnabled;
 
         // Update the Rank now that hard mode has been turned on for a stat module.
         updateRank();
@@ -183,18 +166,11 @@ export default function Home() {
      * @param index the index of the buttons array that has been selected in the input module
      * @param score the new score to update with
      */
-    const handleInputClick = (
-        data: ButtonModuleData,
-        index: number,
-        score: number
-    ) => {
+    const handleInputClick = (data: ButtonModuleData, index: number, score: number) => {
         console.log(data.queryText + ": " + score + " in index " + index);
 
         // Update input module's selected button index in its data.
-        const inputModuleDataToChange = getInputModuleData(
-            data.statModuleId,
-            data.id
-        );
+        const inputModuleDataToChange = getInputModuleData(data.statModuleId, data.id);
         if (inputModuleDataToChange === undefined) {
             return; // To handle finding no matching score index
         }
@@ -206,9 +182,7 @@ export default function Home() {
     const removeStatModuleFromUser = (statModuleId: string) => {
         if (currentUser) {
             removeStatModuleFromUserInFirestore(currentUser.uid, statModuleId);
-            setStatModuleData(
-                statModuleData.filter((data) => data.id !== statModuleId)
-            );
+            setStatModuleData(statModuleData.filter((data) => data.id !== statModuleId));
 
             updateRank();
         } else {
@@ -233,12 +207,8 @@ export default function Home() {
                     if (buttonModule.selectedButtonIndex != null) {
                         ++numberOfEnabledScores;
                         currentScore =
-                            buttonModule.buttonScores[
-                                buttonModule.selectedButtonIndex
-                            ] *
-                            (statModule.hardModeEnabled
-                                ? statModule.hardModeMultiplier
-                                : 1);
+                            buttonModule.buttonScores[buttonModule.selectedButtonIndex] *
+                            (statModule.hardModeEnabled ? statModule.hardModeMultiplier : 1);
                         sum += currentScore;
                     }
                 });
@@ -247,8 +217,7 @@ export default function Home() {
 
         // Calculate the average score.
         const avg = Math.floor(sum / numberOfEnabledScores);
-        const grade =
-            ranks.find(({ threshold }) => avg >= threshold)?.rank || "unranked";
+        const grade = ranks.find(({ threshold }) => avg >= threshold)?.rank || "unranked";
 
         // Update the rank.
         setRank(isNaN(avg) ? undefined : { grade: grade, averageScore: avg });
@@ -268,9 +237,7 @@ export default function Home() {
                                 <div className="peer flex justify-center text-4xl">
                                     {rank.grade}
                                 </div>
-                                <div className="peer flex justify-center">
-                                    {rank.averageScore}
-                                </div>
+                                <div className="peer flex justify-center">{rank.averageScore}</div>
                                 <HoverTooltip
                                     tooltipText={`${rank.grade} - ${rank.averageScore.toString()}`}
                                 />

@@ -32,9 +32,7 @@ export default function TopNav() {
             </div>
 
             <Link className="relative" href={"/"}>
-                <h1 className="peer text-2xl font-bold text-black md:text-4xl">
-                    RANKLE
-                </h1>
+                <h1 className="peer text-2xl font-bold text-black md:text-4xl">RANKLE</h1>
                 <HoverTooltip tooltipText="Home" delay="1000" />
             </Link>
 
@@ -48,10 +46,7 @@ export default function TopNav() {
                             href={link.href}
                         >
                             <LinkIcon className="peer w-6 md:w-8" />
-                            <HoverTooltip
-                                key={link.name}
-                                tooltipText={link.name}
-                            />
+                            <HoverTooltip key={link.name} tooltipText={link.name} />
                         </Link>
                     );
                 })}

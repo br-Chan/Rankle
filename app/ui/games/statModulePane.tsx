@@ -60,9 +60,7 @@ export const StatModulePane = ({
                         }}
                     >
                         <UserPlusIcon className="peer px-[2px] dark:text-white" />
-                        <HoverTooltip
-                            tooltipText={added ? "Added!" : "Add to your list"}
-                        />
+                        <HoverTooltip tooltipText={added ? "Added!" : "Add to your list"} />
                     </button>
                 </ThemedHoverComponent>
 
@@ -107,7 +105,7 @@ export const StatModulePane = ({
                     </div>
 
                     {/* Hard mode display pane */}
-                    <div className="mx-10 rounded-md bg-white p-[2px] text-sm text-black  dark:bg-zinc-800 dark:text-white">
+                    <div className="mx-10 rounded-md bg-white p-[2px] text-sm text-black dark:bg-zinc-800 dark:text-white">
                         {data.hardModeMultiplier !== 1
                             ? `Hard mode: ×${data.hardModeMultiplier}`
                             : "No hard mode"}

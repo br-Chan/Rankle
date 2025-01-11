@@ -1,13 +1,7 @@
 "use client";
 
 import { onAuthStateChanged, User } from "firebase/auth";
-import {
-    createContext,
-    ReactNode,
-    useContext,
-    useEffect,
-    useState,
-} from "react";
+import { createContext, ReactNode, useContext, useEffect, useState } from "react";
 import { initialiseAnonymousUser } from "../lib/firebaseAuthUtils";
 import { auth } from "../firebaseConfig";
 
@@ -62,7 +56,5 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         isUserLoading,
     };
 
-    return (
-        <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
-    );
+    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

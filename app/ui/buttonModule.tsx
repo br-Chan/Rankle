@@ -32,16 +32,12 @@ export const ButtonModule = ({
 }: {
     data: ButtonModuleData;
     themeColor: string;
-    onInputClick: (
-        data: ButtonModuleData,
-        index: number,
-        score: number
-    ) => void;
+    onInputClick: (data: ButtonModuleData, index: number, score: number) => void;
 }) => {
     const { resolvedTheme } = useTheme();
-    const [selectedButtonIndex, setSelectedButtonIndex] = useState<
-        number | null
-    >(data.selectedButtonIndex);
+    const [selectedButtonIndex, setSelectedButtonIndex] = useState<number | null>(
+        data.selectedButtonIndex
+    );
     const buttons = [];
 
     /**
@@ -52,11 +48,7 @@ export const ButtonModule = ({
      * @param scoreIndex the index of the input module data array to update
      * @param score the new updated score
      */
-    const handleClick = (
-        data: ButtonModuleData,
-        index: number,
-        score: number
-    ) => {
+    const handleClick = (data: ButtonModuleData, index: number, score: number) => {
         setSelectedButtonIndex(index);
         onInputClick(data, index, score);
     };
@@ -85,8 +77,7 @@ export const ButtonModule = ({
                                 : resolvedTheme === "dark"
                                   ? "white"
                                   : "black",
-                        transitionDuration:
-                            selectedButtonIndex === index ? "0.3s" : "0s",
+                        transitionDuration: selectedButtonIndex === index ? "0.3s" : "0s",
                     }}
                     onClick={() => handleClick(data, index, score)}
                 >
