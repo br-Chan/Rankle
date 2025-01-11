@@ -20,9 +20,11 @@ export const signInAndLinkWithGoogle = async (initialUser: User) => {
     } catch (error: any) {
         if (error.code === "auth/credential-already-in-use") {
             const credential = GoogleAuthProvider.credentialFromError(error);
-            signInWithCredential(auth, credential!);
+            await signInWithCredential(auth, credential!);
         } else {
             console.error("Error signing in to Google with popup: ", error);
+
+            throw error;
         }
     }
 };

@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { signInAndLinkWithGoogle, signOut } from "../lib/firebaseAuthUtils";
 import { useAuth } from "../contexts/authProvider";
+import { useState } from "react";
 
 /**
  * Page where users can create their own games.
@@ -14,12 +15,23 @@ export default function Home() {
 
     const router = useRouter();
 
+    const [isSigningIn, setIsSigningIn] = useState(false);
+
     const handleGoogleSignIn = async () => {
-        if (currentUser) {
-            await signInAndLinkWithGoogle(currentUser);
-            router.push("/");
-        } else {
-            // TODO: handle situation where user is null
+        if (!isSigningIn) {
+            setIsSigningIn(true);
+
+            if (currentUser) {
+                try {
+                    await signInAndLinkWithGoogle(currentUser);
+                    router.push("/");
+                } catch (error) {
+                    setIsSigningIn(false);
+                    // TODO: handle situation where sign in causes uncaught error
+                }
+            } else {
+                // TODO: handle situation where user is null
+            }
         }
     };
 
