@@ -23,14 +23,3 @@ const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
 
-// Handle Anonymous Authentication
-export const initialiseAnonymousUser = async () => {
-    const userCredential = await signInAnonymously(auth);
-    return userCredential.user;
-};
-
-export const onAuthStateChange = (callback: (user: any) => void) => {
-    return onAuthStateChanged(auth, callback);
-};
-
-// export { db, auth };

@@ -1,19 +1,8 @@
 "use client";
 
-import {
-    AuthErrorCodes,
-    getAdditionalUserInfo,
-    getAuth,
-    GoogleAuthProvider,
-    linkWithCredential,
-    linkWithPopup,
-    signInWithCredential,
-    signInWithPopup,
-    signOut,
-    UserCredential,
-} from "firebase/auth";
-import { useAuth } from "../hooks/useAuth";
 import { useRouter } from "next/navigation";
+import { signInAndLinkWithGoogle, signOut } from "../lib/firebaseAuthUtils";
+import { useAuth } from "../contexts/authProvider";
 
 /**
  * Page where users can create their own games.
@@ -21,27 +10,16 @@ import { useRouter } from "next/navigation";
  * @returns Create form page
  */
 export default function Home() {
-    const { user } = useAuth();
-    const auth = getAuth();
+    const { currentUser } = useAuth();
 
     const router = useRouter();
 
     const handleGoogleSignIn = async () => {
-        try {
-            const provider = new GoogleAuthProvider();
-            await linkWithPopup(user!, provider);
-
+        if (currentUser) {
+            await signInAndLinkWithGoogle(currentUser);
             router.push("/");
-        } catch (error: any) {
-            if (error.code.includes("auth/credential-already-in-use")) {
-                const credential =
-                    GoogleAuthProvider.credentialFromError(error);
-                signInWithCredential(auth, credential!);
-
-                router.push("/");
-            } else {
-                console.error("Error signing in to Google with popup: ", error);
-            }
+        } else {
+            // TODO: handle situation where user is null
         }
     };
 
@@ -51,15 +29,17 @@ export default function Home() {
             <p>Save all your games for easy access!</p>
             <button
                 className="rounded-full bg-white p-4 hover:bg-zinc-100"
-                onClick={() => handleGoogleSignIn()}
+                onClick={async () => {
+                    handleGoogleSignIn();
+                }}
             >
                 Sign in with Google
             </button>
             <button
                 className="rounded-full bg-white p-4 hover:bg-zinc-100"
-                onClick={() => {
-                    signOut(auth);
+                onClick={async () => {
                     console.log("Signing out...");
+                    await signOut();
                 }}
             >
                 Sign out!

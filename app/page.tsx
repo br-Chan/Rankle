@@ -3,7 +3,6 @@
 import { StatModule, StatModuleData } from "./ui/statModule";
 import { ButtonModuleData } from "./ui/buttonModule";
 import { useEffect, useState } from "react";
-import { useAuth } from "./hooks/useAuth";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebaseConfig";
 import {
@@ -14,6 +13,7 @@ import {
     removeStatModuleFromUser as removeStatModuleFromUserInFirestore,
 } from "./lib/firestoreUtils";
 import { HoverTooltip } from "./ui/hoverTooltip";
+import { useAuth } from "./contexts/authProvider";
 
 /**
  * List of Ranks and their attributed minimum scores to attain it.
@@ -47,7 +47,8 @@ type RankleRank = {
  * @returns Home page
  */
 export default function Home() {
-    const { user } = useAuth();
+    const { currentUser, isUserLoading } = useAuth();
+    const [isLoadingComplete, setIsLoadingComplete] = useState(false);
 
     // Array of data for user's stat modules fetched from Firestore.
     const [statModuleData, setStatModuleData] = useState<StatModuleData[]>([]);
@@ -56,19 +57,19 @@ export default function Home() {
 
     // Fetch user data, initialising default data first if new user.
     useEffect(() => {
-        fetchUserData();
-    }, [user]);
+            fetchUserData();
+    }, [currentUser]);
 
     useEffect(() => {
         updateRank();
     }, [statModuleData]);
 
     async function fetchUserData() {
-        if (user) {
+        if (currentUser) {
             const userStatModulesCollectionRef = collection(
                 db,
                 "users",
-                user.uid,
+                currentUser.uid,
                 "userStatModules"
             );
             const userStatModulesSnap = await getDocs(
@@ -78,21 +79,35 @@ export default function Home() {
             if (userStatModulesSnap.empty) {
                 console.log("adding stat modules to new user");
                 await Promise.all([
-                    addStatModuleToUser(user.uid, "fNwVk0dhntmBWj6oAT0U"), // Wordle
-                    addStatModuleToUser(user.uid, "gzF6eumgBN9QiVF1LxM4"), // Connections
-                    addStatModuleToUser(user.uid, "SHP4lWxnM5ONQJpRK5sH"), // Strands
-                    addStatModuleToUser(user.uid, "ZyUFFw9Cdwix8w4UvW9O"), // Mini Crossword
+                    addStatModuleToUser(
+                        currentUser.uid,
+                        "fNwVk0dhntmBWj6oAT0U"
+                    ), // Wordle
+                    addStatModuleToUser(
+                        currentUser.uid,
+                        "gzF6eumgBN9QiVF1LxM4"
+                    ), // Connections
+                    addStatModuleToUser(
+                        currentUser.uid,
+                        "SHP4lWxnM5ONQJpRK5sH"
+                    ), // Strands
+                    addStatModuleToUser(
+                        currentUser.uid,
+                        "ZyUFFw9Cdwix8w4UvW9O"
+                    ), // Mini Crossword
                 ]);
             }
 
             const statModulesFirestoreData: statModulesFirestoreData[] =
-                await fetchUserStatModules(user.uid);
+                await fetchUserStatModules(currentUser.uid);
 
             setStatModuleData(
                 statModulesFirestoreData.map((data) => {
                     return convertStatModuleFirestoreData(data);
                 })
             );
+
+            setIsLoadingComplete(true);
         } else {
             console.log("User data doesn't exist yet.");
         }
@@ -189,8 +204,8 @@ export default function Home() {
     };
 
     const removeStatModuleFromUser = (statModuleId: string) => {
-        if (user) {
-            removeStatModuleFromUserInFirestore(user.uid, statModuleId);
+        if (currentUser) {
+            removeStatModuleFromUserInFirestore(currentUser.uid, statModuleId);
             setStatModuleData(
                 statModuleData.filter((data) => data.id !== statModuleId)
             );
@@ -271,7 +286,7 @@ export default function Home() {
             </div>
 
             {/* Stat modules */}
-            {statModuleData.length === 0 ? (
+            {isUserLoading || !isLoadingComplete ? (
                 <div className="flex flex-col rounded-xl bg-amber-300 px-16 py-1 text-center font-mono text-2xl text-black lg:mt-24 lg:flex-row">
                     <span>Loading your games</span>
                     <span>...</span>

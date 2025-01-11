@@ -3,11 +3,11 @@
 import { addStatModuleToUser } from "@/app/lib/firestoreUtils";
 import { StatModuleData } from "../statModule";
 import { ButtonModulePane } from "./buttonModulePane";
-import { useAuth } from "@/app/hooks/useAuth";
 import { ThemedHoverComponent } from "../themedHoverComponent";
 import { UserPlusIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { HoverTooltip } from "../hoverTooltip";
 import { useState } from "react";
+import { useAuth } from "@/app/contexts/authProvider";
 
 /**
  * Stat module pane for a single game, displaying all information about the stat module. The user
@@ -23,7 +23,7 @@ export const StatModulePane = ({
     data: StatModuleData;
     removeStatModuleFromStatModules: (statModuleId: string) => void;
 }) => {
-    const { user } = useAuth();
+    const { currentUser } = useAuth();
     const inputModulePanes = [];
 
     const [added, setAdded] = useState<boolean>(false);
@@ -55,7 +55,7 @@ export const StatModulePane = ({
                     <button
                         className="relative h-6 w-6 text-sm"
                         onClick={() => {
-                            addStatModuleToUser(user!.uid, data.id); // TODO: user has exclamation
+                            addStatModuleToUser(currentUser!.uid, data.id); // TODO: user has exclamation
                             setAdded(true);
                         }}
                     >
