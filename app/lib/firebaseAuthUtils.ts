@@ -27,6 +27,6 @@ export const signInAndLinkWithGoogle = async (initialUser: User) => {
     }
 };
 
-export const signOut = () => {
-    return firebaseSignOut(auth);
+export const signOut = async () => {
+    return await firebaseSignOut(auth);
 };

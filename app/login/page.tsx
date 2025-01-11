@@ -40,6 +40,7 @@ export default function Home() {
                 onClick={async () => {
                     console.log("Signing out...");
                     await signOut();
+                    router.push("/");
                 }}
             >
                 Sign out!
