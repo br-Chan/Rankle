@@ -34,7 +34,7 @@ export default function Home() {
     return (
         <main className="">
             <h1 className="gap-2 text-center text-2xl font-black">GAMES</h1>
-            <p className="mb-2 text-center">Add custom player-made games to your list!</p>
+            <p className="mb-2 text-center">Peruse the catalogue for games to add to your list!</p>
 
             {/* Stat module panes */}
             {statModulesData.length === 0 ? (

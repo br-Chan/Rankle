@@ -1,22 +1,21 @@
+"use client";
+
 import Link from "next/link";
 import { HoverTooltip } from "./hoverTooltip";
 import {
-    ArrowLeftEndOnRectangleIcon,
     ArrowRightEndOnRectangleIcon,
     PlusIcon,
     Squares2X2Icon,
     UserIcon,
 } from "@heroicons/react/24/outline";
 import ThemeButton from "./themeButton";
+import { useAuth } from "../contexts/authProvider";
 
 const leftLinks = [];
 
 const rightLinks = [
     { name: "Add game", href: "/games/create", icon: PlusIcon },
     { name: "All games", href: "/games", icon: Squares2X2Icon },
-    { name: "Login", href: "/login", icon: ArrowLeftEndOnRectangleIcon },
-    // {name:"", href:"", icon:,},
-    // {name:"", href:"", icon:,},
 ];
 
 /**
@@ -25,6 +24,9 @@ const rightLinks = [
  * @returns navigation bar
  */
 export default function TopNav() {
+    const { currentUser } = useAuth();
+    console.log(currentUser?.email);
+
     return (
         <div className="flex w-full items-center justify-between px-5">
             <div className="flex flex-1">
@@ -50,6 +52,23 @@ export default function TopNav() {
                         </Link>
                     );
                 })}
+                {!currentUser?.isAnonymous ? (
+                    <Link
+                        className="relative mx-1 rounded-lg border-2 border-black text-black transition-colors hover:bg-amber-500 hover:text-white dark:text-white dark:hover:bg-amber-300 dark:hover:text-black"
+                        href="/account"
+                    >
+                        <UserIcon className="peer w-6 md:w-8" />
+                        <HoverTooltip tooltipText="Account" />
+                    </Link>
+                ) : (
+                    <Link
+                        className="relative mx-1 rounded-lg border-2 border-black text-black transition-colors hover:bg-amber-500 hover:text-white dark:text-white dark:hover:bg-amber-300 dark:hover:text-black"
+                        href="/login"
+                    >
+                        <ArrowRightEndOnRectangleIcon className="peer w-6 md:w-8" />
+                        <HoverTooltip tooltipText="Login" />
+                    </Link>
+                )}
             </div>
         </div>
     );
