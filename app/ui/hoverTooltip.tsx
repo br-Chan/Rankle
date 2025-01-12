@@ -15,13 +15,7 @@ const getHoverDelayClassName = (delay?: string) => {
  * @param props Component props
  * @returns the tooltip
  */
-export const HoverTooltip = ({
-    tooltipText,
-    delay,
-}: {
-    tooltipText: string;
-    delay?: string;
-}) => {
+export const HoverTooltip = ({ tooltipText, delay }: { tooltipText: string; delay?: string }) => {
     const hoverDelay = getHoverDelayClassName(delay);
 
     return (

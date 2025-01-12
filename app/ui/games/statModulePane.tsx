@@ -3,11 +3,11 @@
 import { addStatModuleToUser } from "@/app/lib/firestoreUtils";
 import { StatModuleData } from "../statModule";
 import { ButtonModulePane } from "./buttonModulePane";
-import { useAuth } from "@/app/hooks/useAuth";
 import { ThemedHoverComponent } from "../themedHoverComponent";
 import { UserPlusIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { HoverTooltip } from "../hoverTooltip";
 import { useState } from "react";
+import { useAuth } from "@/app/contexts/authProvider";
 
 /**
  * Stat module pane for a single game, displaying all information about the stat module. The user
@@ -23,7 +23,7 @@ export const StatModulePane = ({
     data: StatModuleData;
     removeStatModuleFromStatModules: (statModuleId: string) => void;
 }) => {
-    const { user } = useAuth();
+    const { currentUser } = useAuth();
     const inputModulePanes = [];
 
     const [added, setAdded] = useState<boolean>(false);
@@ -55,14 +55,12 @@ export const StatModulePane = ({
                     <button
                         className="relative h-6 w-6 text-sm"
                         onClick={() => {
-                            addStatModuleToUser(user.uid, data.id);
+                            addStatModuleToUser(currentUser!.uid, data.id); // TODO: user has exclamation
                             setAdded(true);
                         }}
                     >
                         <UserPlusIcon className="peer px-[2px] dark:text-white" />
-                        <HoverTooltip
-                            tooltipText={added ? "Added!" : "Add to your list"}
-                        />
+                        <HoverTooltip tooltipText={added ? "Added!" : "Add to your list"} />
                     </button>
                 </ThemedHoverComponent>
 
@@ -107,7 +105,7 @@ export const StatModulePane = ({
                     </div>
 
                     {/* Hard mode display pane */}
-                    <div className="mx-10 rounded-md bg-white p-[2px] text-sm text-black  dark:bg-zinc-800 dark:text-white">
+                    <div className="mx-10 rounded-md bg-white p-[2px] text-sm text-black dark:bg-zinc-800 dark:text-white">
                         {data.hardModeMultiplier !== 1
                             ? `Hard mode: ×${data.hardModeMultiplier}`
                             : "No hard mode"}

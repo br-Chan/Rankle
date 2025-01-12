@@ -1,11 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import {
-    ButtonFormData,
-    ButtonFormDataSchema,
-    ButtonModuleForm,
-} from "./buttonModuleForm";
+import { ButtonFormData, ButtonFormDataSchema, ButtonModuleForm } from "./buttonModuleForm";
 import { useDebouncedCallback } from "use-debounce";
 import { useRouter } from "next/navigation";
 import { addDataToStatModules } from "@/app/lib/firestoreUtils";
@@ -176,20 +172,15 @@ export const CreateForm = () => {
             } else if (fieldType === "label") {
                 buttonIndex = Number(buttonIndex);
                 newValue = String(newValue);
-                newInputModuleForms[buttonModuleIndex].data[
-                    Number(buttonIndex)
-                ].label = newValue;
+                newInputModuleForms[buttonModuleIndex].data[Number(buttonIndex)].label = newValue;
             } else if (fieldType === "score") {
                 buttonIndex = Number(buttonIndex);
                 newValue = Number(newValue);
-                newInputModuleForms[buttonModuleIndex].data[
-                    Number(buttonIndex)
-                ].score = newValue;
+                newInputModuleForms[buttonModuleIndex].data[Number(buttonIndex)].score = newValue;
             } else {
                 alert("Error - invalid field type");
             }
 
-            console.log(newInputModuleForms);
             setFormData((prevState) => ({
                 ...prevState,
                 inputModuleForms: newInputModuleForms,
@@ -256,9 +247,7 @@ export const CreateForm = () => {
 
                 {/* Theme color picker */}
                 <div className="mb-4 flex w-full items-center justify-between space-x-2">
-                    <span className="flex-1 text-right font-semibold">
-                        Colour:
-                    </span>
+                    <span className="flex-1 text-right font-semibold">Colour:</span>
                     <input
                         type="color"
                         id="themeColor"
@@ -304,9 +293,7 @@ export const CreateForm = () => {
                             key={index}
                             index={index}
                             data={item.data}
-                            handleAddButtonFormClick={(index, add) =>
-                                addButtonForm(index, add)
-                            }
+                            handleAddButtonFormClick={(index, add) => addButtonForm(index, add)}
                             handleButtonModuleFormChange={(
                                 fieldType,
                                 newValue,
