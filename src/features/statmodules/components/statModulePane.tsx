@@ -1,13 +1,13 @@
 "use client";
 
-import { addStatModuleToUser } from "@/app/lib/firestoreUtils";
-import { StatModuleData } from "../statModule";
 import { ButtonModulePane } from "./buttonModulePane";
-import { ThemedHoverComponent } from "../themedHoverComponent";
+import { ThemedHoverComponent } from "../../../components/themedHoverComponent";
 import { UserPlusIcon, TrashIcon } from "@heroicons/react/24/solid";
-import { HoverTooltip } from "../hoverTooltip";
+import { HoverTooltip } from "../../../components/hoverTooltip";
 import { useState } from "react";
-import { useAuth } from "@/app/contexts/authProvider";
+import { addStatModuleToUser } from "@/src/lib/firestoreUtils";
+import { StatModuleData } from "./statModule";
+import { useAuth } from "../../firebaseAuth/hooks/useAuth";
 
 /**
  * Stat module pane for a single game, displaying all information about the stat module. The user

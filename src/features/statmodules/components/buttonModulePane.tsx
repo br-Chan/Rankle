@@ -1,7 +1,7 @@
 "use client";
 
-import { ButtonModuleData } from "../buttonModule";
-import { HoverTooltip } from "../hoverTooltip";
+import { HoverTooltip } from "../../../components/hoverTooltip";
+import { ButtonModuleData } from "./buttonModule";
 
 /**
  * Button module pane that displays the query and set of buttons of the button module, with each

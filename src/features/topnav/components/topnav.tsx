@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { HoverTooltip } from "./hoverTooltip";
+import { HoverTooltip } from "../../../components/hoverTooltip";
 import {
     ArrowRightEndOnRectangleIcon,
     PlusIcon,
@@ -9,7 +9,7 @@ import {
     UserIcon,
 } from "@heroicons/react/24/outline";
 import ThemeButton from "./themeButton";
-import { useAuth } from "../contexts/authProvider";
+import { useAuth } from "../../firebaseAuth/hooks/useAuth";
 
 const leftLinks = [];
 

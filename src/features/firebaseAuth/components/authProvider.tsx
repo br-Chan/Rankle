@@ -1,9 +1,9 @@
 "use client";
 
+import { auth } from "@/src/config/firebase";
+import { initialiseAnonymousUser } from "@/src/lib/firebaseAuthUtils";
 import { onAuthStateChanged, User } from "firebase/auth";
-import { createContext, ReactNode, useContext, useEffect, useState } from "react";
-import { initialiseAnonymousUser } from "../lib/firebaseAuthUtils";
-import { auth } from "../firebaseConfig";
+import { createContext, ReactNode, useEffect, useState } from "react";
 
 type AuthContextValue = {
     currentUser: User | null;
@@ -11,15 +11,11 @@ type AuthContextValue = {
     isUserLoading: boolean;
 };
 
-const AuthContext = createContext<AuthContextValue>({
+export const AuthContext = createContext<AuthContextValue>({
     currentUser: null,
     isSignedIn: false,
     isUserLoading: true,
 });
-
-export const useAuth = () => {
-    return useContext(AuthContext);
-};
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [currentUser, setCurrentUser] = useState<User | null>(null);

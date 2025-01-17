@@ -1,4 +1,4 @@
-import { CreateForm } from "@/app/ui/games/createForm";
+import { CreateForm } from "@/src/features/statmodules/components/createForm";
 
 /**
  * Page where users can create their own games.

@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { HoverTooltip } from "./hoverTooltip";
 import { useTheme } from "next-themes";
+import { HoverTooltip } from "@/src/components/hoverTooltip";
 
 /**
  * Data type for button modules, to be used when displaying a stat module to the user.

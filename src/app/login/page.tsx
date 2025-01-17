@@ -1,9 +1,9 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { signInAndLinkWithGoogle, signOut } from "../lib/firebaseAuthUtils";
-import { useAuth } from "../contexts/authProvider";
+import { signInAndLinkWithGoogle } from "../../lib/firebaseAuthUtils";
 import { useState } from "react";
+import { useAuth } from "@/src/features/firebaseAuth/hooks/useAuth";
 
 export default function Home() {
     const { currentUser } = useAuth();

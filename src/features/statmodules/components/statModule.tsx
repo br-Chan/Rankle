@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { EnableSwitch } from "./enableSwitch";
 import { ButtonModule, ButtonModuleData } from "./buttonModule";
 import { HardModeModule } from "./hardModeModule";
-import { ThemedHoverComponent } from "./themedHoverComponent";
 import { XMarkIcon } from "@heroicons/react/24/solid";
-import { HoverTooltip } from "./hoverTooltip";
+import { EnableSwitch } from "@/src/components/enableSwitch";
+import { HoverTooltip } from "@/src/components/hoverTooltip";
+import { ThemedHoverComponent } from "@/src/components/themedHoverComponent";
 
 /**
  * Data type for stat modules when displaying them to the user.
