@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useAuth } from "@/features/firebaseAuth/hooks/useAuth";
-import { signInAndLinkWithGoogle } from "@/lib/firebaseAuthUtils";
+import { signInAndLinkWithGoogle } from "@/features/firebaseAuth/utils/signIn";
 
 export default function Home() {
     const { currentUser } = useAuth();

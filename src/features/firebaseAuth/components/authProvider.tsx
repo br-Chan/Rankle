@@ -3,7 +3,7 @@
 import { onAuthStateChanged, User } from "firebase/auth";
 import { createContext, ReactNode, useEffect, useState } from "react";
 import { auth } from "@/config/firebase";
-import { initialiseAnonymousUser } from "@/lib/firebaseAuthUtils";
+import { initialiseAnonymousUser } from "../utils/signIn";
 
 type AuthContextValue = {
     currentUser: User | null;

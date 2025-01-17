@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/features/firebaseAuth/hooks/useAuth";
-import { signOut } from "@/lib/firebaseAuthUtils";
+import { signOut } from "@/features/firebaseAuth/utils/signOut";
 
 const Account = () => {
     const { currentUser } = useAuth();

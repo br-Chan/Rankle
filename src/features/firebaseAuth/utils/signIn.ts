@@ -1,10 +1,9 @@
 import {
+    signInAnonymously,
+    User,
     GoogleAuthProvider,
     linkWithPopup,
-    signInAnonymously,
     signInWithCredential,
-    signOut as firebaseSignOut,
-    User,
 } from "firebase/auth";
 import { auth } from "@/config/firebase";
 
@@ -27,8 +26,4 @@ export const signInAndLinkWithGoogle = async (initialUser: User) => {
             throw error;
         }
     }
-};
-
-export const signOut = async () => {
-    return await firebaseSignOut(auth);
 };
