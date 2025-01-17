@@ -1,6 +1,6 @@
 "use client";
 
-import { HoverTooltip } from "../../../components/hoverTooltip";
+import { HoverTooltip } from "@/components/hoverTooltip";
 import { ButtonModuleData } from "./buttonModule";
 
 /**

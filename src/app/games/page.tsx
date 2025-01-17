@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { StatModulePane } from "../../features/statmodules/components/statModulePane";
+import { StatModulePane } from "@/features/statmodules/components/statModulePane";
 import {
-    fetchAllStatModules,
     statModulesFirestoreData,
+    fetchAllStatModules,
     removeStatModuleFromStatModules as removeStatModuleFromStatModulesInFirestore,
-} from "../../lib/firestoreUtils";
+} from "@/lib/firestoreUtils";
 
 /**
  * Page where users can view user-created stat modules and add them to their own lists.

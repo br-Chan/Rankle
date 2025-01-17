@@ -1,15 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { HoverTooltip } from "../../../components/hoverTooltip";
+import { HoverTooltip } from "@/components/hoverTooltip";
+import { useAuth } from "@/features/firebaseAuth/hooks/useAuth";
 import {
-    ArrowRightEndOnRectangleIcon,
     PlusIcon,
     Squares2X2Icon,
+    ArrowRightEndOnRectangleIcon,
     UserIcon,
 } from "@heroicons/react/24/outline";
 import ThemeButton from "./themeButton";
-import { useAuth } from "../../firebaseAuth/hooks/useAuth";
 
 const leftLinks = [];
 

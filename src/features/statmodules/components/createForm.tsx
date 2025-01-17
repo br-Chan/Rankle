@@ -4,9 +4,8 @@ import { useState } from "react";
 import { ButtonFormData, ButtonFormDataSchema, ButtonModuleForm } from "./buttonModuleForm";
 import { useDebouncedCallback } from "use-debounce";
 import { useRouter } from "next/navigation";
-
 import { z } from "zod";
-import { addDataToStatModules } from "@/src/lib/firestoreUtils";
+import { addDataToStatModules } from "@/lib/firestoreUtils";
 
 // Firebase code in this page from this tutorial: https://www.youtube.com/watch?v=5MzCK3k3XlQ
 

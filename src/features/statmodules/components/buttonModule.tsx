@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useTheme } from "next-themes";
-import { HoverTooltip } from "@/src/components/hoverTooltip";
+import { HoverTooltip } from "@/components/hoverTooltip";
 
 /**
  * Data type for button modules, to be used when displaying a stat module to the user.

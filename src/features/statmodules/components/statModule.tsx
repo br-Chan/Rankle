@@ -4,9 +4,9 @@ import { useState } from "react";
 import { ButtonModule, ButtonModuleData } from "./buttonModule";
 import { HardModeModule } from "./hardModeModule";
 import { XMarkIcon } from "@heroicons/react/24/solid";
-import { EnableSwitch } from "@/src/components/enableSwitch";
-import { HoverTooltip } from "@/src/components/hoverTooltip";
-import { ThemedHoverComponent } from "@/src/components/themedHoverComponent";
+import { EnableSwitch } from "@/components/enableSwitch";
+import { HoverTooltip } from "@/components/hoverTooltip";
+import { ThemedHoverComponent } from "@/components/themedHoverComponent";
 
 /**
  * Data type for stat modules when displaying them to the user.

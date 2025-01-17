@@ -1,9 +1,9 @@
 "use client";
 
-import { auth } from "@/src/config/firebase";
-import { initialiseAnonymousUser } from "@/src/lib/firebaseAuthUtils";
 import { onAuthStateChanged, User } from "firebase/auth";
 import { createContext, ReactNode, useEffect, useState } from "react";
+import { auth } from "@/config/firebase";
+import { initialiseAnonymousUser } from "@/lib/firebaseAuthUtils";
 
 type AuthContextValue = {
     currentUser: User | null;

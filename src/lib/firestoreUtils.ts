@@ -14,10 +14,10 @@ import {
     serverTimestamp,
     setDoc,
 } from "firebase/firestore";
-import { db } from "../config/firebase";
-import { StatModuleFormData } from "../features/statmodules/components/createForm";
-import { ButtonModuleData } from "../features/statmodules/components/buttonModule";
-import { StatModuleData } from "../features/statmodules/components/statModule";
+import { db } from "@/config/firebase";
+import { ButtonModuleData } from "@/features/statmodules/components/buttonModule";
+import { StatModuleFormData } from "@/features/statmodules/components/createForm";
+import { StatModuleData } from "@/features/statmodules/components/statModule";
 
 /**
  * Data type for stat modules, to use when adding or fetching data from Firestore.

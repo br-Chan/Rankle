@@ -1,5 +1,5 @@
-import { HoverTooltip } from "@/src/components/hoverTooltip";
 import { useState } from "react";
+import { HoverTooltip } from "@/components/hoverTooltip";
 
 /**
  * A module with a checkbox for users to toggle hard mode in a stat module, multiplying each input

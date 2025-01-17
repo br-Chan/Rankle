@@ -6,7 +6,7 @@ import {
     signOut as firebaseSignOut,
     User,
 } from "firebase/auth";
-import { auth } from "../config/firebase";
+import { auth } from "@/config/firebase";
 
 export const initialiseAnonymousUser = async () => {
     const userCredential = await signInAnonymously(auth);

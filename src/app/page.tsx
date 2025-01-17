@@ -2,18 +2,19 @@
 
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../config/firebase";
+
+import { HoverTooltip } from "@/components/hoverTooltip";
+import { db } from "@/config/firebase";
+import { useAuth } from "@/features/firebaseAuth/hooks/useAuth";
+import { ButtonModuleData } from "@/features/statmodules/components/buttonModule";
+import { StatModuleData, StatModule } from "@/features/statmodules/components/statModule";
 import {
     addStatModuleToUser,
-    convertStatModuleFirestoreData,
     fetchUserStatModules,
+    convertStatModuleFirestoreData,
     statModulesFirestoreData,
     removeStatModuleFromUser as removeStatModuleFromUserInFirestore,
-} from "../lib/firestoreUtils";
-import { HoverTooltip } from "../components/hoverTooltip";
-import { ButtonModuleData } from "../features/statmodules/components/buttonModule";
-import { StatModuleData, StatModule } from "../features/statmodules/components/statModule";
-import { useAuth } from "../features/firebaseAuth/hooks/useAuth";
+} from "@/lib/firestoreUtils";
 
 /**
  * List of Ranks and their attributed minimum scores to attain it.

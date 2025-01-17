@@ -1,13 +1,22 @@
 "use client";
 
-import { ButtonModulePane } from "./buttonModulePane";
-import { ThemedHoverComponent } from "../../../components/themedHoverComponent";
-import { UserPlusIcon, TrashIcon } from "@heroicons/react/24/solid";
-import { HoverTooltip } from "../../../components/hoverTooltip";
 import { useState } from "react";
-import { addStatModuleToUser } from "@/src/lib/firestoreUtils";
+import { HoverTooltip } from "@/components/hoverTooltip";
+import { ThemedHoverComponent } from "@/components/themedHoverComponent";
+import { useAuth } from "@/features/firebaseAuth/hooks/useAuth";
+import { addStatModuleToUser } from "@/lib/firestoreUtils";
+import { UserPlusIcon, TrashIcon } from "@heroicons/react/24/solid";
+import { ButtonModulePane } from "./buttonModulePane";
 import { StatModuleData } from "./statModule";
-import { useAuth } from "../../firebaseAuth/hooks/useAuth";
+
+// import { ButtonModulePane } from "./buttonModulePane";
+// import { ThemedHoverComponent } from "../../../components/themedHoverComponent";
+// import { UserPlusIcon, TrashIcon } from "@heroicons/react/24/solid";
+// import { HoverTooltip } from "../../../components/hoverTooltip";
+// import { useState } from "react";
+// import { addStatModuleToUser } from "@/lib/firestoreUtils";
+// import { StatModuleData } from "./statModule";
+// import { useAuth } from "../../firebaseAuth/hooks/useAuth";
 
 /**
  * Stat module pane for a single game, displaying all information about the stat module. The user

@@ -1,8 +1,8 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { signOut } from "../../lib/firebaseAuthUtils";
-import { useAuth } from "@/src/features/firebaseAuth/hooks/useAuth";
+import { useAuth } from "@/features/firebaseAuth/hooks/useAuth";
+import { signOut } from "@/lib/firebaseAuthUtils";
 
 const Account = () => {
     const { currentUser } = useAuth();
