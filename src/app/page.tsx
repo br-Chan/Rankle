@@ -9,9 +9,9 @@ import { useAuth } from "@/features/firebaseAuth/hooks/useAuth";
 import { ButtonModuleData } from "@/features/statmodules/types/display";
 import { StatModule } from "@/features/statmodules/components/statModule";
 import { StatModuleData } from "@/features/statmodules/types/display";
-import { fetchUserStatModules } from "@/features/statmodules/api/usersCollection";
-import { removeStatModuleFromUser as removeStatModuleFromUserInFirestore } from "@/features/statmodules/api/usersCollection";
-import { addStatModuleToUser } from "@/features/statmodules/api/usersCollection";
+import { getUserStatModules } from "@/features/statmodules/api/usersCollection";
+import { deleteUserStatModule as deleteUserStatModuleInFirestore } from "@/features/statmodules/api/usersCollection";
+import { addUserStatModule } from "@/features/statmodules/api/usersCollection";
 import { convertStatModuleFirestoreData } from "@/features/statmodules/api/firestoreConversion";
 import { statModulesFirestoreData } from "@/features/statmodules/types/firestore";
 
@@ -77,14 +77,14 @@ export default function Home() {
             if (userStatModulesSnap.empty) {
                 console.log("adding stat modules to new user");
                 await Promise.all([
-                    addStatModuleToUser(currentUser.uid, "fNwVk0dhntmBWj6oAT0U"), // Wordle
-                    addStatModuleToUser(currentUser.uid, "gzF6eumgBN9QiVF1LxM4"), // Connections
-                    addStatModuleToUser(currentUser.uid, "SHP4lWxnM5ONQJpRK5sH"), // Strands
-                    addStatModuleToUser(currentUser.uid, "ZyUFFw9Cdwix8w4UvW9O"), // Mini Crossword
+                    addUserStatModule(currentUser.uid, "fNwVk0dhntmBWj6oAT0U"), // Wordle
+                    addUserStatModule(currentUser.uid, "gzF6eumgBN9QiVF1LxM4"), // Connections
+                    addUserStatModule(currentUser.uid, "SHP4lWxnM5ONQJpRK5sH"), // Strands
+                    addUserStatModule(currentUser.uid, "ZyUFFw9Cdwix8w4UvW9O"), // Mini Crossword
                 ]);
             }
 
-            const statModulesFirestoreData: statModulesFirestoreData[] = await fetchUserStatModules(
+            const statModulesFirestoreData: statModulesFirestoreData[] = await getUserStatModules(
                 currentUser.uid
             );
 
@@ -179,9 +179,9 @@ export default function Home() {
         updateRank();
     };
 
-    const removeStatModuleFromUser = (statModuleId: string) => {
+    const deleteUserStatModule = (statModuleId: string) => {
         if (currentUser) {
-            removeStatModuleFromUserInFirestore(currentUser.uid, statModuleId);
+            deleteUserStatModuleInFirestore(currentUser.uid, statModuleId);
             setStatModuleData(statModuleData.filter((data) => data.id !== statModuleId));
 
             updateRank();
@@ -267,7 +267,7 @@ export default function Home() {
                             handleEnableClick={handleEnableClick}
                             handleHardModeClick={handleHardModeClick}
                             handleInputClick={handleInputClick}
-                            removeStatModuleFromUser={removeStatModuleFromUser}
+                            deleteUserStatModule={deleteUserStatModule}
                         />
                     ))}
                 </div>

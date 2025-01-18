@@ -10,13 +10,12 @@ import {
 import { statModulesFirestoreData, buttonModulesFirestoreData } from "../types/firestore";
 import { db } from "@/config/firebase";
 
-export const fetchStatModules = async (
+export const getStatModulesBySnapshot = async (
     statModulesSnapshot: QuerySnapshot<DocumentData, DocumentData>
 ) => {
-    console.log("Fetching data...");
+    console.log("Getting stat modules...");
 
     // Fetch stat module data and iterate through them to initialise statModuleDocuments.
-    // const statModulesSnapshot = await fetchStatModules();
     const statModuleDocuments: statModulesFirestoreData[] = await Promise.all(
         statModulesSnapshot.docs.map(async (doc) => {
             // Get all fields and values from stat module document's data.
@@ -24,25 +23,12 @@ export const fetchStatModules = async (
 
             // Fetch input module data for this stat module and iterate through them to
             // initialise inputModuleDocuments.
-            const inputModulesSnapshot = await fetchInputModules(doc.id);
-            const inputModuleDocuments: buttonModulesFirestoreData[] =
-                inputModulesSnapshot.docs.map((inputDoc) => {
-                    // Get all fields and values from input module document's data.
-                    const inputModuleDocData = inputDoc.data();
-
-                    return {
-                        id: inputDoc.id,
-                        statModuleId: doc.id,
-                        queryText: inputModuleDocData.queryText,
-                        buttonLabels: inputModuleDocData.buttonLabels,
-                        buttonScores: inputModuleDocData.buttonScores,
-                    };
-                });
+            const buttonModuleDocuments = await getButtonModulesById(doc.id);
 
             return {
                 id: doc.id,
                 gameName: statModuleDocData.gameName,
-                inputModules: inputModuleDocuments,
+                inputModules: buttonModuleDocuments,
                 themeColor: statModuleDocData.themeColor,
                 hardModeMultiplier: statModuleDocData.hardModeMultiplier,
             };
@@ -59,17 +45,32 @@ export const fetchStatModules = async (
  * @returns query snapshot of searching for the documents in the inputModules collection of the stat
  * module
  */
-export const fetchInputModules = async (statModuleId: string) => {
+export const getButtonModulesById = async (statModuleId: string) => {
     const querySnapshot = await getDocs(
         collection(db, "statModules", statModuleId, "inputModules")
     );
-    return querySnapshot;
+
+    const buttonModuleDocuments: buttonModulesFirestoreData[] = [];
+
+    for (const doc of querySnapshot.docs) {
+        const docData = doc.data();
+        buttonModuleDocuments.push({
+            id: doc.id,
+            statModuleId: statModuleId,
+            queryText: docData.queryText,
+            buttonLabels: docData.buttonLabels,
+            buttonScores: docData.buttonScores,
+        });
+    }
+
+    return buttonModuleDocuments;
 };
 
-export const removeStatModule = async (
+export const deleteStatModuleByRef = async (
     statModuleRef: DocumentReference<DocumentData, DocumentData>,
-    inputModulesRef: CollectionReference<DocumentData, DocumentData>
+    // inputModulesRef: CollectionReference<DocumentData, DocumentData>
 ) => {
+    const inputModulesRef = collection(statModuleRef, "inputModules");
     const inputModulesSnap = await getDocs(inputModulesRef);
     inputModulesSnap.forEach(async (inputModuleDoc) => {
         await deleteDoc(inputModuleDoc.ref);

@@ -5,7 +5,7 @@ import { ButtonFormData, ButtonFormDataSchema, ButtonModuleForm } from "./button
 import { useDebouncedCallback } from "use-debounce";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
-import { addDataToStatModules } from "../api/statModulesCollection";
+import { createStatModule } from "../api/statModulesCollection";
 
 // Firebase code in this page from this tutorial: https://www.youtube.com/watch?v=5MzCK3k3XlQ
 
@@ -209,7 +209,7 @@ export const CreateForm = () => {
         // }
 
         console.log("Adding data to firestore...");
-        const added = await addDataToStatModules(formData);
+        const added = await createStatModule(formData);
         if (added) {
             router.push("/games");
         } else {

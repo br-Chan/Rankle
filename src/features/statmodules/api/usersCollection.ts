@@ -1,8 +1,8 @@
 import { db } from "@/config/firebase";
 import { doc, getDoc, setDoc, collection, getDocs, orderBy, query } from "firebase/firestore";
-import { fetchStatModules, removeStatModule } from "../utils/firestoreUtils";
+import { getStatModulesBySnapshot, deleteStatModuleByRef } from "../utils/firestoreUtils";
 
-export const addStatModuleToUser = async (userId: string, statModuleId: string) => {
+export const addUserStatModule = async (userId: string, statModuleId: string) => {
     const statModuleRef = doc(db, "statModules", statModuleId);
     const statModuleSnap = await getDoc(statModuleRef);
 
@@ -36,18 +36,17 @@ export const addStatModuleToUser = async (userId: string, statModuleId: string) 
     }
 };
 
-export const removeStatModuleFromUser = async (userId: string, statModuleId: string) => {
-    const userStatModuleRef = doc(db, "users", userId, "userStatModules", statModuleId);
-    const userInputModulesRef = collection(userStatModuleRef, "inputModules");
-    removeStatModule(userStatModuleRef, userInputModulesRef);
-};
-
-export const fetchUserStatModules = async (userId: string) => {
+export const getUserStatModules = async (userId: string) => {
     const q = query(
         collection(db, "users", userId, "userStatModules"),
         orderBy("timeStamp", "asc")
     );
 
     const querySnapshot = await getDocs(q);
-    return fetchStatModules(querySnapshot);
+    return getStatModulesBySnapshot(querySnapshot);
+};
+
+export const deleteUserStatModule = async (userId: string, statModuleId: string) => {
+    const userStatModuleRef = doc(db, "users", userId, "userStatModules", statModuleId);
+    deleteStatModuleByRef(userStatModuleRef);
 };

@@ -21,13 +21,13 @@ export const StatModule = ({
     handleEnableClick,
     handleHardModeClick,
     handleInputClick,
-    removeStatModuleFromUser,
+    deleteUserStatModule,
 }: {
     data: StatModuleData;
     handleEnableClick: (statModuleId: string) => void;
     handleHardModeClick: (statModuleId: string) => void;
     handleInputClick: (data: ButtonModuleData, index: number, score: number) => void;
-    removeStatModuleFromUser: (statModuleId: string) => void;
+    deleteUserStatModule: (statModuleId: string) => void;
 }) => {
     const inputModules = [];
     const [opacity, setOpacity] = useState<number>(data.enabled ? 1 : 0.3);
@@ -112,7 +112,7 @@ export const StatModule = ({
                         <button
                             className="peer flex h-6 w-6 cursor-default items-center dark:text-white"
                             onClick={() => {
-                                removeStatModuleFromUser(data.id);
+                                deleteUserStatModule(data.id);
                             }}
                         >
                             <XMarkIcon />

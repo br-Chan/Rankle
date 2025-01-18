@@ -4,7 +4,7 @@ import { useState } from "react";
 import { HoverTooltip } from "@/components/hoverTooltip";
 import { ThemedHoverComponent } from "@/components/themedHoverComponent";
 import { useAuth } from "@/features/firebaseAuth/hooks/useAuth";
-import { addStatModuleToUser } from "../api/usersCollection";
+import { addUserStatModule } from "../api/usersCollection";
 import { UserPlusIcon, TrashIcon } from "@heroicons/react/24/solid";
 import { ButtonModulePane } from "./buttonModulePane";
 import { StatModuleData } from "../types/display";
@@ -18,10 +18,10 @@ import { StatModuleData } from "../types/display";
  */
 export const StatModulePane = ({
     data,
-    removeStatModuleFromStatModules,
+    deleteStatModule,
 }: {
     data: StatModuleData;
-    removeStatModuleFromStatModules: (statModuleId: string) => void;
+    deleteStatModule: (statModuleId: string) => void;
 }) => {
     const { currentUser } = useAuth();
     const inputModulePanes = [];
@@ -55,7 +55,7 @@ export const StatModulePane = ({
                     <button
                         className="relative h-6 w-6 text-sm"
                         onClick={() => {
-                            addStatModuleToUser(currentUser!.uid, data.id); // TODO: user has exclamation
+                            addUserStatModule(currentUser!.uid, data.id); // TODO: user has exclamation
                             setAdded(true);
                         }}
                     >
@@ -73,7 +73,7 @@ export const StatModulePane = ({
                     <button
                         className="relative h-6 w-6 text-sm dark:text-white"
                         onClick={() => {
-                            removeStatModuleFromStatModules(data.id);
+                            deleteStatModule(data.id);
                         }}
                     >
                         <TrashIcon className="peer px-[2px]" />

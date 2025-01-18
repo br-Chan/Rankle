@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { StatModulePane } from "@/features/statmodules/components/statModulePane";
-import { fetchAllStatModules } from "@/features/statmodules/api/statModulesCollection";
-import { removeStatModuleFromStatModules as removeStatModuleFromStatModulesInFirestore } from "@/features/statmodules/api/statModulesCollection";
-import { statModulesFirestoreData } from "@/features/statmodules/types/display";
+import { getAllStatModules } from "@/features/statmodules/api/statModulesCollection";
+import { deleteStatModule as deleteStatModuleInFirestore } from "@/features/statmodules/api/statModulesCollection";
+import { statModulesFirestoreData } from "@/features/statmodules/types/firestore";
 
 /**
  * Page where users can view user-created stat modules and add them to their own lists.
@@ -18,14 +18,14 @@ export default function Home() {
     // Fetch data when component 'mounts' (not every time it re-renders).
     useEffect(() => {
         async function fetchData() {
-            const statModuleDocuments: statModulesFirestoreData[] = await fetchAllStatModules();
+            const statModuleDocuments: statModulesFirestoreData[] = await getAllStatModules();
             setStatModulesData(statModuleDocuments);
         }
         fetchData();
     }, []);
 
-    const removeStatModuleFromStatModules = (statModuleId: string) => {
-        removeStatModuleFromStatModulesInFirestore(statModuleId);
+    const deleteStatModule = (statModuleId: string) => {
+        deleteStatModuleInFirestore(statModuleId);
         setStatModulesData(statModulesData.filter((data) => data.id !== statModuleId));
     };
 
@@ -65,7 +65,7 @@ export default function Home() {
                                 hardModeEnabled: false,
                                 hardModeMultiplier: item.hardModeMultiplier,
                             }}
-                            removeStatModuleFromStatModules={removeStatModuleFromStatModules}
+                            deleteStatModule={deleteStatModule}
                         />
                     ))}
                 </div>

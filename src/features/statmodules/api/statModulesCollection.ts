@@ -9,7 +9,7 @@ import {
     serverTimestamp,
 } from "firebase/firestore";
 import { StatModuleFormData } from "../components/createForm";
-import { fetchStatModules, removeStatModule } from "../utils/firestoreUtils";
+import { getStatModulesBySnapshot, deleteStatModuleByRef } from "../utils/firestoreUtils";
 
 /**
  * Adds a stat module document to Firestore with all associated data.
@@ -18,7 +18,7 @@ import { fetchStatModules, removeStatModule } from "../utils/firestoreUtils";
  * @returns true if the document was successfully written to Firestore, false otherwise
  */
 
-export const addDataToStatModules = async (statModuleData: StatModuleFormData) => {
+export const createStatModule = async (statModuleData: StatModuleFormData) => {
     try {
         // Add stat module document to statModules collection.
         const statModuleDocRef = await addDoc(collection(db, "statModules"), {
@@ -56,21 +56,21 @@ export const addDataToStatModules = async (statModuleData: StatModuleFormData) =
     }
 };
 
-export const removeStatModuleFromStatModules = async (statModuleId: string) => {
-    const statModuleRef = doc(db, "statModules", statModuleId);
-    const inputModuleRef = collection(statModuleRef, "inputModules");
-    removeStatModule(statModuleRef, inputModuleRef);
-};
-
 /**
  * Fetches all stat module documents in the order they were created, newest at the top left.
  *
  * @returns Firestore data of all stat modules in the statModules collection
  */
-export const fetchAllStatModules = async () => {
+export const getAllStatModules = async () => {
     // Order the collection by timeStamp.
     const q = query(collection(db, "statModules"), orderBy("timeStamp", "desc"));
 
     const querySnapshot = await getDocs(q);
-    return fetchStatModules(querySnapshot);
+    return getStatModulesBySnapshot(querySnapshot);
+};
+
+export const deleteStatModule = async (statModuleId: string) => {
+    const statModuleRef = doc(db, "statModules", statModuleId);
+    const inputModuleRef = collection(statModuleRef, "inputModules");
+    deleteStatModuleByRef(statModuleRef);
 };
