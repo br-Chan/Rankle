@@ -6,15 +6,14 @@ import { collection, getDocs } from "firebase/firestore";
 import { HoverTooltip } from "@/components/hoverTooltip";
 import { db } from "@/config/firebase";
 import { useAuth } from "@/features/firebaseAuth/hooks/useAuth";
-import { ButtonModuleData } from "@/features/statmodules/components/buttonModule";
-import { StatModuleData, StatModule } from "@/features/statmodules/components/statModule";
-import {
-    addStatModuleToUser,
-    fetchUserStatModules,
-    convertStatModuleFirestoreData,
-    statModulesFirestoreData,
-    removeStatModuleFromUser as removeStatModuleFromUserInFirestore,
-} from "@/lib/firestoreUtils";
+import { ButtonModuleData } from "@/features/statmodules/types/display";
+import { StatModule } from "@/features/statmodules/components/statModule";
+import { StatModuleData } from "@/features/statmodules/types/display";
+import { fetchUserStatModules } from "@/features/statmodules/api/usersCollection";
+import { removeStatModuleFromUser as removeStatModuleFromUserInFirestore } from "@/features/statmodules/api/usersCollection";
+import { addStatModuleToUser } from "@/features/statmodules/api/usersCollection";
+import { convertStatModuleFirestoreData } from "@/features/statmodules/api/firestoreConversion";
+import { statModulesFirestoreData } from "@/features/statmodules/types/firestore";
 
 /**
  * List of Ranks and their attributed minimum scores to attain it.

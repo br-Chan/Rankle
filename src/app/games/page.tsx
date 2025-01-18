@@ -2,11 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { StatModulePane } from "@/features/statmodules/components/statModulePane";
-import {
-    statModulesFirestoreData,
-    fetchAllStatModules,
-    removeStatModuleFromStatModules as removeStatModuleFromStatModulesInFirestore,
-} from "@/lib/firestoreUtils";
+import { fetchAllStatModules } from "@/features/statmodules/api/statModulesCollection";
+import { removeStatModuleFromStatModules as removeStatModuleFromStatModulesInFirestore } from "@/features/statmodules/api/statModulesCollection";
+import { statModulesFirestoreData } from "@/features/statmodules/types/display";
 
 /**
  * Page where users can view user-created stat modules and add them to their own lists.

@@ -1,25 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { ButtonModule, ButtonModuleData } from "./buttonModule";
+import { ButtonModule } from "./buttonModule";
+import { ButtonModuleData } from "../types/display";
 import { HardModeModule } from "./hardModeModule";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 import { EnableSwitch } from "@/components/enableSwitch";
 import { HoverTooltip } from "@/components/hoverTooltip";
 import { ThemedHoverComponent } from "@/components/themedHoverComponent";
-
-/**
- * Data type for stat modules when displaying them to the user.
- */
-export type StatModuleData = {
-    id: string;
-    gameName: string;
-    inputModules: ButtonModuleData[];
-    themeColor: string;
-    enabled: boolean;
-    hardModeEnabled: boolean;
-    hardModeMultiplier: number;
-};
+import { StatModuleData } from "../types/display";
 
 /**
  * Stat module for a single game, that the user interacts with to input their stat for the game.

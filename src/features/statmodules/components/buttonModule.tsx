@@ -3,20 +3,7 @@
 import { useState } from "react";
 import { useTheme } from "next-themes";
 import { HoverTooltip } from "@/components/hoverTooltip";
-
-/**
- * Data type for button modules, to be used when displaying a stat module to the user.
- */
-export type ButtonModuleData = {
-    id: string;
-    statModuleId: string;
-    scoreIndex: number;
-    queryText: string;
-    buttonLabels: (number | string)[];
-    buttonScores: number[];
-    enabled: boolean;
-    selectedButtonIndex: number | null;
-};
+import { ButtonModuleData } from "../types/display";
 
 /**
  * Button module that displays a query, a set of buttons and handles colour changes when a button is
