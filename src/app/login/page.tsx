@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useAuth } from "@/features/firebaseAuth/hooks/useAuth";
 import { signInAndLinkWithGoogle } from "@/features/firebaseAuth/utils/signIn";
 
-export default function Home() {
+const Login = () => {
     const { currentUser } = useAuth();
 
     const router = useRouter();
@@ -46,4 +46,6 @@ export default function Home() {
             </div>
         </main>
     );
-}
+};
+
+export default Login;

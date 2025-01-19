@@ -13,7 +13,7 @@ import { createStatModule } from "../api/statModulesCollection";
  *
  * @returns Create form
  */
-export const CreateForm = () => {
+const StatModuleForm = () => {
     const [formData, setFormData] = useState<StatModuleFormData>({
         gameName: "",
         inputModuleForms: [
@@ -312,3 +312,5 @@ export const CreateForm = () => {
         </form>
     );
 };
+
+export default StatModuleForm;

@@ -46,7 +46,7 @@ type RankleRank = {
  *
  * @returns Home page
  */
-export default function Home() {
+const Home = () => {
     const { currentUser, isUserLoading } = useAuth();
     const [isLoadingComplete, setIsLoadingComplete] = useState(false);
 
@@ -274,4 +274,6 @@ export default function Home() {
             )}
         </main>
     );
-}
+};
+
+export default Home;

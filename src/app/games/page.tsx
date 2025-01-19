@@ -11,7 +11,7 @@ import { statModulesFirestoreData } from "@/features/statmodules/types/firestore
  *
  * @returns Games page
  */
-export default function Home() {
+const Games = () => {
     // Array of data for all stat modules fetched from Firestore.
     const [statModulesData, setStatModulesData] = useState<statModulesFirestoreData[]>([]);
 
@@ -72,4 +72,6 @@ export default function Home() {
             )}
         </main>
     );
-}
+};
+
+export default Games;
