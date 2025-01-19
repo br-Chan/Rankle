@@ -8,7 +8,7 @@ import {
     query,
     serverTimestamp,
 } from "firebase/firestore";
-import { StatModuleFormData } from "../components/createForm";
+import { StatModuleFormData } from "../components/statModuleForm";
 import { getStatModulesBySnapshot, deleteStatModuleByRef } from "../utils/firestoreUtils";
 
 /**

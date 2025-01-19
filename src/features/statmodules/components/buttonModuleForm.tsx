@@ -1,14 +1,10 @@
-import { z } from "zod";
-
-export const ButtonFormDataSchema = z.object({
-    label: z.string(),
-    score: z.number(),
-});
-
 /**
  * Data type for button forms, to use when collecting data from the user in the Create form.
  */
-export type ButtonFormData = z.infer<typeof ButtonFormDataSchema>;
+export type ButtonFormData = {
+    label: string;
+    score: number;
+};
 
 /**
  * A 'form' for inputting data for a single button in a button module.

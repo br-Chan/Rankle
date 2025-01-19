@@ -1,33 +1,28 @@
 "use client";
 
 import { useState } from "react";
-import { ButtonFormData, ButtonFormDataSchema, ButtonModuleForm } from "./buttonModuleForm";
+import { ButtonFormData, ButtonModuleForm } from "./buttonModuleForm";
 import { useDebouncedCallback } from "use-debounce";
 import { useRouter } from "next/navigation";
-import { z } from "zod";
 import { createStatModule } from "../api/statModulesCollection";
 
 // Firebase code in this page from this tutorial: https://www.youtube.com/watch?v=5MzCK3k3XlQ
 
-const InputModuleFormDataSchema = z.object({
-    queryText: z.string(),
-    data: z.array(ButtonFormDataSchema),
-});
-
-const StatModuleFormDataSchema = z.object({
-    gameName: z.string().min(1, "Game name is required"),
-    inputModuleForms: z.array(InputModuleFormDataSchema),
-    themeColor: z.string(),
-    themeColorName: z.string(),
-    hardModeMultiplier: z.number(),
-});
-
 /**
  * Data type for input module forms, to use when collecting data from the user in the Create form.
  */
-type InputModuleFormData = z.infer<typeof InputModuleFormDataSchema>;
+type InputModuleFormData = {
+    queryText: string;
+    data: ButtonFormData[];
+};
 
-export type StatModuleFormData = z.infer<typeof StatModuleFormDataSchema>;
+export type StatModuleFormData = {
+    gameName: string;
+    inputModuleForms: InputModuleFormData[];
+    themeColor: string;
+    themeColorName: string;
+    hardModeMultiplier: number;
+};
 
 /**
  * The form that the user can fill in to create their stat module before submitting it and adding
@@ -198,15 +193,7 @@ export const CreateForm = () => {
         // Invoke latest changes to button module forms immediately.
         handleButtonModuleFormChange.flush();
 
-        // Prevent default behaviour of reloading the page.
         e.preventDefault();
-
-        // Validate the form data using Zod. UNUSED FOR NOW
-        // const validationResult = StatModuleFormDataSchema.safeParse(formData);
-        // if (!validationResult.success) {
-        //     console.error("Validation errors:", validationResult.error.errors);
-        //     return;
-        // }
 
         console.log("Adding data to firestore...");
         const added = await createStatModule(formData);

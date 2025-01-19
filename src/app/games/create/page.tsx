@@ -1,4 +1,4 @@
-import { CreateForm } from "@/features/statmodules/components/createForm";
+import { CreateForm } from "@/features/statmodules/components/statModuleForm";
 
 /**
  * Page where users can create their own games.
