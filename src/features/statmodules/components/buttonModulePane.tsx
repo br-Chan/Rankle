@@ -27,13 +27,13 @@ export const ButtonModulePane = ({
             <div className="relative" key={index}>
                 <div className="peer rounded-lg border-black text-sm" key={index}>
                     {/* Button label */}
-                    <div className="w-full rounded-t-md bg-white font-semibold text-black dark:bg-zinc-800 dark:text-white">
+                    <div className="truncate px-1 w-full h-5 rounded-t-md bg-white font-semibold text-black dark:bg-zinc-800 dark:text-white">
                         {label}
                     </div>
 
                     {/* Button score */}
                     <div
-                        className="w-full rounded-b-md border-t-2 bg-white text-gray-700 dark:bg-zinc-800 dark:text-white"
+                        className="truncate px-1 w-full rounded-b-md border-t-2 bg-white text-gray-700 dark:bg-zinc-800 dark:text-white"
                         style={{
                             borderColor: `${themeColor}`,
                         }}

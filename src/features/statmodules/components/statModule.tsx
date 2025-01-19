@@ -101,7 +101,12 @@ export const StatModule = ({
                         onEnableClick={() => handleEnableClickInStatModule(data.id)}
                         backgroundColor={data.themeColor}
                     />
-                    <h2 className="text-xl font-bold">{data.gameName}</h2>
+                    <div className="relative w-44">
+                        <h2 className="text-left peer truncate text-xl font-bold hover:cursor-default">
+                            {data.gameName}
+                        </h2>
+                        <HoverTooltip tooltipText={data.gameName} />
+                    </div>
                 </div>
                 <div className="mr-1 flex h-10 items-center">
                     {/* <button className="font-bold text-blue-500 m-1">/</button> */}

@@ -49,7 +49,7 @@ export const ButtonModule = ({
                 key={index}
             >
                 <button
-                    className="peer w-full rounded-md py-2 text-black duration-300 dark:text-white"
+                    className="peer w-full truncate p-2 rounded-md py-2 text-black duration-300 dark:text-white"
                     value={score}
                     style={{
                         backgroundColor:
@@ -70,7 +70,7 @@ export const ButtonModule = ({
                 >
                     {data.buttonLabels[index]}
                 </button>
-                <HoverTooltip tooltipText={`Score: ${score}`} />
+                <HoverTooltip tooltipText={`${data.buttonLabels[index]} (${score})`} />
             </div>
         );
     }

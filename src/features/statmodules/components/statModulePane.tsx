@@ -64,7 +64,10 @@ export const StatModulePane = ({
                     </button>
                 </ThemedHoverComponent>
 
-                <h2 className="text-xl font-bold">{data.gameName}</h2>
+                <header className="relative w-44">
+                    <h2 className="peer truncate text-xl font-bold">{data.gameName}</h2>
+                    <HoverTooltip tooltipText={data.gameName} />
+                </header>
 
                 <ThemedHoverComponent
                     className="flex cursor-pointer items-center rounded-md border-2 border-black dark:border-white"
