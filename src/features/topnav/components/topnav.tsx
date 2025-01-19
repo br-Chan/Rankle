@@ -10,6 +10,7 @@ import {
     UserIcon,
 } from "@heroicons/react/24/outline";
 import ThemeButton from "./themeButton";
+import AccountButton from "./accountButton";
 
 const leftLinks = [];
 
@@ -43,31 +44,15 @@ export default function TopNav() {
                     return (
                         <Link
                             key={link.name}
-                            className="relative mx-1 rounded-lg border-2 border-black text-black transition-colors hover:bg-amber-500 hover:text-white dark:text-white dark:hover:bg-amber-300 dark:hover:text-black"
+                            className="relative mx-1 rounded-lg border-2 border-black text-black transition-colors hover:bg-amber-500 hover:text-white dark:hover:bg-amber-300 dark:hover:text-black"
                             href={link.href}
                         >
-                            <LinkIcon className="peer w-6 md:w-8" />
+                            <LinkIcon className="peer w-6 md:w-8 dark:text-white" />
                             <HoverTooltip key={link.name} tooltipText={link.name} />
                         </Link>
                     );
                 })}
-                {!currentUser || currentUser.isAnonymous ? (
-                    <Link
-                        className="relative mx-1 rounded-lg border-2 border-black text-black transition-colors hover:bg-amber-500 hover:text-white dark:text-white dark:hover:bg-amber-300 dark:hover:text-black"
-                        href="/login"
-                    >
-                        <ArrowRightEndOnRectangleIcon className="peer w-6 md:w-8" />
-                        <HoverTooltip tooltipText="Login" />
-                    </Link>
-                ) : (
-                    <Link
-                        className="relative mx-1 rounded-lg border-2 border-black text-black transition-colors hover:bg-amber-500 hover:text-white dark:text-white dark:hover:bg-amber-300 dark:hover:text-black"
-                        href="/account"
-                    >
-                        <UserIcon className="peer w-6 md:w-8" />
-                        <HoverTooltip tooltipText="Account" />
-                    </Link>
-                )}
+                <AccountButton />
             </div>
         </div>
     );
