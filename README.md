@@ -13,7 +13,8 @@ This project uses:
 
 - [Home page](https://rankle-rho.vercel.app/)
 - [See user-made games](https://rankle-rho.vercel.app/games)
-- [Add your own game with the Create form](https://rankle-rho.vercel.app/games/create)
+- [Add your own game](https://rankle-rho.vercel.app/games/create)
+- [Sign in to your own account](https://rankle-rho.vercel.app/account)
 
 ## Contributing
 
