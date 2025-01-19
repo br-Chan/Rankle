@@ -1,8 +1,8 @@
 "use client";
 
-import { SunIcon, MoonIcon, ComputerDesktopIcon } from "@heroicons/react/24/outline";
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
+import { HiOutlineComputerDesktop, HiOutlineMoon, HiOutlineSun } from "react-icons/hi2";
 
 const ThemeButton = () => {
     const [mounted, setMounted] = useState(false);
@@ -13,19 +13,19 @@ const ThemeButton = () => {
     return mounted ? (
         <button
             type="button"
-            className="*:border-2 *:border-black *:text-black *:hover:transition-colors"
+            className="*:border-2 *:border-black *:text-black *:hover:transition-colors rounded-full"
             onClick={() => {
                 setTheme(resolvedTheme === "dark" ? "light" : "dark");
             }}
         >
             {resolvedTheme === "dark" ? (
-                <SunIcon className="w-7 rounded-full p-1 hover:bg-amber-300 md:w-9" />
+                <HiOutlineSun className="h-9 w-9 rounded-full p-1 hover:bg-amber-300" />
             ) : (
-                <MoonIcon className="w-7 rounded-full p-1 hover:bg-amber-500 md:w-9" />
+                <HiOutlineMoon className="h-9 w-9 rounded-full p-1 hover:bg-amber-500" />
             )}
         </button>
     ) : (
-        <ComputerDesktopIcon className="h-7 w-7 rounded-full border-2 border-gray-500 p-1 text-gray-500 md:h-9 md:w-9" />
+        <HiOutlineComputerDesktop className="h-9 w-9 rounded-full border-2 border-gray-500 p-1 text-gray-500" />
     );
 };
 

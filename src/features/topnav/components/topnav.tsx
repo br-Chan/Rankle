@@ -3,20 +3,15 @@
 import Link from "next/link";
 import { HoverTooltip } from "@/components/hoverTooltip";
 import { useAuth } from "@/features/firebaseAuth/hooks/useAuth";
-import {
-    PlusIcon,
-    Squares2X2Icon,
-    ArrowRightEndOnRectangleIcon,
-    UserIcon,
-} from "@heroicons/react/24/outline";
+import { HiOutlinePlus, HiOutlineSquares2X2 } from "react-icons/hi2";
 import ThemeButton from "./themeButton";
 import AccountButton from "./accountButton";
 
 const leftLinks = [];
 
 const rightLinks = [
-    { name: "Add game", href: "/games/create", icon: PlusIcon },
-    { name: "All games", href: "/games", icon: Squares2X2Icon },
+    { name: "Add game", href: "/games/create", icon: HiOutlinePlus },
+    { name: "All games", href: "/games", icon: HiOutlineSquares2X2 },
 ];
 
 /**
@@ -47,7 +42,7 @@ export default function TopNav() {
                             className="relative mx-1 rounded-lg border-2 border-black text-black transition-colors hover:bg-amber-500 hover:text-white dark:hover:bg-amber-300 dark:hover:text-black"
                             href={link.href}
                         >
-                            <LinkIcon className="peer w-6 md:w-8 dark:text-white" />
+                            <LinkIcon className="peer h-8 w-8 dark:text-white" />
                             <HoverTooltip key={link.name} tooltipText={link.name} />
                         </Link>
                     );

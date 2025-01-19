@@ -5,8 +5,8 @@ This project uses:
 - [Next.js](https://nextjs.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Firebase](https://firebase.google.com/)
+- [react-icons](https://react-icons.github.io/react-icons/)
 - [The Color API](https://www.thecolorapi.com/)
-- [@heroicons/react](https://www.npmjs.com/package/@heroicons/react)
 - [use-debounce](https://www.npmjs.com/package/use-debounce)
 
 ## Visitable pages (have a play!)

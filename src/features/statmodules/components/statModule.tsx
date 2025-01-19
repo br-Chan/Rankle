@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ButtonModule } from "./buttonModule";
 import { ButtonModuleData } from "../types/display";
 import { HardModeModule } from "./hardModeModule";
-import { XMarkIcon } from "@heroicons/react/24/solid";
+import { HiXMark } from "react-icons/hi2";
 import { EnableSwitch } from "@/components/enableSwitch";
 import { HoverTooltip } from "@/components/hoverTooltip";
 import { ThemedHoverComponent } from "@/components/themedHoverComponent";
@@ -102,7 +102,7 @@ export const StatModule = ({
                         backgroundColor={data.themeColor}
                     />
                     <div className="relative w-44">
-                        <h2 className="text-left peer truncate text-xl font-bold hover:cursor-default">
+                        <h2 className="peer truncate text-left text-xl font-bold hover:cursor-default">
                             {data.gameName}
                         </h2>
                         <HoverTooltip tooltipText={data.gameName} />
@@ -115,12 +115,12 @@ export const StatModule = ({
                         className="relative rounded-md"
                     >
                         <button
-                            className="peer flex h-6 w-6 cursor-default items-center dark:text-white"
+                            className="peer flex cursor-default items-center dark:text-white"
                             onClick={() => {
                                 deleteUserStatModule(data.id);
                             }}
                         >
-                            <XMarkIcon />
+                            <HiXMark className="h-6 w-6" />
                         </button>
                         <HoverTooltip tooltipText="remove" delay="1000" />
                     </ThemedHoverComponent>

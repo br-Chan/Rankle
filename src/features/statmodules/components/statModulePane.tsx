@@ -5,7 +5,7 @@ import { HoverTooltip } from "@/components/hoverTooltip";
 import { ThemedHoverComponent } from "@/components/themedHoverComponent";
 import { useAuth } from "@/features/firebaseAuth/hooks/useAuth";
 import { addUserStatModule } from "../api/usersCollection";
-import { UserPlusIcon, TrashIcon } from "@heroicons/react/24/solid";
+import { HiTrash, HiUserPlus } from "react-icons/hi2";
 import { ButtonModulePane } from "./buttonModulePane";
 import { StatModuleData } from "../types/display";
 
@@ -53,13 +53,13 @@ export const StatModulePane = ({
                     hoveredBackgroundColor="#4ade80" // text-green-400
                 >
                     <button
-                        className="relative h-6 w-6 text-sm"
+                        className="relative text-sm"
                         onClick={() => {
                             addUserStatModule(currentUser!.uid, data.id); // TODO: user has exclamation
                             setAdded(true);
                         }}
                     >
-                        <UserPlusIcon className="peer px-[2px] dark:text-white" />
+                        <HiUserPlus className="peer h-6 w-6 px-[2px] dark:text-white" />
                         <HoverTooltip tooltipText={added ? "Added!" : "Add to your list"} />
                     </button>
                 </ThemedHoverComponent>
@@ -74,12 +74,12 @@ export const StatModulePane = ({
                     hoveredBackgroundColor="#ef4444" // text-red-500
                 >
                     <button
-                        className="relative h-6 w-6 text-sm dark:text-white"
+                        className="relative text-sm dark:text-white"
                         onClick={() => {
                             deleteStatModule(data.id);
                         }}
                     >
-                        <TrashIcon className="peer px-[2px]" />
+                        <HiTrash className="peer h-6 w-6 px-[2px]" />
                         <HoverTooltip tooltipText="Delete" />
                     </button>
                 </ThemedHoverComponent>
