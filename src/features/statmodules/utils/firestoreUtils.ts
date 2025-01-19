@@ -3,12 +3,13 @@ import {
     DocumentData,
     collection,
     getDocs,
-    CollectionReference,
     DocumentReference,
     deleteDoc,
 } from "firebase/firestore";
 import { statModulesFirestoreData, buttonModulesFirestoreData } from "../types/firestore";
 import { db } from "@/config/firebase";
+
+// Firebase code from this tutorial: https://www.youtube.com/watch?v=5MzCK3k3XlQ
 
 export const getStatModulesBySnapshot = async (
     statModulesSnapshot: QuerySnapshot<DocumentData, DocumentData>

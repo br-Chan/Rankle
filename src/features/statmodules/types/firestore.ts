@@ -1,15 +1,4 @@
 /**
- * Data type for stat modules, to use when adding or fetching data from Firestore.
- */
-export type statModulesFirestoreData = {
-    id: string;
-    gameName: string;
-    inputModules: buttonModulesFirestoreData[];
-    themeColor: string;
-    hardModeMultiplier: number;
-};
-
-/**
  * Data type for button modules, to use when adding or fetching data from Firestore.
  */
 export type buttonModulesFirestoreData = {
@@ -18,4 +7,15 @@ export type buttonModulesFirestoreData = {
     queryText: string;
     buttonLabels: string[];
     buttonScores: number[];
+};
+
+/**
+ * Data type for stat modules, to use when adding or fetching data from Firestore.
+ */
+export type statModulesFirestoreData = {
+    id: string;
+    gameName: string;
+    inputModules: buttonModulesFirestoreData[];
+    themeColor: string;
+    hardModeMultiplier: number;
 };

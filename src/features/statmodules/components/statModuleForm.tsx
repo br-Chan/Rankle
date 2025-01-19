@@ -1,28 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { ButtonFormData, ButtonModuleForm } from "./buttonModuleForm";
-import { useDebouncedCallback } from "use-debounce";
 import { useRouter } from "next/navigation";
+import { useDebouncedCallback } from "use-debounce";
+import { ButtonModuleForm } from "./buttonModuleForm";
+import { StatModuleFormData } from "../types/form";
 import { createStatModule } from "../api/statModulesCollection";
-
-// Firebase code in this page from this tutorial: https://www.youtube.com/watch?v=5MzCK3k3XlQ
-
-/**
- * Data type for input module forms, to use when collecting data from the user in the Create form.
- */
-type InputModuleFormData = {
-    queryText: string;
-    data: ButtonFormData[];
-};
-
-export type StatModuleFormData = {
-    gameName: string;
-    inputModuleForms: InputModuleFormData[];
-    themeColor: string;
-    themeColorName: string;
-    hardModeMultiplier: number;
-};
 
 /**
  * The form that the user can fill in to create their stat module before submitting it and adding

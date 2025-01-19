@@ -1,10 +1,4 @@
-/**
- * Data type for button forms, to use when collecting data from the user in the Create form.
- */
-export type ButtonFormData = {
-    label: string;
-    score: number;
-};
+import { ButtonFormData } from "../types/form";
 
 /**
  * A 'form' for inputting data for a single button in a button module.
