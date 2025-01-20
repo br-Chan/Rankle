@@ -4,6 +4,9 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useAuth } from "@/features/firebaseAuth/hooks/useAuth";
 import { signInAndLinkWithGoogle } from "@/features/firebaseAuth/utils/signIn";
+import { FcGoogle } from "react-icons/fc";
+import EmailSignInForm from "@/features/firebaseAuth/components/emailSignInForm";
+import Link from "next/link";
 
 const Login = () => {
     const { currentUser } = useAuth();
@@ -32,17 +35,22 @@ const Login = () => {
 
     return (
         <main className="flex w-[288px] flex-col justify-center text-center md:w-[576px]">
-            <h1 className="gap-2 text-center text-2xl font-black">LOGIN</h1>
+            <h1 className="text-center text-2xl font-black">LOGIN</h1>
             <p>Save all your games!</p>
-            <div className="mt-10 flex flex-col gap-5">
+
+            <div className="mt-4 flex flex-col gap-5">
+                <EmailSignInForm />
+                ------------- OR -------------
                 <button
-                    className="transition-colours rounded-full bg-amber-300 p-4 text-black duration-300 hover:bg-amber-400"
+                    className="transition-colours flex items-center justify-center gap-2 rounded-full bg-amber-400 p-3 text-black duration-300 hover:bg-amber-500"
                     onClick={async () => {
                         handleGoogleSignIn();
                     }}
                 >
+                    <FcGoogle className="h-8 w-8 rounded-full bg-white p-1" />
                     Sign in with Google
                 </button>
+                <div>First time? Create an account.</div>
             </div>
         </main>
     );
