@@ -1,21 +1,44 @@
 import { useState } from "react";
+import { useAuth } from "../hooks/useAuth";
+import { signInWithEmail } from "../utils/signIn";
+import { useRouter } from "next/navigation";
 
 const EmailSignInForm = () => {
+    const { currentUser } = useAuth();
+
+    const router = useRouter();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleEmailSignIn = (e: React.FormEvent) => {
+    const [isSigningIn, setIsSigningIn] = useState(false);
+
+    const handleEmailSignIn = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        
+        if (!isSigningIn) {
+            setIsSigningIn(true);
+
+            if (currentUser) {
+                try {
+                    await signInWithEmail(email, password);
+                    router.push("/");
+                } catch (error) {
+                    setIsSigningIn(false);
+                    // TODO: handle situation where sign in causes uncaught error
+                }
+            } else {
+                // TODO: handle situation where user is null
+            }
+        }
     };
 
     return (
         <form
             onSubmit={handleEmailSignIn}
-            className="flex flex-col gap-4 rounded-3xl border-4 border-amber-400 bg-amber-400 bg-opacity-15 p-4"
+            className="flex flex-col items-center gap-4 rounded-2xl border-4 border-amber-400 bg-amber-400 bg-opacity-30 p-4"
         >
-            <label className="flex flex-col items-center gap-1">
+            <label className="flex w-full flex-col items-center gap-1">
                 <span className="font-bold">Email</span>
                 <input
                     type="email"
@@ -27,7 +50,7 @@ const EmailSignInForm = () => {
                 />
             </label>
 
-            <label className="flex flex-col items-center gap-1">
+            <label className="flex w-full flex-col items-center gap-1">
                 <span className="font-bold">Password</span>
                 <input
                     type="password"
@@ -38,7 +61,12 @@ const EmailSignInForm = () => {
                 />
             </label>
 
-            <button type="submit"></button>
+            <button
+                type="submit"
+                className="transition-colours w-fit rounded-lg bg-amber-400 px-4 py-2 text-black duration-300 hover:bg-amber-500"
+            >
+                Sign in
+            </button>
         </form>
     );
 };
