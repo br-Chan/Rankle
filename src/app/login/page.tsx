@@ -6,7 +6,7 @@ import { useAuth } from "@/features/firebaseAuth/hooks/useAuth";
 import { signInAndLinkWithGoogle } from "@/features/firebaseAuth/utils/signIn";
 import { FcGoogle } from "react-icons/fc";
 import EmailSignInForm from "@/features/firebaseAuth/components/emailSignInForm";
-import Link from "next/link";
+import SignUpButton from "@/app/login/components/signUpButton";
 
 const Login = () => {
     const { currentUser } = useAuth();
@@ -42,15 +42,15 @@ const Login = () => {
                 <EmailSignInForm />
                 ------------- OR -------------
                 <button
-                    className="transition-colours flex items-center justify-center gap-2 rounded-full bg-amber-400 p-3 text-black duration-300 hover:bg-amber-500"
                     onClick={async () => {
                         handleGoogleSignIn();
                     }}
+                    className="transition-colours flex items-center justify-center gap-2 rounded-full bg-amber-400 p-3 text-black duration-300 hover:bg-amber-500"
                 >
                     <FcGoogle className="h-8 w-8 rounded-full bg-white p-1" />
                     Sign in with Google
                 </button>
-                <div>First time? Create an account.</div>
+                <SignUpButton />
             </div>
         </main>
     );

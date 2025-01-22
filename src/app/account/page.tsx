@@ -21,7 +21,7 @@ const Account = () => {
                     className="transition-colours rounded-full bg-amber-300 p-4 font-bold text-black duration-300 hover:bg-amber-500 hover:text-white"
                     onClick={async () => {
                         await signOut();
-                        router.push("/");
+                        router.push("/login");
                     }}
                 >
                     SIGN OUT

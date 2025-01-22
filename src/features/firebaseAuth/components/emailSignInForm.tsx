@@ -46,7 +46,7 @@ const EmailSignInForm = () => {
                     placeholder="rankler@rankmail.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="text-md w-3/5 rounded-xl border-2 border-transparent bg-white bg-opacity-50 p-1 px-3 outline-none focus:border-amber-300"
+                    className="w-3/5 rounded-xl border-2 border-transparent bg-white bg-opacity-50 p-1 px-3 outline-none focus:border-amber-400"
                 />
             </label>
 
@@ -57,7 +57,7 @@ const EmailSignInForm = () => {
                     name="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="text-md w-3/5 rounded-xl border-2 border-transparent bg-white bg-opacity-50 p-1 px-3 outline-none focus:border-amber-300"
+                    className="w-3/5 rounded-xl border-2 border-transparent bg-white bg-opacity-50 p-1 px-3 outline-none focus:border-amber-400"
                 />
             </label>
 
