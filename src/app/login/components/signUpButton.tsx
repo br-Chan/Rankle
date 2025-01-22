@@ -16,7 +16,8 @@ const SignUpButton = () => {
                     Create an account
                 </button>
             </div>
-            {showModal && createPortal(<SignUpModal />, document.body)}
+            {showModal &&
+                createPortal(<SignUpModal onCancel={() => setShowModal(false)} />, document.body)}
         </>
     );
 };

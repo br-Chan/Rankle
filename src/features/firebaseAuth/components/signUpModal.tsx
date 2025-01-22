@@ -3,7 +3,7 @@ import { useAuth } from "../hooks/useAuth";
 import { registerAndLinkWithEmail } from "../utils/signUp";
 import { useRouter } from "next/navigation";
 
-const SignUpModal = () => {
+const SignUpModal = ({ onCancel }: { onCancel: () => void }) => {
     const { currentUser } = useAuth();
 
     const router = useRouter();
@@ -26,7 +26,7 @@ const SignUpModal = () => {
 
             try {
                 if (currentUser!.isAnonymous) {
-                    console.log("registering and linking")
+                    console.log("registering and linking");
                     await registerAndLinkWithEmail(currentUser!, email, password);
                     await currentUser!.getIdToken(true);
                 } else {
@@ -86,6 +86,10 @@ const SignUpModal = () => {
                         className="transition-colours w-fit rounded-lg bg-amber-400 px-4 py-2 text-black duration-300 hover:bg-amber-500"
                     >
                         Sign up
+                    </button>
+                    
+                    <button type="button" onClick={onCancel} className="text-sm hover:underline">
+                        cancel
                     </button>
                 </form>
             </div>
