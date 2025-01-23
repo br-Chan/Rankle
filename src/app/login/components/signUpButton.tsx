@@ -11,7 +11,7 @@ const SignUpButton = () => {
                 First time?{" "}
                 <button
                     onClick={() => setShowModal(true)}
-                    className="font-semibold text-amber-500 hover:underline"
+                    className="font-semibold text-amber-600 dark:text-amber-500 hover:underline"
                 >
                     Create an account
                 </button>

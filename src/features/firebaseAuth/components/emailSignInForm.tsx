@@ -8,10 +8,10 @@ const EmailSignInForm = () => {
 
     const router = useRouter();
 
+    const [isSigningIn, setIsSigningIn] = useState(false);
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
-    const [isSigningIn, setIsSigningIn] = useState(false);
 
     const handleEmailSignIn = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -46,7 +46,7 @@ const EmailSignInForm = () => {
                     placeholder="rankler@rankmail.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full rounded-xl border-2 border-transparent bg-white bg-opacity-50 p-1 px-3 outline-none focus:border-amber-400"
+                    className="w-full rounded-xl border-2 border-transparent bg-white bg-opacity-50 p-1 px-3 outline-none focus:border-amber-400 dark:placeholder-gray-600"
                 />
             </label>
 

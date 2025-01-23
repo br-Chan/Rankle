@@ -8,11 +8,11 @@ const SignUpModal = ({ onCancel }: { onCancel: () => void }) => {
 
     const router = useRouter();
 
+    const [isSigningUp, setIsSigningUp] = useState(false);
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [repeatedPassword, setRepeatedPassword] = useState("");
-
-    const [isSigningUp, setIsSigningUp] = useState(false);
 
     const handleEmailSignUp = async (e: React.FormEvent) => {
         e.preventDefault();
