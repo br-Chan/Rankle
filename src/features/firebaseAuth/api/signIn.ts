@@ -14,12 +14,7 @@ export const initialiseAnonymousUser = async () => {
 };
 
 export const signInWithEmail = async (email: string, password: string) => {
-    try {
-        await signInWithEmailAndPassword(auth, email, password);
-    } catch (error) {
-        console.error("Error signing in with email: ", error);
-        throw error;
-    }
+    await signInWithEmailAndPassword(auth, email, password);
 };
 
 export const signInAndLinkWithGoogle = async (initialUser: User) => {

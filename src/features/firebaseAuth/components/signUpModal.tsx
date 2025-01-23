@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
-import { registerAndLinkWithEmail } from "../utils/signUp";
+import { registerAndLinkWithEmail } from "../api/signUp";
 import { useRouter } from "next/navigation";
 
 const SignUpModal = ({ onCancel }: { onCancel: () => void }) => {
@@ -18,10 +18,6 @@ const SignUpModal = ({ onCancel }: { onCancel: () => void }) => {
         e.preventDefault();
 
         if (!isSigningUp) {
-            // if (password !== repeatedPassword) {
-            //     return;
-            // }
-
             setIsSigningUp(true);
 
             try {
@@ -75,7 +71,7 @@ const SignUpModal = ({ onCancel }: { onCancel: () => void }) => {
                         <input
                             type="password"
                             name="repeatedPassword"
-                            value={password}
+                            value={repeatedPassword}
                             onChange={(e) => setRepeatedPassword(e.target.value)}
                             className="text-md w-full rounded-xl border-2 border-transparent bg-white bg-opacity-50 p-1 px-3 outline-none focus:border-amber-300"
                         />
@@ -83,7 +79,9 @@ const SignUpModal = ({ onCancel }: { onCancel: () => void }) => {
 
                     <button
                         type="submit"
-                        disabled={isSigningUp}
+                        disabled={
+                            !email || !password || password !== repeatedPassword || isSigningUp
+                        }
                         className="transition-colours w-fit rounded-lg bg-amber-400 px-4 py-2 text-black duration-300 hover:bg-amber-500 disabled:pointer-events-none disabled:opacity-50 disabled:transition-none"
                     >
                         Sign up

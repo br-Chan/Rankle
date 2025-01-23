@@ -1,5 +1,5 @@
 import { FcGoogle } from "react-icons/fc";
-import { signInAndLinkWithGoogle } from "../utils/signIn";
+import { signInAndLinkWithGoogle } from "../api/signIn";
 import { useAuth } from "../hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

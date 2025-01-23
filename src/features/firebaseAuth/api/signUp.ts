@@ -1,9 +1,7 @@
-import { auth } from "@/config/firebase";
 import {
     User,
     EmailAuthProvider,
     linkWithCredential,
-    createUserWithEmailAndPassword,
 } from "firebase/auth";
 
 export const registerAndLinkWithEmail = async (

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../hooks/useAuth";
-import { signInWithEmail } from "../utils/signIn";
+import { signInWithEmail } from "../api/signIn";
 import { useRouter } from "next/navigation";
 
 const EmailSignInForm = () => {
@@ -9,6 +9,7 @@ const EmailSignInForm = () => {
     const router = useRouter();
 
     const [isSigningIn, setIsSigningIn] = useState(false);
+    const [invalidCredentials, setInvalidCredentials] = useState(false);
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -18,14 +19,17 @@ const EmailSignInForm = () => {
 
         if (!isSigningIn) {
             setIsSigningIn(true);
+            setInvalidCredentials(false);
 
             if (currentUser) {
                 try {
                     await signInWithEmail(email, password);
                     router.push("/");
-                } catch (error) {
+                } catch (error: any) {
                     setIsSigningIn(false);
-                    // TODO: handle situation where sign in causes uncaught error
+                    if (error.code === "auth/invalid-credential") {
+                        setInvalidCredentials(true);
+                    }
                 }
             } else {
                 // TODO: handle situation where user is null
@@ -45,7 +49,10 @@ const EmailSignInForm = () => {
                     name="email"
                     placeholder="rankler@rankmail.com"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => {
+                        setEmail(e.target.value);
+                        setInvalidCredentials(false);
+                    }}
                     className="w-full rounded-xl border-2 border-transparent bg-white bg-opacity-50 p-1 px-3 outline-none focus:border-amber-400 dark:placeholder-gray-600"
                 />
             </label>
@@ -56,14 +63,21 @@ const EmailSignInForm = () => {
                     type="password"
                     name="password"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => {
+                        setPassword(e.target.value);
+                        setInvalidCredentials(false);
+                    }}
                     className="w-full rounded-xl border-2 border-transparent bg-white bg-opacity-50 p-1 px-3 outline-none focus:border-amber-400"
                 />
             </label>
 
+            <span hidden={!invalidCredentials} className="text-rose-600">
+                invalid credentials
+            </span>
+
             <button
                 type="submit"
-                disabled={isSigningIn}
+                disabled={!email || !password || isSigningIn}
                 className="transition-colours w-fit rounded-lg bg-amber-400 px-4 py-2 text-black duration-300 hover:bg-amber-500 disabled:pointer-events-none disabled:opacity-50 disabled:transition-none"
             >
                 Sign in

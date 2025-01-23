@@ -9,7 +9,7 @@ const Login = () => {
     return (
         <main className="flex w-[288px] flex-col justify-center text-center md:w-[576px]">
             <h1 className="text-center text-2xl font-black">LOGIN</h1>
-            <p>Save all your games!</p>
+            <p>Keep your games safe!</p>
 
             <div className="mt-4 flex flex-col gap-4">
                 <EmailSignInForm />
