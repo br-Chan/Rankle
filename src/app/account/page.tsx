@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/features/firebaseAuth/hooks/useAuth";
-import { signOut } from "@/features/firebaseAuth/utils/signOut";
+import { signOut } from "@/features/firebaseAuth/api/signOut";
 
 const Account = () => {
     const { currentUser } = useAuth();
@@ -21,7 +21,7 @@ const Account = () => {
                     className="transition-colours rounded-full bg-amber-300 p-4 font-bold text-black duration-300 hover:bg-amber-500 hover:text-white"
                     onClick={async () => {
                         await signOut();
-                        router.push("/");
+                        router.push("/login");
                     }}
                 >
                     SIGN OUT
