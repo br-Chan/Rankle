@@ -9,17 +9,26 @@ const EmailSignInForm = () => {
     const router = useRouter();
 
     const [isSigningIn, setIsSigningIn] = useState(false);
-    const [invalidCredentials, setInvalidCredentials] = useState(false);
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const [invalidText, setInvalidText] = useState("");
+
+    const handleSignInError = (error: any) => {
+        if (error.code === "auth/invalid-credential") {
+            setInvalidText("wrong username or password");
+        } else {
+            setInvalidText("sign in got rankled...");
+        }
+    };
 
     const handleEmailSignIn = async (e: React.FormEvent) => {
         e.preventDefault();
 
         if (!isSigningIn) {
             setIsSigningIn(true);
-            setInvalidCredentials(false);
+            setInvalidText("");
 
             if (currentUser) {
                 try {
@@ -27,9 +36,7 @@ const EmailSignInForm = () => {
                     router.push("/");
                 } catch (error: any) {
                     setIsSigningIn(false);
-                    if (error.code === "auth/invalid-credential") {
-                        setInvalidCredentials(true);
-                    }
+                    handleSignInError(error);
                 }
             } else {
                 // TODO: handle situation where user is null
@@ -51,7 +58,7 @@ const EmailSignInForm = () => {
                     value={email}
                     onChange={(e) => {
                         setEmail(e.target.value);
-                        setInvalidCredentials(false);
+                        setInvalidText("");
                     }}
                     className="w-full rounded-xl border-2 border-transparent bg-white bg-opacity-50 p-1 px-3 outline-none focus:border-amber-400 dark:placeholder-gray-600"
                 />
@@ -65,23 +72,25 @@ const EmailSignInForm = () => {
                     value={password}
                     onChange={(e) => {
                         setPassword(e.target.value);
-                        setInvalidCredentials(false);
+                        setInvalidText("");
                     }}
                     className="w-full rounded-xl border-2 border-transparent bg-white bg-opacity-50 p-1 px-3 outline-none focus:border-amber-400"
                 />
             </label>
 
-            <span hidden={!invalidCredentials} className="text-rose-600">
-                invalid credentials
-            </span>
+            <div className="flex flex-col items-center gap-2">
+                <span hidden={!invalidText} className="text-sm text-rose-600">
+                    {invalidText}
+                </span>
 
-            <button
-                type="submit"
-                disabled={!email || !password || isSigningIn}
-                className="transition-colours w-fit rounded-lg bg-amber-400 px-4 py-2 text-black duration-300 hover:bg-amber-500 disabled:pointer-events-none disabled:opacity-50 disabled:transition-none"
-            >
-                Sign in
-            </button>
+                <button
+                    type="submit"
+                    disabled={!email || !password || isSigningIn}
+                    className="transition-colours w-fit rounded-lg bg-amber-400 px-4 py-2 text-black duration-300 hover:bg-amber-500 disabled:pointer-events-none disabled:opacity-50 disabled:transition-none"
+                >
+                    Sign in
+                </button>
+            </div>
         </form>
     );
 };

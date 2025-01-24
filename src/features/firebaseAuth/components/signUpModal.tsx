@@ -15,15 +15,27 @@ const SignUpModal = ({ onCancel }: { onCancel: () => void }) => {
     const [password, setPassword] = useState("");
     const [repeatedPassword, setRepeatedPassword] = useState("");
 
+    const [invalidText, setInvalidText] = useState("");
+
+    const handleSignUpError = (error: any) => {
+        if (error.code === "auth/weak-password") {
+            setInvalidText("puny password");
+        } else if (error.code === "auth/email-already-in-use") {
+            setInvalidText("email already in use");
+        } else {
+            setInvalidText("sign up got rankled...");
+        }
+    };
+
     const handleEmailSignUp = async (e: React.FormEvent) => {
         e.preventDefault();
 
         if (!isSigningUp) {
             setIsSigningUp(true);
+            setInvalidText("");
 
             try {
                 if (currentUser!.isAnonymous) {
-                    console.log("registering and linking");
                     await registerAndLinkWithEmail(currentUser!, email, password);
                     await currentUser!.getIdToken(true);
                 } else {
@@ -32,7 +44,7 @@ const SignUpModal = ({ onCancel }: { onCancel: () => void }) => {
                 router.push("/");
             } catch (error) {
                 setIsSigningUp(false);
-                // TODO: handle situation where sign in causes uncaught error
+                handleSignUpError(error);
             }
         }
     };
@@ -77,17 +89,23 @@ const SignUpModal = ({ onCancel }: { onCancel: () => void }) => {
                     />
                 </label>
 
-                <button
-                    type="submit"
-                    disabled={!email || !password || password !== repeatedPassword || isSigningUp}
-                    className="transition-colours w-fit rounded-lg bg-amber-400 px-4 py-2 text-black duration-300 hover:bg-amber-500 disabled:pointer-events-none disabled:opacity-50 disabled:transition-none"
-                >
-                    Sign up
-                </button>
-
-                <button type="button" onClick={onCancel} className="text-sm hover:underline">
-                    cancel
-                </button>
+                <div className="flex flex-col items-center gap-2">
+                    <span hidden={!invalidText} className="text-sm text-red-500">
+                        {invalidText}
+                    </span>
+                    <button
+                        type="submit"
+                        disabled={
+                            !email || !password || password !== repeatedPassword || isSigningUp
+                        }
+                        className="transition-colours w-fit rounded-lg bg-amber-400 px-4 py-2 text-black duration-300 hover:bg-amber-500 disabled:pointer-events-none disabled:opacity-50 disabled:transition-none"
+                    >
+                        Sign up
+                    </button>
+                    <button type="button" onClick={onCancel} className="text-sm hover:underline">
+                        cancel
+                    </button>
+                </div>
             </form>
         </ModalContainer>
     );
