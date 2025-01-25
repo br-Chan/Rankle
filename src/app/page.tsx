@@ -220,7 +220,7 @@ const Home = () => {
         const grade = ranks.find(({ threshold }) => avg >= threshold)?.rank || "unranked";
 
         // Update the rank.
-        setRank(isNaN(avg) ? undefined : { grade: grade, averageScore: avg });
+        setRank(avg >= 0 ? { grade, averageScore: avg } : undefined);
     };
 
     return (
@@ -239,7 +239,7 @@ const Home = () => {
                                 </div>
                                 <div className="peer flex justify-center">{rank.averageScore}</div>
                                 <HoverTooltip
-                                    tooltipText={`${rank.grade} - ${rank.averageScore.toString()}`}
+                                    tooltipText={`${rank.grade} (${rank.averageScore.toString()})`}
                                 />
                             </div>
                         ) : (
