@@ -7,69 +7,54 @@ import {
     deleteDoc,
 } from "firebase/firestore";
 import { statModulesFirestoreData, buttonModulesFirestoreData } from "../types/firestore";
-import { db } from "@/config/firebase";
 
 // Firebase code from this tutorial: https://www.youtube.com/watch?v=5MzCK3k3XlQ
 
 export const getStatModulesBySnapshot = async (
-    statModulesSnapshot: QuerySnapshot<DocumentData, DocumentData>
+    statModulesSnap: QuerySnapshot<DocumentData, DocumentData>
 ) => {
-    console.log("Getting stat modules...");
-
     // Fetch stat module data and iterate through them to initialise statModuleDocuments.
-    const statModuleDocuments: statModulesFirestoreData[] = await Promise.all(
-        statModulesSnapshot.docs.map(async (doc) => {
-            // Get all fields and values from stat module document's data.
+    const statModules: statModulesFirestoreData[] = await Promise.all(
+        statModulesSnap.docs.map(async (doc) => {
             const statModuleDocData = doc.data();
-
-            // Fetch input module data for this stat module and iterate through them to
-            // initialise inputModuleDocuments.
-            const buttonModuleDocuments = await getButtonModulesById(doc.id);
+            const buttonModules = await getButtonModulesByRef(doc.ref);
 
             return {
                 id: doc.id,
                 gameName: statModuleDocData.gameName,
-                inputModules: buttonModuleDocuments,
+                inputModules: buttonModules,
                 themeColor: statModuleDocData.themeColor,
                 hardModeMultiplier: statModuleDocData.hardModeMultiplier,
             };
         })
     );
 
-    return statModuleDocuments;
+    return statModules;
 };
 
-/**
- * Fetches the input module documents of the stat module associated with the input ID.
- *
- * @param statModuleId id of the stat module to search for
- * @returns query snapshot of searching for the documents in the inputModules collection of the stat
- * module
- */
-export const getButtonModulesById = async (statModuleId: string) => {
-    const querySnapshot = await getDocs(
-        collection(db, "statModules", statModuleId, "inputModules")
-    );
+export const getButtonModulesByRef = async (
+    statModuleRef: DocumentReference<DocumentData, DocumentData>
+) => {
+    const inputModulesRef = collection(statModuleRef, "inputModules");
+    const inputModulesSnap = await getDocs(inputModulesRef);
 
-    const buttonModuleDocuments: buttonModulesFirestoreData[] = [];
-
-    for (const doc of querySnapshot.docs) {
+    const buttonModules: buttonModulesFirestoreData[] = [];
+    for (const doc of inputModulesSnap.docs) {
         const docData = doc.data();
-        buttonModuleDocuments.push({
+        buttonModules.push({
             id: doc.id,
-            statModuleId: statModuleId,
+            statModuleId: statModuleRef.id,
             queryText: docData.queryText,
             buttonLabels: docData.buttonLabels,
             buttonScores: docData.buttonScores,
         });
     }
 
-    return buttonModuleDocuments;
+    return buttonModules;
 };
 
 export const deleteStatModuleByRef = async (
-    statModuleRef: DocumentReference<DocumentData, DocumentData>,
-    // inputModulesRef: CollectionReference<DocumentData, DocumentData>
+    statModuleRef: DocumentReference<DocumentData, DocumentData>
 ) => {
     const inputModulesRef = collection(statModuleRef, "inputModules");
     const inputModulesSnap = await getDocs(inputModulesRef);
