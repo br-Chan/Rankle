@@ -18,7 +18,7 @@ const AccountButton = () => {
         </Link>
     ) : (
         <Link
-            className="relative mx-1 rounded-lg border-2 border-black text-black transition-colors hover:bg-amber-500 hover:text-white dark:hover:bg-amber-300 dark:hover:text-black"
+            className="relative aspect-square h-fit rounded-lg border-2 border-black text-black transition-colors hover:bg-amber-500 hover:text-white dark:hover:bg-amber-300 dark:hover:text-black"
             href="/account"
         >
             <HiOutlineUser className="peer h-8 w-8 dark:text-white" />
