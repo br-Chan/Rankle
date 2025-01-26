@@ -40,7 +40,7 @@ export const StatModulePane = ({
     }
 
     return (
-        <div className="relative cursor-default">
+        <div className="relative w-72 cursor-default">
             {/* Title bar of the stat module pane*/}
             <div
                 className="absolute left-0 top-0 flex h-9 w-full items-center justify-between rounded-t-2xl border-l-4 border-r-4 border-t-4 px-3 opacity-100"

@@ -254,7 +254,7 @@ const Home = () => {
 
             {/* Stat modules */}
             {isUserLoading || !isLoadingComplete ? (
-                <div className="flex w-fit flex-col rounded-xl bg-amber-300 px-16 py-1 text-center font-mono text-2xl text-black lg:mt-24 lg:flex-row">
+                <div className="flex flex-col rounded-xl bg-amber-300 px-16 py-1 text-center font-mono text-2xl text-black lg:mt-24 lg:flex-row">
                     <span>Loading your games</span>
                     <span>...</span>
                 </div>

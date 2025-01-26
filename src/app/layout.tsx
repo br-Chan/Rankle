@@ -22,9 +22,9 @@ export default function RootLayout({
                 <AppProvider>
                     <main className="flex min-h-screen flex-col items-center justify-between py-24">
                         <TopNav />
-                        <div className="container flex justify-center px-10">
+                        <div className="container flex flex-col items-center justify-center px-10">
                             {children}
-                            </div>
+                        </div>
                     </main>
                 </AppProvider>
             </body>
