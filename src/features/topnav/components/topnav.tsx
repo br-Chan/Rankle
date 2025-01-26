@@ -47,7 +47,7 @@ export default function TopNav() {
                     <button className="sm:hidden">
                         <FaBars
                             onClick={() => setOpenHamburger(!openHamburger)}
-                            className="h-6 w-6"
+                            className={`${openHamburger ? "text-amber-50" : "text-black"} h-6 w-6`}
                         />
                     </button>
 
@@ -72,16 +72,14 @@ export default function TopNav() {
             <div
                 className={`${openHamburger ? "flex" : "hidden"} flex-col items-center border-b-2 border-black sm:hidden dark:border-white`}
             >
-                <ListAccountButton />
+                <ListAccountButton onClick={() => setOpenHamburger(false)} />
                 {rightLinks.map((link) => {
                     const LinkIcon = link.icon;
                     return (
                         <Link
                             key={link.name}
                             href={link.href}
-                            onClick={() => {
-                                setOpenHamburger(false);
-                            }}
+                            onClick={() => setOpenHamburger(false)}
                             className="flex w-full items-center justify-center transition-bg-border hover:bg-amber-500 hover:text-white dark:text-white dark:hover:bg-amber-300 dark:hover:text-black"
                         >
                             <LinkIcon className="h-7 w-7" /> {link.name}

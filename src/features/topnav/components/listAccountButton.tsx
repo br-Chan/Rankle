@@ -2,11 +2,12 @@ import { useAuth } from "@/features/firebaseAuth/hooks/useAuth";
 import Link from "next/link";
 import { HiOutlineArrowRightEndOnRectangle, HiOutlineUser } from "react-icons/hi2";
 
-const ListAccountButton = () => {
+const ListAccountButton = ({ onClick }: { onClick: () => void }) => {
     const { currentUser } = useAuth();
 
     return !currentUser || currentUser.isAnonymous ? (
         <Link
+            onClick={onClick}
             href="/login"
             className="flex w-full items-center justify-center transition-bg-border hover:bg-amber-500 hover:text-white dark:text-white dark:hover:bg-amber-300 dark:hover:text-black"
         >
