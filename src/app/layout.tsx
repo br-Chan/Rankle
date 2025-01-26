@@ -20,9 +20,11 @@ export default function RootLayout({
                 className={`${inter.className} bg-zinc-200 text-black antialiased dark:bg-zinc-800 dark:text-white`}
             >
                 <AppProvider>
-                    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+                    <main className="flex min-h-screen flex-col items-center justify-between py-24">
                         <TopNav />
-                        {children}
+                        <div className="container flex justify-center px-10">
+                            {children}
+                            </div>
                     </main>
                 </AppProvider>
             </body>

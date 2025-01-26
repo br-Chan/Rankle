@@ -57,7 +57,7 @@ export const StatModule = ({
 
     return (
         <div
-            className="relative transition-opacity duration-300"
+            className="relative w-72 transition-opacity duration-300"
             style={{
                 opacity: opacity,
             }}
