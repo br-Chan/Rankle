@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { HiOutlineArrowRightEndOnRectangle, HiOutlineUser } from "react-icons/hi2";
 import { HoverTooltip } from "@/components/hoverTooltip";
 import { useAuth } from "@/features/firebaseAuth/hooks/useAuth";
-import { HiOutlineArrowRightEndOnRectangle, HiOutlineUser } from "react-icons/hi2";
 
-const AccountButton = () => {
+const NavAccountButton = () => {
     const { currentUser } = useAuth();
 
     return !currentUser || currentUser.isAnonymous ? (
@@ -27,4 +27,4 @@ const AccountButton = () => {
     );
 };
 
-export default AccountButton;
+export default NavAccountButton;
