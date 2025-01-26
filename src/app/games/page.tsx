@@ -5,6 +5,7 @@ import { StatModulePane } from "@/features/statmodules/components/statModulePane
 import { getAllStatModules } from "@/features/statmodules/api/statModulesCollection";
 import { deleteStatModule as deleteStatModuleInFirestore } from "@/features/statmodules/api/statModulesCollection";
 import { statModulesFirestoreData } from "@/features/statmodules/types/firestore";
+import LoadingGamesBar from "@/components/loadingGamesBar";
 
 /**
  * Page where users can view user-created stat modules and add them to their own lists.
@@ -12,6 +13,8 @@ import { statModulesFirestoreData } from "@/features/statmodules/types/firestore
  * @returns Games page
  */
 const Games = () => {
+    const [isLoadingComplete, setIsLoadingComplete] = useState(false);
+
     // Array of data for all stat modules fetched from Firestore.
     const [statModulesData, setStatModulesData] = useState<statModulesFirestoreData[]>([]);
 
@@ -20,6 +23,8 @@ const Games = () => {
         async function fetchData() {
             const statModuleDocuments: statModulesFirestoreData[] = await getAllStatModules();
             setStatModulesData(statModuleDocuments);
+
+            setIsLoadingComplete(true);
         }
         fetchData();
     }, []);
@@ -35,11 +40,10 @@ const Games = () => {
             <p className="mb-2 text-center">Peruse the catalogue for games to add to your list!</p>
 
             {/* Stat module panes */}
-            {statModulesData.length === 0 ? (
-                <p className="flex flex-col rounded-xl bg-amber-300 px-16 py-1 text-center font-mono text-2xl text-black lg:mt-10 lg:flex-row">
-                    <span>Loading all games</span>
-                    <span>...</span>
-                </p>
+            {!isLoadingComplete ? (
+                <div className="lg:mt-10">
+                    <LoadingGamesBar />
+                </div>
             ) : (
                 <div className="mb-32 grid w-full grid-cols-[repeat(auto-fill,288px)] justify-center gap-4 pt-4 text-center">
                     {statModulesData.map((item, index) => (

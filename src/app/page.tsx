@@ -14,6 +14,7 @@ import { deleteUserStatModule as deleteUserStatModuleInFirestore } from "@/featu
 import { addUserStatModule } from "@/features/statmodules/api/usersCollection";
 import { convertStatModuleFirestoreData } from "@/features/statmodules/api/firestoreConversion";
 import { statModulesFirestoreData } from "@/features/statmodules/types/firestore";
+import LoadingGamesBar from "@/components/loadingGamesBar";
 
 /**
  * List of Ranks and their attributed minimum scores to attain it.
@@ -254,9 +255,8 @@ const Home = () => {
 
             {/* Stat modules */}
             {isUserLoading || !isLoadingComplete ? (
-                <div className="flex flex-col rounded-xl bg-amber-300 px-16 py-1 text-center font-mono text-2xl text-black lg:mt-24 lg:flex-row">
-                    <span>Loading your games</span>
-                    <span>...</span>
+                <div className="lg:mt-24">
+                    <LoadingGamesBar />
                 </div>
             ) : (
                 <div className="mb-32 grid w-full grid-cols-[repeat(auto-fill,288px)] justify-center gap-4 lg:mt-20">
