@@ -36,8 +36,8 @@ const Games = () => {
 
     return (
         <>
-            <h1 className="gap-2 text-center text-2xl font-black">GAMES</h1>
-            <p className="mb-2 text-center">Peruse the catalogue for games to add to your list!</p>
+            <h1 className="gap-2 text-2xl font-black">GAMES</h1>
+            <p>Peruse the catalogue for games to add to your list!</p>
 
             {/* Stat module panes */}
             {!isLoadingComplete ? (
@@ -45,7 +45,7 @@ const Games = () => {
                     <LoadingGamesBar />
                 </div>
             ) : (
-                <div className="mb-32 grid w-full grid-cols-[repeat(auto-fill,288px)] justify-center gap-4 pt-4 text-center">
+                <div className="mb-32 grid w-full grid-cols-[repeat(auto-fill,288px)] justify-center gap-4 pt-6 text-center">
                     {statModulesData.map((item, index) => (
                         <StatModulePane
                             key={index}
