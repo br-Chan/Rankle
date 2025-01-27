@@ -188,7 +188,7 @@ const StatModuleForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="w-[576px]">
+        <form onSubmit={handleSubmit} className="w-full md:w-[576px]">
             <div
                 className="mb-2 flex h-fit flex-col items-center gap-4 rounded-2xl border-4 px-5 py-2 text-center transition-bg-border duration-300"
                 style={{
@@ -200,7 +200,7 @@ const StatModuleForm = () => {
                 <input
                     type="text"
                     id="gameName"
-                    className="w-full rounded-lg border-2 bg-white bg-opacity-50 px-3 py-2 text-center text-2xl font-bold outline-none focus:border-amber-500 sm:w-4/5 dark:placeholder-gray-600"
+                    className="w-full rounded-lg border-2 bg-white bg-opacity-50 px-3 py-2 text-center text-2xl font-bold outline-none focus:border-amber-500 md:w-4/5 dark:placeholder-gray-600"
                     value={formData.gameName}
                     placeholder="Game name"
                     autoComplete="off"

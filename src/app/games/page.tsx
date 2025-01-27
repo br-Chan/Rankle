@@ -45,7 +45,7 @@ const Games = () => {
                     <LoadingGamesBar />
                 </div>
             ) : (
-                <div className="mb-32 grid w-full grid-cols-[repeat(auto-fill,288px)] justify-center gap-4 pt-6 text-center">
+                <div className="mb-32 grid w-full grid-cols-[repeat(auto-fill,288px)] justify-center gap-4 mt-6 text-center">
                     {statModulesData.map((item, index) => (
                         <StatModulePane
                             key={index}
