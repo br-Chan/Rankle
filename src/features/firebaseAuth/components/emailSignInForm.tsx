@@ -47,9 +47,9 @@ const EmailSignInForm = () => {
     return (
         <form
             onSubmit={handleEmailSignIn}
-            className="flex flex-col items-center gap-4 rounded-2xl border-4 border-amber-400 bg-amber-400 bg-opacity-30 p-4"
+            className="flex flex-col items-center gap-4 rounded-2xl border-4 border-amber-400 bg-amber-400 bg-opacity-30 p-3"
         >
-            <label className="flex w-3/5 flex-col items-center gap-1">
+            <label className="flex w-full sm:w-3/5 flex-col items-center gap-1">
                 <span className="font-bold">Email</span>
                 <input
                     type="email"
@@ -64,7 +64,7 @@ const EmailSignInForm = () => {
                 />
             </label>
 
-            <label className="flex w-3/5 flex-col items-center gap-1">
+            <label className="flex w-full sm:w-3/5 flex-col items-center gap-1">
                 <span className="font-bold">Password</span>
                 <input
                     type="password"

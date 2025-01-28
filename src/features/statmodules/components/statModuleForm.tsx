@@ -188,36 +188,36 @@ const StatModuleForm = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="pt-4">
+        <form onSubmit={handleSubmit} className="w-full md:w-[576px]">
             <div
-                className="mb-2 flex h-full flex-col items-center rounded-2xl border-4 px-5 pt-2 text-center transition-bg-border duration-300"
+                className="mb-2 flex h-fit flex-col items-center gap-4 rounded-2xl border-4 px-5 py-2 text-center transition-bg-border duration-300"
                 style={{
                     borderColor: `${formData.themeColor}`,
                     backgroundColor: `${formData.themeColor}25`,
                 }}
             >
                 {/* Game name input */}
-                <div className="mb-4">
-                    <input
-                        type="text"
-                        id="gameName"
-                        className="w-full rounded-lg border-2 bg-white bg-opacity-50 px-3 py-2 text-center text-2xl font-bold outline-none focus:border-amber-500 md:w-4/5 dark:placeholder-gray-600"
-                        value={formData.gameName}
-                        placeholder="Game name"
-                        autoComplete="off"
-                        onChange={(e) =>
-                            setFormData((prevState) => ({
-                                ...prevState,
-                                gameName: e.target.value,
-                            }))
-                        }
-                        required
-                    />
-                </div>
+                <input
+                    type="text"
+                    id="gameName"
+                    className="w-full rounded-lg border-2 bg-white bg-opacity-50 px-3 py-2 text-center text-2xl font-bold outline-none focus:border-amber-500 md:w-4/5 dark:placeholder-gray-600"
+                    value={formData.gameName}
+                    placeholder="Game name"
+                    autoComplete="off"
+                    onChange={(e) =>
+                        setFormData((prevState) => ({
+                            ...prevState,
+                            gameName: e.target.value,
+                        }))
+                    }
+                    required
+                />
 
                 {/* Theme color picker */}
-                <div className="mb-4 flex w-full items-center justify-between space-x-2">
-                    <span className="flex-1 text-right font-semibold">Colour:</span>
+                <div className="flex w-full items-center justify-between space-x-2">
+                    <label htmlFor="themeColor" className="flex-1 text-right font-semibold">
+                        Colour:
+                    </label>
                     <input
                         type="color"
                         id="themeColor"
@@ -227,17 +227,16 @@ const StatModuleForm = () => {
                             updateThemeColor(e.target.value);
                         }}
                     />
-                    <label
-                        htmlFor="themeColor"
-                        className="flex-1 text-left font-mono text-gray-700 dark:text-gray-300"
-                    >
+                    <span className="flex-1 text-left font-mono text-gray-700 dark:text-gray-300">
                         &quot;{formData.themeColorName}&quot;
-                    </label>
+                    </span>
                 </div>
 
                 {/* Hard mode input */}
-                <div className="mb-4 flex items-center space-x-2">
-                    <span className="font-semibold">Hard mode multiplier:</span>
+                <div className="flex items-center gap-1">
+                    <label htmlFor="hardModeMultiplier" className="font-semibold">
+                        Hard mode multiplier:
+                    </label>
                     <input
                         type="number"
                         id="hardModeMultiplier"
@@ -257,7 +256,7 @@ const StatModuleForm = () => {
                 </div>
 
                 {/* Input module creation */}
-                <div className="mb-4 flex w-full flex-col items-center text-center">
+                <div className="flex w-full flex-col items-center text-center">
                     {formData.inputModuleForms.map((item, index) => (
                         <ButtonModuleForm
                             key={index}
@@ -282,7 +281,7 @@ const StatModuleForm = () => {
                 </div>
 
                 {/* Add/remove a button module */}
-                <div className="group mb-2 flex w-32 rounded-lg border-2 border-black text-sm">
+                <div className="group flex w-32 rounded-lg border-2 border-black text-sm">
                     <input
                         type="button"
                         id="addInputModuleForm"

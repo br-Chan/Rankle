@@ -14,6 +14,7 @@ import { deleteUserStatModule as deleteUserStatModuleInFirestore } from "@/featu
 import { addUserStatModule } from "@/features/statmodules/api/usersCollection";
 import { convertStatModuleFirestoreData } from "@/features/statmodules/api/firestoreConversion";
 import { statModulesFirestoreData } from "@/features/statmodules/types/firestore";
+import LoadingGamesBar from "@/components/loadingGamesBar";
 
 /**
  * List of Ranks and their attributed minimum scores to attain it.
@@ -224,7 +225,7 @@ const Home = () => {
     };
 
     return (
-        <main>
+        <>
             {/* Rank display */}
             <div className="fixed bottom-0 left-0 z-10 flex h-40 w-full items-end justify-center bg-gradient-to-t from-zinc-200 via-zinc-200 to-transparent lg:bottom-auto lg:top-0 lg:mt-16 lg:h-32 lg:bg-gradient-to-b lg:via-70% lg:to-95% dark:from-zinc-800 dark:via-zinc-800">
                 <div className="mb-2 flex w-full items-center space-x-2 p-4 lg:mb-10 lg:p-0">
@@ -254,13 +255,12 @@ const Home = () => {
 
             {/* Stat modules */}
             {isUserLoading || !isLoadingComplete ? (
-                <div className="flex flex-col rounded-xl bg-amber-300 px-16 py-1 text-center font-mono text-2xl text-black lg:mt-24 lg:flex-row">
-                    <span>Loading your games</span>
-                    <span>...</span>
+                <div className="lg:mt-24">
+                    <LoadingGamesBar />
                 </div>
             ) : (
-                <div className="mb-32 grid w-[288px] grid-cols-1 gap-4 text-center md:w-[576px] md:grid-cols-2 lg:mt-20 lg:w-[864px] lg:grid-cols-3 2xl:w-[1152px] 2xl:grid-cols-4">
-                    {statModuleData.map((data, index) => (
+                <div className="mb-32 grid w-full grid-cols-[repeat(auto-fill,288px)] justify-center gap-4 lg:mt-20">
+                    {statModuleData.map((data) => (
                         <StatModule
                             key={data.id}
                             data={data}
@@ -272,7 +272,7 @@ const Home = () => {
                     ))}
                 </div>
             )}
-        </main>
+        </>
     );
 };
 

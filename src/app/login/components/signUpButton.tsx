@@ -7,7 +7,7 @@ const SignUpButton = () => {
 
     return (
         <>
-            <div>
+            <div className="text-center">
                 First time?{" "}
                 <button
                     onClick={() => setShowModal(true)}
