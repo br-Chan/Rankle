@@ -1,8 +1,4 @@
-import {
-    User,
-    EmailAuthProvider,
-    linkWithCredential,
-} from "firebase/auth";
+import { User, EmailAuthProvider, linkWithCredential } from "firebase/auth";
 
 export const registerAndLinkWithEmail = async (
     initialUser: User,

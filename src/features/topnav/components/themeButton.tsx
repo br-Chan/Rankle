@@ -13,7 +13,7 @@ const ThemeButton = () => {
     return mounted ? (
         <button
             type="button"
-            className="*:border-2 *:border-black *:text-black *:hover:transition-colors rounded-full"
+            className="rounded-full *:border-2 *:border-black *:text-black *:hover:transition-colors"
             onClick={() => {
                 setTheme(resolvedTheme === "dark" ? "light" : "dark");
             }}

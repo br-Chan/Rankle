@@ -87,7 +87,7 @@ export const StatModulePane = ({
 
             {/* Body of the stat module pane*/}
             <div
-                className="h-full rounded-2xl border-4 px-5 py-2 text-center"
+                className="h-full rounded-2xl border-4 px-5 py-2 text-center shadow-lg"
                 style={{
                     borderColor: `${data.themeColor}`,
                     backgroundColor: `${data.themeColor}25`,

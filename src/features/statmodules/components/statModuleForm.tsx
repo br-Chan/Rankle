@@ -190,7 +190,7 @@ const StatModuleForm = () => {
     return (
         <form onSubmit={handleSubmit} className="w-full md:w-[576px]">
             <div
-                className="mb-2 flex h-fit flex-col items-center gap-4 rounded-2xl border-4 px-5 py-2 text-center transition-bg-border duration-300"
+                className="mb-2 flex h-fit flex-col items-center gap-4 rounded-2xl border-4 px-5 py-2 text-center shadow-lg transition-bg-border duration-300"
                 style={{
                     borderColor: `${formData.themeColor}`,
                     backgroundColor: `${formData.themeColor}25`,

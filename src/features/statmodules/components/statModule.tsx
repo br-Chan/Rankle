@@ -64,7 +64,7 @@ export const StatModule = ({
         >
             {/* Body of the stat module */}
             <div
-                className="h-full rounded-2xl border-4 px-5 py-2 text-center transition-opacity duration-300"
+                className="h-full rounded-2xl border-4 px-5 py-2 text-center shadow-lg transition-opacity duration-300"
                 style={{
                     borderColor: `${data.themeColor}`,
                     backgroundColor: `${data.themeColor}25`,

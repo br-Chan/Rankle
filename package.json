@@ -7,7 +7,7 @@
         "build": "next build",
         "start": "next start",
         "lint": "next lint",
-        "prettier": "prettier app/** --write"
+        "prettier": "prettier src/** --write"
     },
     "dependencies": {
         "firebase": "^11.2.0",

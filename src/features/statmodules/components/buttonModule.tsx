@@ -49,7 +49,7 @@ export const ButtonModule = ({
                 key={index}
             >
                 <button
-                    className="peer w-full truncate p-2 rounded-md py-2 text-black duration-300 dark:text-white"
+                    className="peer w-full truncate rounded-md p-2 py-2 text-black duration-300 dark:text-white"
                     value={score}
                     style={{
                         backgroundColor:

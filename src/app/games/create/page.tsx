@@ -11,7 +11,7 @@ const Create = () => {
             <h1 className="text-2xl font-black">CREATE</h1>
             <p>Add a game to Rankle!</p>
 
-            <div className="mt-6 flex flex-col w-full items-center">
+            <div className="mt-6 flex w-full flex-col items-center">
                 <StatModuleForm />
             </div>
         </>
