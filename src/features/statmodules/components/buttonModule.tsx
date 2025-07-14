@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { useTheme } from "next-themes";
-import { HoverTooltip } from "@/components/hoverTooltip";
 import { ButtonModuleData } from "../types/display";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 /**
  * Button module that displays a query, a set of buttons and handles colour changes when a button is
@@ -40,45 +40,51 @@ export const ButtonModule = ({
         onInputClick(data, index, score);
     };
 
-    // Create each button using data from the prop.
-    for (let index = 0; index < data.buttonLabels.length; ++index) {
-        let score = data.buttonScores[index];
-        buttons.push(
-            <div
-                className="relative rounded-lg border-2 border-black font-semibold dark:border-white"
-                key={index}
-            >
-                <button
-                    className="peer w-full truncate rounded-md p-2 py-2 text-black duration-300 dark:text-white"
-                    value={score}
-                    style={{
-                        backgroundColor:
-                            selectedButtonIndex === index
-                                ? themeColor
-                                : resolvedTheme === "dark"
-                                  ? "#27272a"
-                                  : "white",
-                        color:
-                            selectedButtonIndex === index
-                                ? "black"
-                                : resolvedTheme === "dark"
-                                  ? "white"
-                                  : "black",
-                        transitionDuration: selectedButtonIndex === index ? "0.3s" : "0s",
-                    }}
-                    onClick={() => handleClick(data, index, score)}
-                >
-                    {data.buttonLabels[index]}
-                </button>
-                <HoverTooltip tooltipText={`${data.buttonLabels[index]} (${score})`} />
-            </div>
-        );
-    }
-
     return (
         <>
             <label>{data.queryText}</label>
-            <div className="grid grid-cols-3 gap-1">{buttons}</div>
+            <div className="grid grid-cols-3 gap-1">
+                {data.buttonLabels.map((label, index) => {
+                    const score = data.buttonScores[index];
+                    return (
+                        <div
+                            className="relative rounded-lg border-2 border-black font-semibold dark:border-white"
+                            key={index}
+                        >
+                            <Tooltip>
+                                <TooltipTrigger asChild>
+                                    <button
+                                        className="w-full truncate rounded-md p-2 py-2 text-black duration-300 dark:text-white"
+                                        value={score}
+                                        style={{
+                                            backgroundColor:
+                                                selectedButtonIndex === index
+                                                    ? themeColor
+                                                    : resolvedTheme === "dark"
+                                                      ? "#27272a"
+                                                      : "white",
+                                            color:
+                                                selectedButtonIndex === index
+                                                    ? "black"
+                                                    : resolvedTheme === "dark"
+                                                      ? "white"
+                                                      : "black",
+                                            transitionDuration:
+                                                selectedButtonIndex === index ? "0.3s" : "0s",
+                                        }}
+                                        onClick={() => handleClick(data, index, score)}
+                                    >
+                                        {label}
+                                    </button>
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                    {label} ({score})
+                                </TooltipContent>
+                            </Tooltip>
+                        </div>
+                    );
+                })}
+            </div>
         </>
     );
 };

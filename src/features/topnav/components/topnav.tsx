@@ -4,13 +4,13 @@ import Link from "next/link";
 import { useState } from "react";
 import { HiOutlinePlus, HiOutlineSquares2X2 } from "react-icons/hi2";
 import { FaBars } from "react-icons/fa6";
-import { HoverTooltip } from "@/components/hoverTooltip";
 import ThemeButton from "./themeButton";
 import NavAccountButton from "./navAccountButton";
 import ListAccountButton from "./listAccountButton";
 import { LinkData } from "../types/links";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
-const leftLinks: LinkData[] = [];
+const _leftLinks: LinkData[] = [];
 
 const rightLinks: LinkData[] = [
     { name: "Add game", href: "/games/create", icon: HiOutlinePlus },
@@ -32,16 +32,20 @@ export default function TopNav() {
                     <ThemeButton />
                 </nav>
 
-                <Link
-                    onClick={() => {
-                        setOpenHamburger(false);
-                    }}
-                    href={"/"}
-                    className="relative"
-                >
-                    <h1 className="peer text-4xl font-bold text-black">RANKLE</h1>
-                    <HoverTooltip tooltipText="Home" delay="1000" />
-                </Link>
+                <Tooltip>
+                    <TooltipTrigger asChild>
+                        <Link
+                            onClick={() => {
+                                setOpenHamburger(false);
+                            }}
+                            href="/"
+                            className="relative"
+                        >
+                            <h1 className="peer text-4xl font-bold text-black">RANKLE</h1>
+                        </Link>
+                    </TooltipTrigger>
+                    <TooltipContent>Home</TooltipContent>
+                </Tooltip>
 
                 <nav className="flex flex-1 items-center justify-end gap-2">
                     <button className="sm:hidden">
@@ -55,14 +59,17 @@ export default function TopNav() {
                         {rightLinks.map((link) => {
                             const LinkIcon = link.icon;
                             return (
-                                <Link
-                                    key={link.name}
-                                    className="relative aspect-square h-fit rounded-lg border-2 border-black text-black transition-colors hover:bg-amber-500 hover:text-white dark:hover:bg-amber-300 dark:hover:text-black"
-                                    href={link.href}
-                                >
-                                    <LinkIcon className="peer h-8 w-8 dark:text-white" />
-                                    <HoverTooltip key={link.name} tooltipText={link.name} />
-                                </Link>
+                                <Tooltip key={link.name}>
+                                    <TooltipTrigger asChild>
+                                        <Link
+                                            className="rounded-lg border-2 border-black text-black transition-colors hover:bg-amber-500 hover:text-white dark:hover:bg-amber-300 dark:hover:text-black"
+                                            href={link.href}
+                                        >
+                                            <LinkIcon className="h-8 w-8 dark:text-white" />
+                                        </Link>
+                                    </TooltipTrigger>
+                                    <TooltipContent>{link.name}</TooltipContent>
+                                </Tooltip>
                             );
                         })}
                         <NavAccountButton />

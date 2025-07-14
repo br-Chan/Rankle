@@ -1,13 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { HoverTooltip } from "@/components/hoverTooltip";
 import { ThemedHoverComponent } from "@/components/themedHoverComponent";
 import { useAuth } from "@/features/firebaseAuth/hooks/useAuth";
 import { addUserStatModule } from "../api/usersCollection";
 import { HiTrash, HiUserPlus } from "react-icons/hi2";
 import { ButtonModulePane } from "./buttonModulePane";
 import { StatModuleData } from "../types/display";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 /**
  * Stat module pane for a single game, displaying all information about the stat module. The user
@@ -48,41 +48,51 @@ export const StatModulePane = ({
                     borderColor: `${data.themeColor}`,
                 }}
             >
-                <ThemedHoverComponent
-                    className="flex cursor-pointer items-center rounded-md border-2 border-black dark:border-white"
-                    hoveredBackgroundColor="#4ade80" // text-green-400
-                >
-                    <button
-                        className="relative text-sm"
-                        onClick={() => {
-                            addUserStatModule(currentUser!.uid, data.id); // TODO: user has exclamation
-                            setAdded(true);
-                        }}
-                    >
-                        <HiUserPlus className="peer h-6 w-6 px-[2px] dark:text-white" />
-                        <HoverTooltip tooltipText={added ? "Added!" : "Add to your list"} />
-                    </button>
-                </ThemedHoverComponent>
+                <Tooltip>
+                    <TooltipTrigger asChild>
+                        <ThemedHoverComponent
+                            className="flex cursor-pointer items-center rounded-md border-2 border-black dark:border-white"
+                            hoveredBackgroundColor="#4ade80" // text-green-400
+                        >
+                            <button
+                                className="text-sm"
+                                onClick={() => {
+                                    addUserStatModule(currentUser!.uid, data.id); // TODO: user has exclamation
+                                    setAdded(true);
+                                }}
+                            >
+                                <HiUserPlus className="h-6 w-6 px-[2px] dark:text-white" />
+                            </button>
+                        </ThemedHoverComponent>
+                    </TooltipTrigger>
+                    <TooltipContent>{added ? "Added!" : "Add to your list"}</TooltipContent>
+                </Tooltip>
 
-                <header className="relative w-44">
-                    <h2 className="peer truncate text-xl font-bold">{data.gameName}</h2>
-                    <HoverTooltip tooltipText={data.gameName} />
-                </header>
+                <Tooltip>
+                    <TooltipTrigger asChild>
+                        <h2 className="w-44 truncate text-xl font-bold">{data.gameName}</h2>
+                    </TooltipTrigger>
+                    <TooltipContent className="-translate-y-1">{data.gameName}</TooltipContent>
+                </Tooltip>
 
-                <ThemedHoverComponent
-                    className="flex cursor-pointer items-center rounded-md border-2 border-black dark:border-white"
-                    hoveredBackgroundColor="#ef4444" // text-red-500
-                >
-                    <button
-                        className="relative text-sm dark:text-white"
-                        onClick={() => {
-                            deleteStatModule(data.id);
-                        }}
-                    >
-                        <HiTrash className="peer h-6 w-6 px-[2px]" />
-                        <HoverTooltip tooltipText="Delete" />
-                    </button>
-                </ThemedHoverComponent>
+                <Tooltip>
+                    <TooltipTrigger asChild>
+                        <ThemedHoverComponent
+                            className="flex cursor-pointer items-center rounded-md border-2 border-black dark:border-white"
+                            hoveredBackgroundColor="#ef4444" // text-red-500
+                        >
+                            <button
+                                className="relative text-sm dark:text-white"
+                                onClick={() => {
+                                    deleteStatModule(data.id);
+                                }}
+                            >
+                                <HiTrash className="peer h-6 w-6 px-[2px]" />
+                            </button>
+                        </ThemedHoverComponent>
+                    </TooltipTrigger>
+                    <TooltipContent>Delete from global</TooltipContent>
+                </Tooltip>
             </div>
 
             {/* Body of the stat module pane*/}
