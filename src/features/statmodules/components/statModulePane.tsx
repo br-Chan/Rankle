@@ -48,12 +48,12 @@ export const StatModulePane = ({
                     borderColor: `${data.themeColor}`,
                 }}
             >
-                <Tooltip>
-                    <TooltipTrigger asChild>
-                        <ThemedHoverComponent
-                            className="flex cursor-pointer items-center rounded-md border-2 border-black dark:border-white"
-                            hoveredBackgroundColor="#4ade80" // text-green-400
-                        >
+                <ThemedHoverComponent
+                    className="flex cursor-pointer items-center rounded-md border-2 border-black dark:border-white"
+                    hoveredBackgroundColor="#4ade80" // text-green-400
+                >
+                    <Tooltip delayDuration={300}>
+                        <TooltipTrigger asChild>
                             <button
                                 className="text-sm"
                                 onClick={() => {
@@ -63,10 +63,10 @@ export const StatModulePane = ({
                             >
                                 <HiUserPlus className="h-6 w-6 px-[2px] dark:text-white" />
                             </button>
-                        </ThemedHoverComponent>
-                    </TooltipTrigger>
-                    <TooltipContent>{added ? "Added!" : "Add to your list"}</TooltipContent>
-                </Tooltip>
+                        </TooltipTrigger>
+                        <TooltipContent>{added ? "Added!" : "Add to your list"}</TooltipContent>
+                    </Tooltip>
+                </ThemedHoverComponent>
 
                 <Tooltip>
                     <TooltipTrigger asChild>
@@ -75,24 +75,24 @@ export const StatModulePane = ({
                     <TooltipContent className="-translate-y-1">{data.gameName}</TooltipContent>
                 </Tooltip>
 
-                <Tooltip>
-                    <TooltipTrigger asChild>
-                        <ThemedHoverComponent
-                            className="flex cursor-pointer items-center rounded-md border-2 border-black dark:border-white"
-                            hoveredBackgroundColor="#ef4444" // text-red-500
-                        >
+                <ThemedHoverComponent
+                    className="flex cursor-pointer items-center rounded-md border-2 border-black dark:border-white"
+                    hoveredBackgroundColor="#ef4444" // text-red-500
+                >
+                    <Tooltip delayDuration={300}>
+                        <TooltipTrigger asChild>
                             <button
-                                className="relative text-sm dark:text-white"
+                                className="text-sm dark:text-white"
                                 onClick={() => {
                                     deleteStatModule(data.id);
                                 }}
                             >
-                                <HiTrash className="peer h-6 w-6 px-[2px]" />
+                                <HiTrash className="h-6 w-6 px-[2px]" />
                             </button>
-                        </ThemedHoverComponent>
-                    </TooltipTrigger>
-                    <TooltipContent>Delete from global</TooltipContent>
-                </Tooltip>
+                        </TooltipTrigger>
+                        <TooltipContent>Delete from global</TooltipContent>
+                    </Tooltip>{" "}
+                </ThemedHoverComponent>
             </div>
 
             {/* Body of the stat module pane*/}
