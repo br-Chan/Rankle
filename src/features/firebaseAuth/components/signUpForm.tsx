@@ -3,7 +3,6 @@ import { useAuth } from "../hooks/useAuth";
 import { signInWithEmail } from "../api/signIn";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { signInDetails, SignInDetailsSchema } from "../schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "@/lib/utils";
 import {
@@ -27,50 +26,59 @@ import {
 import GoogleSignInButton from "./googleSignInButton";
 import OrDivider from "@/features/firebaseAuth/components/orDivider";
 import Link from "next/link";
+import { signUpDetails, SignUpDetailsSchema } from "../schemas";
+import { registerAndLinkWithEmail } from "../api/signUp";
 
-const SignInForm = () => {
+const SignUpform = () => {
     const { currentUser } = useAuth();
 
     const router = useRouter();
 
-    const form = useForm<signInDetails>({
-        resolver: zodResolver(SignInDetailsSchema),
+    const form = useForm<signUpDetails>({
+        resolver: zodResolver(SignUpDetailsSchema),
         defaultValues: {
             email: "",
             password: "",
+            confirmPassword: "",
         },
     });
 
-    const [isSigningIn, setIsSigningIn] = useState(false);
+    const [isSigningUp, setIsSigningUp] = useState(false);
 
-    const onSubmit = async (values: signInDetails) => {
-        if (!isSigningIn) {
-            setIsSigningIn(true);
-            if (currentUser) {
-                try {
-                    await signInWithEmail(values.email, values.password);
-                    router.push("/");
-                } catch (error: any) {
-                    setIsSigningIn(false);
-                    handleSignInError(error);
+    const onSubmit = async (values: signUpDetails) => {
+        if (!isSigningUp) {
+            setIsSigningUp(true);
+            try {
+                if (currentUser!.isAnonymous) {
+                    await registerAndLinkWithEmail(currentUser!, values.email, values.password);
+                    await currentUser!.getIdToken(true);
+                } else {
+                    // TODO: handle situation where user is already signed in (can't even happen?)
                 }
-            } else {
-                // TODO: handle situation where user is null
+                router.push("/");
+            } catch (error) {
+                setIsSigningUp(false);
+                handleSignUpError(error);
             }
         }
     };
 
-    const handleSignInError = (error: any) => {
-        if (error.code === "auth/invalid-credential") {
+    const handleSignUpError = (error: any) => {
+        if (error.code === "auth/weak-password") {
             form.setError("password", {
                 type: "manual",
-                message: "Wrong email or password",
+                message: "Password must contain at least 6 letters",
+            });
+        } else if (error.code === "auth/email-already-in-use") {
+            form.setError("email", {
+                type: "manual",
+                message: "Email already in use",
             });
         } else {
             // TODO: replace with sonner
             form.setError("password", {
                 type: "manual",
-                message: "sign in got rankled, my bad...",
+                message: "sign up got rankled, my bad...",
             });
         }
     };
@@ -78,8 +86,10 @@ const SignInForm = () => {
     return (
         <Card>
             <CardHeader>
-                <CardTitle>Welcome back, Rankler</CardTitle>
-                <CardDescription>Enter your email to see your list of saved games.</CardDescription>
+                <CardTitle>Create Account</CardTitle>
+                <CardDescription>
+                    Sign up to save your list of games and add more to Rankle.
+                </CardDescription>
             </CardHeader>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -123,21 +133,41 @@ const SignInForm = () => {
                                 </FormItem>
                             )}
                         />
+                        <FormField
+                            control={form.control}
+                            name="confirmPassword"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Confirm Password</FormLabel>
+                                    <FormControl>
+                                        <Input
+                                            {...field}
+                                            type="password"
+                                            className={cn(
+                                                form.formState.errors.password &&
+                                                    "border-destructive"
+                                            )}
+                                        />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            )}
+                        />
                     </CardContent>
                     <CardFooter className="grid w-full gap-2">
                         <Button
                             className="bg-amber-400 text-lg text-black hover:bg-amber-500"
                             type="submit"
                         >
-                            Login
+                            Sign Up
                         </Button>
                         <span className="text-center text-sm text-muted-foreground">
-                            First time?&nbsp;
+                            Already signed up?&nbsp;
                             <Link
                                 className="underline hover:text-amber-600 hover:no-underline"
-                                href="/register"
+                                href="/login"
                             >
-                                Create account
+                                Login
                             </Link>
                         </span>
 
@@ -150,4 +180,4 @@ const SignInForm = () => {
     );
 };
 
-export default SignInForm;
+export default SignUpform;
