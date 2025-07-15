@@ -227,9 +227,9 @@ const Home = () => {
     return (
         <>
             {/* Rank display */}
-            <div className="fixed bottom-0 left-0 z-20 flex h-40 w-full items-end justify-center bg-gradient-to-t from-background via-background to-transparent lg:bottom-auto lg:top-0 lg:mt-16 lg:h-32 lg:bg-gradient-to-b lg:via-70% lg:to-95%">
-                <div className="mb-2 flex w-full items-center space-x-2 p-4 lg:mb-10 lg:p-0">
-                    <div className="flex flex-1 justify-end space-x-2">
+            <div className="fixed bottom-0 left-0 z-20 flex h-40 w-full items-end justify-center bg-gradient-to-t from-background via-background to-transparent lg:bottom-auto lg:top-0 lg:mt-10 lg:h-32 lg:bg-gradient-to-b lg:via-80% lg:to-95%">
+                <div className="mb-2 flex w-full items-center gap-2 p-4 lg:mb-8 lg:p-0">
+                    <div className="flex flex-1 justify-end gap-2">
                         <span>---</span>
                     </div>
                     <div className="mx-auto flex h-16 w-28 cursor-default items-center justify-center rounded-md border-2 border-black bg-white p-4 font-black text-black dark:border-white dark:bg-zinc-900 dark:text-white">
@@ -253,7 +253,7 @@ const Home = () => {
                             "unranked"
                         )}
                     </div>
-                    <div className="flex flex-1 justify-start space-x-2">
+                    <div className="flex flex-1 justify-start gap-2">
                         <span>---</span>
                     </div>
                 </div>

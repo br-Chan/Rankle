@@ -20,7 +20,7 @@ export default function RootLayout({
                 className={`${inter.className} overflow-y-scroll bg-background text-black antialiased dark:text-white`}
             >
                 <AppProvider>
-                    <main className="flex min-h-screen flex-col items-center justify-between py-24">
+                    <main className="flex min-h-screen flex-col items-center justify-between py-20">
                         <TopNav />
                         <div className="container flex flex-col items-center justify-center px-5">
                             {children}

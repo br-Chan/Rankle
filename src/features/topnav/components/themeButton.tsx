@@ -2,7 +2,7 @@
 
 import { useTheme } from "next-themes";
 import { useState, useEffect } from "react";
-import { HiOutlineComputerDesktop, HiOutlineMoon, HiOutlineSun } from "react-icons/hi2";
+import { HiComputerDesktop, HiMoon, HiSun } from "react-icons/hi2";
 
 const ThemeButton = () => {
     const [mounted, setMounted] = useState(false);
@@ -13,20 +13,20 @@ const ThemeButton = () => {
     return mounted ? (
         <button
             type="button"
-            className="rounded-full *:border-2 *:border-black *:bg-rankle *:text-black *:hover:transition-colors"
+            className="self-center rounded-md *:bg-rankle *:text-black *:hover:transition-colors"
             onClick={() => {
                 setTheme(resolvedTheme === "dark" ? "light" : "dark");
             }}
         >
             {resolvedTheme === "dark" ? (
-                <HiOutlineSun className="size-9 rounded-full p-1 hover:bg-rankle-hover" />
+                <HiSun className="size-9 rounded-md p-1 hover:bg-rankle-hover" />
             ) : (
-                <HiOutlineMoon className="size-9 rounded-full p-1 hover:bg-rankle-hover" />
+                <HiMoon className="size-9 rounded-md p-1 hover:bg-rankle-hover" />
             )}
         </button>
     ) : (
         <a className="self-center rounded-full" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
-            <HiOutlineComputerDesktop className="size-9 rounded-full border-2 border-black bg-rankle p-1 text-black" />
+            <HiComputerDesktop className="size-9 rounded-md bg-rankle p-1 text-black hover:bg-rankle-hover" />
         </a>
     );
 };
