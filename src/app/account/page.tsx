@@ -25,13 +25,13 @@ const Account = () => {
                     Account type: {currentUser?.providerData[0].providerId}
                 </span>
                 <button
-                    className="transition-colours rounded-full bg-amber-300 p-4 font-bold text-black duration-300 hover:bg-amber-500 hover:text-white"
+                    className="transition-colours bg-rankle rounded-full p-4 font-bold duration-300"
                     onClick={async () => {
                         await signOut();
                         router.push("/login");
                     }}
                 >
-                    SIGN OUT
+                    Sign Out
                 </button>
             </div>
         </>

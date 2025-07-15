@@ -156,7 +156,7 @@ const SignUpform = () => {
                     </CardContent>
                     <CardFooter className="grid w-full gap-2">
                         <Button
-                            className="bg-amber-400 text-lg text-black hover:bg-amber-500"
+                            className="bg-rankle hover:bg-rankle-hover text-lg text-black"
                             type="submit"
                         >
                             Sign Up
@@ -164,7 +164,7 @@ const SignUpform = () => {
                         <span className="text-center text-sm text-muted-foreground">
                             Already signed up?&nbsp;
                             <Link
-                                className="underline hover:text-amber-600 hover:no-underline"
+                                className="hover:text-rankle-text underline hover:no-underline"
                                 href="/login"
                             >
                                 Login

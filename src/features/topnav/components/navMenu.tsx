@@ -1,0 +1,154 @@
+"use client";
+
+import * as React from "react";
+import Link from "next/link";
+
+import {
+    NavigationMenu,
+    NavigationMenuContent,
+    NavigationMenuItem,
+    NavigationMenuLink,
+    NavigationMenuList,
+    NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu";
+import { useAuth } from "@/features/firebaseAuth/hooks/useAuth";
+import { FaGithub } from "react-icons/fa6";
+import { HiOutlinePlus, HiOutlineSquares2X2 } from "react-icons/hi2";
+
+const components: { title: string; href: string; description: string }[] = [
+    {
+        title: "Alert Dialog",
+        href: "/docs/primitives/alert-dialog",
+        description:
+            "A modal dialog that interrupts the user with important content and expects a response.",
+    },
+    {
+        title: "Hover Card",
+        href: "/docs/primitives/hover-card",
+        description: "For sighted users to preview content available behind a link.",
+    },
+    {
+        title: "Progress",
+        href: "/docs/primitives/progress",
+        description:
+            "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
+    },
+    {
+        title: "Scroll-area",
+        href: "/docs/primitives/scroll-area",
+        description: "Visually or semantically separates content.",
+    },
+    {
+        title: "Tabs",
+        href: "/docs/primitives/tabs",
+        description:
+            "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
+    },
+    {
+        title: "Tooltip",
+        href: "/docs/primitives/tooltip",
+        description:
+            "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
+    },
+];
+
+export function NavMenu() {
+    const { currentUser } = useAuth();
+
+    return (
+        <NavigationMenu viewport={false}>
+            <NavigationMenuList>
+                <NavigationMenuItem>
+                    <NavigationMenuTrigger>
+                        <Link href="/">Home</Link>
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                        <ul className="grid w-[300px] gap-4">
+                            <li>
+                                <NavigationMenuLink asChild>
+                                    <Link className="font-medium" href="/">
+                                        My Games
+                                    </Link>
+                                </NavigationMenuLink>
+                                <NavigationMenuLink asChild>
+                                    <Link href="/scores">
+                                        <div className="font-medium">My Scores</div>
+                                        <div className="text-muted-foreground">
+                                            View all your saved scores.
+                                        </div>
+                                    </Link>
+                                </NavigationMenuLink>
+                            </li>
+                        </ul>
+                    </NavigationMenuContent>
+                </NavigationMenuItem>
+
+                <NavigationMenuItem>
+                    <NavigationMenuTrigger>Games</NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                        <ul className="grid w-[300px] gap-4">
+                            <li>
+                                <NavigationMenuLink asChild>
+                                    <Link href="/games/create">
+                                        <div>
+                                            <div className="grid grid-cols-[.2fr_1fr] items-center justify-center">
+                                                <HiOutlinePlus className="row-span-2 size-8" />
+                                                <div className="font-medium">Create</div>
+                                                <div className="text-muted-foreground">
+                                                    Add a game module to Rankle.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                </NavigationMenuLink>
+                                <NavigationMenuLink asChild>
+                                    <Link href="/games">
+                                        <div className="grid grid-cols-[.2fr_1fr] items-center justify-center">
+                                            <HiOutlineSquares2X2 className="row-span-2 size-8" />
+                                            <div className="font-medium">All games</div>
+                                            <div className="text-muted-foreground">
+                                                Browse games that other Ranklers have added.
+                                            </div>
+                                        </div>
+                                    </Link>
+                                </NavigationMenuLink>
+                            </li>
+                        </ul>
+                    </NavigationMenuContent>
+                </NavigationMenuItem>
+
+                <NavigationMenuItem>
+                    <NavigationMenuTrigger>About</NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                        <ul className="grid w-[300px] gap-4">
+                            <li>
+                                <NavigationMenuLink asChild>
+                                    <Link href="/about">
+                                        <div className="font-medium">About Rankle</div>
+                                        <div className="text-muted-foreground">What is this?</div>
+                                    </Link>
+                                </NavigationMenuLink>
+                                <NavigationMenuLink asChild>
+                                    <a
+                                        className="flex"
+                                        href="https://github.com/br-Chan/Rankle"
+                                        rel="noopener"
+                                        target="_blank"
+                                    >
+                                        <div className="grid grid-cols-[.2fr_1fr] items-center justify-center">
+                                            <FaGithub className="row-span-2 size-8" />
+                                            <div className="font-medium">GitHub</div>
+                                            <div className="text-muted-foreground">
+                                                Take a look at Rankle&apos;s code.
+                                            </div>
+                                        </div>
+                                    </a>
+                                </NavigationMenuLink>
+                            </li>
+                        </ul>
+                    </NavigationMenuContent>
+                </NavigationMenuItem>
+            </NavigationMenuList>
+        </NavigationMenu>
+    );
+}
