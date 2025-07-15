@@ -10,6 +10,9 @@
         "prettier": "prettier src/** --write"
     },
     "dependencies": {
+        "@hookform/resolvers": "^5.1.1",
+        "@radix-ui/react-label": "^2.1.7",
+        "@radix-ui/react-slot": "^1.2.3",
         "@radix-ui/react-switch": "^1.2.5",
         "@radix-ui/react-tooltip": "^1.2.7",
         "class-variance-authority": "^0.7.1",
@@ -20,10 +23,12 @@
         "next-themes": "^0.4.4",
         "react": "^18",
         "react-dom": "^18",
+        "react-hook-form": "^7.60.0",
         "react-icons": "^5.4.0",
         "tailwind-merge": "^3.3.1",
         "tailwindcss-animate": "^1.0.7",
-        "use-debounce": "^10.0.3"
+        "use-debounce": "^10.0.3",
+        "zod": "^4.0.5"
     },
     "devDependencies": {
         "@types/node": "^20",

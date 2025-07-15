@@ -17,7 +17,7 @@ export default function RootLayout({
     return (
         <html lang="en" className="dark" suppressHydrationWarning>
             <body
-                className={`${inter.className} bg-zinc-200 text-black antialiased dark:bg-zinc-800 dark:text-white`}
+                className={`${inter.className} bg-background text-black antialiased dark:text-white`}
             >
                 <AppProvider>
                     <main className="flex min-h-screen flex-col items-center justify-between py-24">
