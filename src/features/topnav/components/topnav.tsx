@@ -38,11 +38,10 @@ export default function TopNav() {
                         <TooltipContent>Home</TooltipContent>
                     </Tooltip>
                     <NavMenu />
+                    <ThemeButton />
                 </div>
 
                 <div className="flex items-center justify-end gap-2">
-                    <ThemeButton />
-
                     <button className="sm:hidden">
                         <FaBars
                             onClick={() => setOpenHamburger(!openHamburger)}

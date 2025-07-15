@@ -13,19 +13,21 @@ const ThemeButton = () => {
     return mounted ? (
         <button
             type="button"
-            className="rounded-full *:border-2 *:border-black *:text-black *:hover:transition-colors"
+            className="rounded-full *:border-2 *:border-black *:bg-rankle *:text-black *:hover:transition-colors"
             onClick={() => {
                 setTheme(resolvedTheme === "dark" ? "light" : "dark");
             }}
         >
             {resolvedTheme === "dark" ? (
-                <HiOutlineSun className="h-9 w-9 rounded-full p-1 hover:bg-amber-300" />
+                <HiOutlineSun className="size-9 rounded-full p-1 hover:bg-rankle-hover" />
             ) : (
-                <HiOutlineMoon className="h-9 w-9 rounded-full p-1 hover:bg-amber-500" />
+                <HiOutlineMoon className="size-9 rounded-full p-1 hover:bg-rankle-hover" />
             )}
         </button>
     ) : (
-        <HiOutlineComputerDesktop className="h-9 w-9 rounded-full border-2 border-gray-500 p-1 text-gray-500" />
+        <a className="self-center rounded-full" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
+            <HiOutlineComputerDesktop className="size-9 rounded-full border-2 border-black bg-rankle p-1 text-black" />
+        </a>
     );
 };
 
