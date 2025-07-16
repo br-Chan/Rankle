@@ -11,13 +11,10 @@ import {
     NavigationMenuList,
     NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import { useAuth } from "@/features/firebaseAuth/hooks/useAuth";
-import { FaGithub } from "react-icons/fa6";
+import { FaGithub, FaQuestion } from "react-icons/fa6";
 import { HiOutlinePlus, HiOutlineSquares2X2 } from "react-icons/hi2";
 
-export function NavMenu() {
-    const { currentUser } = useAuth();
-
+export const NavMenu = () => {
     return (
         <NavigationMenu viewport={false}>
             <NavigationMenuList>
@@ -87,8 +84,13 @@ export function NavMenu() {
                             <li>
                                 <NavigationMenuLink asChild>
                                     <Link href="/about">
-                                        <div className="font-medium">About Rankle</div>
-                                        <div className="text-muted-foreground">What is this?</div>
+                                        <div className="grid grid-cols-[.2fr_1fr] items-center justify-center">
+                                            <FaQuestion className="row-span-2 size-8" />
+                                            <div className="font-medium">About Rankle</div>
+                                            <div className="text-muted-foreground">
+                                                What is this?
+                                            </div>
+                                        </div>
                                     </Link>
                                 </NavigationMenuLink>
                                 <NavigationMenuLink asChild>
@@ -108,10 +110,13 @@ export function NavMenu() {
                                     </a>
                                 </NavigationMenuLink>
                             </li>
+                            <span className="text-center text-xs text-muted-foreground">
+                                Made by br-Chan
+                            </span>
                         </ul>
                     </NavigationMenuContent>
                 </NavigationMenuItem>
             </NavigationMenuList>
         </NavigationMenu>
     );
-}
+};

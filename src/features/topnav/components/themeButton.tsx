@@ -19,14 +19,14 @@ const ThemeButton = () => {
             }}
         >
             {resolvedTheme === "dark" ? (
-                <HiSun className="size-9 rounded-md p-1 hover:bg-rankle-hover" />
+                <HiSun className="size-8 rounded-md p-1 hover:bg-rankle-hover sm:size-9" />
             ) : (
-                <HiMoon className="size-9 rounded-md p-1 hover:bg-rankle-hover" />
+                <HiMoon className="size-8 rounded-md p-1 hover:bg-rankle-hover sm:size-9" />
             )}
         </button>
     ) : (
         <a className="self-center rounded-full" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
-            <HiComputerDesktop className="size-9 rounded-md bg-rankle p-1 text-black hover:bg-rankle-hover" />
+            <HiComputerDesktop className="size-8 rounded-md bg-rankle p-1 text-black hover:bg-rankle-hover sm:size-9" />
         </a>
     );
 };
