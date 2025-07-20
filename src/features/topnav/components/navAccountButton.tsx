@@ -14,10 +14,10 @@ const NavAccountButton = () => {
                 <>
                     <TooltipTrigger asChild>
                         <Link
-                            className="rounded-full border-2 border-black text-black transition-colors hover:bg-amber-500 hover:text-white dark:hover:bg-amber-300 dark:hover:text-black"
+                            className="rounded-md bg-rankle text-black hover:bg-amber-500 hover:bg-rankle-hover hover:transition-colors"
                             href="/login"
                         >
-                            <HiOutlineArrowRightEndOnRectangle className="size-8 p-1" />
+                            <HiOutlineArrowRightEndOnRectangle className="size-9 rounded-md p-1" />
                         </Link>
                     </TooltipTrigger>
                     <TooltipContent>Login</TooltipContent>
@@ -26,10 +26,10 @@ const NavAccountButton = () => {
                 <>
                     <TooltipTrigger asChild>
                         <Link
-                            className="rounded-lg border-2 border-black text-black transition-colors hover:bg-amber-500 hover:text-white dark:hover:bg-amber-300 dark:hover:text-black"
+                            className="rounded-md bg-rankle text-black hover:bg-amber-500 hover:bg-rankle-hover hover:transition-colors"
                             href="/account"
                         >
-                            <HiOutlineUser className="h-8 w-8 dark:text-white" />
+                            <HiOutlineUser className="size-9 rounded-md p-1" />
                         </Link>
                     </TooltipTrigger>
                     <TooltipContent>Account</TooltipContent>
