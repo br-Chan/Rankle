@@ -1,14 +1,14 @@
-import {
-    SheetClose,
-    SheetDescription,
-    SheetFooter,
-    SheetHeader,
-    SheetTitle,
-} from "@/components/ui/sheet";
+import { SheetFooter, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { useAuth } from "@/features/firebaseAuth/hooks/useAuth";
-import Link from "next/link";
 import { FaGithub, FaQuestion } from "react-icons/fa6";
-import { HiOutlinePlus, HiOutlineSquares2X2 } from "react-icons/hi2";
+import {
+    HiOutlineArrowRightEndOnRectangle,
+    HiOutlineGift,
+    HiOutlineSquare2Stack,
+    HiOutlineSquares2X2,
+    HiOutlineSquaresPlus,
+    HiOutlineUser,
+} from "react-icons/hi2";
 import { NavSheetLink } from "./navSheetLink";
 
 export const NavSheet = () => {
@@ -21,33 +21,53 @@ export const NavSheet = () => {
             </SheetHeader>
 
             <div className="flex flex-col gap-8">
-                TODO: account links
                 <div className="flex flex-col gap-2">
-                    <span>Home</span>
-                    <NavSheetLink href="/" label="My Games" />
-                    <NavSheetLink href="/scores" label="My Scores" />
+                    <span className="text-muted-foreground">Account</span>
+                    {!currentUser || currentUser.isAnonymous ? (
+                        <NavSheetLink
+                            href="/login"
+                            icon={<HiOutlineArrowRightEndOnRectangle className="size-7" />}
+                            label="Login"
+                        />
+                    ) : (
+                        <NavSheetLink
+                            href="/account"
+                            icon={<HiOutlineUser className="size-7" />}
+                            label="Profile"
+                        />
+                    )}
                 </div>
                 <div className="flex flex-col gap-2">
-                    <span>Games</span>
+                    <span className="text-muted-foreground">Home</span>
+                    <NavSheetLink
+                        href="/"
+                        icon={<HiOutlineSquare2Stack className="size-7" />}
+                        label="My Games"
+                    />
+                    <NavSheetLink
+                        href="/scores"
+                        icon={<HiOutlineGift className="size-7" />}
+                        label="My Scores"
+                    />
+                </div>
+                <div className="flex flex-col gap-2">
+                    <span className="text-muted-foreground">Games</span>
                     <NavSheetLink
                         href="/games/create"
-                        icon={<HiOutlinePlus className="size-7" />}
-                        description="Add a game module to Rankle."
+                        icon={<HiOutlineSquaresPlus className="size-7" />}
                         label="Create"
                     />
                     <NavSheetLink
                         href="/games"
                         icon={<HiOutlineSquares2X2 className="size-7" />}
-                        description="Browse all added games."
                         label="All Games"
                     />
                 </div>
                 <div className="flex flex-col gap-2">
-                    <span>About</span>
+                    <span className="text-muted-foreground">About</span>
                     <NavSheetLink
                         href="/about"
                         icon={<FaQuestion className="size-7" />}
-                        description="What is this?"
                         label="About Rankle"
                     />
                     <a
@@ -57,10 +77,7 @@ export const NavSheet = () => {
                         target="_blank"
                     >
                         <FaGithub className="size-7" />
-                        <div className="text-xl font-medium">GitHub</div>
-                        <div className="text-muted-foreground">
-                            Take a look at Rankle&apos;s code.
-                        </div>
+                        <div className="text-lg font-medium">GitHub</div>
                     </a>
                 </div>
             </div>

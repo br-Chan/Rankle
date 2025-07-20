@@ -39,7 +39,7 @@ export default function TopNav() {
                     </div>
                     <Sheet>
                         <SheetTrigger className="sm:hidden">
-                            <FaBars className="size-7" />
+                            <FaBars className="size-7 text-black" />
                         </SheetTrigger>
                         <SheetContent side="top" className="flex flex-col gap-8">
                             <NavSheet />

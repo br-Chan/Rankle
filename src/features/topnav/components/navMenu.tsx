@@ -12,29 +12,38 @@ import {
     NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 import { FaGithub, FaQuestion } from "react-icons/fa6";
-import { HiOutlinePlus, HiOutlineSquares2X2 } from "react-icons/hi2";
+import {
+    HiOutlineGift,
+    HiOutlineSquare2Stack,
+    HiOutlineSquares2X2,
+    HiOutlineSquaresPlus,
+} from "react-icons/hi2";
 
 export const NavMenu = () => {
     return (
         <NavigationMenu viewport={false}>
             <NavigationMenuList>
                 <NavigationMenuItem>
-                    <NavigationMenuTrigger>
-                        <Link href="/">Home</Link>
-                    </NavigationMenuTrigger>
+                    <NavigationMenuTrigger>Home</NavigationMenuTrigger>
                     <NavigationMenuContent>
-                        <ul className="grid w-[200px] gap-4">
+                        <ul className="grid w-[300px] gap-4">
                             <li>
                                 <NavigationMenuLink asChild>
                                     <Link className="font-medium" href="/">
-                                        My Games
+                                        <div className="grid grid-cols-[.2fr_1fr] items-center justify-center">
+                                            <HiOutlineSquare2Stack className="row-span-1 size-8" />
+                                            <div className="font-medium">My Games</div>
+                                        </div>
                                     </Link>
                                 </NavigationMenuLink>
                                 <NavigationMenuLink asChild>
                                     <Link href="/scores">
-                                        <div className="font-medium">My Scores</div>
-                                        <div className="text-muted-foreground">
-                                            View all your saved scores.
+                                        <div className="grid grid-cols-[.2fr_1fr] items-center justify-center">
+                                            <HiOutlineGift className="row-span-2 size-8" />
+                                            <div className="font-medium">My Scores</div>
+                                            <div className="text-muted-foreground">
+                                                View all your saved scores.
+                                            </div>
                                         </div>
                                     </Link>
                                 </NavigationMenuLink>
@@ -50,13 +59,11 @@ export const NavMenu = () => {
                             <li>
                                 <NavigationMenuLink asChild>
                                     <Link href="/games/create">
-                                        <div>
-                                            <div className="grid grid-cols-[.2fr_1fr] items-center justify-center">
-                                                <HiOutlinePlus className="row-span-2 size-8" />
-                                                <div className="font-medium">Create</div>
-                                                <div className="text-muted-foreground">
-                                                    Add a game module to Rankle.
-                                                </div>
+                                        <div className="grid grid-cols-[.2fr_1fr] items-center justify-center">
+                                            <HiOutlineSquaresPlus className="row-span-2 size-8" />
+                                            <div className="font-medium">Create</div>
+                                            <div className="text-muted-foreground">
+                                                Add a game module to Rankle.
                                             </div>
                                         </div>
                                     </Link>
