@@ -29,9 +29,10 @@ const Games = () => {
         fetchData();
     }, []);
 
-    const deleteStatModule = (statModuleId: string) => {
-        deleteStatModuleInFirestore(statModuleId);
-        setStatModulesData(statModulesData.filter((data) => data.id !== statModuleId));
+    const deleteStatModule = async (statModuleId: string) => {
+        if (await deleteStatModuleInFirestore(statModuleId)) {
+            setStatModulesData(statModulesData.filter((data) => data.id !== statModuleId));
+        }
     };
 
     return (

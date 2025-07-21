@@ -23,6 +23,17 @@ import {
 import { FaBars } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
 import { getColorNameByHex } from "@/lib/utils";
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 /**
  * Stat module pane for a single game, displaying all information about the stat module. The user
@@ -50,10 +61,7 @@ export const StatModulePane = ({
     }, [data.themeColor]);
 
     return (
-        <Card
-            className="flex flex-col justify-between border-2 shadow-md"
-            style={{ borderColor: data.themeColor }}
-        >
+        <Card className="flex flex-col justify-between border-2 shadow-md">
             <div>
                 <CardHeader>
                     <CardTitle>
@@ -69,27 +77,45 @@ export const StatModulePane = ({
                         </Tooltip>
                     </CardTitle>
                     <CardAction>
-                        <DropdownMenu modal={false}>
-                            <DropdownMenuTrigger>
-                                <FaBars />
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align="start">
-                                <DropdownMenuItem
-                                    onClick={() => {
-                                        addUserStatModule(currentUser!.uid, data.id);
-                                    }}
-                                >
-                                    Add to List
-                                </DropdownMenuItem>
-                                <DropdownMenuItem
-                                    onClick={() => {
-                                        deleteStatModule(data.id);
-                                    }}
-                                >
-                                    Delete from Global
-                                </DropdownMenuItem>
-                            </DropdownMenuContent>
-                        </DropdownMenu>
+                        <AlertDialog>
+                            <DropdownMenu modal={false}>
+                                <DropdownMenuTrigger>
+                                    <FaBars />
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent align="start">
+                                    <DropdownMenuItem
+                                        onClick={() => {
+                                            addUserStatModule(currentUser!.uid, data.id);
+                                        }}
+                                    >
+                                        Add to List
+                                    </DropdownMenuItem>
+                                    <AlertDialogTrigger asChild>
+                                        <DropdownMenuItem>Delete from Global</DropdownMenuItem>
+                                    </AlertDialogTrigger>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+                            <AlertDialogContent>
+                                <AlertDialogHeader>
+                                    <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                                    <AlertDialogDescription>
+                                        &quot;{data.gameName}&quot; will be lost forever! (A long
+                                        time!)
+                                    </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                    <AlertDialogAction
+                                        className="bg-rankle text-black hover:bg-rankle-hover"
+                                        onClick={() => {
+                                            deleteStatModule(data.id);
+                                        }}
+                                    >
+                                        Delete
+                                    </AlertDialogAction>
+                                </AlertDialogFooter>
+                            </AlertDialogContent>
+                        </AlertDialog>
                     </CardAction>
                 </CardHeader>
                 <CardContent className="flex flex-col gap-2">

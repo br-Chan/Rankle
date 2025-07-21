@@ -22,7 +22,6 @@ const GoogleSignInButton = () => {
                     router.push("/");
                 } catch (error) {
                     setIsSigningIn(false);
-                    // TODO: handle situation where sign in causes uncaught error
                 }
             } else {
                 // TODO: handle situation where user is null

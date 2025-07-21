@@ -7,6 +7,7 @@ import { ButtonModuleForm } from "./buttonModuleForm";
 import { StatModuleFormData } from "../types/form";
 import { createStatModule } from "../api/statModulesCollection";
 import { getColorNameByHex } from "@/lib/utils";
+import { toast } from "sonner";
 
 /**
  * The form that the user can fill in to create their stat module before submitting it and adding
@@ -169,12 +170,8 @@ const StatModuleForm = () => {
 
         e.preventDefault();
 
-        console.log("Adding data to firestore...");
-        const added = await createStatModule(formData);
-        if (added) {
+        if (await createStatModule(formData)) {
             router.push("/games");
-        } else {
-            alert("Something didn't work, data not added to Firestore.");
         }
     };
 

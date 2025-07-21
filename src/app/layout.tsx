@@ -3,6 +3,7 @@ import "./globals.css";
 import TopNav from "@/features/topnav/components/topnav";
 import { inter } from "@/fonts";
 import { AppProvider } from "./provider";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
     title: "Rankle",
@@ -26,6 +27,7 @@ export default function RootLayout({
                             {children}
                         </div>
                     </main>
+                    <Toaster richColors />
                 </AppProvider>
             </body>
         </html>
