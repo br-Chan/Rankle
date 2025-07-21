@@ -34,6 +34,7 @@ const GoogleSignInButton = () => {
         <Button
             className="text-md bg-white text-black hover:bg-gray-50"
             onClick={handleGoogleSignIn}
+            type="button"
         >
             <FcGoogle />
             Sign in with Google

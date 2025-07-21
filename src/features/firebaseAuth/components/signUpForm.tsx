@@ -92,7 +92,7 @@ const SignUpform = () => {
                 </CardDescription>
             </CardHeader>
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-8">
                     <CardContent className="grid w-full gap-2">
                         <FormField
                             control={form.control}
@@ -156,7 +156,7 @@ const SignUpform = () => {
                     </CardContent>
                     <CardFooter className="grid w-full gap-2">
                         <Button
-                            className="bg-rankle hover:bg-rankle-hover text-lg text-black"
+                            className="bg-rankle text-lg text-black hover:bg-rankle-hover"
                             type="submit"
                         >
                             Sign Up
@@ -164,7 +164,7 @@ const SignUpform = () => {
                         <span className="text-center text-sm text-muted-foreground">
                             Already signed up?&nbsp;
                             <Link
-                                className="hover:text-rankle-text underline hover:no-underline"
+                                className="underline hover:text-rankle-text hover:no-underline"
                                 href="/login"
                             >
                                 Login

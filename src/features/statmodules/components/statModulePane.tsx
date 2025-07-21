@@ -1,13 +1,28 @@
 "use client";
 
-import { useState } from "react";
-import { ThemedHoverComponent } from "@/components/themedHoverComponent";
+import { useMemo, useState } from "react";
 import { useAuth } from "@/features/firebaseAuth/hooks/useAuth";
 import { addUserStatModule } from "../api/usersCollection";
-import { HiTrash, HiUserPlus } from "react-icons/hi2";
 import { ButtonModulePane } from "./buttonModulePane";
 import { StatModuleData } from "../types/display";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+    Card,
+    CardAction,
+    CardContent,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { FaBars } from "react-icons/fa6";
+import { Button } from "@/components/ui/button";
+import { getColorNameByHex } from "@/lib/utils";
 
 /**
  * Stat module pane for a single game, displaying all information about the stat module. The user
@@ -24,110 +39,90 @@ export const StatModulePane = ({
     deleteStatModule: (statModuleId: string) => void;
 }) => {
     const { currentUser } = useAuth();
-    const inputModulePanes = [];
 
-    const [added, setAdded] = useState<boolean>(false);
+    const [themeColorName, setThemeColorName] = useState(data.themeColor);
+    useMemo(() => {
+        const getThemeColorName = async () => {
+            setThemeColorName(await getColorNameByHex(data.themeColor));
+        };
 
-    // Create each input module pane using data from the prop.
-    for (let index = 0; index < data.inputModules.length; ++index) {
-        inputModulePanes.push(
-            <ButtonModulePane
-                key={index}
-                data={data.inputModules[index]}
-                themeColor={data.themeColor}
-            />
-        );
-    }
+        getThemeColorName();
+    }, [data.themeColor]);
 
     return (
-        <div className="relative w-72 cursor-default">
-            {/* Title bar of the stat module pane*/}
-            <div
-                className="absolute left-0 top-0 flex h-9 w-full items-center justify-between rounded-t-2xl border-l-4 border-r-4 border-t-4 px-3 opacity-100"
-                style={{
-                    borderColor: `${data.themeColor}`,
-                }}
-            >
-                <ThemedHoverComponent
-                    className="flex cursor-pointer items-center rounded-md border-2 border-black dark:border-white"
-                    hoveredBackgroundColor="#4ade80" // text-green-400
-                >
-                    <Tooltip delayDuration={300}>
-                        <TooltipTrigger asChild>
-                            <button
-                                className="text-sm"
-                                onClick={() => {
-                                    addUserStatModule(currentUser!.uid, data.id); // TODO: user has exclamation
-                                    setAdded(true);
-                                }}
-                            >
-                                <HiUserPlus className="h-6 w-6 px-[2px] dark:text-white" />
-                            </button>
-                        </TooltipTrigger>
-                        <TooltipContent>{added ? "Added!" : "Add to your list"}</TooltipContent>
-                    </Tooltip>
-                </ThemedHoverComponent>
-
-                <Tooltip>
-                    <TooltipTrigger asChild>
-                        <h2 className="w-44 truncate text-xl font-bold">{data.gameName}</h2>
-                    </TooltipTrigger>
-                    <TooltipContent className="-translate-y-1">{data.gameName}</TooltipContent>
-                </Tooltip>
-
-                <ThemedHoverComponent
-                    className="flex cursor-pointer items-center rounded-md border-2 border-black dark:border-white"
-                    hoveredBackgroundColor="#ef4444" // text-red-500
-                >
-                    <Tooltip delayDuration={300}>
-                        <TooltipTrigger asChild>
-                            <button
-                                className="text-sm dark:text-white"
-                                onClick={() => {
-                                    deleteStatModule(data.id);
-                                }}
-                            >
-                                <HiTrash className="h-6 w-6 px-[2px]" />
-                            </button>
-                        </TooltipTrigger>
-                        <TooltipContent>Delete from global</TooltipContent>
-                    </Tooltip>{" "}
-                </ThemedHoverComponent>
-            </div>
-
-            {/* Body of the stat module pane*/}
-            <div
-                className="h-full rounded-2xl border-4 px-5 py-2 text-center shadow-lg"
-                style={{
-                    borderColor: `${data.themeColor}`,
-                    backgroundColor: `${data.themeColor}25`,
-                }}
-            >
-                <div className="mt-6 space-y-2">
-                    {/* Horizontal line at the top of the body to divide it from title bar */}
+        <Card
+            className="flex flex-col justify-between border-2 shadow-md"
+            style={{ borderColor: data.themeColor }}
+        >
+            <div>
+                <CardHeader>
+                    <CardTitle>
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <h2 className="w-52 cursor-default truncate text-xl font-bold">
+                                    {data.gameName}
+                                </h2>
+                            </TooltipTrigger>
+                            <TooltipContent className="-translate-y-1">
+                                {data.gameName}
+                            </TooltipContent>
+                        </Tooltip>
+                    </CardTitle>
+                    <CardAction>
+                        <DropdownMenu modal={false}>
+                            <DropdownMenuTrigger>
+                                <FaBars />
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="start">
+                                <DropdownMenuItem
+                                    onClick={() => {
+                                        addUserStatModule(currentUser!.uid, data.id);
+                                    }}
+                                >
+                                    Add to List
+                                </DropdownMenuItem>
+                                <DropdownMenuItem
+                                    onClick={() => {
+                                        deleteStatModule(data.id);
+                                    }}
+                                >
+                                    Delete from Global
+                                </DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+                    </CardAction>
+                </CardHeader>
+                <CardContent className="flex flex-col gap-2">
                     <div
-                        className="border-2"
-                        style={{
-                            borderColor: `${data.themeColor}`,
-                        }}
-                    ></div>
-
-                    {/* Theme colour */}
-                    <div className="mx-10 rounded-md bg-white p-[2px] text-sm text-black dark:bg-zinc-800 dark:text-white">
-                        {`Theme: ${data.themeColor}`}
+                        className="flex justify-between rounded-md bg-white p-1 text-sm text-black dark:bg-zinc-800 dark:text-white"
+                        style={{ backgroundColor: `${data.themeColor}25` }}
+                    >
+                        <span>Theme: {themeColorName}</span>
+                        <span className="font-mono">{data.themeColor}</span>
                     </div>
 
-                    {/* Hard mode display pane */}
-                    <div className="mx-10 rounded-md bg-white p-[2px] text-sm text-black dark:bg-zinc-800 dark:text-white">
-                        {data.hardModeMultiplier !== 1
-                            ? `Hard mode: ×${data.hardModeMultiplier}`
-                            : "No hard mode"}
+                    <div
+                        className="rounded-md bg-white p-1 text-sm text-black dark:bg-zinc-800 dark:text-white"
+                        style={{ backgroundColor: `${data.themeColor}25` }}
+                    >
+                        Hard mode:{" "}
+                        {data.hardModeMultiplier !== 1 ? `×${data.hardModeMultiplier}` : "N/A"}
                     </div>
 
-                    {/* Input module panes */}
-                    {inputModulePanes}
-                </div>
+                    <>
+                        {data.inputModules.map((inputModule) => (
+                            <ButtonModulePane
+                                key={inputModule.id}
+                                data={inputModule}
+                                themeColor={data.themeColor}
+                            />
+                        ))}
+                    </>
+                </CardContent>
             </div>
-        </div>
+            <CardFooter className="flex w-full justify-end gap-2">
+                <Button className="bg-rankle text-black hover:bg-rankle-hover">Preview</Button>
+            </CardFooter>
+        </Card>
     );
 };

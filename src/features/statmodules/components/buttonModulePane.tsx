@@ -18,7 +18,7 @@ export const ButtonModulePane = ({
     themeColor: string;
 }) => {
     return (
-        <div className="mt-2 rounded-md p-2" style={{ backgroundColor: `${themeColor}25` }}>
+        <div className="rounded-md p-2" style={{ backgroundColor: `${themeColor}25` }}>
             <div>{data.queryText}</div>
             <div className="grid grid-cols-3 gap-1">
                 {data.buttonLabels.map((label, index) => {
