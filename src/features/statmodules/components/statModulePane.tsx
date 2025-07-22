@@ -34,6 +34,7 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { toast } from "sonner";
 
 /**
  * Stat module pane for a single game, displaying all information about the stat module. The user
@@ -147,7 +148,14 @@ export const StatModulePane = ({
                 </CardContent>
             </div>
             <CardFooter className="flex w-full justify-end gap-2">
-                <Button className="bg-rankle text-black hover:bg-rankle-hover">Preview</Button>
+                <Button
+                    onClick={() => {
+                        toast.info("Work in progress!");
+                    }}
+                    className="bg-rankle text-black hover:bg-rankle-hover"
+                >
+                    Preview
+                </Button>
             </CardFooter>
         </Card>
     );
