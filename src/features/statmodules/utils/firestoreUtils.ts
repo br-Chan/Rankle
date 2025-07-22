@@ -7,6 +7,7 @@ import {
     deleteDoc,
 } from "firebase/firestore";
 import { statModulesFirestoreData, buttonModulesFirestoreData } from "../types/firestore";
+import { toast } from "sonner";
 
 // Firebase code from this tutorial: https://www.youtube.com/watch?v=5MzCK3k3XlQ
 
@@ -56,13 +57,24 @@ export const getButtonModulesByRef = async (
 export const deleteStatModuleByRef = async (
     statModuleRef: DocumentReference<DocumentData, DocumentData>
 ) => {
-    const inputModulesRef = collection(statModuleRef, "inputModules");
-    const inputModulesSnap = await getDocs(inputModulesRef);
-    inputModulesSnap.forEach(async (inputModuleDoc) => {
-        await deleteDoc(inputModuleDoc.ref);
-    });
+    try {
+        const inputModulesRef = collection(statModuleRef, "inputModules");
+        const inputModulesSnap = await getDocs(inputModulesRef);
+        inputModulesSnap.forEach(async (inputModuleDoc) => {
+            await deleteDoc(inputModuleDoc.ref);
+        });
 
-    await deleteDoc(statModuleRef);
-
-    console.log("stat module deleted!");
+        await deleteDoc(statModuleRef);
+        toast.success("The game module goes to its fathers.", {
+            description: "And even in their mighty company it shall not now be ashamed.",
+        });
+        return true;
+    } catch (error: any) {
+        if (error.code === "permission-denied") {
+            toast.error("You must have an account to delete a game module from Global.");
+        } else {
+            toast.error("Error when deleting game module from Global.");
+        }
+        return false;
+    }
 };

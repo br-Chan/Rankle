@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { HoverTooltip } from "@/components/hoverTooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 /**
  * A module with a checkbox for users to toggle hard mode in a stat module, multiplying each input
@@ -27,18 +27,14 @@ export const HardModeModule = ({
     }
 
     return (
-        <div className="relative">
-            <label className="peer flex cursor-pointer justify-center">
-                <input
-                    type="checkbox"
-                    value=""
-                    onChange={handleClick}
-                    className=""
-                    checked={isClicked}
-                />
-                <div className="ml-1">Hard Mode</div>
-            </label>
-            <HoverTooltip tooltipText={`×${hardModeMultiplier}`} />
-        </div>
+        <Tooltip>
+            <TooltipTrigger asChild>
+                <label className="flex cursor-pointer justify-center">
+                    <input type="checkbox" onChange={handleClick} checked={isClicked} />
+                    <div className="ml-1">Hard Mode</div>
+                </label>
+            </TooltipTrigger>
+            <TooltipContent>×{hardModeMultiplier}</TooltipContent>
+        </Tooltip>
     );
 };

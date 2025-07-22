@@ -2,28 +2,40 @@
 
 import Link from "next/link";
 import { HiOutlineArrowRightEndOnRectangle, HiOutlineUser } from "react-icons/hi2";
-import { HoverTooltip } from "@/components/hoverTooltip";
 import { useAuth } from "@/features/firebaseAuth/hooks/useAuth";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const NavAccountButton = () => {
     const { currentUser } = useAuth();
 
-    return !currentUser || currentUser.isAnonymous ? (
-        <Link
-            className="relative mx-1 rounded-lg border-2 border-black text-black transition-colors hover:bg-amber-500 hover:text-white dark:hover:bg-amber-300 dark:hover:text-black"
-            href="/login"
-        >
-            <HiOutlineArrowRightEndOnRectangle className="peer h-8 w-8 dark:text-white" />
-            <HoverTooltip tooltipText="Login" />
-        </Link>
-    ) : (
-        <Link
-            className="relative aspect-square h-fit rounded-lg border-2 border-black text-black transition-colors hover:bg-amber-500 hover:text-white dark:hover:bg-amber-300 dark:hover:text-black"
-            href="/account"
-        >
-            <HiOutlineUser className="peer h-8 w-8 dark:text-white" />
-            <HoverTooltip tooltipText="Account" />
-        </Link>
+    return (
+        <Tooltip>
+            {!currentUser || currentUser.isAnonymous ? (
+                <>
+                    <TooltipTrigger asChild>
+                        <Link
+                            className="rounded-md bg-rankle text-black hover:bg-amber-500 hover:bg-rankle-hover hover:transition-colors"
+                            href="/login"
+                        >
+                            <HiOutlineArrowRightEndOnRectangle className="size-9 rounded-md p-1" />
+                        </Link>
+                    </TooltipTrigger>
+                    <TooltipContent>Login</TooltipContent>
+                </>
+            ) : (
+                <>
+                    <TooltipTrigger asChild>
+                        <Link
+                            className="rounded-md bg-rankle text-black hover:bg-amber-500 hover:bg-rankle-hover hover:transition-colors"
+                            href="/account"
+                        >
+                            <HiOutlineUser className="size-9 rounded-md p-1" />
+                        </Link>
+                    </TooltipTrigger>
+                    <TooltipContent>Account</TooltipContent>
+                </>
+            )}
+        </Tooltip>
     );
 };
 

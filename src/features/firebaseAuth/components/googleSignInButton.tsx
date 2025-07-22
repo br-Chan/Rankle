@@ -3,6 +3,7 @@ import { signInAndLinkWithGoogle } from "../api/signIn";
 import { useAuth } from "../hooks/useAuth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 const GoogleSignInButton = () => {
     const { currentUser } = useAuth();
@@ -21,7 +22,6 @@ const GoogleSignInButton = () => {
                     router.push("/");
                 } catch (error) {
                     setIsSigningIn(false);
-                    // TODO: handle situation where sign in causes uncaught error
                 }
             } else {
                 // TODO: handle situation where user is null
@@ -30,15 +30,14 @@ const GoogleSignInButton = () => {
     };
 
     return (
-        <button
-            onClick={async () => {
-                handleGoogleSignIn();
-            }}
-            className="transition-colours flex items-center justify-center gap-2 rounded-full bg-amber-400 p-3 text-black duration-300 hover:bg-amber-500"
+        <Button
+            className="text-md bg-white text-black hover:bg-gray-50"
+            onClick={handleGoogleSignIn}
+            type="button"
         >
-            <FcGoogle className="h-8 w-8 rounded-full bg-white p-1" />
+            <FcGoogle />
             Sign in with Google
-        </button>
+        </Button>
     );
 };
 

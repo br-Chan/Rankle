@@ -5,10 +5,10 @@ import { ButtonModule } from "./buttonModule";
 import { ButtonModuleData } from "../types/display";
 import { HardModeModule } from "./hardModeModule";
 import { HiXMark } from "react-icons/hi2";
-import { EnableSwitch } from "@/components/enableSwitch";
-import { HoverTooltip } from "@/components/hoverTooltip";
 import { ThemedHoverComponent } from "@/components/themedHoverComponent";
 import { StatModuleData } from "../types/display";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { Switch } from "@/components/ui/switch";
 
 /**
  * Stat module for a single game, that the user interacts with to input their stat for the game.
@@ -30,7 +30,7 @@ export const StatModule = ({
     deleteUserStatModule: (statModuleId: string) => void;
 }) => {
     const inputModules = [];
-    const [opacity, setOpacity] = useState<number>(data.enabled ? 1 : 0.3);
+    const [opacity, setOpacity] = useState(data.enabled ? 1 : 0.3);
 
     // Create each input module using data from the prop.
     for (let index = 0; index < data.inputModules.length; ++index) {
@@ -58,26 +58,74 @@ export const StatModule = ({
     return (
         <div
             className="relative w-72 transition-opacity duration-300"
-            style={{
-                opacity: opacity,
-            }}
+            style={
+                {
+                    // opacity: opacity,
+                }
+            }
         >
+            {/* Title bar of the stat module */}
+            <div
+                className="absolute left-0 top-0 z-10 flex h-10 w-full items-center justify-between rounded-t-2xl border-4 px-1 opacity-100 transition-opacity duration-300"
+                style={{
+                    borderColor: `${data.themeColor}`,
+                    backgroundColor: `${data.themeColor}25`,
+                }}
+            >
+                <div className="flex items-center gap-2">
+                    <Switch
+                        checked={data.enabled}
+                        onCheckedChange={() => handleEnableClickInStatModule(data.id)}
+                        style={
+                            {
+                                "--theme-color": data.themeColor,
+                            } as React.CSSProperties
+                        }
+                        className="data-[state=checked]:bg-[var(--theme-color)]"
+                    />
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <h2 className="w-44 truncate text-left text-xl font-bold hover:cursor-default">
+                                {data.gameName}
+                            </h2>
+                        </TooltipTrigger>
+                        <TooltipContent className="-translate-y-1">{data.gameName}</TooltipContent>
+                    </Tooltip>
+                </div>
+                <div className="mr-1 flex h-10 items-center">
+                    {/* <button className="font-bold text-blue-500 m-1">/</button> */}
+
+                    <Tooltip>
+                        <TooltipTrigger asChild>
+                            <ThemedHoverComponent
+                                hoveredBackgroundColor={data.themeColor}
+                                className="rounded-md"
+                            >
+                                <button
+                                    className="flex cursor-default items-center dark:text-white"
+                                    onClick={() => {
+                                        deleteUserStatModule(data.id);
+                                    }}
+                                >
+                                    <HiXMark className="h-6 w-6" />
+                                </button>
+                            </ThemedHoverComponent>
+                        </TooltipTrigger>
+                        <TooltipContent>remove from your list</TooltipContent>
+                    </Tooltip>
+                </div>
+            </div>
+
             {/* Body of the stat module */}
             <div
                 className="h-full rounded-2xl border-4 px-5 py-2 text-center shadow-lg transition-opacity duration-300"
                 style={{
                     borderColor: `${data.themeColor}`,
                     backgroundColor: `${data.themeColor}25`,
+                    opacity: opacity,
                 }}
             >
-                <div className="mt-7 transition-opacity duration-300">
-                    {/* Horizontal line (decide if should do this) */}
-                    {/* <div
-                        className="border-2"
-                        style={{
-                            borderColor: `${data.themeColor}`,
-                        }}
-                    ></div> */}
+                <div className="mt-7 flex flex-col transition-opacity duration-300">
                     {data.hardModeMultiplier !== 1 ? (
                         <HardModeModule
                             hardModeMultiplier={data.hardModeMultiplier}
@@ -85,45 +133,6 @@ export const StatModule = ({
                         />
                     ) : null}
                     {inputModules}
-                </div>
-            </div>
-
-            {/* Title bar of the stat module */}
-            <div
-                className="absolute left-0 top-0 flex h-10 w-full items-center justify-between rounded-t-2xl border-4 px-1 opacity-100 transition-opacity duration-300"
-                style={{
-                    borderColor: `${data.themeColor}`,
-                    backgroundColor: `${data.themeColor}25`,
-                }}
-            >
-                <div className="flex items-center">
-                    <EnableSwitch
-                        onEnableClick={() => handleEnableClickInStatModule(data.id)}
-                        backgroundColor={data.themeColor}
-                    />
-                    <div className="relative w-44">
-                        <h2 className="peer truncate text-left text-xl font-bold hover:cursor-default">
-                            {data.gameName}
-                        </h2>
-                        <HoverTooltip tooltipText={data.gameName} />
-                    </div>
-                </div>
-                <div className="mr-1 flex h-10 items-center">
-                    {/* <button className="font-bold text-blue-500 m-1">/</button> */}
-                    <ThemedHoverComponent
-                        hoveredBackgroundColor={data.themeColor}
-                        className="relative rounded-md"
-                    >
-                        <button
-                            className="peer flex cursor-default items-center dark:text-white"
-                            onClick={() => {
-                                deleteUserStatModule(data.id);
-                            }}
-                        >
-                            <HiXMark className="h-6 w-6" />
-                        </button>
-                        <HoverTooltip tooltipText="remove" delay="1000" />
-                    </ThemedHoverComponent>
                 </div>
             </div>
         </div>

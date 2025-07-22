@@ -6,6 +6,8 @@ import { useDebouncedCallback } from "use-debounce";
 import { ButtonModuleForm } from "./buttonModuleForm";
 import { StatModuleFormData } from "../types/form";
 import { createStatModule } from "../api/statModulesCollection";
+import { getColorNameByHex } from "@/lib/utils";
+import { toast } from "sonner";
 
 /**
  * The form that the user can fill in to create their stat module before submitting it and adding
@@ -43,17 +45,7 @@ const StatModuleForm = () => {
      */
     const updateThemeColor = useDebouncedCallback(async (hexCode: string) => {
         let newThemeColorName = formData.themeColorName;
-        try {
-            const response = await fetch(
-                `https://www.thecolorapi.com/id?hex=${hexCode.substring(1)}`
-                // Removes the "#" from the hex code before concatenating with the URL
-            );
-
-            const data = await response.json();
-            newThemeColorName = data.name.value;
-        } catch (error) {
-            console.error("Error fetching color data:", error);
-        }
+        newThemeColorName = await getColorNameByHex(hexCode);
 
         setFormData((prevState) => ({
             ...prevState,
@@ -178,12 +170,8 @@ const StatModuleForm = () => {
 
         e.preventDefault();
 
-        console.log("Adding data to firestore...");
-        const added = await createStatModule(formData);
-        if (added) {
+        if (await createStatModule(formData)) {
             router.push("/games");
-        } else {
-            alert("Something didn't work, data not added to Firestore.");
         }
     };
 

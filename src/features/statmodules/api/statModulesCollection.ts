@@ -10,6 +10,7 @@ import {
 } from "firebase/firestore";
 import { StatModuleFormData } from "../types/form";
 import { getStatModulesBySnapshot, deleteStatModuleByRef } from "../utils/firestoreUtils";
+import { toast } from "sonner";
 
 /**
  * Adds a stat module document to Firestore with all associated data.
@@ -49,9 +50,15 @@ export const createStatModule = async (statModuleData: StatModuleFormData) => {
             console.log("Input module document written with ID: ", inputModuleDocRef.id);
         });
 
+        toast.success("Successfully added game module to Rankle!");
         return true;
-    } catch (error) {
-        console.error("Error adding document ", error);
+    } catch (error: any) {
+        if (error.code === "permission-denied") {
+            toast.error("You must have an account to add a game module to Rankle.");
+        } else {
+            toast.error("Error when adding stat module to Rankle.");
+            console.log("Error when adding stat module to Rankle: ", error);
+        }
         return false;
     }
 };
@@ -71,6 +78,5 @@ export const getAllStatModules = async () => {
 
 export const deleteStatModule = async (statModuleId: string) => {
     const statModuleRef = doc(db, "statModules", statModuleId);
-    const inputModuleRef = collection(statModuleRef, "inputModules");
-    deleteStatModuleByRef(statModuleRef);
+    return await deleteStatModuleByRef(statModuleRef);
 };
