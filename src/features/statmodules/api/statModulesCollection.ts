@@ -24,11 +24,11 @@ export const createStatModule = async (statModuleData: StatModuleFormData) => {
         // Add stat module document to statModules collection.
         const statModuleDocRef = await addDoc(collection(db, "statModules"), {
             gameName: statModuleData.gameName,
+            link: statModuleData.link,
             hardModeMultiplier: statModuleData.hardModeMultiplier,
             themeColor: statModuleData.themeColor,
             timeStamp: serverTimestamp(), // The time it was created
         });
-        console.log("Stat module document written with ID: ", statModuleDocRef.id);
 
         // Add input module documents to inputModules sub-collection in the statModules collection.
         statModuleData.inputModuleForms.map(async (inputModuleFormData, i) => {
@@ -42,12 +42,11 @@ export const createStatModule = async (statModuleData: StatModuleFormData) => {
             });
 
             //Add input module document to inputModules collection.
-            const inputModuleDocRef = await addDoc(collection(statModuleDocRef, "inputModules"), {
+            await addDoc(collection(statModuleDocRef, "inputModules"), {
                 queryText: inputModuleFormData.queryText,
                 buttonLabels: buttonLabels,
                 buttonScores: buttonScores,
             });
-            console.log("Input module document written with ID: ", inputModuleDocRef.id);
         });
 
         toast.success("Successfully added game module to Rankle!");

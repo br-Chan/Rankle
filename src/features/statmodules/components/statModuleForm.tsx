@@ -7,17 +7,19 @@ import { ButtonModuleForm } from "./buttonModuleForm";
 import { StatModuleFormData } from "../types/form";
 import { createStatModule } from "../api/statModulesCollection";
 import { getColorNameByHex } from "@/lib/utils";
-import { toast } from "sonner";
 
 /**
  * The form that the user can fill in to create their stat module before submitting it and adding
  * the data to Firestore. Is visually designed to be similar to a stat module.
+ *
+ * Perhaps I will one day overhaul this thing with react hook form. One day...
  *
  * @returns Create form
  */
 const StatModuleForm = () => {
     const [formData, setFormData] = useState<StatModuleFormData>({
         gameName: "",
+        link: "",
         inputModuleForms: [
             {
                 queryText: "",
@@ -196,6 +198,23 @@ const StatModuleForm = () => {
                         setFormData((prevState) => ({
                             ...prevState,
                             gameName: e.target.value,
+                        }))
+                    }
+                    required
+                />
+
+                {/* Game link input */}
+                <input
+                    type="text"
+                    id="link"
+                    className="w-full rounded-lg border-2 bg-white bg-opacity-50 text-center outline-none focus:border-amber-500 md:w-4/5 dark:placeholder-gray-600"
+                    value={formData.link}
+                    placeholder="Game link"
+                    autoComplete="off"
+                    onChange={(e) =>
+                        setFormData((prevState) => ({
+                            ...prevState,
+                            link: e.target.value,
                         }))
                     }
                     required
