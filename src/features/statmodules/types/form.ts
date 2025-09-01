@@ -16,6 +16,7 @@ export type ButtonModuleFormData = {
 
 export type StatModuleFormData = {
     gameName: string;
+    link: string;
     inputModuleForms: ButtonModuleFormData[];
     themeColor: string;
     themeColorName: string;

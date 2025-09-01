@@ -1,6 +1,7 @@
 import { db } from "@/config/firebase";
 import { doc, getDoc, setDoc, collection, getDocs, orderBy, query } from "firebase/firestore";
 import { getStatModulesBySnapshot, deleteStatModuleByRef } from "../utils/firestoreUtils";
+import { toast } from "sonner";
 
 export const addUserStatModule = async (userId: string, statModuleId: string) => {
     const statModuleRef = doc(db, "statModules", statModuleId);
@@ -30,9 +31,9 @@ export const addUserStatModule = async (userId: string, statModuleId: string) =>
             await setDoc(userInputModuleRef, inputModuleDoc.data());
         });
 
-        console.log("Stat module added!");
+        toast.success("Successfully added game module to your games!");
     } else {
-        console.error("Stat module not found");
+        toast.error("Error when adding stat module to your games.");
     }
 };
 

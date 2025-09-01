@@ -15,6 +15,7 @@ export type buttonModulesFirestoreData = {
 export type statModulesFirestoreData = {
     id: string;
     gameName: string;
+    link: string;
     inputModules: buttonModulesFirestoreData[];
     themeColor: string;
     hardModeMultiplier: number;

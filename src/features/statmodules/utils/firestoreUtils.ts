@@ -23,6 +23,7 @@ export const getStatModulesBySnapshot = async (
             return {
                 id: doc.id,
                 gameName: statModuleDocData.gameName,
+                link: statModuleDocData.link,
                 inputModules: buttonModules,
                 themeColor: statModuleDocData.themeColor,
                 hardModeMultiplier: statModuleDocData.hardModeMultiplier,
