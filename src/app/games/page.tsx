@@ -53,6 +53,7 @@ const Games = () => {
                             data={{
                                 id: item.id,
                                 gameName: item.gameName,
+                                link: item.link,
                                 inputModules: item.inputModules.map((item, index) => {
                                     return {
                                         id: item.id,

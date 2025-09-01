@@ -15,7 +15,7 @@ const Account = () => {
         <div className="mt-6 flex w-full max-w-md flex-col gap-4">
             <Card>
                 <CardHeader>
-                    <CardTitle>Rankle Profile</CardTitle>
+                    <CardTitle>Rankler Profile</CardTitle>
                 </CardHeader>
                 <CardContent className="flex flex-col">
                     <div className="flex justify-between">

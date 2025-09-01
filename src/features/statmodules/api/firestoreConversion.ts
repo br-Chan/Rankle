@@ -10,6 +10,7 @@ export const convertStatModuleFirestoreData = (firestoreData: statModulesFiresto
     const convertedData: StatModuleData = {
         id: firestoreData.id,
         gameName: firestoreData.gameName,
+        link: firestoreData.link,
         inputModules: convertedButtonModulesData,
         themeColor: firestoreData.themeColor,
         enabled: true,

@@ -85,9 +85,11 @@ export const StatModule = ({
                     />
                     <Tooltip>
                         <TooltipTrigger asChild>
-                            <h2 className="w-44 truncate text-left text-xl font-bold hover:cursor-default">
-                                {data.gameName}
-                            </h2>
+                            <a className="flex" href={data.link} rel="noopener" target="_blank">
+                                <h2 className="w-44 truncate text-left text-xl font-bold">
+                                    {data.gameName}
+                                </h2>
+                            </a>
                         </TooltipTrigger>
                         <TooltipContent className="-translate-y-1">{data.gameName}</TooltipContent>
                     </Tooltip>

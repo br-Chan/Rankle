@@ -68,9 +68,11 @@ export const StatModulePane = ({
                     <CardTitle>
                         <Tooltip>
                             <TooltipTrigger asChild>
-                                <h2 className="w-52 cursor-default truncate text-xl font-bold">
-                                    {data.gameName}
-                                </h2>
+                                <a className="flex" href={data.link} rel="noopener" target="_blank">
+                                    <h2 className="w-52 truncate text-xl font-bold">
+                                        {data.gameName}
+                                    </h2>
+                                </a>
                             </TooltipTrigger>
                             <TooltipContent className="-translate-y-1">
                                 {data.gameName}

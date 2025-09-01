@@ -19,6 +19,7 @@ export type ButtonModuleData = {
 export type StatModuleData = {
     id: string;
     gameName: string;
+    link: string;
     inputModules: ButtonModuleData[];
     themeColor: string;
     enabled: boolean;
